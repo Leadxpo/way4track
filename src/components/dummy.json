@@ -1,0 +1,5937 @@
+{
+    "aadharNumber": "1111 1111 1111",
+    "address": "vijayewada",
+    "basicSalary": "50000.00",
+    "beforeExperience": 4,
+    "branch": {
+        "addressLine1": "allipuram",
+        "addressLine2": "venkateswara metta",
+        "branchAddress": "Visakhaptnam",
+        "branchName": "Cochin",
+        "branchNumber": "9999999998",
+        "branchOpening": "2021-01-15T09:00:00.000Z",
+        "branchPhoto": null,
+        "city": "cochin",
+        "companyCode": "WAY4TRACK",
+        "email": "suneel@example.com",
+        "id": 2,
+        "pincode": "530001",
+        "state": "kerala",
+        "unitCode": "WAY4"
+    },
+    "companyCode": "WAY4TRACK",
+    "designation": "Accountant",
+    "dob": "11-11-1999",
+    "email": "varshini@gmail.com",
+    "id": 12,
+    "joiningDate": "2012-12-12",
+    "name": "varshini",
+    "password": "Way4track_accountant",
+    "phoneNumber": "1111111111",
+    "staffId": "SF-00003",
+    "staffPhoto": "/Users/leadxpo/NextJS/way4track_services/uploads/staff_photos/1737208281085-rn_image_picker_lib_temp_56649a30-6831-40e2-9584-218a6ca1a4f3.jpg",
+    "unitCode": "WAY4"
+}
+//client
+{
+    "address": "vijaywada ",
+    "branchId": 3,
+    "branchName": "Vijaywad",
+    "clientId": "CLI(Vijaywad)-00002",
+    "clientPhoto": "/Users/leadxpo/NextJS/way4track_services/uploads/client_photos/1737458702784.jpg",
+    "companyCode": "WAY4TRACK",
+    "dob": "2000-09-19",
+    "email": "client1@gmail.com",
+    "id": 2,
+    "joiningDate": "2024-12-30",
+    "name": "client1",
+    "phoneNumber": "9019019010",
+    "unitCode": "WAY4"
+}
+//estimate
+{
+    "CGST": null,
+    "GSTORTDS": null,
+    "SCST": null,
+    "buildingAddress": "vizag",
+    "clientAddress": "123 Client Street, City, State, 54321",
+    "clientEmail": "johndoe@example.com",
+    "clientId": "CLI(Visakhapatnam)-00001",
+    "clientName": "John Doe",
+    "clientPhoneNumber": "1234567890",
+    "companyCode": "WAY4TRACK",
+    "description": "qewfeht",
+    "estimateDate": "2025-01-25T18:30:00.000Z",
+    "estimateId": "EST-0002",
+    "expireDate": "2025-01-29",
+    "hsnCode": null,
+    "id": 5,
+    "invoiceId": null,
+    "productOrService": "GPS for bike, GPS for Car",
+    "products": [
+        {
+            "amount": 100,
+            "name": "GPS for bike",
+            "quantity": 1
+        },
+        {
+            "amount": 300,
+            "name": "GPS for Car",
+            "quantity": 2
+        }
+    ],
+    "totalAmount": 700,
+    "unitCode": "WAY4"
+},
+{
+    "CGST": null,
+    "GSTORTDS": null,
+    "SCST": null,
+    "buildingAddress": "vizag",
+    "clientAddress": "123 Client Street, City, State, 54321",
+    "clientEmail": "johndoe@example.com",
+    "clientId": "CLI(Visakhapatnam)-00001",
+    "clientName": "John Doe",
+    "clientPhoneNumber": "1234567890",
+    "companyCode": "WAY4TRACK",
+    "description": "qewfeht",
+    "estimateDate": "2025-01-25T18:30:00.000Z",
+    "estimateId": "EST-0002",
+    "expireDate": "2025-01-29",
+    "hsnCode": null,
+    "id": 5,
+    "invoiceId": null,
+    "productOrService": "GPS for bike, GPS for Car",
+    "products": [
+        [Object
+        ],
+        [Object
+        ]
+    ],
+    "totalAmount": 700,
+    "unitCode": "WAY4"
+}
+//product
+{
+    "ICCIDNo": null,
+    "SNO": null,
+    "categoryName": "Category 1",
+    "companyCode": "COMP001",
+    "dateOfPurchase": "2023-10-01",
+    "deviceModel": "Model 1",
+    "id": 4,
+    "imeiNumber": "123456789012345",
+    "planName": "Plan 1",
+    "price": "100.00",
+    "primaryNetwork": "Network 1",
+    "primaryNo": "Primary No 1",
+    "productDescription": "Description for product 1",
+    "productName": "GPS for bike",
+    "productPhoto": "https://www.roadpoint.in/images/bike-tracker.png",
+    "quantity": 10,
+    "remarks1": "Remarks 1",
+    "remarks2": "Remarks 2",
+    "secondaryNetwork": "Network 2",
+    "secondaryNo": "Secondary No 1",
+    "serialNumber": "SN001",
+    "simStatus": "Active",
+    "supplierName": "Supplier 1",
+    "unitCode": "UNIT001",
+    "vendorAddress": "Address 1",
+    "vendorEmailId": "vendor1@example.com",
+    "vendorId": {
+        "GSTNumber": null,
+        "aadharNumber": "1234-5678-9012",
+        "address": "123 Vendor Lane, City, State, 12345",
+        "alternatePhoneNumber": "0123456789",
+        "companyCode": "WAY4TRACK",
+        "emailId": "vendoraA@example.com",
+        "id": 1,
+        "name": "Vendor A",
+        "productType": "Electronics",
+        "startingDate": "2024-01-10",
+        "unitCode": "WAY4",
+        "vendorId": "v-001",
+        "vendorPhoneNumber": "9876543210",
+        "vendorPhoto": null
+    },
+    "vendorName": "Vendor 1",
+    "vendorPhoneNumber": "1234567890",
+    "voucherId": []
+}
+//product list 
+[
+    {
+        "ICCIDNo": null,
+        "SNO": 0,
+        "basketName": null,
+        "categoryName": "vehicle",
+        "companyCode": "WAY4TRACK",
+        "dateOfPurchase": "2025-01-01",
+        "deviceModel": "new",
+        "hsnCode": null,
+        "id": 1,
+        "imeiNumber": "te5474",
+        "location": "warehouse",
+        "mobileNumber": null,
+        "planName": "vadh",
+        "price": "120000.00",
+        "primaryNetwork": "11",
+        "primaryNo": "11",
+        "productDescription": "dvfsbdfjk  djfs",
+        "productName": "Honda Bike",
+        "productPhoto": null,
+        "quantity": 12,
+        "remarks1": "good",
+        "remarks2": null,
+        "remarks3": null,
+        "secondaryNetwork": "11",
+        "secondaryNo": "11",
+        "serialNumber": "12",
+        "simImsi": null,
+        "simNo": null,
+        "simStatus": "accept",
+        "status": "not_assigned",
+        "supplierName": "prem",
+        "unitCode": "WAY4",
+        "vendorAddress": "Ampalam(villages), Narasannapeta(mandal), Srikakulam(District), 532421",
+        "vendorEmailId": "kolatejaed09@gmail.com",
+        "vendorId": {
+            "GSTNumber": null,
+            "aadharNumber": null,
+            "address": "Ampalam(villages), Narasannapeta(mandal), Srikakulam(District), 532421",
+            "alternatePhoneNumber": null,
+            "companyCode": "WAY4TRACK",
+            "createdAt": "2025-02-06T12:25:09.000Z",
+            "emailId": "kolatejaed09@gmail.com",
+            "id": 1,
+            "name": null,
+            "productType": null,
+            "startingDate": null,
+            "unitCode": "WAY4",
+            "updatedAt": "2025-02-06T12:25:09.000Z",
+            "vendorId": "v-001",
+            "vendorPhoneNumber": "1234567890",
+            "vendorPhoto": null
+        },
+        "vendorName": null,
+        "vendorPhoneNumber": "1234567890",
+        "voucherId": []
+    },
+    {
+        "ICCIDNo": null,
+        "SNO": 0,
+        "basketName": null,
+        "categoryName": null,
+        "companyCode": "WAY4TRACK",
+        "dateOfPurchase": "1970-01-01",
+        "deviceModel": null,
+        "hsnCode": null,
+        "id": 3,
+        "imeiNumber": null,
+        "location": "warehouse",
+        "mobileNumber": null,
+        "planName": null,
+        "price": "0.00",
+        "primaryNetwork": null,
+        "primaryNo": null,
+        "productDescription": null,
+        "productName": null,
+        "productPhoto": null,
+        "quantity": 0,
+        "remarks1": null,
+        "remarks2": null,
+        "remarks3": null,
+        "secondaryNetwork": null,
+        "secondaryNo": null,
+        "serialNumber": null,
+        "simImsi": null,
+        "simNo": null,
+        "simStatus": null,
+        "status": "not_assigned",
+        "supplierName": null,
+        "unitCode": "WAY4",
+        "vendorAddress": null,
+        "vendorEmailId": null,
+        "vendorId": null,
+        "vendorName": null,
+        "vendorPhoneNumber": null,
+        "voucherId": []
+    },
+]
+
+{
+    "assertsAmount": 5000,
+    "assertsName": "Voucher 1",
+    "assetPhoto": "https://storage.googleapis.com/way4track-application/assert_photos/1739018141749-rn_image_picker_lib_temp_9867475e-ff25-4238-86ef-3bf73afd82c9.jpg",
+    "assetType": "office asset",
+    "branchId": {
+        "addressLine1": "allipuram",
+        "addressLine2": "venkateswara metta",
+        "branchAddress": "Visakhaptnam",
+        "branchName": "Visakhapatnam",
+        "branchNumber": "9999999999",
+        "branchOpening": "2021-01-15T09:00:00.000Z",
+        "branchPhoto": null,
+        "city": "Visakhaptnam",
+        "companyCode": "WAY4TRACK",
+        "email": "suneel.g@example.com",
+        "id": 1,
+        "pincode": "530001",
+        "state": "AP",
+        "unitCode": "WAY4"
+    },
+    "companyCode": "WAY4TRACK",
+    "description": "office chairs",
+    "emiNumber": 1,
+    "id": 3,
+    "paymentType": "bank",
+    "purchaseDate": "2025-01-31T14:09:27.000Z",
+    "quantity": 2,
+    "unitCode": "WAY4",
+    "voucherId": {
+        "CGST": null,
+        "GSTORTDS": null,
+        "SCST": null,
+        "amount": 5000,
+        "buildingAddress": null,
+        "cardNumber": null,
+        "checkNumber": null,
+        "companyCode": "WAY4TRACK",
+        "createdAt": "2025-01-31T14:09:27.000Z",
+        "creditAmount": null,
+        "emiAmount": 750,
+        "emiNumber": 1,
+        "expireDate": null,
+        "generationDate": "2025-01-31T14:09:27.000Z",
+        "hsnCode": null,
+        "id": 1,
+        "initialPayment": "500.00",
+        "lastPaidDate": "2025-01-31T14:09:27.000Z",
+        "name": "Voucher 1",
+        "nextDueDate": "2025-03-03T14:09:27.000Z",
+        "numberOfEmi": 6,
+        "paidAmount": null,
+        "paymentStatus": "PARTIALLY_PAID",
+        "paymentType": "bank",
+        "productType": "product",
+        "purpose": null,
+        "quantity": null,
+        "remainingAmount": 4500,
+        "role": "client",
+        "shippingAddress": null,
+        "unitCode": "WAY4",
+        "updatedAt": "2025-02-01T06:54:22.000Z",
+        "upiId": null,
+        "voucherId": "EMI-20250131-001",
+        "voucherType": "emi"
+    }
+}
+//staff 
+{
+    "aadharNumber": "3455366",
+    "accountBranch": "Vizag",
+    "accountNumber": "1234567890",
+    "accountType": "current",
+    "address": "Ampalam(village),Narasannapeta(mandal),Srikakulam(District),532421",
+    "alternateNumber": "9647770",
+    "bankName": "ABC Bank",
+    "beforeExperience": null,
+    "bikeAllocation": "Yes",
+    "bikeNumber": null,
+    "bloodGroup": "O+",
+    "branch": {
+        "CIN": null,
+        "GST": null,
+        "addressLine1": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM",
+        "addressLine2": "Door No 30, 20-7, Nehru Rd, Setharamapuram",
+        "branchAddress": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM, Door No 30, 20-7, Nehru Rd, Setharamapuram, Vijayawada, Andhra Pradesh 520002.",
+        "branchName": "Vijayawada",
+        "branchNumber": "8977943035",
+        "branchOpening": "2022-03-27T00:00:00.000Z",
+        "branchPhoto": "https://storage.googleapis.com/way4track-application/Branch_photos/1743508610469-WhatsApp Image 2025-04-01 at 5.20.53 PM.jpeg",
+        "city": "Vijayawada",
+        "companyCode": "WAY4TRACK",
+        "email": "arunodaya@sharontelematics.com",
+        "id": 5,
+        "latitude": null,
+        "longitude": null,
+        "pincode": "520002",
+        "qrPhoto": null,
+        "state": "Andhra Pradesh",
+        "unitCode": "WAY4"
+    },
+    "branchName": "Vijayawada",
+    "carryForwardLeaves": 0,
+    "companyCode": "WAY4TRACK",
+    "createdAt": "2025-04-01T13:36:42.000Z",
+    "department": "technician",
+    "description": "technician",
+    "designation": "Technician",
+    "dob": "2025-04-04",
+    "drivingLicence": "Yes",
+    "drivingLicenceNumber": "123456",
+    "email": "kolate09@gmail.com",
+    "esicNumber": "ESIC1234567",
+    "experienceDetails": [
+        {
+            "previousCompany": "",
+            "previous_designation": "",
+            "previous_salary": "",
+            "total_experience": ""
+        }
+    ],
+    "finalSettlementDate": "2025-04-25",
+    "gender": "Female",
+    "id": 8,
+    "ifscCode": "SBIN1235",
+    "imeiNumber": null,
+    "insuranceEligibilityDate": "2025-04-19",
+    "insuranceExpiryDate": "2025-04-13",
+    "insuranceNumber": "insurance123",
+    "joiningDate": "2025-04-04",
+    "latitude": "17.7307648",
+    "location": "Vizag, ",
+    "longitude": "83.2405504",
+    "mailAllocation": "Yes",
+    "mobileAllocation": "Yes",
+    "mobileBrand": "cv",
+    "mobileNumber": null,
+    "monthlySalary": "4999.00",
+    "name": "ravikanth",
+    "officeEmail": "koja09@gmail.com",
+    "officePhoneNumber": "0733000",
+    "panCardNumber": "df5577",
+    "password": "123a",
+    "phoneNumber": "0330792477",
+    "qualifications": [
+        {
+            "marksOrCgpa": "80",
+            "qualificationName": "Degree"
+        }
+    ],
+    "resignationDate": "2025-04-02",
+    "resume": null,
+    "salaryDate": null,
+    "staffId": "8608088",
+    "staffPhoto": "https://storage.googleapis.com/way4track-application/staff_photos/8608088.jpg",
+    "status": "ACTIVE",
+    "terminationDate": "2025-04-08",
+    "uanNumber": "100200300400",
+    "uniqueId": null,
+    "unitCode": "WAY4",
+    "updatedAt": "2025-04-01T13:36:42.000Z",
+    "vehiclePhoto": null
+}
+
+{
+    "address": "123 Client Street, City, State, 54321",
+    "amount": null,
+    "branchName": "Visakhapatnam",
+    "clientId": "CLI(Visakhapatnam)-00001",
+    "dob": "1990-05-14T18:30:00.000Z",
+    "email": "johndoe@example.com",
+    "generationDate": null,
+    "joiningDate": "2023-12-31T18:30:00.000Z",
+    "name": "John Doe",
+    "paymentStatus": null,
+    "phoneNumber": "1234567890",
+    "productType": null,
+    "quantity": null,
+    "voucherId": null,
+    "voucherName": null
+}
+{
+    "CGST": "8",
+    "GSTORTDS": "GST",
+    "SGST": "8",
+    "buildingAddress": "123 Client Street, City, State, 54321",
+    "clientId": "CLI(Visakhapatnam)-00001",
+    "companyCode": "WAY4TRACK",
+    "convertToInvoice": true,
+    "description": "hiii 6 items and client 1",
+    "estimateId": "EST-0007",
+    "id": 10,
+    "productDetails": [
+        {
+            "hsnCode": "123456789012345",
+            "productId": 4,
+            "productName": "GPS for bike",
+            "quantity": 1
+        },
+        {
+            "hsnCode": "123456789012346",
+            "productId": 5,
+            "productName": "Fule controllor",
+            "quantity": 2
+        },
+        {
+            "hsnCode": "123456789012347",
+            "productId": 6,
+            "productName": "GPS for Car",
+            "quantity": 3
+        },
+        {
+            "hsnCode": "123456789012345",
+            "productId": 4,
+            "productName": "GPS for bike",
+            "quantity": 4
+        },
+        {
+            "hsnCode": "123456789012346",
+            "productId": 5,
+            "productName": "Fule controllor",
+            "quantity": 5
+        },
+        {
+            "hsnCode": "123456789012347",
+            "productId": 6,
+            "productName": "GPS for Car",
+            "quantity": 6
+        }
+    ],
+    "productOrService": "GPS for bike, Fule controllor, GPS for Car, GPS for bike, Fule controllor, GPS for Car",
+    "totalAmount": 4600,
+    "unitCode": "WAY4"
+}
+//dashboard
+ dashboardData : {
+    "ExpenseData": {
+        "last30DaysExpenses": null,
+        "percentageChange": "0.00"
+    },
+    "ProductAndServiceSales": [
+        {
+            "branchName": "Visakhapatnam",
+            "date": "2025-01-30T18:30:00.000Z",
+            "id": 1,
+            "productSales": 5000,
+            "serviceSales": 0,
+            "totalSales": 5000
+        },
+        {
+            "branchName": "Banglore",
+            "date": "2025-01-31T18:30:00.000Z",
+            "id": 10,
+            "productSales": 7000,
+            "serviceSales": 0,
+            "totalSales": 7000
+        },
+        {
+            "branchName": "Cochin",
+            "date": "2025-01-31T18:30:00.000Z",
+            "id": 2,
+            "productSales": 5000,
+            "serviceSales": 0,
+            "totalSales": 5000
+        },
+        {
+            "branchName": "Goa",
+            "date": "2025-01-31T18:30:00.000Z",
+            "id": 5,
+            "productSales": 7000,
+            "serviceSales": 0,
+            "totalSales": 7000
+        },
+        {
+            "branchName": "rajamendary",
+            "date": "2025-01-31T18:30:00.000Z",
+            "id": 6,
+            "productSales": 7000,
+            "serviceSales": 0,
+            "totalSales": 7000
+        },
+        {
+            "branchName": "Rajasthan",
+            "date": "2025-01-31T18:30:00.000Z",
+            "id": 8,
+            "productSales": 7000,
+            "serviceSales": 0,
+            "totalSales": 7000
+        },
+        {
+            "branchName": "Vijaynagaram",
+            "date": "2025-01-31T18:30:00.000Z",
+            "id": 4,
+            "productSales": 5000,
+            "serviceSales": 0,
+            "totalSales": 5000
+        },
+        {
+            "branchName": "Vijaywad",
+            "date": "2025-01-31T18:30:00.000Z",
+            "id": 3,
+            "productSales": 5000,
+            "serviceSales": 0,
+            "totalSales": 5000
+        }
+    ],
+    "ProductTypeCreditAndDebitPercentages": [
+        {
+            "branchAddress": "goa",
+            "branchId": 5,
+            "branchName": "Goa",
+            "branchNumber": "9999999995",
+            "date": "2025-01-31T18:30:00.000Z",
+            "expansesDebitPercentage": null,
+            "expansesTotalDebitAmount": 0,
+            "productCreditPercentage": 100,
+            "productTotalCreditAmount": 7000,
+            "salariesDebitPercentage": null,
+            "salariesTotalDebitAmount": 0,
+            "salesCreditPercentage": 0,
+            "salesTotalCreditAmount": 0,
+            "serviceCreditPercentage": 0,
+            "serviceTotalCreditAmount": 0,
+            "totalCreditAmount": 7000,
+            "totalDebitAmount": 0
+        }
+    ],
+    "PurchaseCount": {
+        "last30DaysPurchases": "0",
+        "percentageChange": "NaN"
+    },
+    "attendence": [],
+    "branchWiseSolidLiquidCash": [
+        {
+            "branchName": "Goa",
+            "liquidCash": 0,
+            "solidCash": 7000
+        }
+    ],
+    "monthWiseBalance": [],
+    "productData": [
+        {
+            "ICCIDNo": null,
+            "SNO": null,
+            "basketName": null,
+            "categoryName": "Category 1",
+            "companyCode": "WAY4TRACK",
+            "dateOfPurchase": "2023-10-01",
+            "deviceModel": "Model 1",
+            "hsnCode": null,
+            "id": 4,
+            "imeiNumber": "123456789012345",
+            "location": "warehouse",
+            "mobileNumber": null,
+            "planName": "Plan 1",
+            "price": "100.00",
+            "primaryNetwork": "Network 1",
+            "primaryNo": "Primary No 1",
+            "productDescription": "Description for product 1",
+            "productName": "GPS for bike",
+            "productPhoto": "https://www.roadpoint.in/images/bike-tracker.png",
+            "quantity": 10,
+            "remarks1": "Remarks 1",
+            "remarks2": "Remarks 2",
+            "remarks3": null,
+            "secondaryNetwork": "Network 2",
+            "secondaryNo": "Secondary No 1",
+            "serialNumber": "SN001",
+            "simImsi": null,
+            "simNo": null,
+            "simStatus": "Active",
+            "status": "not_assigned",
+            "supplierName": "Supplier 1",
+            "unitCode": "WAY4",
+            "vendorAddress": "Address 1",
+            "vendorEmailId": "vendor1@example.com",
+            "vendorId": [Object
+            ],
+            "vendorName": "Vendor 1",
+            "vendorPhoneNumber": "1234567890",
+            "voucherId": [Array
+            ]
+        },
+        {
+            "ICCIDNo": null,
+            "SNO": null,
+            "basketName": null,
+            "categoryName": "Category 2",
+            "companyCode": "WAY4TRACK",
+            "dateOfPurchase": "2023-10-02",
+            "deviceModel": "Model 2",
+            "hsnCode": null,
+            "id": 5,
+            "imeiNumber": "123456789012346",
+            "location": "warehouse",
+            "mobileNumber": null,
+            "planName": "Plan 2",
+            "price": "200.00",
+            "primaryNetwork": "Network 1",
+            "primaryNo": "Primary No 2",
+            "productDescription": "Description for product 2",
+            "productName": "Fule controllor",
+            "productPhoto": "https://5.imimg.com/data5/ANDROID/Default/2023/5/307032355/GP/WN/VV/13527700/product-jpeg-500x500.jpg",
+            "quantity": 5,
+            "remarks1": "Remarks 1",
+            "remarks2": "Remarks 2",
+            "remarks3": null,
+            "secondaryNetwork": "Network 2",
+            "secondaryNo": "Secondary No 2",
+            "serialNumber": "SN002",
+            "simImsi": null,
+            "simNo": null,
+            "simStatus": "Inactive",
+            "status": "not_assigned",
+            "supplierName": "Supplier 2",
+            "unitCode": "WAY4",
+            "vendorAddress": "Address 2",
+            "vendorEmailId": "vendor2@example.com",
+            "vendorId": [Object
+            ],
+            "vendorName": "Vendor 2",
+            "vendorPhoneNumber": "0987654321",
+            "voucherId": [Array
+            ]
+        },
+        {
+            "ICCIDNo": null,
+            "SNO": null,
+            "basketName": null,
+            "categoryName": "Category 3",
+            "companyCode": "WAY4TRACK",
+            "dateOfPurchase": "2023-10-03",
+            "deviceModel": "Model 3",
+            "hsnCode": null,
+            "id": 6,
+            "imeiNumber": "123456789012347",
+            "location": "warehouse",
+            "mobileNumber": null,
+            "planName": "Plan 3",
+            "price": "300.00",
+            "primaryNetwork": "Network 1",
+            "primaryNo": "Primary No 3",
+            "productDescription": "Description for product 3",
+            "productName": "GPS for Car",
+            "productPhoto": "https://www.safewise.com/app/uploads/2019/07/Vyncs-Vehicle-GPS-Tracker.jpg",
+            "quantity": 15,
+            "remarks1": "Remarks 1",
+            "remarks2": "Remarks 2",
+            "remarks3": null,
+            "secondaryNetwork": "Network 2",
+            "secondaryNo": "Secondary No 3",
+            "serialNumber": "SN003",
+            "simImsi": null,
+            "simNo": null,
+            "simStatus": "Active",
+            "status": "not_assigned",
+            "supplierName": "Supplier 3",
+            "unitCode": "WAY4",
+            "vendorAddress": "Address 3",
+            "vendorEmailId": "vendor3@example.com",
+            "vendorId": [Object
+            ],
+            "vendorName": "Vendor 3",
+            "vendorPhoneNumber": "1122334455",
+            "voucherId": [Array
+            ]
+        },
+        {
+            "ICCIDNo": null,
+            "SNO": 0,
+            "basketName": null,
+            "categoryName": "vehicle",
+            "companyCode": "WAY4TRACK",
+            "dateOfPurchase": "2025-01-01",
+            "deviceModel": "new",
+            "hsnCode": null,
+            "id": 7,
+            "imeiNumber": "te5474",
+            "location": "warehouse",
+            "mobileNumber": null,
+            "planName": "vadh",
+            "price": "120000.00",
+            "primaryNetwork": "11",
+            "primaryNo": "11",
+            "productDescription": "dvfsbdfjk  djfs",
+            "productName": "Honda Bike",
+            "productPhoto": null,
+            "quantity": 12,
+            "remarks1": "good",
+            "remarks2": null,
+            "remarks3": null,
+            "secondaryNetwork": "11",
+            "secondaryNo": "11",
+            "serialNumber": "12",
+            "simImsi": null,
+            "simNo": null,
+            "simStatus": "accept",
+            "status": "not_assigned",
+            "supplierName": "prem",
+            "unitCode": "WAY4",
+            "vendorAddress": "Ampalam(villages), Narasannapeta(mandal), Srikakulam(District), 532421",
+            "vendorEmailId": "kolatejaed09@gmail.com",
+            "vendorId": [Object
+            ],
+            "vendorName": null,
+            "vendorPhoneNumber": "1234567890",
+            "voucherId": [Array
+            ]
+        }
+    ],
+    "purchaseData": [],
+    "solidLiquid": {
+        "details": [
+            [Object
+            ]
+        ],
+        "liquidCash": 0,
+        "solidCash": 7000
+    },
+    "totalProducts": {
+        "last30DaysProducts": null,
+        "percentageChange": "0.00"
+    },
+    "totalTickets": {
+        "last30DaysTickets": "0",
+        "percentageChange": "NaN"
+    }
+}
+//permissions
+{
+    "staffData": [
+        {
+            "branchName": "Visakhapatnam",
+            "branch_address_line1": "21-27 Viman Nagar Airport Road",
+            "branch_address_line2": "near INS Dega",
+            "branch_branch_address": "21-27 Viman Nagar Airport Road near INS Dega Visakhapatnam Andra Pradesh. 530009",
+            "branch_branch_number": "BR001",
+            "branch_branch_opening": "2021-01-15T00: 00: 00.000Z",
+            "branch_branch_photo": null,
+            "branch_city": "Visakhapatnam",
+            "branch_company_code": "WAY4TRACK",
+            "branch_email": "support@way4track.com",
+            "branch_id": 1,
+            "branch_name": "Visakhapatnam",
+            "branch_pincode": "530009",
+            "branch_state": "Andra pradesh",
+            "branch_unit_code": "WAY4",
+            "designation": "HR",
+            "id": 10,
+            "phoneNumber": "+0987654322",
+            "staffId": "SF-00001",
+            "staffName": "Suneel"
+        }
+    ],
+    "staffPermission": [
+        {
+            "add": true,
+            "delete": true,
+            "edit": true,
+            "name": "branch",
+            "view": true
+        },
+        {
+            "add": true,
+            "delete": true,
+            "edit": true,
+            "name": "assets",
+            "view": true
+        },
+        {
+            "add": true,
+            "delete": true,
+            "edit": true,
+            "name": "appointments",
+            "view": true
+        },
+        {
+            "add": true,
+            "delete": true,
+            "edit": true,
+            "name": "staff",
+            "view": true
+        },
+        {
+            "add": true,
+            "delete": true,
+            "edit": true,
+            "name": "client",
+            "view": true
+        },
+        {
+            "add": true,
+            "delete": true,
+            "edit": true,
+            "name": "vendor",
+            "view": true
+        },
+        {
+            "add": true,
+            "delete": true,
+            "edit": true,
+            "name": "subdealer",
+            "view": true
+        },
+        {
+            "add": true,
+            "delete": true,
+            "edit": true,
+            "name": "hiring",
+            "view": true
+        },
+        {
+            "add": true,
+            "delete": true,
+            "edit": true,
+            "name": "bank",
+            "view": true
+        },
+        {
+            "add": true,
+            "delete": true,
+            "edit": true,
+            "name": "product",
+            "view": true
+        },
+        {
+            "add": true,
+            "delete": true,
+            "edit": true,
+            "name": "productassign",
+            "view": true
+        },
+        {
+            "add": true,
+            "delete": true,
+            "edit": true,
+            "name": "tickets",
+            "view": true
+        },
+        {
+            "add": true,
+            "delete": true,
+            "edit": true,
+            "name": "voucher",
+            "view": true
+        },
+        {
+            "add": true,
+            "delete": true,
+            "edit": true,
+            "name": "work-allocation",
+            "view": true
+        },
+        {
+            "add": true,
+            "delete": true,
+            "edit": true,
+            "name": "estimate",
+            "view": true
+        },
+        {
+            "add": true,
+            "delete": true,
+            "edit": true,
+            "name": "attendance",
+            "view": true
+        }
+    ]
+}{
+    "CreditAndDebitPercentages": [],
+    "assertCard": {
+        "groupedBranches": [],
+        "officeAsserts": 0,
+        "totalAsserts": 0,
+        "transportAsserts": 0
+    },
+    "productByBranch": {
+        "data": [],
+        "errorCode": 200,
+        "internalMessage": "Data retrieved successfully",
+        "status": true
+    },
+    "totalStaff": {
+        "result": [
+            [Object
+            ],
+            [Object
+            ]
+        ],
+        "staff": [
+            [Object
+            ],
+            [Object
+            ]
+        ]
+    }
+}
+
+{
+    "BranchManager_homeInfoReducer": {
+        "BranchManager_homeInfo": null,
+        "error": null,
+        "loading": false
+    },
+    "CEO_homeInfoReducer": {
+        "CEO_homeInfo": null,
+        "error": null,
+        "loading": false
+    },
+    "HR_homeInfoReducer": {
+        "HR_homeInfo": null,
+        "error": null,
+        "loading": false
+    },
+    "SalesMen_homeInfoReducer": {
+        "SalesMen_homeInfo": null,
+        "error": null,
+        "loading": false
+    },
+    "Technician_homeInfoReducer": {
+        "Technician_homeInfo": null,
+        "error": null,
+        "loading": false
+    },
+    "WarehouseManager_homeInfoReducer": {
+        "WarehouseManager_homeInfo": null,
+        "error": null,
+        "loading": false
+    },
+    "addClient": {
+        "clients": [],
+        "error": "",
+        "loading": false
+    },
+    "addProductAssigns": {
+        "error": "",
+        "loading": false,
+        "productAssignInfo": {}
+    },
+    "addRequests": {
+        "error": "",
+        "loading": false,
+        "raiseRequestInfo": {}
+    },
+    "addStaffs": {
+        "error": "",
+        "loading": false,
+        "staff": {}
+    },
+    "addSubdelear": {
+        "error": "",
+        "loading": false,
+        "subdealerInfo": {}
+    },
+    "addTicket": {
+        "error": "",
+        "loading": false,
+        "ticket": {}
+    },
+    "addVendor": {
+        "error": "",
+        "loading": false,
+        "vendorInfo": {}
+    },
+    "addVoucher": {
+        "error": "",
+        "loading": false,
+        "voucherInfo": {}
+    },
+    "addWorkAllocation": {
+        "error": "",
+        "loading": false,
+        "workAllocationInfo": {}
+    },
+    "appointmentDetailReducer": {
+        "appointmentInfo": {},
+        "error": "",
+        "loading": false
+    },
+    "appointmentsReducer": {
+        "appointments": [],
+        "error": "",
+        "loading": false
+    },
+    "assertDetailReducer": {
+        "assertInfo": {},
+        "error": "",
+        "loading": false
+    },
+    "assertsReducer": {
+        "asserts": [],
+        "error": "",
+        "loading": false
+    },
+    "bankAccountDetailReducer": {
+        "bankAccount": {},
+        "error": "",
+        "loading": false
+    },
+    "bankAccountsDropdownReducer": {
+        "bankAccountsDropdown": [],
+        "error": "",
+        "loading": false
+    },
+    "bankAccountsReducer": {
+        "bankAccounts": [],
+        "error": "",
+        "loading": false
+    },
+    "branchDetailReducer": {
+        "branch": {},
+        "error": "",
+        "loading": false
+    },
+    "branchProductReducer": {
+        "branchProducts": {},
+        "error": "",
+        "loading": false
+    },
+    "branchesDropdownReducer": {
+        "branchesDropdown": [],
+        "error": "",
+        "loading": false
+    },
+    "branchesReducer": {
+        "branches": [],
+        "error": "",
+        "loading": false
+    },
+    "categoryDetails": {
+        "category": {},
+        "error": "",
+        "loading": false
+    },
+    "categoryProducts": {
+        "catProducts": [],
+        "error": "",
+        "loading": false
+    },
+    "categorys": {
+        "categories": [],
+        "error": "",
+        "loading": false
+    },
+    "clientDetails": {
+        "clientInfo": {},
+        "error": "",
+        "loading": false
+    },
+    "clients": {
+        "clients": [],
+        "error": "",
+        "loading": false
+    },
+    "clientsDropdownReducer": {
+        "clientsDropdown": [],
+        "error": "",
+        "loading": false
+    },
+    "createAppointmentReducer": {
+        "appointmentInfo": {},
+        "error": "",
+        "loading": false
+    },
+    "createAssertReducer": {
+        "assertInfo": {},
+        "error": "",
+        "loading": false
+    },
+    "createHiringsReducer": {
+        "error": "",
+        "hiringInfo": {},
+        "loading": false
+    },
+    "createbankAccountsReducer": {
+        "addedBankAccount": {},
+        "error": "",
+        "loading": false
+    },
+    "createbranchsReducer": {
+        "addedBranch": {},
+        "error": "",
+        "loading": false
+    },
+    "createestimatesReducer": {
+        "error": "",
+        "estimateInfo": {},
+        "loading": false
+    },
+    "deleateAppointmentReducer": {
+        "appointment": {},
+        "error": "",
+        "loading": false
+    },
+    "deleateAssertReducer": {
+        "assert": {},
+        "error": "",
+        "loading": false
+    },
+    "deleteClientStatus": {
+        "client": {},
+        "error": "",
+        "loading": false
+    },
+    "deleteHiringReducer": {
+        "error": "",
+        "hiring": {},
+        "loading": false
+    },
+    "deleteRequestStatus": {
+        "error": "",
+        "loading": false,
+        "raiseRequest": {}
+    },
+    "deleteStaffStatus": {
+        "error": "",
+        "loading": false,
+        "staff": {}
+    },
+    "deleteSubdelearStatus": {
+        "error": "",
+        "loading": false,
+        "subdealer": {}
+    },
+    "deleteTicketStatus": {
+        "error": "",
+        "loading": false,
+        "ticket": {}
+    },
+    "deleteVendorStatus": {
+        "error": "",
+        "loading": false,
+        "vendor": {}
+    },
+    "deleteVoucherStatus": {
+        "error": "",
+        "loading": false,
+        "voucher": {}
+    },
+    "deleteWorkAllocationStatus": {
+        "error": "",
+        "loading": false,
+        "workAllocation": {}
+    },
+    "deletebankAccountReducer": {
+        "deletedbankAccount": {},
+        "error": "",
+        "loading": false
+    },
+    "deletebranchReducer": {
+        "deletedbranch": {},
+        "error": "",
+        "loading": false
+    },
+    "deleteestimateReducer": {
+        "error": "",
+        "estimate": {},
+        "loading": false
+    },
+    "estimateDetailReducer": {
+        "error": "",
+        "estimateInfo": {},
+        "loading": false
+    },
+    "estimatesReducer": {
+        "error": "",
+        "estimates": [],
+        "loading": false
+    },
+    "hiringDetailReducer": {
+        "error": "",
+        "hiringInfo": {},
+        "loading": false
+    },
+    "hiringsReducer": {
+        "error": "",
+        "hirings": [],
+        "loading": false
+    },
+    "invoicesReducer": {
+        "error": "",
+        "invoices": [],
+        "loading": false
+    },
+    "notificationDetails": {
+        "error": "",
+        "loading": false,
+        "notification": {}
+    },
+    "notifications": {
+        "error": "",
+        "loading": false,
+        "notifications": []
+    },
+    "productAssignInfo": {
+        "error": "",
+        "loading": false,
+        "productAssignInfo": {}
+    },
+    "productAssigns": {
+        "error": "",
+        "loading": false,
+        "productAssigns": []
+    },
+    "productInfo": {
+        "error": "",
+        "loading": false,
+        "productInfo": {}
+    },
+    "productUpdate": {
+        "error": "",
+        "loading": false,
+        "product": {}
+    },
+    "products": {
+        "error": "",
+        "loading": false,
+        "products": []
+    },
+    "productsDropdownReducer": {
+        "error": "",
+        "loading": false,
+        "productsDropdown": []
+    },
+    "raiserequests": {
+        "error": "",
+        "loading": false,
+        "raiseRequests": []
+    },
+    "recieptsReducer": {
+        "error": "",
+        "loading": false,
+        "reciepts": []
+    },
+    "requestDetails": {
+        "error": "",
+        "loading": false,
+        "raiseRequestInfo": {}
+    },
+    "selectedDrawLabel": {
+        "error": null,
+        "loading": false,
+        "selectedLabel": ""
+    },
+    "staffDetails": {
+        "error": "",
+        "loading": false,
+        "staffByIdInfo": {
+            "aadharNumber": "000000000000",
+            "address": "456 Another St, Town, Country",
+            "basicSalary": "60000.00",
+            "beforeExperience": 0,
+            "companyCode": "WAY4TRACK",
+            "createdAt": "2025-02-06T12:17:27.000Z",
+            "designation": "CEO",
+            "dob": "1985-05-10",
+            "email": "sunil.g@example.com",
+            "id": 10,
+            "joiningDate": "2018-06-15",
+            "latitude": "17.7242112",
+            "longitude": "83.2929792",
+            "name": "Suneel",
+            "password": "way4track_CEO",
+            "permissions": [Array
+            ],
+            "phoneNumber": "+0987654322",
+            "productAssign": [Array
+            ],
+            "request": [Array
+            ],
+            "staffFrom": [Array
+            ],
+            "staffId": "SF-00001",
+            "staffPhoto": "https://example.com/janephoto.jpg",
+            "staffTo": [Array
+            ],
+            "unitCode": "WAY4",
+            "updatedAt": "2025-02-06T12:17:28.000Z",
+            "voucherId": [Array
+            ]
+        }
+    },
+    "staffLogin": {
+        "error": null,
+        "loading": false,
+        "staffInfo": {
+            "data": [Object
+            ],
+            "errorCode": 200,
+            "internalMessage": "Login successful.",
+            "status": true
+        }
+    },
+    "staffs": {
+        "error": "",
+        "loading": false,
+        "staff": {},
+        "staffs": []
+    },
+    "staffsDropdownReducer": {
+        "error": "",
+        "loading": false,
+        "staffsDropdown": []
+    },
+    "subdealerDetails": {
+        "error": "",
+        "loading": false,
+        "subdealerInfo": {}
+    },
+    "subdealers": {
+        "error": "",
+        "loading": false,
+        "subdealers": []
+    },
+    "subdealersDropdownReducer": {
+        "error": "",
+        "loading": false,
+        "subdealersDropdown": []
+    },
+    "ticketDetails": {
+        "error": "",
+        "loading": false,
+        "ticket": {}
+    },
+    "ticketsReducer": {
+        "error": "",
+        "loading": false,
+        "tickets": []
+    },
+    "updateAppointmentReducer": {
+        "appointment": {},
+        "error": "",
+        "loading": false
+    },
+    "updateAssertReducer": {
+        "assert": {},
+        "error": "",
+        "loading": false
+    },
+    "updateClientDetails": {
+        "client": {},
+        "error": "",
+        "loading": false
+    },
+    "updateHiringReducer": {
+        "error": "",
+        "hiring": {},
+        "loading": false
+    },
+    "updateProductAssign": {
+        "error": "",
+        "loading": false,
+        "productAssign": {}
+    },
+    "updateRequests": {
+        "error": "",
+        "loading": false,
+        "raiseRequest": {}
+    },
+    "updateStaffs": {
+        "error": "",
+        "loading": false,
+        "staff": {}
+    },
+    "updateSubdelearDetails": {
+        "error": "",
+        "loading": false,
+        "subdealer": {}
+    },
+    "updateTicketDetails": {
+        "error": "",
+        "loading": false,
+        "ticket": {}
+    },
+    "updateVendorDetails": {
+        "error": "",
+        "loading": false,
+        "vendor": {}
+    },
+    "updateVoucherDetails": {
+        "error": "",
+        "loading": false,
+        "voucher": {}
+    },
+    "updateWorkAllocationDetails": {
+        "error": "",
+        "loading": false,
+        "workAllocation": {}
+    },
+    "updatebankAccountReducer": {
+        "error": "",
+        "loading": false,
+        "updatedBankAccount": {}
+    },
+    "updatebranchReducer": {
+        "error": "",
+        "loading": false,
+        "updatedBranch": {}
+    },
+    "updateestimateReducer": {
+        "error": "",
+        "estimate": {},
+        "loading": false
+    },
+    "vendorDetails": {
+        "error": "",
+        "loading": false,
+        "vendorInfo": {}
+    },
+    "vendors": {
+        "error": "",
+        "loading": false,
+        "vendors": []
+    },
+    "vendorsDropdownReducer": {
+        "error": "",
+        "loading": false,
+        "vendorsDropdown": []
+    },
+    "voucherDetails": {
+        "error": "",
+        "loading": false,
+        "voucherInfo": []
+    },
+    "voucher_daybookReducer": {
+        "error": "",
+        "loading": false,
+        "voucherDaybookData": []
+    },
+    "voucher_ledgerReducer": {
+        "error": "",
+        "loading": false,
+        "voucherledgersData": []
+    },
+    "voucher_paymentsReducer": {
+        "error": "",
+        "loading": false,
+        "voucherPaymentsData": []
+    },
+    "voucher_purchasesReducer": {
+        "error": "",
+        "loading": false,
+        "voucherPurchasesData": []
+    },
+    "voucher_recieptReducer": {
+        "error": "",
+        "loading": false,
+        "voucherRecieptsData": []
+    },
+    "vouchers": {
+        "error": "",
+        "loading": false,
+        "vouchers": []
+    },
+    "workAllocationDetails": {
+        "error": "",
+        "loading": false,
+        "workAllocationInfo": {}
+    },
+    "workAllocations": {
+        "error": "",
+        "loading": false,
+        "workAllocations": []
+    }
+}
+//workAllocation
+[
+    {
+        "clientName": "teja",
+        "date": "2025-01-30T00:00:00.000Z",
+        "id": 1,
+        "otherInformation": "product",
+        "serviceOrProduct": null,
+        "staffName": "Suneel",
+        "workAllocationNumber": "#VOU-00001",
+        "workStatus": "pending"
+    },
+    {
+        "clientName": "sunil",
+        "date": "2025-02-04T00:00:00.000Z",
+        "id": 2,
+        "otherInformation": "product change",
+        "serviceOrProduct": null,
+        "staffName": "rajitha",
+        "workAllocationNumber": "#VOU-00002",
+        "workStatus": "pending"
+    }
+]
+//drawer permission
+[
+    {
+        "id": 12,
+        "permissions": [
+            {
+                "add": false,
+                "edit": false,
+                "name": "branch",
+                "view": false,
+                "delete": true
+            },
+            {
+                "add": false,
+                "edit": false,
+                "name": "assets",
+                "view": true,
+                "delete": true
+            },
+            {
+                "add": true,
+                "edit": true,
+                "name": "appointments",
+                "view": true,
+                "delete": true
+            },
+            {
+                "add": false,
+                "edit": false,
+                "name": "staff",
+                "view": true,
+                "delete": true
+            },
+            {
+                "add": false,
+                "edit": false,
+                "name": "client",
+                "view": true,
+                "delete": true
+            },
+            {
+                "add": false,
+                "edit": false,
+                "name": "vendor",
+                "view": true,
+                "delete": true
+            },
+            {
+                "add": false,
+                "edit": false,
+                "name": "subdealer",
+                "view": true,
+                "delete": true
+            },
+            {
+                "add": false,
+                "edit": false,
+                "name": "hiring",
+                "view": false,
+                "delete": true
+            },
+            {
+                "add": false,
+                "edit": false,
+                "name": "bank",
+                "view": false,
+                "delete": true
+            },
+            {
+                "add": false,
+                "edit": false,
+                "name": "product",
+                "view": true,
+                "delete": true
+            },
+            {
+                "add": false,
+                "edit": false,
+                "name": "productassign",
+                "view": false,
+                "delete": true
+            },
+            {
+                "add": true,
+                "edit": true,
+                "name": "tickets",
+                "view": true,
+                "delete": true
+            },
+            {
+                "add": true,
+                "edit": true,
+                "name": "voucher",
+                "view": true,
+                "delete": true
+            },
+            {
+                "add": true,
+                "edit": true,
+                "name": "work-allocation",
+                "view": true,
+                "delete": true
+            },
+            {
+                "add": false,
+                "edit": false,
+                "name": "estimate",
+                "view": true,
+                "delete": true
+            },
+            {
+                "add": true,
+                "edit": true,
+                "name": "attendance",
+                "view": true,
+                "delete": true
+            }
+        ],
+        "role": "branch",
+        "companyCode": "WAY4TRACK",
+        "unitCode": "WAY4"
+    }
+]
+
+{
+    "address": "vizag",
+    "chassisNumber": "sgbh",
+    "date": "2014-02-14",
+    "engineNumber": "dfgbfdh",
+    "name": "client1",
+    "phoneNumber": "9999999999",
+    "productName": "ais140_vltd",
+    "service": "repair",
+    "vehicleNumber": "sgdh",
+    "vehiclePhoto": null,
+    "vehiclePhotoUpload": {
+        "name": "rn_image_picker_lib_temp_d06f6be0-08ec-4a12-981f-894bbcf72869.jpg",
+        "type": "image/jpeg",
+        "uri": "file:///data/user/0/com.way4track/cache/rn_image_picker_lib_temp_d06f6be0-08ec-4a12-981f-894bbcf72869.jpg"
+    },
+    "vehicleType": "bike"
+}
+//tech_Work
+[
+    {
+        "WaclientId": null,
+        "acceptStartDate": null,
+        "activateDate": null,
+        "address": "vizag",
+        "amount": 6000,
+        "applicationName": null,
+        "backSupporterId": 22,
+        "backSupportterName": "D.srinu",
+        "br_CIN": null,
+        "br_GST": null,
+        "br_address_line1": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM",
+        "br_address_line2": "Door No 30, 20-7, Nehru Rd, Setharamapuram",
+        "br_branch_address": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM, Door No 30, 20-7, Nehru Rd, Setharamapuram, Vijayawada, Andhra Pradesh 520002.",
+        "br_branch_number": "8977943035",
+        "br_branch_opening": "2022-03-27T00:00:00.000Z",
+        "br_branch_photo": "https://storage.googleapis.com/way4track-application/Branch_photos/1743508610469-WhatsApp Image 2025-04-01 at 5.20.53 PM.jpeg",
+        "br_city": "Vijayawada",
+        "br_company_code": "WAY4TRACK",
+        "br_email": "arunodaya@sharontelematics.com",
+        "br_id": 5,
+        "br_latitude": null,
+        "br_longitude": null,
+        "br_name": "Vijayawada",
+        "br_pincode": "520002",
+        "br_qr_photo": null,
+        "br_state": "Andhra Pradesh",
+        "br_unit_code": "WAY4",
+        "branchId": 5,
+        "chassisNumber": "xdvff",
+        "clientName": "ravi",
+        "client_GST_number": null,
+        "client_address": null,
+        "client_bill_wise_date": null,
+        "client_branch_id": null,
+        "client_client_id": null,
+        "client_client_photo": null,
+        "client_company_code": null,
+        "client_email": null,
+        "client_hsn_code": null,
+        "client_id": null,
+        "client_joining_date": null,
+        "client_name": null,
+        "client_phone_number": null,
+        "client_sac_code": null,
+        "client_status": null,
+        "client_tcs": null,
+        "client_tds": null,
+        "client_unit_code": null,
+        "completedDate": null,
+        "description": null,
+        "email": null,
+        "endDate": "2025-04-09T08:43:40.000Z",
+        "engineNumber": "dffgbfgbf",
+        "id": 3,
+        "imeiNumber": "8768665445653",
+        "installationAddress": "P6HH+PQH, Visakhapatnam, Andhra Pradesh 530009, India",
+        "paidAmount": null,
+        "paymentStatus": "COMPLETED",
+        "pendingDate": null,
+        "phoneNumber": "949494994",
+        "productName": "SHENZHONE CONCOX V5 ",
+        "remark": "[{\"date\":\"2025-04-09T07:33:26.786Z\",\"desc\":\"hi\",\"name\":\"ravikanth\",\"staffId\":8},{\"date\":\"2025-04-09T07:42:59.177Z\",\"desc\":\"hello\",\"name\":\"ravikanth\",\"staffId\":8},{\"staffId\":\"SF-0010\",\"name\":\"D.srinu\",\"date\":\"2025-04-11T14:20:17.972Z\",\"desc\":\"test\",\"file\":null},{\"staffId\":\"SF-0010\",\"name\":\"D.srinu\",\"date\":\"2025-04-11T14:34:13.669Z\",\"desc\":\"Image\",\"file\":\"attached\"},{\"staffId\":\"SF-0010\",\"name\":\"D.srinu\",\"date\":\"2025-04-11T14:48:40.260Z\",\"desc\":\"Image\",\"file\":\"attached\"},{\"staffId\":\"SF-0010\",\"name\":\"D.srinu\",\"date\":\"2025-04-11T14:49:51.336Z\",\"desc\":\"video\",\"file\":null}]",
+        "screenShot": null,
+        "service": null,
+        "simNumber": null,
+        "st_aadhar_number": "34553",
+        "st_account_branch": "DAY AND NIGHT ",
+        "st_account_number": "7036007434123",
+        "st_account_type": "savings",
+        "st_address": "Ampalam(vilage),Narasannapeta(mandal),Srikakulam(District),532421",
+        "st_alternate_number": "96401454",
+        "st_bank_name": "SBI",
+        "st_before_experience": null,
+        "st_bike_allocation": "Yes",
+        "st_bike_number": "vbgf",
+        "st_blood_group": "",
+        "st_branch_id": 15,
+        "st_branch_name": "Tirupati",
+        "st_carry_forward_leaves": 0,
+        "st_company_code": "WAY4TRACK",
+        "st_created_at": "2025-04-02T09:50:25.000Z",
+        "st_department": "CIVIL",
+        "st_description": "BE GOOD good",
+        "st_designation": "Backend Support",
+        "st_designation_id": 11,
+        "st_dob": "2025-04-15T00:00:00.000Z",
+        "st_driving_licence": "Yes",
+        "st_driving_licence_number": "ty567",
+        "st_email": "kolat88a09@gmail.com",
+        "st_esic_number": "hk",
+        "st_experience_details": [],
+        "st_final_settlement_date": "2025-04-26T00:00:00.000Z",
+        "st_gender": "Female",
+        "st_id": 22,
+        "st_ifsc_code": "SBI123654789",
+        "st_imei_number": null,
+        "st_insurance_eligibility_date": "2025-04-05T00:00:00.000Z",
+        "st_insurance_expiry_date": "2025-04-22T00:00:00.000Z",
+        "st_insurance_number": "789456123",
+        "st_joining_date": "2025-04-19T00:00:00.000Z",
+        "st_latitude": null,
+        "st_location": "fg",
+        "st_longitude": null,
+        "st_mail_allocation": "Yes",
+        "st_mobile_allocation": "Yes",
+        "st_mobile_brand": "vb",
+        "st_mobile_number": null,
+        "st_monthly_salary": "121.00",
+        "st_name": "D.srinu",
+        "st_office_email": "kolat44eja09@gmail.com",
+        "st_office_phone_number": "073355",
+        "st_pan_card_number": "df5566",
+        "st_password": "123",
+        "st_phone_number": "073307",
+        "st_qualifications": [
+            [Object
+            ]
+        ],
+        "st_resignation_date": "2025-05-01T00:00:00.000Z",
+        "st_resume": null,
+        "st_salary_date": null,
+        "st_staff_id": "SF-0010",
+        "st_staff_photo": null,
+        "st_staff_status": "ACTIVE",
+        "st_termination_date": "2025-04-04T00:00:00.000Z",
+        "st_uan_number": "jkh",
+        "st_unique_id": null,
+        "st_unit_code": "WAY4",
+        "st_updated_at": "2025-04-02T09:50:25.000Z",
+        "st_vehicle_photo": null,
+        "staffId": 8,
+        "staffName": "ravikanth",
+        "staff_aadhar_number": "3455366",
+        "staff_account_branch": "Vizag",
+        "staff_account_number": "1234567890",
+        "staff_account_type": "current",
+        "staff_address": "Ampalam(village),Narasannapeta(mandal),Srikakulam(District),532421",
+        "staff_alternate_number": "9647770",
+        "staff_bank_name": "ABC Bank",
+        "staff_before_experience": null,
+        "staff_bike_allocation": "Yes",
+        "staff_bike_number": null,
+        "staff_blood_group": "O+",
+        "staff_branch_id": 5,
+        "staff_branch_name": "Vijayawada",
+        "staff_carry_forward_leaves": 0,
+        "staff_company_code": "WAY4TRACK",
+        "staff_created_at": "2025-04-01T13:36:42.000Z",
+        "staff_department": "technician",
+        "staff_description": "technician",
+        "staff_designation": "Technician",
+        "staff_designation_id": 6,
+        "staff_dob": "2025-04-04T00:00:00.000Z",
+        "staff_driving_licence": "Yes",
+        "staff_driving_licence_number": "123456",
+        "staff_email": "kolate09@gmail.com",
+        "staff_esic_number": "ESIC1234567",
+        "staff_experience_details": "[{\"previousCompany\":\"\",\"previous_designation\":\"\",\"total_experience\":\"\",\"previous_salary\":\"\"}]",
+        "staff_final_settlement_date": "2025-04-25T00:00:00.000Z",
+        "staff_gender": "Female",
+        "staff_id": 8,
+        "staff_ifsc_code": "SBIN1235",
+        "staff_imei_number": null,
+        "staff_insurance_eligibility_date": "2025-04-19T00:00:00.000Z",
+        "staff_insurance_expiry_date": "2025-04-13T00:00:00.000Z",
+        "staff_insurance_number": "insurance123",
+        "staff_joining_date": "2025-04-04T00:00:00.000Z",
+        "staff_latitude": "17.7307648",
+        "staff_location": "Vizag, ",
+        "staff_longitude": "83.2405504",
+        "staff_mail_allocation": "Yes",
+        "staff_mobile_allocation": "Yes",
+        "staff_mobile_brand": "cv",
+        "staff_mobile_number": null,
+        "staff_monthly_salary": "4999.00",
+        "staff_name": "ravikanth",
+        "staff_office_email": "koja09@gmail.com",
+        "staff_office_phone_number": "0733000",
+        "staff_pan_card_number": "df5577",
+        "staff_password": "123a",
+        "staff_phone_number": "0330792477",
+        "staff_qualifications": "[{\"qualificationName\":\"Degree\",\"marksOrCgpa\":\"80\"}]",
+        "staff_resignation_date": "2025-04-02T00:00:00.000Z",
+        "staff_resume": null,
+        "staff_salary_date": null,
+        "staff_staff_id": "8608088",
+        "staff_staff_photo": "https://storage.googleapis.com/way4track-application/staff_photos/8608088.jpg",
+        "staff_staff_status": "ACTIVE",
+        "staff_termination_date": "2025-04-08T00:00:00.000Z",
+        "staff_uan_number": "100200300400",
+        "staff_unique_id": null,
+        "staff_unit_code": "WAY4",
+        "staff_updated_at": "2025-04-01T13:36:42.000Z",
+        "staff_vehicle_photo": null,
+        "startDate": "2025-04-08T12:20:54.000Z",
+        "subDealerId": null,
+        "subDealerName": null,
+        "subDealerPhoneNumber": null,
+        "technicianNumber": "2526-000000003",
+        "userName": null,
+        "vehicleNumber": "dgfddf",
+        "vehiclePhoto1": "https://storage.googleapis.com/way4track-application/vehicle_photos/1744114855613-rn_image_picker_lib_temp_14bc98d6-a390-4026-b2dc-2b2a381ca750.jpg",
+        "vehiclePhoto10": null,
+        "vehiclePhoto2": null,
+        "vehiclePhoto3": null,
+        "vehiclePhoto4": null,
+        "vehiclePhoto5": null,
+        "vehiclePhoto6": null,
+        "vehiclePhoto7": null,
+        "vehiclePhoto8": null,
+        "vehiclePhoto9": null,
+        "vehicleType": null,
+        "workStatus": "activate"
+    },
+    {
+        "WaclientId": null,
+        "acceptStartDate": null,
+        "activateDate": null,
+        "address": "edfdgrde",
+        "amount": 5000,
+        "applicationName": null,
+        "backSupporterId": 22,
+        "backSupportterName": "D.srinu",
+        "br_CIN": null,
+        "br_GST": null,
+        "br_address_line1": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM",
+        "br_address_line2": "Door No 30, 20-7, Nehru Rd, Setharamapuram",
+        "br_branch_address": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM, Door No 30, 20-7, Nehru Rd, Setharamapuram, Vijayawada, Andhra Pradesh 520002.",
+        "br_branch_number": "8977943035",
+        "br_branch_opening": "2022-03-27T00:00:00.000Z",
+        "br_branch_photo": "https://storage.googleapis.com/way4track-application/Branch_photos/1743508610469-WhatsApp Image 2025-04-01 at 5.20.53 PM.jpeg",
+        "br_city": "Vijayawada",
+        "br_company_code": "WAY4TRACK",
+        "br_email": "arunodaya@sharontelematics.com",
+        "br_id": 5,
+        "br_latitude": null,
+        "br_longitude": null,
+        "br_name": "Vijayawada",
+        "br_pincode": "520002",
+        "br_qr_photo": null,
+        "br_state": "Andhra Pradesh",
+        "br_unit_code": "WAY4",
+        "branchId": 5,
+        "chassisNumber": "ghbfhfgs",
+        "clientName": "sewrd",
+        "client_GST_number": null,
+        "client_address": null,
+        "client_bill_wise_date": null,
+        "client_branch_id": null,
+        "client_client_id": null,
+        "client_client_photo": null,
+        "client_company_code": null,
+        "client_email": null,
+        "client_hsn_code": null,
+        "client_id": null,
+        "client_joining_date": null,
+        "client_name": null,
+        "client_phone_number": null,
+        "client_sac_code": null,
+        "client_status": null,
+        "client_tcs": null,
+        "client_tds": null,
+        "client_unit_code": null,
+        "completedDate": null,
+        "description": "partially paid",
+        "email": null,
+        "endDate": "2025-04-11T11:33:37.000Z",
+        "engineNumber": "hgh",
+        "id": 4,
+        "imeiNumber": "dgf",
+        "installationAddress": "P6JQ+QV9, Junk Yard, Visakhapatnam, Andhra Pradesh 530009, India",
+        "paidAmount": null,
+        "paymentStatus": "COMPLETED",
+        "pendingDate": null,
+        "phoneNumber": "rgdr",
+        "productName": "SHENZHONE CONCOX V5 ",
+        "remark": [
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ]
+        ],
+        "screenShot": null,
+        "service": "NORMAL INSTALLATION",
+        "simNumber": null,
+        "st_aadhar_number": "34553",
+        "st_account_branch": "DAY AND NIGHT ",
+        "st_account_number": "7036007434123",
+        "st_account_type": "savings",
+        "st_address": "Ampalam(vilage),Narasannapeta(mandal),Srikakulam(District),532421",
+        "st_alternate_number": "96401454",
+        "st_bank_name": "SBI",
+        "st_before_experience": null,
+        "st_bike_allocation": "Yes",
+        "st_bike_number": "vbgf",
+        "st_blood_group": "",
+        "st_branch_id": 15,
+        "st_branch_name": "Tirupati",
+        "st_carry_forward_leaves": 0,
+        "st_company_code": "WAY4TRACK",
+        "st_created_at": "2025-04-02T09:50:25.000Z",
+        "st_department": "CIVIL",
+        "st_description": "BE GOOD good",
+        "st_designation": "Backend Support",
+        "st_designation_id": 11,
+        "st_dob": "2025-04-15T00:00:00.000Z",
+        "st_driving_licence": "Yes",
+        "st_driving_licence_number": "ty567",
+        "st_email": "kolat88a09@gmail.com",
+        "st_esic_number": "hk",
+        "st_experience_details": [],
+        "st_final_settlement_date": "2025-04-26T00:00:00.000Z",
+        "st_gender": "Female",
+        "st_id": 22,
+        "st_ifsc_code": "SBI123654789",
+        "st_imei_number": null,
+        "st_insurance_eligibility_date": "2025-04-05T00:00:00.000Z",
+        "st_insurance_expiry_date": "2025-04-22T00:00:00.000Z",
+        "st_insurance_number": "789456123",
+        "st_joining_date": "2025-04-19T00:00:00.000Z",
+        "st_latitude": null,
+        "st_location": "fg",
+        "st_longitude": null,
+        "st_mail_allocation": "Yes",
+        "st_mobile_allocation": "Yes",
+        "st_mobile_brand": "vb",
+        "st_mobile_number": null,
+        "st_monthly_salary": "121.00",
+        "st_name": "D.srinu",
+        "st_office_email": "kolat44eja09@gmail.com",
+        "st_office_phone_number": "073355",
+        "st_pan_card_number": "df5566",
+        "st_password": "123",
+        "st_phone_number": "073307",
+        "st_qualifications": [
+            [Object
+            ]
+        ],
+        "st_resignation_date": "2025-05-01T00:00:00.000Z",
+        "st_resume": null,
+        "st_salary_date": null,
+        "st_staff_id": "SF-0010",
+        "st_staff_photo": null,
+        "st_staff_status": "ACTIVE",
+        "st_termination_date": "2025-04-04T00:00:00.000Z",
+        "st_uan_number": "jkh",
+        "st_unique_id": null,
+        "st_unit_code": "WAY4",
+        "st_updated_at": "2025-04-02T09:50:25.000Z",
+        "st_vehicle_photo": null,
+        "staffId": 8,
+        "staffName": "ravikanth",
+        "staff_aadhar_number": "3455366",
+        "staff_account_branch": "Vizag",
+        "staff_account_number": "1234567890",
+        "staff_account_type": "current",
+        "staff_address": "Ampalam(village),Narasannapeta(mandal),Srikakulam(District),532421",
+        "staff_alternate_number": "9647770",
+        "staff_bank_name": "ABC Bank",
+        "staff_before_experience": null,
+        "staff_bike_allocation": "Yes",
+        "staff_bike_number": null,
+        "staff_blood_group": "O+",
+        "staff_branch_id": 5,
+        "staff_branch_name": "Vijayawada",
+        "staff_carry_forward_leaves": 0,
+        "staff_company_code": "WAY4TRACK",
+        "staff_created_at": "2025-04-01T13:36:42.000Z",
+        "staff_department": "technician",
+        "staff_description": "technician",
+        "staff_designation": "Technician",
+        "staff_designation_id": 6,
+        "staff_dob": "2025-04-04T00:00:00.000Z",
+        "staff_driving_licence": "Yes",
+        "staff_driving_licence_number": "123456",
+        "staff_email": "kolate09@gmail.com",
+        "staff_esic_number": "ESIC1234567",
+        "staff_experience_details": "[{\"previousCompany\":\"\",\"previous_designation\":\"\",\"total_experience\":\"\",\"previous_salary\":\"\"}]",
+        "staff_final_settlement_date": "2025-04-25T00:00:00.000Z",
+        "staff_gender": "Female",
+        "staff_id": 8,
+        "staff_ifsc_code": "SBIN1235",
+        "staff_imei_number": null,
+        "staff_insurance_eligibility_date": "2025-04-19T00:00:00.000Z",
+        "staff_insurance_expiry_date": "2025-04-13T00:00:00.000Z",
+        "staff_insurance_number": "insurance123",
+        "staff_joining_date": "2025-04-04T00:00:00.000Z",
+        "staff_latitude": "17.7307648",
+        "staff_location": "Vizag, ",
+        "staff_longitude": "83.2405504",
+        "staff_mail_allocation": "Yes",
+        "staff_mobile_allocation": "Yes",
+        "staff_mobile_brand": "cv",
+        "staff_mobile_number": null,
+        "staff_monthly_salary": "4999.00",
+        "staff_name": "ravikanth",
+        "staff_office_email": "koja09@gmail.com",
+        "staff_office_phone_number": "0733000",
+        "staff_pan_card_number": "df5577",
+        "staff_password": "123a",
+        "staff_phone_number": "0330792477",
+        "staff_qualifications": "[{\"qualificationName\":\"Degree\",\"marksOrCgpa\":\"80\"}]",
+        "staff_resignation_date": "2025-04-02T00:00:00.000Z",
+        "staff_resume": null,
+        "staff_salary_date": null,
+        "staff_staff_id": "8608088",
+        "staff_staff_photo": "https://storage.googleapis.com/way4track-application/staff_photos/8608088.jpg",
+        "staff_staff_status": "ACTIVE",
+        "staff_termination_date": "2025-04-08T00:00:00.000Z",
+        "staff_uan_number": "100200300400",
+        "staff_unique_id": null,
+        "staff_unit_code": "WAY4",
+        "staff_updated_at": "2025-04-01T13:36:42.000Z",
+        "staff_vehicle_photo": null,
+        "startDate": "2025-04-08T14:08:58.000Z",
+        "subDealerId": null,
+        "subDealerName": null,
+        "subDealerPhoneNumber": null,
+        "technicianNumber": "2526-000000004",
+        "userName": null,
+        "vehicleNumber": "fhgdf",
+        "vehiclePhoto1": "https://storage.googleapis.com/way4track-application/vehicle_photos/1744121339514-rn_image_picker_lib_temp_f6992ea0-da5d-4142-b163-134b3f112633.jpg",
+        "vehiclePhoto10": null,
+        "vehiclePhoto2": null,
+        "vehiclePhoto3": null,
+        "vehiclePhoto4": null,
+        "vehiclePhoto5": null,
+        "vehiclePhoto6": null,
+        "vehiclePhoto7": null,
+        "vehiclePhoto8": null,
+        "vehiclePhoto9": null,
+        "vehicleType": null,
+        "workStatus": "activate"
+    },
+    {
+        "WaclientId": null,
+        "acceptStartDate": "2025-04-09T09:01:09.000Z",
+        "activateDate": null,
+        "address": "xbfvb ",
+        "amount": null,
+        "applicationName": null,
+        "backSupporterId": 22,
+        "backSupportterName": "D.srinu",
+        "br_CIN": null,
+        "br_GST": null,
+        "br_address_line1": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM",
+        "br_address_line2": "Door No 30, 20-7, Nehru Rd, Setharamapuram",
+        "br_branch_address": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM, Door No 30, 20-7, Nehru Rd, Setharamapuram, Vijayawada, Andhra Pradesh 520002.",
+        "br_branch_number": "8977943035",
+        "br_branch_opening": "2022-03-27T00:00:00.000Z",
+        "br_branch_photo": "https://storage.googleapis.com/way4track-application/Branch_photos/1743508610469-WhatsApp Image 2025-04-01 at 5.20.53 PM.jpeg",
+        "br_city": "Vijayawada",
+        "br_company_code": "WAY4TRACK",
+        "br_email": "arunodaya@sharontelematics.com",
+        "br_id": 5,
+        "br_latitude": null,
+        "br_longitude": null,
+        "br_name": "Vijayawada",
+        "br_pincode": "520002",
+        "br_qr_photo": null,
+        "br_state": "Andhra Pradesh",
+        "br_unit_code": "WAY4",
+        "branchId": 5,
+        "chassisNumber": "cbccv",
+        "clientName": "rass",
+        "client_GST_number": null,
+        "client_address": null,
+        "client_bill_wise_date": null,
+        "client_branch_id": null,
+        "client_client_id": null,
+        "client_client_photo": null,
+        "client_company_code": null,
+        "client_email": null,
+        "client_hsn_code": null,
+        "client_id": null,
+        "client_joining_date": null,
+        "client_name": null,
+        "client_phone_number": null,
+        "client_sac_code": null,
+        "client_status": null,
+        "client_tcs": null,
+        "client_tds": null,
+        "client_unit_code": null,
+        "completedDate": null,
+        "description": null,
+        "email": null,
+        "endDate": null,
+        "engineNumber": "b c",
+        "id": 11,
+        "imeiNumber": "xfdbcfb",
+        "installationAddress": "P6JQ+QV9, Junk Yard, Visakhapatnam, Andhra Pradesh 530009, India",
+        "paidAmount": null,
+        "paymentStatus": "PENDING",
+        "pendingDate": null,
+        "phoneNumber": "dfgb",
+        "productName": "SHENZHONE CONCOX V5 ",
+        "remark": [
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ]
+        ],
+        "screenShot": null,
+        "service": "NORMAL INSTALLATION",
+        "simNumber": null,
+        "st_aadhar_number": "34553",
+        "st_account_branch": "DAY AND NIGHT ",
+        "st_account_number": "7036007434123",
+        "st_account_type": "savings",
+        "st_address": "Ampalam(vilage),Narasannapeta(mandal),Srikakulam(District),532421",
+        "st_alternate_number": "96401454",
+        "st_bank_name": "SBI",
+        "st_before_experience": null,
+        "st_bike_allocation": "Yes",
+        "st_bike_number": "vbgf",
+        "st_blood_group": "",
+        "st_branch_id": 15,
+        "st_branch_name": "Tirupati",
+        "st_carry_forward_leaves": 0,
+        "st_company_code": "WAY4TRACK",
+        "st_created_at": "2025-04-02T09:50:25.000Z",
+        "st_department": "CIVIL",
+        "st_description": "BE GOOD good",
+        "st_designation": "Backend Support",
+        "st_designation_id": 11,
+        "st_dob": "2025-04-15T00:00:00.000Z",
+        "st_driving_licence": "Yes",
+        "st_driving_licence_number": "ty567",
+        "st_email": "kolat88a09@gmail.com",
+        "st_esic_number": "hk",
+        "st_experience_details": [],
+        "st_final_settlement_date": "2025-04-26T00:00:00.000Z",
+        "st_gender": "Female",
+        "st_id": 22,
+        "st_ifsc_code": "SBI123654789",
+        "st_imei_number": null,
+        "st_insurance_eligibility_date": "2025-04-05T00:00:00.000Z",
+        "st_insurance_expiry_date": "2025-04-22T00:00:00.000Z",
+        "st_insurance_number": "789456123",
+        "st_joining_date": "2025-04-19T00:00:00.000Z",
+        "st_latitude": null,
+        "st_location": "fg",
+        "st_longitude": null,
+        "st_mail_allocation": "Yes",
+        "st_mobile_allocation": "Yes",
+        "st_mobile_brand": "vb",
+        "st_mobile_number": null,
+        "st_monthly_salary": "121.00",
+        "st_name": "D.srinu",
+        "st_office_email": "kolat44eja09@gmail.com",
+        "st_office_phone_number": "073355",
+        "st_pan_card_number": "df5566",
+        "st_password": "123",
+        "st_phone_number": "073307",
+        "st_qualifications": [
+            [Object
+            ]
+        ],
+        "st_resignation_date": "2025-05-01T00:00:00.000Z",
+        "st_resume": null,
+        "st_salary_date": null,
+        "st_staff_id": "SF-0010",
+        "st_staff_photo": null,
+        "st_staff_status": "ACTIVE",
+        "st_termination_date": "2025-04-04T00:00:00.000Z",
+        "st_uan_number": "jkh",
+        "st_unique_id": null,
+        "st_unit_code": "WAY4",
+        "st_updated_at": "2025-04-02T09:50:25.000Z",
+        "st_vehicle_photo": null,
+        "staffId": 8,
+        "staffName": "ravikanth",
+        "staff_aadhar_number": "3455366",
+        "staff_account_branch": "Vizag",
+        "staff_account_number": "1234567890",
+        "staff_account_type": "current",
+        "staff_address": "Ampalam(village),Narasannapeta(mandal),Srikakulam(District),532421",
+        "staff_alternate_number": "9647770",
+        "staff_bank_name": "ABC Bank",
+        "staff_before_experience": null,
+        "staff_bike_allocation": "Yes",
+        "staff_bike_number": null,
+        "staff_blood_group": "O+",
+        "staff_branch_id": 5,
+        "staff_branch_name": "Vijayawada",
+        "staff_carry_forward_leaves": 0,
+        "staff_company_code": "WAY4TRACK",
+        "staff_created_at": "2025-04-01T13:36:42.000Z",
+        "staff_department": "technician",
+        "staff_description": "technician",
+        "staff_designation": "Technician",
+        "staff_designation_id": 6,
+        "staff_dob": "2025-04-04T00:00:00.000Z",
+        "staff_driving_licence": "Yes",
+        "staff_driving_licence_number": "123456",
+        "staff_email": "kolate09@gmail.com",
+        "staff_esic_number": "ESIC1234567",
+        "staff_experience_details": "[{\"previousCompany\":\"\",\"previous_designation\":\"\",\"total_experience\":\"\",\"previous_salary\":\"\"}]",
+        "staff_final_settlement_date": "2025-04-25T00:00:00.000Z",
+        "staff_gender": "Female",
+        "staff_id": 8,
+        "staff_ifsc_code": "SBIN1235",
+        "staff_imei_number": null,
+        "staff_insurance_eligibility_date": "2025-04-19T00:00:00.000Z",
+        "staff_insurance_expiry_date": "2025-04-13T00:00:00.000Z",
+        "staff_insurance_number": "insurance123",
+        "staff_joining_date": "2025-04-04T00:00:00.000Z",
+        "staff_latitude": "17.7307648",
+        "staff_location": "Vizag, ",
+        "staff_longitude": "83.2405504",
+        "staff_mail_allocation": "Yes",
+        "staff_mobile_allocation": "Yes",
+        "staff_mobile_brand": "cv",
+        "staff_mobile_number": null,
+        "staff_monthly_salary": "4999.00",
+        "staff_name": "ravikanth",
+        "staff_office_email": "koja09@gmail.com",
+        "staff_office_phone_number": "0733000",
+        "staff_pan_card_number": "df5577",
+        "staff_password": "123a",
+        "staff_phone_number": "0330792477",
+        "staff_qualifications": "[{\"qualificationName\":\"Degree\",\"marksOrCgpa\":\"80\"}]",
+        "staff_resignation_date": "2025-04-02T00:00:00.000Z",
+        "staff_resume": null,
+        "staff_salary_date": null,
+        "staff_staff_id": "8608088",
+        "staff_staff_photo": "https://storage.googleapis.com/way4track-application/staff_photos/8608088.jpg",
+        "staff_staff_status": "ACTIVE",
+        "staff_termination_date": "2025-04-08T00:00:00.000Z",
+        "staff_uan_number": "100200300400",
+        "staff_unique_id": null,
+        "staff_unit_code": "WAY4",
+        "staff_updated_at": "2025-04-01T13:36:42.000Z",
+        "staff_vehicle_photo": null,
+        "startDate": "2025-04-09T06:28:23.000Z",
+        "subDealerId": null,
+        "subDealerName": null,
+        "subDealerPhoneNumber": null,
+        "technicianNumber": "2526-000000010",
+        "userName": null,
+        "vehicleNumber": "cfbcf",
+        "vehiclePhoto1": "https://storage.googleapis.com/way4track-application/vehicle_photos/1744180105443-rn_image_picker_lib_temp_aeb371a9-e2e2-4697-9a21-a5c23bd18972.jpg",
+        "vehiclePhoto10": null,
+        "vehiclePhoto2": null,
+        "vehiclePhoto3": null,
+        "vehiclePhoto4": null,
+        "vehiclePhoto5": null,
+        "vehiclePhoto6": null,
+        "vehiclePhoto7": null,
+        "vehiclePhoto8": null,
+        "vehiclePhoto9": null,
+        "vehicleType": null,
+        "workStatus": "activate"
+    },
+    {
+        "WaclientId": null,
+        "acceptStartDate": null,
+        "activateDate": null,
+        "address": "rtr",
+        "amount": null,
+        "applicationName": "SHENZHONE CONCOX V5 ",
+        "backSupporterId": 1,
+        "backSupportterName": "Suneel",
+        "br_CIN": null,
+        "br_GST": null,
+        "br_address_line1": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM",
+        "br_address_line2": "Door No 30, 20-7, Nehru Rd, Setharamapuram",
+        "br_branch_address": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM, Door No 30, 20-7, Nehru Rd, Setharamapuram, Vijayawada, Andhra Pradesh 520002.",
+        "br_branch_number": "8977943035",
+        "br_branch_opening": "2022-03-27T00:00:00.000Z",
+        "br_branch_photo": "https://storage.googleapis.com/way4track-application/Branch_photos/1743508610469-WhatsApp Image 2025-04-01 at 5.20.53 PM.jpeg",
+        "br_city": "Vijayawada",
+        "br_company_code": "WAY4TRACK",
+        "br_email": "arunodaya@sharontelematics.com",
+        "br_id": 5,
+        "br_latitude": null,
+        "br_longitude": null,
+        "br_name": "Vijayawada",
+        "br_pincode": "520002",
+        "br_qr_photo": null,
+        "br_state": "Andhra Pradesh",
+        "br_unit_code": "WAY4",
+        "branchId": 5,
+        "chassisNumber": "xccv",
+        "clientName": "ree",
+        "client_GST_number": null,
+        "client_address": null,
+        "client_bill_wise_date": null,
+        "client_branch_id": null,
+        "client_client_id": null,
+        "client_client_photo": null,
+        "client_company_code": null,
+        "client_email": null,
+        "client_hsn_code": null,
+        "client_id": null,
+        "client_joining_date": null,
+        "client_name": null,
+        "client_phone_number": null,
+        "client_sac_code": null,
+        "client_status": null,
+        "client_tcs": null,
+        "client_tds": null,
+        "client_unit_code": null,
+        "completedDate": null,
+        "description": null,
+        "email": null,
+        "endDate": null,
+        "engineNumber": "cvv vb",
+        "id": 158,
+        "imeiNumber": "cb v",
+        "installationAddress": "P6JQ+QV9, Junk Yard, Visakhapatnam, Andhra Pradesh 530009, India",
+        "paidAmount": null,
+        "paymentStatus": "PENDING",
+        "pendingDate": null,
+        "phoneNumber": "ree",
+        "productName": "SHENZHONE CONCOX V5 ",
+        "remark": [],
+        "screenShot": null,
+        "service": "NORMAL INSTALLATION",
+        "simNumber": null,
+        "st_aadhar_number": "000000000000",
+        "st_account_branch": null,
+        "st_account_number": null,
+        "st_account_type": null,
+        "st_address": "456 Another St, Town, Country",
+        "st_alternate_number": null,
+        "st_bank_name": null,
+        "st_before_experience": 0,
+        "st_bike_allocation": null,
+        "st_bike_number": null,
+        "st_blood_group": null,
+        "st_branch_id": null,
+        "st_branch_name": null,
+        "st_carry_forward_leaves": 0,
+        "st_company_code": "WAY4TRACK",
+        "st_created_at": "2025-04-01T06:43:22.000Z",
+        "st_department": null,
+        "st_description": null,
+        "st_designation": "CEO",
+        "st_designation_id": 1,
+        "st_dob": "1985-05-10T00:00:00.000Z",
+        "st_driving_licence": null,
+        "st_driving_licence_number": null,
+        "st_email": "sunil.g@example.com",
+        "st_esic_number": null,
+        "st_experience_details": [],
+        "st_final_settlement_date": null,
+        "st_gender": "Male",
+        "st_id": 1,
+        "st_ifsc_code": null,
+        "st_imei_number": null,
+        "st_insurance_eligibility_date": null,
+        "st_insurance_expiry_date": null,
+        "st_insurance_number": null,
+        "st_joining_date": "2018-06-15T00:00:00.000Z",
+        "st_latitude": null,
+        "st_location": null,
+        "st_longitude": null,
+        "st_mail_allocation": null,
+        "st_mobile_allocation": null,
+        "st_mobile_brand": null,
+        "st_mobile_number": null,
+        "st_monthly_salary": null,
+        "st_name": "Suneel",
+        "st_office_email": null,
+        "st_office_phone_number": null,
+        "st_pan_card_number": null,
+        "st_password": "way4track_CEO",
+        "st_phone_number": "+0987654322",
+        "st_qualifications": [],
+        "st_resignation_date": null,
+        "st_resume": null,
+        "st_salary_date": null,
+        "st_staff_id": "SF-00001",
+        "st_staff_photo": "https://example.com/janephoto.jpg",
+        "st_staff_status": "ACTIVE",
+        "st_termination_date": null,
+        "st_uan_number": null,
+        "st_unique_id": null,
+        "st_unit_code": "WAY4",
+        "st_updated_at": "2025-04-01T06:43:22.000Z",
+        "st_vehicle_photo": null,
+        "staffId": 8,
+        "staffName": "ravikanth",
+        "staff_aadhar_number": "3455366",
+        "staff_account_branch": "Vizag",
+        "staff_account_number": "1234567890",
+        "staff_account_type": "current",
+        "staff_address": "Ampalam(village),Narasannapeta(mandal),Srikakulam(District),532421",
+        "staff_alternate_number": "9647770",
+        "staff_bank_name": "ABC Bank",
+        "staff_before_experience": null,
+        "staff_bike_allocation": "Yes",
+        "staff_bike_number": null,
+        "staff_blood_group": "O+",
+        "staff_branch_id": 5,
+        "staff_branch_name": "Vijayawada",
+        "staff_carry_forward_leaves": 0,
+        "staff_company_code": "WAY4TRACK",
+        "staff_created_at": "2025-04-01T13:36:42.000Z",
+        "staff_department": "technician",
+        "staff_description": "technician",
+        "staff_designation": "Technician",
+        "staff_designation_id": 6,
+        "staff_dob": "2025-04-04T00:00:00.000Z",
+        "staff_driving_licence": "Yes",
+        "staff_driving_licence_number": "123456",
+        "staff_email": "kolate09@gmail.com",
+        "staff_esic_number": "ESIC1234567",
+        "staff_experience_details": "[{\"previousCompany\":\"\",\"previous_designation\":\"\",\"total_experience\":\"\",\"previous_salary\":\"\"}]",
+        "staff_final_settlement_date": "2025-04-25T00:00:00.000Z",
+        "staff_gender": "Female",
+        "staff_id": 8,
+        "staff_ifsc_code": "SBIN1235",
+        "staff_imei_number": null,
+        "staff_insurance_eligibility_date": "2025-04-19T00:00:00.000Z",
+        "staff_insurance_expiry_date": "2025-04-13T00:00:00.000Z",
+        "staff_insurance_number": "insurance123",
+        "staff_joining_date": "2025-04-04T00:00:00.000Z",
+        "staff_latitude": "17.7307648",
+        "staff_location": "Vizag, ",
+        "staff_longitude": "83.2405504",
+        "staff_mail_allocation": "Yes",
+        "staff_mobile_allocation": "Yes",
+        "staff_mobile_brand": "cv",
+        "staff_mobile_number": null,
+        "staff_monthly_salary": "4999.00",
+        "staff_name": "ravikanth",
+        "staff_office_email": "koja09@gmail.com",
+        "staff_office_phone_number": "0733000",
+        "staff_pan_card_number": "df5577",
+        "staff_password": "123a",
+        "staff_phone_number": "0330792477",
+        "staff_qualifications": "[{\"qualificationName\":\"Degree\",\"marksOrCgpa\":\"80\"}]",
+        "staff_resignation_date": "2025-04-02T00:00:00.000Z",
+        "staff_resume": null,
+        "staff_salary_date": null,
+        "staff_staff_id": "8608088",
+        "staff_staff_photo": "https://storage.googleapis.com/way4track-application/staff_photos/8608088.jpg",
+        "staff_staff_status": "ACTIVE",
+        "staff_termination_date": "2025-04-08T00:00:00.000Z",
+        "staff_uan_number": "100200300400",
+        "staff_unique_id": null,
+        "staff_unit_code": "WAY4",
+        "staff_updated_at": "2025-04-01T13:36:42.000Z",
+        "staff_vehicle_photo": null,
+        "startDate": "2025-04-11T10:43:02.000Z",
+        "subDealerId": null,
+        "subDealerName": null,
+        "subDealerPhoneNumber": null,
+        "technicianNumber": "2526-000000158",
+        "userName": "rer",
+        "vehicleNumber": "xcvbc",
+        "vehiclePhoto1": "https://storage.googleapis.com/way4track-application/vehicle_photos/1744368183252-rn_image_picker_lib_temp_b36c492e-e7fc-4525-b659-3ee48b4643fa.jpg",
+        "vehiclePhoto10": null,
+        "vehiclePhoto2": null,
+        "vehiclePhoto3": null,
+        "vehiclePhoto4": null,
+        "vehiclePhoto5": null,
+        "vehiclePhoto6": null,
+        "vehiclePhoto7": null,
+        "vehiclePhoto8": null,
+        "vehiclePhoto9": null,
+        "vehicleType": null,
+        "workStatus": "pending"
+    },
+    {
+        "WaclientId": null,
+        "acceptStartDate": null,
+        "activateDate": null,
+        "address": "vizag address",
+        "amount": 5000,
+        "applicationName": "SHENZHONE CONCOX V5 ",
+        "backSupporterId": 1,
+        "backSupportterName": "Suneel",
+        "br_CIN": null,
+        "br_GST": null,
+        "br_address_line1": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM",
+        "br_address_line2": "Door No 30, 20-7, Nehru Rd, Setharamapuram",
+        "br_branch_address": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM, Door No 30, 20-7, Nehru Rd, Setharamapuram, Vijayawada, Andhra Pradesh 520002.",
+        "br_branch_number": "8977943035",
+        "br_branch_opening": "2022-03-27T00:00:00.000Z",
+        "br_branch_photo": "https://storage.googleapis.com/way4track-application/Branch_photos/1743508610469-WhatsApp Image 2025-04-01 at 5.20.53 PM.jpeg",
+        "br_city": "Vijayawada",
+        "br_company_code": "WAY4TRACK",
+        "br_email": "arunodaya@sharontelematics.com",
+        "br_id": 5,
+        "br_latitude": null,
+        "br_longitude": null,
+        "br_name": "Vijayawada",
+        "br_pincode": "520002",
+        "br_qr_photo": null,
+        "br_state": "Andhra Pradesh",
+        "br_unit_code": "WAY4",
+        "branchId": 5,
+        "chassisNumber": "chassis",
+        "clientName": "ravi name",
+        "client_GST_number": null,
+        "client_address": null,
+        "client_bill_wise_date": null,
+        "client_branch_id": null,
+        "client_client_id": null,
+        "client_client_photo": null,
+        "client_company_code": null,
+        "client_email": null,
+        "client_hsn_code": null,
+        "client_id": null,
+        "client_joining_date": null,
+        "client_name": null,
+        "client_phone_number": null,
+        "client_sac_code": null,
+        "client_status": null,
+        "client_tcs": null,
+        "client_tds": null,
+        "client_unit_code": null,
+        "completedDate": null,
+        "description": "partially paid",
+        "email": null,
+        "endDate": "2025-04-12T07:52:05.000Z",
+        "engineNumber": "engin",
+        "id": 159,
+        "imeiNumber": "98765423456",
+        "installationAddress": "P6JQ+QV9, Junk Yard, Visakhapatnam, Andhra Pradesh 530009, India",
+        "paidAmount": null,
+        "paymentStatus": "PARTIALLY_PAID",
+        "pendingDate": null,
+        "phoneNumber": "3452345671",
+        "productName": "SHENZHONE CONCOX V5 ",
+        "remark": [
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ]
+        ],
+        "screenShot": null,
+        "service": "NORMAL INSTALLATION",
+        "simNumber": null,
+        "st_aadhar_number": "000000000000",
+        "st_account_branch": null,
+        "st_account_number": null,
+        "st_account_type": null,
+        "st_address": "456 Another St, Town, Country",
+        "st_alternate_number": null,
+        "st_bank_name": null,
+        "st_before_experience": 0,
+        "st_bike_allocation": null,
+        "st_bike_number": null,
+        "st_blood_group": null,
+        "st_branch_id": null,
+        "st_branch_name": null,
+        "st_carry_forward_leaves": 0,
+        "st_company_code": "WAY4TRACK",
+        "st_created_at": "2025-04-01T06:43:22.000Z",
+        "st_department": null,
+        "st_description": null,
+        "st_designation": "CEO",
+        "st_designation_id": 1,
+        "st_dob": "1985-05-10T00:00:00.000Z",
+        "st_driving_licence": null,
+        "st_driving_licence_number": null,
+        "st_email": "sunil.g@example.com",
+        "st_esic_number": null,
+        "st_experience_details": [],
+        "st_final_settlement_date": null,
+        "st_gender": "Male",
+        "st_id": 1,
+        "st_ifsc_code": null,
+        "st_imei_number": null,
+        "st_insurance_eligibility_date": null,
+        "st_insurance_expiry_date": null,
+        "st_insurance_number": null,
+        "st_joining_date": "2018-06-15T00:00:00.000Z",
+        "st_latitude": null,
+        "st_location": null,
+        "st_longitude": null,
+        "st_mail_allocation": null,
+        "st_mobile_allocation": null,
+        "st_mobile_brand": null,
+        "st_mobile_number": null,
+        "st_monthly_salary": null,
+        "st_name": "Suneel",
+        "st_office_email": null,
+        "st_office_phone_number": null,
+        "st_pan_card_number": null,
+        "st_password": "way4track_CEO",
+        "st_phone_number": "+0987654322",
+        "st_qualifications": [],
+        "st_resignation_date": null,
+        "st_resume": null,
+        "st_salary_date": null,
+        "st_staff_id": "SF-00001",
+        "st_staff_photo": "https://example.com/janephoto.jpg",
+        "st_staff_status": "ACTIVE",
+        "st_termination_date": null,
+        "st_uan_number": null,
+        "st_unique_id": null,
+        "st_unit_code": "WAY4",
+        "st_updated_at": "2025-04-01T06:43:22.000Z",
+        "st_vehicle_photo": null,
+        "staffId": 8,
+        "staffName": "ravikanth",
+        "staff_aadhar_number": "3455366",
+        "staff_account_branch": "Vizag",
+        "staff_account_number": "1234567890",
+        "staff_account_type": "current",
+        "staff_address": "Ampalam(village),Narasannapeta(mandal),Srikakulam(District),532421",
+        "staff_alternate_number": "9647770",
+        "staff_bank_name": "ABC Bank",
+        "staff_before_experience": null,
+        "staff_bike_allocation": "Yes",
+        "staff_bike_number": null,
+        "staff_blood_group": "O+",
+        "staff_branch_id": 5,
+        "staff_branch_name": "Vijayawada",
+        "staff_carry_forward_leaves": 0,
+        "staff_company_code": "WAY4TRACK",
+        "staff_created_at": "2025-04-01T13:36:42.000Z",
+        "staff_department": "technician",
+        "staff_description": "technician",
+        "staff_designation": "Technician",
+        "staff_designation_id": 6,
+        "staff_dob": "2025-04-04T00:00:00.000Z",
+        "staff_driving_licence": "Yes",
+        "staff_driving_licence_number": "123456",
+        "staff_email": "kolate09@gmail.com",
+        "staff_esic_number": "ESIC1234567",
+        "staff_experience_details": "[{\"previousCompany\":\"\",\"previous_designation\":\"\",\"total_experience\":\"\",\"previous_salary\":\"\"}]",
+        "staff_final_settlement_date": "2025-04-25T00:00:00.000Z",
+        "staff_gender": "Female",
+        "staff_id": 8,
+        "staff_ifsc_code": "SBIN1235",
+        "staff_imei_number": null,
+        "staff_insurance_eligibility_date": "2025-04-19T00:00:00.000Z",
+        "staff_insurance_expiry_date": "2025-04-13T00:00:00.000Z",
+        "staff_insurance_number": "insurance123",
+        "staff_joining_date": "2025-04-04T00:00:00.000Z",
+        "staff_latitude": "17.7307648",
+        "staff_location": "Vizag, ",
+        "staff_longitude": "83.2405504",
+        "staff_mail_allocation": "Yes",
+        "staff_mobile_allocation": "Yes",
+        "staff_mobile_brand": "cv",
+        "staff_mobile_number": null,
+        "staff_monthly_salary": "4999.00",
+        "staff_name": "ravikanth",
+        "staff_office_email": "koja09@gmail.com",
+        "staff_office_phone_number": "0733000",
+        "staff_pan_card_number": "df5577",
+        "staff_password": "123a",
+        "staff_phone_number": "0330792477",
+        "staff_qualifications": "[{\"qualificationName\":\"Degree\",\"marksOrCgpa\":\"80\"}]",
+        "staff_resignation_date": "2025-04-02T00:00:00.000Z",
+        "staff_resume": null,
+        "staff_salary_date": null,
+        "staff_staff_id": "8608088",
+        "staff_staff_photo": "https://storage.googleapis.com/way4track-application/staff_photos/8608088.jpg",
+        "staff_staff_status": "ACTIVE",
+        "staff_termination_date": "2025-04-08T00:00:00.000Z",
+        "staff_uan_number": "100200300400",
+        "staff_unique_id": null,
+        "staff_unit_code": "WAY4",
+        "staff_updated_at": "2025-04-01T13:36:42.000Z",
+        "staff_vehicle_photo": null,
+        "startDate": "2025-04-12T05:50:16.000Z",
+        "subDealerId": null,
+        "subDealerName": null,
+        "subDealerPhoneNumber": null,
+        "technicianNumber": "2526-000000159",
+        "userName": "ravi userID",
+        "vehicleNumber": "ravi vehicle",
+        "vehiclePhoto1": "https://storage.googleapis.com/way4track-application/vehicle_photos/1744437017716-rn_image_picker_lib_temp_26e6f985-ec04-4fed-9873-0f876fb6e273.jpg",
+        "vehiclePhoto10": null,
+        "vehiclePhoto2": "https://storage.googleapis.com/way4track-application/vehicle_photos/1744437017991-rn_image_picker_lib_temp_8306489a-aabd-4f00-952d-0b6c2554fe5d.jpg",
+        "vehiclePhoto3": "https://storage.googleapis.com/way4track-application/vehicle_photos/1744437018048-rn_image_picker_lib_temp_7e8a88eb-ac08-4a1e-93b2-04df31337b38.jpg",
+        "vehiclePhoto4": null,
+        "vehiclePhoto5": null,
+        "vehiclePhoto6": null,
+        "vehiclePhoto7": null,
+        "vehiclePhoto8": null,
+        "vehiclePhoto9": null,
+        "vehicleType": null,
+        "workStatus": "activate"
+    }
+]
+{
+    "address": "vizag",
+    "chassisNumber": "dfdz",
+    "date": "2025-03-25",
+    "engineNumber": "xvxx",
+    "name": "ravi",
+    "phoneNumber": "9494130830",
+    "productIMEI": "1234574576dfsgdfh",
+    "productName": null,
+    "productSIM": "",
+    "service": "install",
+    "vehicleNumber": "dsgdd",
+    "vehiclePhotoUpload_four": {
+        "name": "rn_image_picker_lib_temp_ac027866-a3f7-4a4c-a52b-55389a3140f1.jpg",
+        "type": "image/jpeg",
+        "uri": "file:///data/user/0/com.way4track/cache/rn_image_picker_lib_temp_ac027866-a3f7-4a4c-a52b-55389a3140f1.jpg"
+    },
+    "vehiclePhotoUpload_one": {
+        "name": "rn_image_picker_lib_temp_15e7c722-6a25-454e-acdf-159f1174cbfe.jpg",
+        "type": "image/jpeg",
+        "uri": "file:///data/user/0/com.way4track/cache/rn_image_picker_lib_temp_15e7c722-6a25-454e-acdf-159f1174cbfe.jpg"
+    },
+    "vehiclePhotoUpload_three": {
+        "name": "rn_image_picker_lib_temp_61fa6539-81f1-45c7-87fe-ce93473bee84.jpg",
+        "type": "image/jpeg",
+        "uri": "file:///data/user/0/com.way4track/cache/rn_image_picker_lib_temp_61fa6539-81f1-45c7-87fe-ce93473bee84.jpg"
+    },
+    "vehiclePhotoUpload_two": {
+        "name": "rn_image_picker_lib_temp_a51eba80-8051-4659-b869-099db9599c2c.jpg",
+        "type": "image/jpeg",
+        "uri": "file:///data/user/0/com.way4track/cache/rn_image_picker_lib_temp_a51eba80-8051-4659-b869-099db9599c2c.jpg"
+    },
+    "vehicleType": "bike"
+}
+//attendence
+[
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-01",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-02",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-03",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-04",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-05",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-06",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-07",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-08",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-09",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-10",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-11",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-12",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-13",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": "7-75/15, ganesh nagar, duvvada sector1, Visakhapatnam, pincode-530049",
+        "branchName": "Tirupati",
+        "day": "2025-04-14",
+        "designation": "Technician",
+        "dob": "1997-03-28T00:00:00.000Z",
+        "email": "sagarkankipati5@gmail.com",
+        "inTime": "0.37222222222222223",
+        "name": "Kankipati Vidya Sagar",
+        "outTime": "0.8958333333333334",
+        "phoneNumber": "8688598787",
+        "status": "P",
+        "totalHours": "NaN"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-15",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-16",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-17",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-18",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-19",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-20",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-21",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-22",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-23",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-24",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-25",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-26",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-27",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-28",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-29",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-30",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    }
+][
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-01",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-02",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-03",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-04",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-05",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-06",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-07",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-08",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-09",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-10",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-11",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-12",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-13",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": "7-75/15, ganesh nagar, duvvada sector1, Visakhapatnam, pincode-530049",
+        "branchName": "Tirupati",
+        "day": "2025-04-14",
+        "designation": "Technician",
+        "dob": "1997-03-28T00:00:00.000Z",
+        "email": "sagarkankipati5@gmail.com",
+        "inTime": "0.37222222222222223",
+        "name": "Kankipati Vidya Sagar",
+        "outTime": "0.8958333333333334",
+        "phoneNumber": "8688598787",
+        "status": "P",
+        "totalHours": "NaN"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-15",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-16",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-17",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-18",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-19",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-20",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-21",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-22",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-23",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-24",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-25",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-26",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-27",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-28",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-29",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    },
+    {
+        "aadharNumber": null,
+        "address": null,
+        "branchName": null,
+        "day": "2025-04-30",
+        "designation": null,
+        "dob": null,
+        "email": null,
+        "inTime": null,
+        "name": null,
+        "outTime": null,
+        "phoneNumber": null,
+        "status": "Absent",
+        "totalHours": "0.00"
+    }
+] //upcomming
+[
+    {
+        "clientAddress": null,
+        "clientName": null,
+        "clientPhoneNumber": null,
+        "description": null,
+        "productName": "",
+        "staffId": 50,
+        "staffName": "RAKESH",
+        "weekNumber": "1",
+        "year": 2025
+    },
+    {
+        "clientAddress": null,
+        "clientName": null,
+        "clientPhoneNumber": null,
+        "description": null,
+        "productName": "",
+        "staffId": 50,
+        "staffName": "RAKESH",
+        "weekNumber": "3",
+        "year": 2025
+    }
+]
+//staff
+{
+    "aadharNumber": "3455366",
+    "accountBranch": "Vizag",
+    "accountNumber": "1234567890",
+    "accountType": "current",
+    "address": "Ampalam(village),Narasannapeta(mandal),Srikakulam(District),532421",
+    "alternateNumber": "9647770",
+    "bankName": "ABC Bank",
+    "beforeExperience": null,
+    "bikeAllocation": "Yes",
+    "bikeNumber": null,
+    "bloodGroup": "O+",
+    "branch": {
+        "CIN": null,
+        "GST": null,
+        "addressLine1": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM",
+        "addressLine2": "Door No 30, 20-7, Nehru Rd, Setharamapuram",
+        "branchAddress": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM, Door No 30, 20-7, Nehru Rd, Setharamapuram, Vijayawada, Andhra Pradesh 520002.",
+        "branchName": "Vijayawada",
+        "branchNumber": "8977943035",
+        "branchOpening": "2022-03-27T00:00:00.000Z",
+        "branchPhoto": "https://storage.googleapis.com/way4track-application/Branch_photos/1743508610469-WhatsApp Image 2025-04-01 at 5.20.53 PM.jpeg",
+        "city": "Vijayawada",
+        "companyCode": "WAY4TRACK",
+        "email": "arunodaya@sharontelematics.com",
+        "id": 5,
+        "latitude": null,
+        "longitude": null,
+        "pincode": "520002",
+        "qrPhoto": null,
+        "state": "Andhra Pradesh",
+        "unitCode": "WAY4"
+    },
+    "branchName": "Vijayawada",
+    "carryForwardLeaves": 0,
+    "companyCode": "WAY4TRACK",
+    "createdAt": "2025-04-01T13:36:42.000Z",
+    "department": "technician",
+    "description": "technician",
+    "designation": "Technician",
+    "designationRelation": {
+        "companyCode": "WAY4TRACK",
+        "designation": "Technician",
+        "id": 6,
+        "roles": [
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ]
+        ],
+        "unitCode": "WAY4"
+    },
+    "dob": "2025-04-04",
+    "drivingLicence": "Yes",
+    "drivingLicenceNumber": "123456",
+    "email": "kolate09@gmail.com",
+    "esicNumber": "ESIC1234567",
+    "experienceDetails": [
+        {
+            "previousCompany": "",
+            "previous_designation": "",
+            "previous_salary": "",
+            "total_experience": ""
+        }
+    ],
+    "finalSettlementDate": "2025-04-25",
+    "gender": "Female",
+    "id": 8,
+    "ifscCode": "SBIN1235",
+    "imeiNumber": null,
+    "insuranceEligibilityDate": "2025-04-19",
+    "insuranceExpiryDate": "2025-04-13",
+    "insuranceNumber": "insurance123",
+    "joiningDate": "2025-04-04",
+    "latitude": null,
+    "location": "Vizag, ",
+    "longitude": null,
+    "mailAllocation": "Yes",
+    "mobileAllocation": "Yes",
+    "mobileBrand": "cv",
+    "mobileNumber": null,
+    "monthlySalary": "4999.00",
+    "name": "ravikanth",
+    "notifications": [],
+    "officeEmail": "koja09@gmail.com",
+    "officePhoneNumber": "0733000",
+    "panCardNumber": "df5577",
+    "password": "123a",
+    "permissions": [
+        {
+            "companyCode": "WAY4TRACK",
+            "endDate": "2025-04-01T13:36:42.000Z",
+            "id": 8,
+            "permissions": [Array
+            ],
+            "role": "branch",
+            "staffStatus": "ACTIVE",
+            "startDate": "2025-04-01T13:36:42.000Z",
+            "unitCode": "WAY4"
+        }
+    ],
+    "phoneNumber": "0330792477",
+    "qualifications": [
+        {
+            "marksOrCgpa": "80",
+            "qualificationName": "Degree"
+        }
+    ],
+    "resignationDate": "2025-04-02",
+    "resume": null,
+    "salaryDate": null,
+    "staffId": "8608088",
+    "staffPhoto": "https://storage.googleapis.com/way4track-application/staff_photos/8608088.jpg",
+    "status": "ACTIVE",
+    "terminationDate": "2025-04-08",
+    "uanNumber": "100200300400",
+    "unitCode": "WAY4",
+    "updatedAt": "2025-04-01T13:36:42.000Z",
+    "vehiclePhoto": null,
+    "voucherId": []
+} //techwork
+{
+    "WaclientId": 2,
+    "WaclientName": null,
+    "WaphoneNumber": null,
+    "address": "address123",
+    "chassisNumber": "",
+    "clientId": "CLI(ABC Branch)-00002",
+    "clientName": "swagath",
+    "date": "2025-03-29T00:00:00.000Z",
+    "description": null,
+    "email": "johndoe@example.com",
+    "engineNumber": "",
+    "id": 6,
+    "imeiNumber": "",
+    "paymentStatus": "PENDING",
+    "phoneNumber": "9966397971",
+    "productName": "",
+    "service": "",
+    "simNumber": null,
+    "staffName": "RAKESH",
+    "vehicleNumber": "",
+    "vehiclePhoto1": null,
+    "vehiclePhoto2": null,
+    "vehiclePhoto3": null,
+    "vehiclePhoto4": null,
+    "vehicleType": "",
+    "workAllocationNumber": "#VOU-00004",
+    "workStatus": "pending"
+}
+//product details
+{
+    "address": "address123",
+    "chassisNumber": "xcb c",
+    "date": "2025-03-30",
+    "engineNumber": "cxvb cvn bg",
+    "id": 6,
+    "name": "swagath",
+    "phoneNumber": "9966397971",
+    "productIMEI": "gbngfn",
+    "productName": "tracking",
+    "productSIM": "",
+    "service": "zxv",
+    "vehicleNumber": "xcb b g",
+    "vehiclePhotoUpload_four": {
+        "name": "rn_image_picker_lib_temp_8df1a817-2c34-422f-9d12-6938d22901fe.jpg",
+        "type": "image/jpeg",
+        "uri": "file:///data/user/0/com.way4track/cache/rn_image_picker_lib_temp_8df1a817-2c34-422f-9d12-6938d22901fe.jpg"
+    },
+    "vehiclePhotoUpload_one": {
+        "name": "rn_image_picker_lib_temp_e38b6b4e-3c16-4837-88cc-6d4da9cf41a7.jpg",
+        "type": "image/jpeg",
+        "uri": "file:///data/user/0/com.way4track/cache/rn_image_picker_lib_temp_e38b6b4e-3c16-4837-88cc-6d4da9cf41a7.jpg"
+    },
+    "vehiclePhotoUpload_three": {
+        "name": "rn_image_picker_lib_temp_c9367b70-027f-4385-87df-175cc24bb507.jpg",
+        "type": "image/jpeg",
+        "uri": "file:///data/user/0/com.way4track/cache/rn_image_picker_lib_temp_c9367b70-027f-4385-87df-175cc24bb507.jpg"
+    },
+    "vehiclePhotoUpload_two": {
+        "name": "rn_image_picker_lib_temp_ea5ae389-033a-48af-83ad-627a6618942c.jpg",
+        "type": "image/jpeg",
+        "uri": "file:///data/user/0/com.way4track/cache/rn_image_picker_lib_temp_ea5ae389-033a-48af-83ad-627a6618942c.jpg"
+    },
+    "vehicleType": "bike"
+}
+//initial tech
+deviceInstallData) : {
+    "WaclientId": null,
+    "acceptStartDate": null,
+    "activateDate": null,
+    "address": "vizag",
+    "amount": 5000,
+    "backSupporterId": 22,
+    "backSupportterName": "D.srinu",
+    "br_CIN": null,
+    "br_GST": null,
+    "br_address_line1": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM",
+    "br_address_line2": "Door No 30, 20-7, Nehru Rd, Setharamapuram",
+    "br_branch_address": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM, Door No 30, 20-7, Nehru Rd, Setharamapuram, Vijayawada, Andhra Pradesh 520002.",
+    "br_branch_number": "8977943035",
+    "br_branch_opening": "2022-03-27T00:00:00.000Z",
+    "br_branch_photo": "https://storage.googleapis.com/way4track-application/Branch_photos/1743508610469-WhatsApp Image 2025-04-01 at 5.20.53 PM.jpeg",
+    "br_city": "Vijayawada",
+    "br_company_code": "WAY4TRACK",
+    "br_email": "arunodaya@sharontelematics.com",
+    "br_id": 5,
+    "br_latitude": null,
+    "br_longitude": null,
+    "br_name": "Vijayawada",
+    "br_pincode": "520002",
+    "br_qr_photo": null,
+    "br_state": "Andhra Pradesh",
+    "br_unit_code": "WAY4",
+    "branchId": 5,
+    "chassisNumber": "xdvff",
+    "clientName": "ravi",
+    "client_GST_number": null,
+    "client_address": null,
+    "client_bill_wise_date": null,
+    "client_branch_id": null,
+    "client_client_id": null,
+    "client_client_photo": null,
+    "client_company_code": null,
+    "client_email": null,
+    "client_hsn_code": null,
+    "client_id": null,
+    "client_joining_date": null,
+    "client_name": null,
+    "client_phone_number": null,
+    "client_sac_code": null,
+    "client_status": null,
+    "client_tcs": null,
+    "client_tds": null,
+    "client_unit_code": null,
+    "completedDate": null,
+    "description": null,
+    "email": null,
+    "endDate": null,
+    "engineNumber": "dffgbfgbf",
+    "id": 3,
+    "imeiNumber": "8768665445653",
+    "installationAddress": "P6HH+PQH, Visakhapatnam, Andhra Pradesh 530009, India",
+    "paymentStatus": "COMPLETED",
+    "pendingDate": null,
+    "phoneNumber": "949494994",
+    "productName": "SHENZHONE CONCOX V5 ",
+    "remark": [
+        {
+            "date": "2025-04-09T07:33:26.786Z",
+            "desc": "hi",
+            "name": "ravikanth",
+            "staffId": 8
+        },
+        {
+            "date": "2025-04-09T07:42:59.177Z",
+            "desc": "hello",
+            "name": "ravikanth",
+            "staffId": 8
+        }
+    ],
+    "screenShot": null,
+    "service": null,
+    "simNumber": null,
+    "st_aadhar_number": "34553",
+    "st_account_branch": "DAY AND NIGHT ",
+    "st_account_number": "7036007434123",
+    "st_account_type": "savings",
+    "st_address": "Ampalam(vilage),Narasannapeta(mandal),Srikakulam(District),532421",
+    "st_alternate_number": "96401454",
+    "st_bank_name": "SBI",
+    "st_before_experience": null,
+    "st_bike_allocation": "Yes",
+    "st_bike_number": "vbgf",
+    "st_blood_group": "",
+    "st_branch_id": 15,
+    "st_branch_name": "Tirupati",
+    "st_carry_forward_leaves": 0,
+    "st_company_code": "WAY4TRACK",
+    "st_created_at": "2025-04-02T09:50:25.000Z",
+    "st_department": "CIVIL",
+    "st_description": "BE GOOD good",
+    "st_designation": "Backend Support",
+    "st_designation_id": 11,
+    "st_dob": "2025-04-15T00:00:00.000Z",
+    "st_driving_licence": "Yes",
+    "st_driving_licence_number": "ty567",
+    "st_email": "kolat88a09@gmail.com",
+    "st_esic_number": "hk",
+    "st_experience_details": [],
+    "st_final_settlement_date": "2025-04-26T00:00:00.000Z",
+    "st_gender": "Female",
+    "st_id": 22,
+    "st_ifsc_code": "SBI123654789",
+    "st_imei_number": null,
+    "st_insurance_eligibility_date": "2025-04-05T00:00:00.000Z",
+    "st_insurance_expiry_date": "2025-04-22T00:00:00.000Z",
+    "st_insurance_number": "789456123",
+    "st_joining_date": "2025-04-19T00:00:00.000Z",
+    "st_latitude": null,
+    "st_location": "fg",
+    "st_longitude": null,
+    "st_mail_allocation": "Yes",
+    "st_mobile_allocation": "Yes",
+    "st_mobile_brand": "vb",
+    "st_mobile_number": null,
+    "st_monthly_salary": "121.00",
+    "st_name": "D.srinu",
+    "st_office_email": "kolat44eja09@gmail.com",
+    "st_office_phone_number": "073355",
+    "st_pan_card_number": "df5566",
+    "st_password": "123",
+    "st_phone_number": "073307",
+    "st_qualifications": [
+        {
+            "file": "https://storage.googleapis.com/way4track-application/qualification_files/SF-0010_Review Confirmation Page.pdf",
+            "marksOrCgpa": null,
+            "qualificationName": "10th Class"
+        }
+    ],
+    "st_resignation_date": "2025-05-01T00:00:00.000Z",
+    "st_resume": null,
+    "st_salary_date": null,
+    "st_staff_id": "SF-0010",
+    "st_staff_photo": null,
+    "st_staff_status": "ACTIVE",
+    "st_termination_date": "2025-04-04T00:00:00.000Z",
+    "st_uan_number": "jkh",
+    "st_unit_code": "WAY4",
+    "st_updated_at": "2025-04-02T09:50:25.000Z",
+    "st_vehicle_photo": null,
+    "staffId": 8,
+    "staffName": "ravikanth",
+    "staff_aadhar_number": "3455366",
+    "staff_account_branch": "Vizag",
+    "staff_account_number": "1234567890",
+    "staff_account_type": "current",
+    "staff_address": "Ampalam(village),Narasannapeta(mandal),Srikakulam(District),532421",
+    "staff_alternate_number": "9647770",
+    "staff_bank_name": "ABC Bank",
+    "staff_before_experience": null,
+    "staff_bike_allocation": "Yes",
+    "staff_bike_number": null,
+    "staff_blood_group": "O+",
+    "staff_branch_id": 5,
+    "staff_branch_name": "Vijayawada",
+    "staff_carry_forward_leaves": 0,
+    "staff_company_code": "WAY4TRACK",
+    "staff_created_at": "2025-04-01T13:36:42.000Z",
+    "staff_department": "technician",
+    "staff_description": "technician",
+    "staff_designation": "Technician",
+    "staff_designation_id": 6,
+    "staff_dob": "2025-04-04T00:00:00.000Z",
+    "staff_driving_licence": "Yes",
+    "staff_driving_licence_number": "123456",
+    "staff_email": "kolate09@gmail.com",
+    "staff_esic_number": "ESIC1234567",
+    "staff_experience_details": "[{\"previousCompany\":\"\",\"previous_designation\":\"\",\"total_experience\":\"\",\"previous_salary\":\"\"}]",
+    "staff_final_settlement_date": "2025-04-25T00:00:00.000Z",
+    "staff_gender": "Female",
+    "staff_id": 8,
+    "staff_ifsc_code": "SBIN1235",
+    "staff_imei_number": null,
+    "staff_insurance_eligibility_date": "2025-04-19T00:00:00.000Z",
+    "staff_insurance_expiry_date": "2025-04-13T00:00:00.000Z",
+    "staff_insurance_number": "insurance123",
+    "staff_joining_date": "2025-04-04T00:00:00.000Z",
+    "staff_latitude": "17.7307648",
+    "staff_location": "Vizag, ",
+    "staff_longitude": "83.2405504",
+    "staff_mail_allocation": "Yes",
+    "staff_mobile_allocation": "Yes",
+    "staff_mobile_brand": "cv",
+    "staff_mobile_number": null,
+    "staff_monthly_salary": "4999.00",
+    "staff_name": "ravikanth",
+    "staff_office_email": "koja09@gmail.com",
+    "staff_office_phone_number": "0733000",
+    "staff_pan_card_number": "df5577",
+    "staff_password": "123a",
+    "staff_phone_number": "0330792477",
+    "staff_qualifications": "[{\"qualificationName\":\"Degree\",\"marksOrCgpa\":\"80\"}]",
+    "staff_resignation_date": "2025-04-02T00:00:00.000Z",
+    "staff_resume": null,
+    "staff_salary_date": null,
+    "staff_staff_id": "8608088",
+    "staff_staff_photo": "https://storage.googleapis.com/way4track-application/staff_photos/8608088.jpg",
+    "staff_staff_status": "ACTIVE",
+    "staff_termination_date": "2025-04-08T00:00:00.000Z",
+    "staff_uan_number": "100200300400",
+    "staff_unit_code": "WAY4",
+    "staff_updated_at": "2025-04-01T13:36:42.000Z",
+    "staff_vehicle_photo": null,
+    "startDate": "2025-04-08T12:20:54.000Z",
+    "subDealerId": null,
+    "subDealerName": null,
+    "subDealerPhoneNumber": null,
+    "technicianNumber": "2526-000000003",
+    "vehicleNumber": "dgfddf",
+    "vehiclePhoto1": "https://storage.googleapis.com/way4track-application/vehicle_photos/1744114855613-rn_image_picker_lib_temp_14bc98d6-a390-4026-b2dc-2b2a381ca750.jpg",
+    "vehiclePhoto10": null,
+    "vehiclePhoto2": null,
+    "vehiclePhoto3": null,
+    "vehiclePhoto4": null,
+    "vehiclePhoto5": null,
+    "vehiclePhoto6": null,
+    "vehiclePhoto7": null,
+    "vehiclePhoto8": null,
+    "vehiclePhoto9": null,
+    "vehicleType": null,
+    "workStatus": "activate"
+}
+//location
+[
+    {
+        "address_components": [
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ]
+        ],
+        "formatted_address": "P7J3+8F Visakhapatnam, Andhra Pradesh, India",
+        "geometry": {
+            "bounds": [Object
+            ],
+            "location": [Object
+            ],
+            "location_type": "GEOMETRIC_CENTER",
+            "viewport": [Object
+            ]
+        },
+        "place_id": "GhIJZxHlZhO7MUARcBgW7TvQVEA",
+        "plus_code": {
+            "compound_code": "P7J3+8F Visakhapatnam, Andhra Pradesh, India",
+            "global_code": "7M95P7J3+8F"
+        },
+        "types": [
+            "plus_code"
+        ]
+    },
+    {
+        "address_components": [
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ]
+        ],
+        "formatted_address": "Mimi's paradise HIG 31 MEHAR MARG, Ashoka Park Colony, Visakhapatnam, Andhra Pradesh 530008, India",
+        "geometry": {
+            "location": [Object
+            ],
+            "location_type": "ROOFTOP",
+            "viewport": [Object
+            ]
+        },
+        "navigation_points": [
+            [Object
+            ]
+        ],
+        "place_id": "ChIJ_3-plZRDOToRTbMFfp_h1ps",
+        "plus_code": {
+            "compound_code": "P7J3+XG Visakhapatnam, Andhra Pradesh, India",
+            "global_code": "7M95P7J3+XG"
+        },
+        "types": [
+            "street_address"
+        ]
+    },
+    {
+        "address_components": [
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ]
+        ],
+        "formatted_address": "Unnamed Road, Junk Yard, Visakhapatnam, Andhra Pradesh 530008, India",
+        "geometry": {
+            "bounds": [Object
+            ],
+            "location": [Object
+            ],
+            "location_type": "GEOMETRIC_CENTER",
+            "viewport": [Object
+            ]
+        },
+        "place_id": "ChIJj3aveKhCOToRLh8fqXCkrvg",
+        "types": [
+            "route"
+        ]
+    },
+]
+//request
+[
+    {
+        "branchId": {
+            "CIN": null,
+            "GST": null,
+            "addressLine1": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM",
+            "addressLine2": "Door No 30, 20-7, Nehru Rd, Setharamapuram",
+            "branchAddress": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM, Door No 30, 20-7, Nehru Rd, Setharamapuram, Vijayawada, Andhra Pradesh 520002.",
+            "branchName": "Vijayawada",
+            "branchNumber": "8977943035",
+            "branchOpening": "2022-03-27T00:00:00.000Z",
+            "branchPhoto": "https://storage.googleapis.com/way4track-application/Branch_photos/1743508610469-WhatsApp Image 2025-04-01 at 5.20.53 PM.jpeg",
+            "city": "Vijayawada",
+            "companyCode": "WAY4TRACK",
+            "email": "arunodaya@sharontelematics.com",
+            "id": 5,
+            "latitude": null,
+            "longitude": null,
+            "pincode": "520002",
+            "qrPhoto": null,
+            "state": "Andhra Pradesh",
+            "unitCode": "WAY4"
+        },
+        "companyCode": "WAY4TRACK",
+        "createdAt": "2025-04-08T14:21:46.000Z",
+        "createdDate": "2025-04-08T14:21:46.000Z",
+        "description": "laptop",
+        "fromDate": null,
+        "id": 4,
+        "products": null,
+        "requestFor": null,
+        "requestId": "RR-00001",
+        "requestType": "assets",
+        "staffId": null,
+        "status": "pending",
+        "toDate": null,
+        "unitCode": "WAY4",
+        "updatedAt": "2025-04-08T14:21:46.000Z"
+    },
+    {
+        "branchId": {
+            "CIN": null,
+            "GST": null,
+            "addressLine1": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM",
+            "addressLine2": "Door No 30, 20-7, Nehru Rd, Setharamapuram",
+            "branchAddress": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM, Door No 30, 20-7, Nehru Rd, Setharamapuram, Vijayawada, Andhra Pradesh 520002.",
+            "branchName": "Vijayawada",
+            "branchNumber": "8977943035",
+            "branchOpening": "2022-03-27T00:00:00.000Z",
+            "branchPhoto": "https://storage.googleapis.com/way4track-application/Branch_photos/1743508610469-WhatsApp Image 2025-04-01 at 5.20.53 PM.jpeg",
+            "city": "Vijayawada",
+            "companyCode": "WAY4TRACK",
+            "email": "arunodaya@sharontelematics.com",
+            "id": 5,
+            "latitude": null,
+            "longitude": null,
+            "pincode": "520002",
+            "qrPhoto": null,
+            "state": "Andhra Pradesh",
+            "unitCode": "WAY4"
+        },
+        "companyCode": "WAY4TRACK",
+        "createdAt": "2025-04-08T14:25:27.000Z",
+        "createdDate": "2025-04-08T14:25:27.000Z",
+        "description": "2000",
+        "fromDate": null,
+        "id": 5,
+        "products": null,
+        "requestFor": null,
+        "requestId": "RR-00002",
+        "requestType": "money",
+        "staffId": null,
+        "status": "pending",
+        "toDate": null,
+        "unitCode": "WAY4",
+        "updatedAt": "2025-04-08T14:25:27.000Z"
+    },
+    {
+        "branchId": {
+            "CIN": null,
+            "GST": null,
+            "addressLine1": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM",
+            "addressLine2": "Door No 30, 20-7, Nehru Rd, Setharamapuram",
+            "branchAddress": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM, Door No 30, 20-7, Nehru Rd, Setharamapuram, Vijayawada, Andhra Pradesh 520002.",
+            "branchName": "Vijayawada",
+            "branchNumber": "8977943035",
+            "branchOpening": "2022-03-27T00:00:00.000Z",
+            "branchPhoto": "https://storage.googleapis.com/way4track-application/Branch_photos/1743508610469-WhatsApp Image 2025-04-01 at 5.20.53 PM.jpeg",
+            "city": "Vijayawada",
+            "companyCode": "WAY4TRACK",
+            "email": "arunodaya@sharontelematics.com",
+            "id": 5,
+            "latitude": null,
+            "longitude": null,
+            "pincode": "520002",
+            "qrPhoto": null,
+            "state": "Andhra Pradesh",
+            "unitCode": "WAY4"
+        },
+        "companyCode": "WAY4TRACK",
+        "createdAt": "2025-04-08T14:35:28.000Z",
+        "createdDate": "2025-04-08T14:35:28.000Z",
+        "description": "sfdd",
+        "fromDate": null,
+        "id": 6,
+        "products": null,
+        "requestFor": null,
+        "requestId": "RR-00003",
+        "requestType": "assets",
+        "staffId": null,
+        "status": "pending",
+        "toDate": null,
+        "unitCode": "WAY4",
+        "updatedAt": "2025-04-08T14:35:28.000Z"
+    },
+    {
+        "branchId": {
+            "CIN": null,
+            "GST": null,
+            "addressLine1": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM",
+            "addressLine2": "Door No 30, 20-7, Nehru Rd, Setharamapuram",
+            "branchAddress": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM, Door No 30, 20-7, Nehru Rd, Setharamapuram, Vijayawada, Andhra Pradesh 520002.",
+            "branchName": "Vijayawada",
+            "branchNumber": "8977943035",
+            "branchOpening": "2022-03-27T00:00:00.000Z",
+            "branchPhoto": "https://storage.googleapis.com/way4track-application/Branch_photos/1743508610469-WhatsApp Image 2025-04-01 at 5.20.53 PM.jpeg",
+            "city": "Vijayawada",
+            "companyCode": "WAY4TRACK",
+            "email": "arunodaya@sharontelematics.com",
+            "id": 5,
+            "latitude": null,
+            "longitude": null,
+            "pincode": "520002",
+            "qrPhoto": null,
+            "state": "Andhra Pradesh",
+            "unitCode": "WAY4"
+        },
+        "companyCode": "WAY4TRACK",
+        "createdAt": "2025-04-09T03:57:24.000Z",
+        "createdDate": "2025-04-09T03:57:24.000Z",
+        "description": "waffs",
+        "fromDate": null,
+        "id": 7,
+        "products": [
+            [Object
+            ]
+        ],
+        "requestFor": null,
+        "requestId": "RR-00004",
+        "requestType": "assets",
+        "staffId": null,
+        "status": "pending",
+        "toDate": null,
+        "unitCode": "WAY4",
+        "updatedAt": "2025-04-09T03:57:24.000Z"
+    },
+    {
+        "branchId": {
+            "CIN": null,
+            "GST": null,
+            "addressLine1": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM",
+            "addressLine2": "Door No 30, 20-7, Nehru Rd, Setharamapuram",
+            "branchAddress": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM, Door No 30, 20-7, Nehru Rd, Setharamapuram, Vijayawada, Andhra Pradesh 520002.",
+            "branchName": "Vijayawada",
+            "branchNumber": "8977943035",
+            "branchOpening": "2022-03-27T00:00:00.000Z",
+            "branchPhoto": "https://storage.googleapis.com/way4track-application/Branch_photos/1743508610469-WhatsApp Image 2025-04-01 at 5.20.53 PM.jpeg",
+            "city": "Vijayawada",
+            "companyCode": "WAY4TRACK",
+            "email": "arunodaya@sharontelematics.com",
+            "id": 5,
+            "latitude": null,
+            "longitude": null,
+            "pincode": "520002",
+            "qrPhoto": null,
+            "state": "Andhra Pradesh",
+            "unitCode": "WAY4"
+        },
+        "companyCode": "WAY4TRACK",
+        "createdAt": "2025-04-09T03:57:55.000Z",
+        "createdDate": "2025-04-09T03:57:55.000Z",
+        "description": "1000",
+        "fromDate": null,
+        "id": 8,
+        "products": [
+            [Object
+            ]
+        ],
+        "requestFor": null,
+        "requestId": "RR-00005",
+        "requestType": "money",
+        "staffId": null,
+        "status": "pending",
+        "toDate": null,
+        "unitCode": "WAY4",
+        "updatedAt": "2025-04-09T03:57:55.000Z"
+    },
+    {
+        "branchId": {
+            "CIN": null,
+            "GST": null,
+            "addressLine1": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM",
+            "addressLine2": "Door No 30, 20-7, Nehru Rd, Setharamapuram",
+            "branchAddress": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM, Door No 30, 20-7, Nehru Rd, Setharamapuram, Vijayawada, Andhra Pradesh 520002.",
+            "branchName": "Vijayawada",
+            "branchNumber": "8977943035",
+            "branchOpening": "2022-03-27T00:00:00.000Z",
+            "branchPhoto": "https://storage.googleapis.com/way4track-application/Branch_photos/1743508610469-WhatsApp Image 2025-04-01 at 5.20.53 PM.jpeg",
+            "city": "Vijayawada",
+            "companyCode": "WAY4TRACK",
+            "email": "arunodaya@sharontelematics.com",
+            "id": 5,
+            "latitude": null,
+            "longitude": null,
+            "pincode": "520002",
+            "qrPhoto": null,
+            "state": "Andhra Pradesh",
+            "unitCode": "WAY4"
+        },
+        "companyCode": "WAY4TRACK",
+        "createdAt": "2025-04-09T04:00:32.000Z",
+        "createdDate": "2025-04-09T04:00:32.000Z",
+        "description": "",
+        "fromDate": null,
+        "id": 9,
+        "products": [
+            [Object
+            ]
+        ],
+        "requestFor": null,
+        "requestId": "RR-00006",
+        "requestType": "products",
+        "staffId": null,
+        "status": "pending",
+        "toDate": null,
+        "unitCode": "WAY4",
+        "updatedAt": "2025-04-09T04:00:32.000Z"
+    },
+    {
+        "branchId": {
+            "CIN": null,
+            "GST": null,
+            "addressLine1": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM",
+            "addressLine2": "Door No 30, 20-7, Nehru Rd, Setharamapuram",
+            "branchAddress": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM, Door No 30, 20-7, Nehru Rd, Setharamapuram, Vijayawada, Andhra Pradesh 520002.",
+            "branchName": "Vijayawada",
+            "branchNumber": "8977943035",
+            "branchOpening": "2022-03-27T00:00:00.000Z",
+            "branchPhoto": "https://storage.googleapis.com/way4track-application/Branch_photos/1743508610469-WhatsApp Image 2025-04-01 at 5.20.53 PM.jpeg",
+            "city": "Vijayawada",
+            "companyCode": "WAY4TRACK",
+            "email": "arunodaya@sharontelematics.com",
+            "id": 5,
+            "latitude": null,
+            "longitude": null,
+            "pincode": "520002",
+            "qrPhoto": null,
+            "state": "Andhra Pradesh",
+            "unitCode": "WAY4"
+        },
+        "companyCode": "WAY4TRACK",
+        "createdAt": "2025-04-09T04:01:09.000Z",
+        "createdDate": "2025-04-09T04:01:09.000Z",
+        "description": "",
+        "fromDate": null,
+        "id": 10,
+        "products": [
+            [Object
+            ]
+        ],
+        "requestFor": null,
+        "requestId": "RR-00007",
+        "requestType": "products",
+        "staffId": null,
+        "status": "pending",
+        "toDate": null,
+        "unitCode": "WAY4",
+        "updatedAt": "2025-04-09T04:01:09.000Z"
+    },
+    {
+        "branchId": {
+            "CIN": null,
+            "GST": null,
+            "addressLine1": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM",
+            "addressLine2": "Door No 30, 20-7, Nehru Rd, Setharamapuram",
+            "branchAddress": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM, Door No 30, 20-7, Nehru Rd, Setharamapuram, Vijayawada, Andhra Pradesh 520002.",
+            "branchName": "Vijayawada",
+            "branchNumber": "8977943035",
+            "branchOpening": "2022-03-27T00:00:00.000Z",
+            "branchPhoto": "https://storage.googleapis.com/way4track-application/Branch_photos/1743508610469-WhatsApp Image 2025-04-01 at 5.20.53 PM.jpeg",
+            "city": "Vijayawada",
+            "companyCode": "WAY4TRACK",
+            "email": "arunodaya@sharontelematics.com",
+            "id": 5,
+            "latitude": null,
+            "longitude": null,
+            "pincode": "520002",
+            "qrPhoto": null,
+            "state": "Andhra Pradesh",
+            "unitCode": "WAY4"
+        },
+        "companyCode": "WAY4TRACK",
+        "createdAt": "2025-04-09T04:01:26.000Z",
+        "createdDate": "2025-04-09T04:01:26.000Z",
+        "description": "",
+        "fromDate": null,
+        "id": 11,
+        "products": [
+            [Object
+            ]
+        ],
+        "requestFor": null,
+        "requestId": "RR-00008",
+        "requestType": "products",
+        "staffId": null,
+        "status": "pending",
+        "toDate": null,
+        "unitCode": "WAY4",
+        "updatedAt": "2025-04-09T04:01:26.000Z"
+    }
+]
+//navigation
+{
+    "index": 2,
+    "key": "stack-Vt1vRLwzIRgyDg0bb0gZv",
+    "preloadedRoutes": [],
+    "routeNames": [
+        "Splash",
+        "Login",
+        "BottomHome",
+        "Attendence",
+        "WorkPayment",
+        "Visit_ClientInfo",
+        "Visit_ProductInfo",
+        "WorkDetails",
+        "DeviceInstall_ClientInfo",
+        "DeviceInstall_ProductInfo",
+        "DeviceInstall_VechileInfo",
+        "InstallDeviceOverview",
+        "InstallationProcessing",
+        "InstallSuccessfully",
+        "Profile",
+        "UpcommingWorks",
+        "About",
+        "Notification",
+        "WorkAllocation",
+        "TechWorks",
+        "Tickets",
+        "Payments",
+        "Purchase",
+        "Work",
+        "Report",
+        "RequestRaise",
+        "AddRequestRaise",
+        "EditRequestRaise",
+        "TechnicianWork",
+        "TrackingStaff",
+        "PaymentScanner"
+    ],
+    "routes": [
+        {
+            "key": "Splash-pzyPeK94S_jZ4176Ap7_m",
+            "name": "Splash",
+            "params": undefined
+        },
+        {
+            "key": "BottomHome-wkKcPXCHROdsVZR_fyw53",
+            "name": "BottomHome",
+            "state": [Object
+            ]
+        },
+        {
+            "key": "DeviceInstall_ProductInfo-nHYf8NexeE_Sin8xML0dZ",
+            "name": "DeviceInstall_ProductInfo",
+            "params": undefined,
+            "path": undefined
+        }
+    ],
+    "stale": false,
+    "type": "stack"
+}
+//remarks
+[
+    {
+        "date": "2025-04-16T09:51:48.291Z",
+        "desc": "hi",
+        "file": null,
+        "image": null,
+        "name": "ravikanth",
+        "staffId": 8,
+        "video": null
+    },
+    {
+        "date": "2025-04-17T11:07:18.854Z",
+        "desc": "testing ",
+        "file": null,
+        "image": null,
+        "name": "D.srinu",
+        "staffId": "SF-0010",
+        "video": null
+    },
+    {
+        "date": "2025-04-17T11:07:31.614Z",
+        "desc": "",
+        "file": {
+            "name": "Image"
+        },
+        "image": "https://storage.googleapis.com/way4track-application/remark_images/1744888052361-mechanic-with-laptop-white-background_1368-4145.avif",
+        "name": "D.srinu",
+        "staffId": "SF-0010",
+        "video": null
+    },
+    {
+        "date": "2025-04-17T11:09:28.803Z",
+        "desc": "",
+        "file": {
+            "name": "Image"
+        },
+        "image": "https://storage.googleapis.com/way4track-application/remark_images/1744888169504-smiling-auto-mechanic-with-wrench-standing-hands-folded-white-background_662251-2939.avif",
+        "name": "D.srinu",
+        "staffId": "SF-0010",
+        "video": null
+    },
+    {
+        "date": "2025-04-17T13:51:48.574Z",
+        "desc": "hi",
+        "file": null,
+        "image": null,
+        "name": "ravikanth",
+        "video": null
+    }
+]
+//
+{
+    "data": {
+        "acceptStartDate": "2025-04-17T08:14:58.000Z",
+        "activateDate": null,
+        "address": "Vvvvenkateswara Metta Temple Rd, Daba Gardens, 104 Area, Visakhapatnam, Andhra Pradesh 530020, India",
+        "amount": null,
+        "applicationId": null,
+        "backEndStaffRelation": {
+            "aadharNumber": null,
+            "accountBranch": null,
+            "accountNumber": null,
+            "accountType": "savings",
+            "address": "Ampalam(vilage),Narasannapeta(mandal),Srikakulam(District),532421",
+            "alternateNumber": "96401454",
+            "bankName": "SBI",
+            "beforeExperience": null,
+            "bikeAllocation": "Yes",
+            "bikeNumber": null,
+            "bloodGroup": "",
+            "branchName": "Tirupati",
+            "carryForwardLeaves": 0,
+            "companyCode": "WAY4TRACK",
+            "createdAt": "2025-04-02T09:50:25.000Z",
+            "department": "CIVIL",
+            "description": "BE GOOD good",
+            "designation": "Backend Support",
+            "dob": "2025-04-15",
+            "drivingLicence": "Yes",
+            "drivingLicenceNumber": null,
+            "email": "kolat88a09@gmail.com",
+            "esicNumber": null,
+            "experienceDetails": [Array
+            ],
+            "finalSettlementDate": "2025-04-26",
+            "gender": "Female",
+            "id": 22,
+            "ifscCode": null,
+            "imeiNumber": null,
+            "insuranceEligibilityDate": "2025-04-05",
+            "insuranceExpiryDate": "2025-04-22",
+            "insuranceNumber": null,
+            "joiningDate": "2025-04-19",
+            "latitude": null,
+            "location": "fg",
+            "longitude": null,
+            "mailAllocation": "Yes",
+            "mobileAllocation": "Yes",
+            "mobileBrand": "vb",
+            "mobileNumber": null,
+            "monthlySalary": "121.00",
+            "name": "D.srinu",
+            "officeEmail": "kolat44eja09@gmail.com",
+            "officePhoneNumber": "073355",
+            "panCardNumber": null,
+            "password": "123",
+            "phoneNumber": "073307",
+            "qualifications": [Array
+            ],
+            "resignationDate": "2025-05-01",
+            "resume": null,
+            "salaryDate": null,
+            "staffId": "SF-0010",
+            "staffPhoto": null,
+            "status": "ACTIVE",
+            "terminationDate": "2025-04-04",
+            "uanNumber": null,
+            "uniqueId": null,
+            "unitCode": "WAY4",
+            "updatedAt": "2025-04-14T14:39:56.000Z",
+            "vehiclePhoto": null
+        },
+        "branchId": {
+            "CIN": null,
+            "GST": null,
+            "addressLine1": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM",
+            "addressLine2": "Door No 30, 20-7, Nehru Rd, Setharamapuram",
+            "branchAddress": "2nd Floor, SAI RAM MOHANA DURGA NILAYAM, Door No 30, 20-7, Nehru Rd, Setharamapuram, Vijayawada, Andhra Pradesh 520002.",
+            "branchName": "Vijayawada",
+            "branchNumber": "8977943035",
+            "branchOpening": "2022-03-27T00:00:00.000Z",
+            "branchPhoto": "https://storage.googleapis.com/way4track-application/Branch_photos/1743508610469-WhatsApp Image 2025-04-01 at 5.20.53 PM.jpeg",
+            "city": "Vijayawada",
+            "companyCode": "WAY4TRACK",
+            "email": "arunodaya@sharontelematics.com",
+            "id": 5,
+            "latitude": null,
+            "longitude": null,
+            "pincode": "520002",
+            "qrPhoto": null,
+            "state": "Andhra Pradesh",
+            "unitCode": "WAY4"
+        },
+        "chassisNumber": "1234",
+        "clientId": null,
+        "companyCode": "WAY4track",
+        "completedDate": null,
+        "createdAt": "2025-04-15T07:50:13.000Z",
+        "description": null,
+        "email": "Zbxxb",
+        "endDate": null,
+        "engineNumber": "123",
+        "id": 1,
+        "imeiNumber": "Xxjwu",
+        "installationAddress": "12-4-32, Himachalnagar, Gajuwaka, Visakhapatnam, Andhra Pradesh 530026, India",
+        "name": "ravi",
+        "paidAmount": null,
+        "paymentStatus": "PENDING",
+        "pendingDate": null,
+        "phoneNumber": "595686",
+        "productName": "SHENZHONE CONCOX V5",
+        "remark": [
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ]
+        ],
+        "screenShot": null,
+        "service": "[object Object]",
+        "serviceId": {
+            "companyCode": "WAY4TRACK",
+            "createdAt": "2025-04-05T10:09:31.000Z",
+            "description": "NORMAL INSTALLATION 40 MINUTS",
+            "duration": "40",
+            "id": 1,
+            "name": "NORMAL INSTALLATION",
+            "unitCode": "WAY4",
+            "updatedAt": "2025-04-14T14:56:25.000Z"
+        },
+        "serviceOrProduct": null,
+        "simNumber": null,
+        "startDate": "2025-04-15T07:50:12.000Z",
+        "subDealerId": null,
+        "technicianNumber": "2526-000000001",
+        "unitCode": "WAY4",
+        "updatedAt": "2025-04-17T16:01:58.000Z",
+        "userName": "89464",
+        "vehicleId": null,
+        "vehicleNumber": "123",
+        "vehiclePhoto1": null,
+        "vehiclePhoto10": null,
+        "vehiclePhoto2": null,
+        "vehiclePhoto3": null,
+        "vehiclePhoto4": null,
+        "vehiclePhoto5": null,
+        "vehiclePhoto6": null,
+        "vehiclePhoto7": null,
+        "vehiclePhoto8": null,
+        "vehiclePhoto9": null,
+        "vehicleType": "[object Object]",
+        "workStatus": "accept"
+    }
+    //staff products
+    {
+        "branchDetails": [
+            {
+                "assignTime": null,
+                "branchName": "Vijayawada",
+                "handStock": "9",
+                "presentStock": "0",
+                "productName": null,
+                "productStatus": "available"
+            },
+            {
+                "assignTime": null,
+                "branchName": "Vijayawada",
+                "handStock": "1",
+                "presentStock": "0",
+                "productName": "",
+                "productStatus": "available"
+            },
+            {
+                "assignTime": null,
+                "branchName": "Visakhapatnam",
+                "handStock": "4",
+                "presentStock": "0",
+                "productName": null,
+                "productStatus": "available"
+            }
+        ],
+        "branchList": [
+            {
+                "branchName": "Visakhapatnam"
+            },
+            {
+                "branchName": "Vijayawada"
+            }
+        ],
+        "staffDetails": [
+            {
+                "assignTime": null,
+                "handStock": "1",
+                "productName": "",
+                "productStatus": "available",
+                "staffName": "ravikanth"
+            },
+            {
+                "assignTime": null,
+                "handStock": "9",
+                "productName": null,
+                "productStatus": "available",
+                "staffName": "ravikanth"
+            }
+        ],
+        "staffList": [],
+        "subDealerDetails": [
+            {
+                "assignTime": null,
+                "presentStock": "0",
+                "productName": "",
+                "productStatus": "available",
+                "subDealerId": "SD-001",
+                "subDealerName": "Ramesh"
+            },
+            {
+                "assignTime": null,
+                "presentStock": "0",
+                "productName": null,
+                "productStatus": "available",
+                "subDealerId": "SD-001",
+                "subDealerName": "Ramesh"
+            }
+        ],
+        "subDealerList": [
+            {
+                "subDealerId": "SD-001",
+                "subDealerName": "Ramesh"
+            }
+        ]
+    }
+    //raise request
+    {
+        "branchId": {
+            "CIN": null,
+            "GST": null,
+            "addressLine1": " 21-27, Double road",
+            "addressLine2": "Viman Nagar, Kakani Nagar,",
+            "branchAddress": " 21-27, Double road,Viman Nagar, Kakani Nagar, Visakhapatnam, Andhra Pradesh 530009",
+            "branchName": "Visakhapatnam",
+            "branchNumber": "7032213434",
+            "branchOpening": "2018-06-25T00:00:00.000Z",
+            "branchPhoto": "https://storage.googleapis.com/way4track-application/Branch_photos/1743670424700-WhatsApp Image 2025-04-01 at 5.20.53 PM.jpeg",
+            "city": "Visakhaptnam",
+            "companyCode": "WAY4TRACK",
+            "email": "support@way4track.com",
+            "id": 1,
+            "latitude": "null",
+            "longitude": "null",
+            "pincode": "530009",
+            "qrPhoto": null,
+            "state": "Andhra Pradesh",
+            "unitCode": "WAY4"
+        }
+        //designation
+        [
+            {
+                "companyCode": "WAY4TRACK",
+                "designation": "CEO",
+                "id": 1,
+                "roles": [
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ]
+                ],
+                "unitCode": "WAY4"
+            },
+            {
+                "companyCode": "WAY4TRACK",
+                "designation": "HR",
+                "id": 2,
+                "roles": [
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ]
+                ],
+                "unitCode": "WAY4"
+            },
+            {
+                "companyCode": "WAY4TRACK",
+                "designation": "Accountant",
+                "id": 3,
+                "roles": [
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ]
+                ],
+                "unitCode": "WAY4"
+            },
+            {
+                "companyCode": "WAY4TRACK",
+                "designation": "Branch Manager",
+                "id": 4,
+                "roles": [
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ]
+                ],
+                "unitCode": "WAY4"
+            },
+            {
+                "companyCode": "WAY4TRACK",
+                "designation": "Warehouse Manager",
+                "id": 5,
+                "roles": [
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ]
+                ],
+                "unitCode": "WAY4"
+            },
+            {
+                "companyCode": "WAY4TRACK",
+                "designation": "Technician",
+                "id": 6,
+                "roles": [
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ]
+                ],
+                "unitCode": "WAY4"
+            },
+            {
+                "companyCode": "WAY4TRACK",
+                "designation": "Tele caller",
+                "id": 7,
+                "roles": [
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ]
+                ],
+                "unitCode": "WAY4"
+            },
+            {
+                "companyCode": "WAY4TRACK",
+                "designation": "Digital Marketing ",
+                "id": 8,
+                "roles": [
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ]
+                ],
+                "unitCode": "WAY4"
+            },
+            {
+                "companyCode": "WAY4TRACK",
+                "designation": "Technical Support",
+                "id": 9,
+                "roles": [
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ]
+                ],
+                "unitCode": "WAY4"
+            },
+            {
+                "companyCode": "WAY4TRACK",
+                "designation": "Sales Executive",
+                "id": 10,
+                "roles": [
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ]
+                ],
+                "unitCode": "WAY4"
+            },
+            {
+                "companyCode": "WAY4TRACK",
+                "designation": "Backend Support",
+                "id": 11,
+                "roles": [
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ]
+                ],
+                "unitCode": "WAY4"
+            },
+            {
+                "companyCode": "WAY4TRACK",
+                "designation": "Operational Support",
+                "id": 12,
+                "roles": [
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ]
+                ],
+                "unitCode": "WAY4"
+            },
+            {
+                "companyCode": "WAY4TRACK",
+                "designation": "Sr.Technician",
+                "id": 13,
+                "roles": [
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ]
+                ],
+                "unitCode": "WAY4"
+            },
+            {
+                "companyCode": "WAY4TRACK",
+                "designation": "Sub Dealer",
+                "id": 15,
+                "roles": [
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ],
+                    [Object
+                    ]
+                ],
+                "unitCode": "WAY4"
+            }
+        ]
+        //tickets total pending
+        [
+            {
+                "staffId": null,
+                "staffName": null,
+                "subDealerId": null,
+                "subDealerName": null,
+                "totalPendingTickets": "1",
+                "totalProcessingTickets": "0",
+                "totalSuccessTickets": "0",
+                "totalTickets": "2"
+            },
+            {
+                "staffId": 8,
+                "staffName": "ravikanth",
+                "subDealerId": null,
+                "subDealerName": null,
+                "totalPendingTickets": "2",
+                "totalProcessingTickets": "0",
+                "totalSuccessTickets": "0",
+                "totalTickets": "2"
+            },
+            {
+                "staffId": 5,
+                "staffName": "Kankipati Vidya Sagar",
+                "subDealerId": null,
+                "subDealerName": null,
+                "totalPendingTickets": "1",
+                "totalProcessingTickets": "0",
+                "totalSuccessTickets": "0",
+                "totalTickets": "1"
+            }
+        ]
+        //ticket list 
+        [
+            {
+                "branchName": null,
+                "companyCode": "WAY4TRACK",
+                "date": "2025-04-22T00:00:00.000Z",
+                "id": 1,
+                "problem": "i have a problem",
+                "staffName": null,
+                "subDealerId": null,
+                "subDealerName": null,
+                "ticketNumber": "Tickets-00001",
+                "unitCode": "WAY4"
+            },
+            {
+                "branchName": null,
+                "companyCode": "WAY4TRACK",
+                "date": "2025-12-30T00:00:00.000Z",
+                "id": 2,
+                "problem": "Test id",
+                "staffName": null,
+                "subDealerId": null,
+                "subDealerName": null,
+                "ticketNumber": "Tickets-00002",
+                "unitCode": "WAY4"
+            },
+            {
+                "branchName": "Vijayawada",
+                "companyCode": "WAY4TRACK",
+                "date": "2025-04-23T00:00:00.000Z",
+                "id": 4,
+                "problem": "Repair",
+                "staffName": "ravikanth",
+                "subDealerId": null,
+                "subDealerName": null,
+                "ticketNumber": "Tickets-00003",
+                "unitCode": "WAY4"
+            },
+            {
+                "branchName": "Vijayawada",
+                "companyCode": "WAY4TRACK",
+                "date": "2025-04-23T00:00:00.000Z",
+                "id": 5,
+                "problem": "Repair testing ",
+                "staffName": "ravikanth",
+                "subDealerId": null,
+                "subDealerName": null,
+                "ticketNumber": "Tickets-00005",
+                "unitCode": "WAY4"
+            },
+            {
+                "branchName": "Tirupati",
+                "companyCode": "WAY4TRACK",
+                "date": "2025-04-23T00:00:00.000Z",
+                "id": 6,
+                "problem": "dsgdbffg",
+                "staffName": "Kankipati Vidya Sagar",
+                "subDealerId": null,
+                "subDealerName": null,
+                "ticketNumber": "Tickets-00006",
+                "unitCode": "WAY4"
+            }
+        ]
+        //subdealer
+        {
+            "aadharNumber": "568956789012",
+            "address": "testing BEACH road gate opposite 532140",
+            "alternatePhoneNumber": "9777522210",
+            "branchId": 1,
+            "branchName": "Visakhapatnam",
+            "companyCode": "WAY4TRACK",
+            "emailId": "testingkumar@gmail.com",
+            "id": 26,
+            "name": "Raju",
+            "password": "1234",
+            "startingDate": "2025-05-24T00:00:00.000Z",
+            "subDealerId": "SD-008",
+            "subDealerPhoneNumber": "9888955532",
+            "subDealerPhoto": "https://storage.googleapis.com/way4track-application/subDealer_photos/1745925272590-pexels-andreas-barth-89047-1131774.jpg",
+            "unitCode": "WAY4"
+        }
+        //subdealerStaff
+        {
+            "aadharNumber": "590956789012",
+            "address": "testing BEACH road gate opposite 532140",
+            "alternateNumber": "9666899944",
+            "companyCode": "WAY4TRACK",
+            "createdAt": "2025-04-29T11:21:36.000Z",
+            "description": "Stronger and flixble",
+            "dob": "2004-11-28",
+            "email": "testingkumrrrr@gmail.com",
+            "gender": "MALE",
+            "id": 1,
+            "name": "BHANU",
+            "panCardNumber": "GLTTT8745D",
+            "password": "1234",
+            "phoneNumber": "9777977790",
+            "staffId": "SF-00011",
+            "subDealerId": {
+                "aadharNumber": "568956789012",
+                "address": "testing BEACH road gate opposite 532140",
+                "alternatePhoneNumber": "9777522210",
+                "companyCode": "WAY4TRACK",
+                "createdAt": "2025-04-29T11:14:32.000Z",
+                "emailId": "testingkumar@gmail.com",
+                "gstNumber": "GSTIN4754255",
+                "id": 26,
+                "name": "Raju",
+                "password": "1234",
+                "startingDate": "2025-05-24T00:00:00.000Z",
+                "status": "INACTIVE",
+                "subDealerId": "SD-008",
+                "subDealerPhoneNumber": "9888955532",
+                "subDealerPhoto": "https://storage.googleapis.com/way4track-application/subDealer_photos/1745925272590-pexels-andreas-barth-89047-1131774.jpg",
+                "unitCode": "WAY4",
+                "updatedAt": "2025-05-01T07:43:02.000Z"
+            },
+            "unitCode": "WAY4",
+            "updatedAt": "2025-04-29T11:21:36.000Z"
+        }
+        //workpayload
+        {
+            "address": "vizag",
+            "applicationId": 3,
+            "applicationName": "TESTING ",
+            "chassisNumber": "fvgfdf",
+            "date": "2025-05-02",
+            "email": "ark.kumar@gmail.com",
+            "engineNumber": "gvfdfdgdb",
+            "name": "ravi",
+            "phoneNumber": "9494130380",
+            "productIMEI": "11111111111111",
+            "productName": "Select Product Name",
+            "productSIM": "",
+            "service": "Select Services",
+            "serviceId": "",
+            "subDealerId": 1,
+            "userID": "ravi",
+            "vehicleID": "",
+            "vehicleNumber": "dsvdfd",
+            "vehiclePhotos": [
+                {
+                    "name": "rn_image_picker_lib_temp_f94eb28f-c7d3-4f92-975a-4278a49181d1.jpg",
+                    "type": "image/jpeg",
+                    "uri": "file:///data/user/0/com.way4track/cache/rn_image_picker_lib_temp_63287864-905f-44f2-a60c-3698b6afc64a.jpg"
+                },
+                {
+                    "name": "rn_image_picker_lib_temp_1386ab7e-db6d-4d33-ac1c-720d175cef79.jpg",
+                    "type": "image/jpeg",
+                    "uri": "file:///data/user/0/com.way4track/cache/rn_image_picker_lib_temp_42ce8cec-bf17-47b9-86d5-a1c6f90ae1f5.jpg"
+                },
+                {
+                    "name": "rn_image_picker_lib_temp_fa0799b5-6018-44bc-8259-164d173de04e.jpg",
+                    "type": "image/jpeg",
+                    "uri": "file:///data/user/0/com.way4track/cache/rn_image_picker_lib_temp_47ddedf8-bce8-4ee5-b71c-e13bb39afe62.jpg"
+                }
+            ],
+            "vehicleType": null
+        }
+        //subdealerworks
+        [
+            {
+                "acceptStartDate": null,
+                "activateDate": null,
+                "address": "vizag",
+                "amount": null,
+                "backSupporterId": null,
+                "backSupportterName": null,
+                "branchId": 1,
+                "branchName": "Visakhapatnam",
+                "clientName": "ravi",
+                "completedDate": null,
+                "description": null,
+                "email": "ark.kumar@gmail.com",
+                "endDate": null,
+                "id": 1,
+                "imeiNumber": "dfgf",
+                "installationAddress": "58-32-270, Bowdra Ring Rd, Ashoka Park Colony, Visakhapatanam, Visakhapatnam, Andhra Pradesh 530008, India",
+                "paidAmount": null,
+                "paymentStatus": "PENDING",
+                "pendingDate": null,
+                "phoneNumber": "9494130380",
+                "productName": "Select Product Name",
+                "remark": null,
+                "service": null,
+                "serviceOrProduct": null,
+                "simNumber": null,
+                "staffId": null,
+                "staffName": null,
+                "startDate": "2025-05-02T03:54:29.000Z",
+                "subDealerId": "SD-001",
+                "subDealerName": "Testing Sub Dealer",
+                "subDealerPhoneNumber": "9845566250",
+                "subDealerStaffId": null,
+                "technicianNumber": "2526-000000001",
+                "vehiclePhoto1": "https://storage.googleapis.com/way4track-application/vehicle_photos/1746158071716-rn_image_picker_lib_temp_2ae8a238-dcfd-4f82-a41c-8baf73eb93ce.jpg",
+                "vehiclePhoto10": null,
+                "vehiclePhoto2": "https://storage.googleapis.com/way4track-application/vehicle_photos/1746158071795-rn_image_picker_lib_temp_8c1b7d0d-1a51-4130-90df-aca4803a2d6e.jpg",
+                "vehiclePhoto3": "https://storage.googleapis.com/way4track-application/vehicle_photos/1746158071898-rn_image_picker_lib_temp_6da2b2d7-0029-4099-8b2f-11bcb088e8f8.jpg",
+                "vehiclePhoto4": null,
+                "vehiclePhoto5": null,
+                "vehiclePhoto6": null,
+                "vehiclePhoto7": null,
+                "vehiclePhoto8": null,
+                "vehiclePhoto9": null,
+                "vehicleType": null,
+                "workStatus": "install"
+            }
+        ]
+        //work details
+        {
+            "acceptStartDate": null,
+            "activateDate": null,
+            "address": "fdgfgf",
+            "amount": null,
+            "backSupporterId": null,
+            "backSupportterName": null,
+            "branchId": 1,
+            "branchName": "Visakhapatnam",
+            "clientName": "fdgfgfbgd",
+            "completedDate": null,
+            "description": null,
+            "email": "fgfh",
+            "endDate": null,
+            "id": 4,
+            "imeiNumber": "fbfggg",
+            "installationAddress": "58-32-270, Bowdra Ring Rd, Ashoka Park Colony, Visakhapatanam, Visakhapatnam, Andhra Pradesh 530008, India",
+            "paidAmount": null,
+            "paymentStatus": "PENDING",
+            "pendingDate": null,
+            "phoneNumber": "dgfgfgb",
+            "productName": "Select Product Name",
+            "remark": null,
+            "service": null,
+            "serviceOrProduct": null,
+            "simNumber": null,
+            "staffId": null,
+            "staffName": null,
+            "startDate": "2025-05-02T07:56:10.000Z",
+            "subDealerId": "SD-008",
+            "subDealerName": "Raju",
+            "subDealerPhoneNumber": "9888955532",
+            "subDealerStaffId": "SF-00011",
+            "technicianNumber": "2526-000000004",
+            "vehiclePhoto1": "https://storage.googleapis.com/way4track-application/vehicle_photos/1746172588452-rn_image_picker_lib_temp_a39276fb-5109-4d34-82fe-30297f62ae6f.jpg",
+            "vehiclePhoto10": null,
+            "vehiclePhoto2": "https://storage.googleapis.com/way4track-application/vehicle_photos/1746172588522-rn_image_picker_lib_temp_9eff06a6-139b-4cfb-9992-80eacd4ba023.jpg",
+            "vehiclePhoto3": "https://storage.googleapis.com/way4track-application/vehicle_photos/1746172588588-rn_image_picker_lib_temp_778383bc-f6a1-4e83-a450-7f668e4cf2d7.jpg",
+            "vehiclePhoto4": null,
+            "vehiclePhoto5": null,
+            "vehiclePhoto6": null,
+            "vehiclePhoto7": null,
+            "vehiclePhoto8": null,
+            "vehiclePhoto9": null,
+            "vehicleType": null,
+            "workStatus": "install"
+        }
+        //promotion list
+        {
+            "desc": "sadfas",
+            "photo": "https://storage.googleapis.com/way4track-application/list_images/1746269640444-24_hours_history.png"
+        },
+        {
+            "desc": "sdfsdfffffffffffffff",
+            "photo": "https://storage.googleapis.com/way4track-application/list_images/1746269640502-ap_mining_04.png"
+        }
+        //subdealer details
+        {
+            "aadharNumber": "568956789012",
+            "address": "testing BEACH road gate opposite 532140",
+            "alternateNumber": "7654890321",
+            "companyCode": "WAY4TRACK",
+            "createdAt": "2025-05-07T11:25:00.000Z",
+            "description": "Stronger and flixble",
+            "dob": "1998-10-29",
+            "email": "testingvirat@gmail.com",
+            "gender": "FEMALE",
+            "id": 1,
+            "name": "Virat bhai testing",
+            "panCardNumber": "GLTTT8745D",
+            "password": "1234",
+            "phoneNumber": "7689054321",
+            "staffId": "SF-0008",
+            "subDealerId": {
+                "aadharNumber": "5647566567112",
+                "address": "testing BEACH road gate opposite 532140",
+                "alternatePhoneNumber": "6578904321",
+                "companyCode": "WAY4TRACK",
+                "createdAt": "2025-05-07T11:21:43.000Z",
+                "emailId": "testingsuma@gmail.com",
+                "gstNumber": "GSTIN4567890",
+                "id": 4,
+                "name": "suma",
+                "password": "1234",
+                "startingDate": "2024-10-30T00:00:00.000Z",
+                "status": "ACTIVE",
+                "subDealerId": "SD-003",
+                "subDealerPhoneNumber": "6789054321",
+                "subDealerPhoto": "https://storage.googleapis.com/way4track-application/subDealer_photos/1746616902915-smiling-auto-mechanic-with-wrench-standing-hands-folded-white-background_662251-2939.avif",
+                "unitCode": "WAY4",
+                "updatedAt": "2025-05-07T11:21:43.000Z"
+            },
+            "unitCode": "WAY4",
+            "updatedAt": "2025-05-07T11:25:00.000Z"
+        }

@@ -7,6 +7,7 @@ require Pod::Executable.execute_command('node', ['-p',
 
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
+use_modular_headers!
 
 linkage = ENV['USE_FRAMEWORKS']
 if linkage != nil
@@ -14,11 +15,15 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
+# Add GoogleUtilities and FirebaseCoreInternal with modular headers
+pod 'GoogleUtilities', :modular_headers => true
+pod 'FirebaseCoreInternal', :modular_headers => true
+
 target 'way4track' do
   config = use_native_modules!
 
   use_react_native!(
-    :path => config[:reactNativePath],
+    :path => config[:reactNativePath],hermes_enabled: true,
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )

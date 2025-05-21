@@ -1,0 +1,4 @@
+// constantStaff.js
+export const STAFF_LOGIN_REQUEST = 'STAFF_LOGIN_REQUEST';
+export const STAFF_LOGIN_SUCCESS = 'STAFF_LOGIN_SUCCESS';
+export const STAFF_LOGIN_FAIL = 'STAFF_LOGIN_FAIL';

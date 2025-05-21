@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "817943282998",
+    "firebase_url": "https://way4track-65c57.firebaseio.com",
+    "project_id": "way4track-65c57",
+    "storage_bucket": "way4track-65c57.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:817943282998:android:7c01904e3d2a9ab0",
+        "android_client_info": {
+          "package_name": "com.way4track"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "817943282998-6ckmk767n47vq2lnkrq4iet0t2jiuv3a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVQSvoR4-aelo4X1jTbq_hsY4Q8W-2Pkw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "817943282998-6ckmk767n47vq2lnkrq4iet0t2jiuv3a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "817943282998-46p7l7ve41m1kn2t99qgngh094tlsqpd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gpsconnect.way4track"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
