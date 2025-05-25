@@ -1,4 +1,4 @@
-package com.yourapp
+package com.way4track
 
 import android.Manifest
 import android.app.*
