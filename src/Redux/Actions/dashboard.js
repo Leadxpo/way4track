@@ -14,6 +14,9 @@ import {
     CREATE_TECHNICIAN_DASHBOARD_REQUEST,
     CREATE_TECHNICIAN_DASHBOARD_SUCCESS,
     CREATE_TECHNICIAN_DASHBOARD_FAIL,
+    CREATE_SALES_VISITS_DASHBOARD_REQUEST,
+    CREATE_SALES_VISITS_DASHBOARD_SUCCESS,
+    CREATE_SALES_VISITS_DASHBOARD_FAIL,
     CREATE_SUBDEALER_STAFF_DASHBOARD_REQUEST,
     CREATE_SUBDEALER_STAFF_DASHBOARD_SUCCESS,
     CREATE_SUBDEALER_STAFF_DASHBOARD_FAIL,
@@ -264,6 +267,44 @@ export const intiateTechnician_dashboard = (create_Technician_dashboardPayload) 
         // If the error status is 500, try refreshing the token
         // Handle other types of errors
         dispatch({ type: CREATE_TECHNICIAN_DASHBOARD_FAIL, payload: error.message });
+    }
+};
+export const intiateSalesVisit_dashboard = (create_SalesVisit_dashboardPayload) => async (dispatch) => {
+    console.log("rrr : ",create_SalesVisit_dashboardPayload)
+    dispatch({ type: CREATE_SALES_MEN_DASHBOARD_REQUEST });
+    try {
+        const { data } = await api.post(
+            `/sales-works/getAll`,
+            create_SalesVisit_dashboardPayload,
+            { headers: { 'Content-Type': 'application/json' } }
+        );
+        const totalLeads = data?.data || [];
+        const pendingLeads = totalLeads?.filter(item => item.leadStatus === "pending");
+        const allocatedLeads = totalLeads?.filter(item => item.leadStatus === "allocated");
+        const pendingPaymentLeads = totalLeads?.filter(item => item.leadStatus === "paymentPending");
+        const partiallyPaymentLeads = totalLeads?.filter(item => item.leadStatus === "partiallyPaid");
+        const completedLeads = totalLeads?.filter(item => item.leadStatus === "completed");
+
+        const totalPendingAndSuccessTickets = await api.post(`/tickets/getTotalPendingAndSucessTickets`, create_SalesVisit_dashboardPayload, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const dashboardSalesVisitData = {
+            totalLeadsData: totalLeads,
+            pendingLeads: pendingLeads.length,
+            allocatedLeads: allocatedLeads.length,
+            pendingPaymentLeads: pendingPaymentLeads.length,
+            partiallyPaymentLeads: partiallyPaymentLeads.length,
+            completedLeads: completedLeads.length,
+            totalPendingAndSuccessTickets: totalPendingAndSuccessTickets.data.data,
+        }
+        dispatch({ type: CREATE_SALES_MEN_DASHBOARD_SUCCESS, payload: dashboardSalesVisitData });
+    } catch (error) {
+        console.log("error : ", error.message)
+        // If the error status is 500, try refreshing the token
+        // Handle other types of errors
+        dispatch({ type: CREATE_SALES_MEN_DASHBOARD_FAIL, payload: error.message });
     }
 };
 

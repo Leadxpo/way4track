@@ -116,6 +116,7 @@ import InstallDeviceOverview from './src/screens/Staffs/installDeviceOverview';
 import InstallSuccessfully from './src/screens/Staffs/installSuccessfully';
 import SubdealerStaffWorks from './src/screens/Staffs/subdealerStaffWorks';
 import SubStaffWorkDetails from './src/screens/Staffs/subStaffWorkDetails';
+import VisitList from './src/screens/Staffs/visitList';
 import VisitSuccessfully from './src/screens/Staffs/visitSuccessfully';
 import SalesVisitOverview from './src/screens/Staffs/salesVisitOverview';
 import PaymentScanner from './src/screens/Staffs/paymentScanner';
@@ -253,6 +254,7 @@ const StackNavigator = () => {
       <Stack.Screen name="WorkDetails" component={WorkDetails} options={{ headerShown: true }} />
       <Stack.Screen name="DeviceInstall_ClientInfo" component={DeviceInstall_ClientInfo} options={{ headerShown: true }} />
       <Stack.Screen name="DeviceInstall_ProductInfo" component={DeviceInstall_ProductInfo} options={{ headerShown: true }} />
+      <Stack.Screen name="SalesVisitOverview" component={SalesVisitOverview} options={{ headerShown: true }} />
       <Stack.Screen name="DeviceInstall_VechileInfo" component={DeviceInstall_VechileInfo} options={{ headerShown: true }} />
       <Stack.Screen name="InstallDeviceOverview" component={InstallDeviceOverview} options={{ headerShown: true }} />
       <Stack.Screen name="ProductTech" component={ProductTech} options={{ headerShown: true }} />
@@ -289,7 +291,7 @@ const SalesStackNavigator = () => {
   const [role, setRole] = useState("")
   const [permissions, setPermissions] = useState([])
   return (
-    <Stack.Navigator initialRouteName="Splash"
+    <Stack.Navigator initialRouteName="SaleHome"
       screenListeners={{
         state: async (e) => {
           // Log navigation changes if needed
@@ -303,13 +305,8 @@ const SalesStackNavigator = () => {
       <Stack.Screen name="WorkPayment" component={WorkPayment} options={{ headerShown: false }} />
       <Stack.Screen name="Visit_ClientInfo" component={Visit_ClientInfo} options={{ headerShown: false }} />
       <Stack.Screen name="Visit_ProductInfo" component={Visit_ProductInfo} options={{ headerShown: true }} />
-      <Stack.Screen name="WorkDetails" component={WorkDetails} options={{ headerShown: true }} />
-      <Stack.Screen name="ProductTech" component={ProductTech} options={{ headerShown: true }} />
-      <Stack.Screen name="InstallationProcessing" component={InstallationProcessing} options={{ headerShown: true }} />
-      <Stack.Screen name="InstallSuccessfully" component={InstallSuccessfully} options={{ headerShown: true }} />
+      <Stack.Screen name="SalesVisitOverview" component={SalesVisitOverview} options={{ headerShown: true }} />
       <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
-      <Stack.Screen name="ProfileSubStaff" component={ProfileSubStaff} options={{ headerShown: false }} />
-      <Stack.Screen name="UpcommingWorks" component={UpcommingWorks} options={{ headerShown: true }} />
       <Stack.Screen name="About" component={About} options={{ headerShown: true }} />
       <Stack.Screen name="Notification" component={Notification} options={{ headerShown: false }} />
       <Stack.Screen name="WorkAllocation" component={WorkAllocation} options={{ headerShown: false }} />
@@ -317,7 +314,6 @@ const SalesStackNavigator = () => {
       <Stack.Screen name="Tickets" component={Tickets} options={{ headerShown: false }} />
       <Stack.Screen name="AddTickets" component={AddTickets} options={{ headerShown: false }} />
       <Stack.Screen name="Payments" component={Payments} options={{ headerShown: false }} />
-      <Stack.Screen name="Purchase" component={Purchase} options={{ headerShown: false }} />
       <Stack.Screen name="Work" component={TechnicianWorks} options={{ headerShown: false }} />
       <Stack.Screen name="Report" component={Report} options={{ headerShown: false }} />
       <Stack.Screen name="RequestRaiseDetails" component={RequestRaiseDetails} options={{ headerShown: true }} />
@@ -630,12 +626,11 @@ const SaleBottomNavigator = () => {
       />
 
       <BottomTab.Screen
-        name="sales"
-        component={TechnicianWorks}
+        name="Sales"
+        component={VisitList}
         options={{
           headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
           tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
-
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="lead-pencil" color={color} size={size} />
           ),
@@ -644,7 +639,7 @@ const SaleBottomNavigator = () => {
 
       <BottomTab.Screen
         name=" "
-        component={DeviceInstall_ClientInfo}
+        component={Visit_ClientInfo}
         options={{
           headerShown: false,
           tabBarStyle: { elevation: 3 },

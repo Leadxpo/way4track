@@ -105,7 +105,6 @@ const Home_Technician = ({ navigation }) => {
         setMarkedDates(marks);
         const totalDays = staffAttendance.length;
         const presentDays = staffAttendance.filter(record => record.status === "Present").length;
-        console.log("attendence : ", presentDays, "/", totalDays)
         setAttendancePercentage(totalDays > 0 ? (presentDays / totalDays) * 100 : 0);
 
       } catch (error) {

@@ -39,11 +39,13 @@ const Visit_ProductInfo = ({ navigation }) => {
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => {
-        navigation.navigate("DeviceInstall_clientInfo");
+        navigation.navigate("Visit_ClientInfo");
         return true;
       };
-      BackHandler.addEventListener("hardwareBackPress", onBackPress);
-      return () => BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+  
+      const backHandler = BackHandler.addEventListener("hardwareBackPress", onBackPress);
+  
+      return () => backHandler.remove(); // ✅ Correct way to clean up
     }, [navigation])
   );
 
@@ -108,7 +110,6 @@ const Visit_ProductInfo = ({ navigation }) => {
       </TouchableOpacity>
 
       <TouchableOpacity style={[styles.nextButton,{marginBottom:70}]} onPress={() => {
-              console.log("Payload:", formData);
         dispatch(updateSalesVisit(formData));
         navigation.navigate("SalesVisitOverview");
       }}>

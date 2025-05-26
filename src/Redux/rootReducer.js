@@ -7,7 +7,7 @@ import { branchDetailReducer, branchProductReducer, branchesReducer, createbranc
 import { bankAccountDetailReducer, bankAccountsDropdownReducer, bankAccountsReducer, createbankAccountReducer, deletebankAccountReducer, updatebankAccountReducer } from './Reducers/bankAccountReducer'; // Import userLoginReducer
 import { categorysReducer, categoryProductReducer, categoryDetailReducer } from './Reducers/categoryReducer'; // Import category Reducer
 import { clientDetailReducer, clientsDropdownReducer, clientsReducer, createClientsReducer, deleteClientReducer, updateClientReducer, } from './Reducers/clientReducer'; // Import client Reducer
-import { drawReducer } from './Reducers/drawReducer'; // Import drawmenu Reducer
+import { drawReducer } from './Reducers/drawReducer'; // Import drawmenu Reducer 
 import { deviceInstallReducer,uploadDeviceInstallReducer } from './Reducers/deviceInstallReducer'; // Import drawmenu Reducer
 import { CEO_dashboardReducer,WarehouseManager_dashboardReducer,BranchManager_dashboardReducer,HR_dashboardReducer,SubdealerStaff_dashboardReducer,SalesMen_dashboardReducer,Technician_dashboardReducer, } from './Reducers/dashboardReducer'; // Import drawmenu Reducer
 import { createEstimatesReducer, createInvoiceReducer, createRecieptReducer, deleteEstimateReducer, estimateDetailReducer, estimatesReducer, invoicesReducer, recieptsReducer, updateEstimateReducer, } from './Reducers/estimateReducer'; // Import estimation Reducer
