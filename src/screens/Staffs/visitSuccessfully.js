@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -8,28 +8,28 @@ const VisitSuccessfully = () => {
   const navigation = useNavigation();
 
   return (
+    <ScrollView style={{paddingBottom:500}}>
     <View style={styles.container}>
       {/* Header Section */}
 
       <Image
-          source={{ uri: "https://storage.googleapis.com/way4track-application/Sharlon_App_usage/Sharon%20Telematics%20Logo.png" }} // Replace with actual URL
-          style={styles.logo}
-          resizeMode="contain"
-        />
+        source={{ uri: "https://storage.googleapis.com/way4track-application/Sharlon_App_usage/Sharon%20Telematics%20Logo%20(1).png" }} // Replace with actual URL
+        style={styles.logo}
+        resizeMode="contain"
+      />
       {/* Installation Processing Section */}
-      <Text style={styles.title}>Visited Successfully</Text>
-
       <Image
-        source={{ uri: "https://storage.googleapis.com/way4track-application/Sharlon_App_usage/installSuccessfully.png" }} // Replace with actual URL
+        source={{ uri: "https://storage.googleapis.com/way4track-application/Sharlon_App_usage/way4track.jpg" }} // Replace with actual URL
         style={styles.mainImage}
         resizeMode="contain"
       />
 
       {/* Refresh Button */}
-      <Button mode="contained" onPress={() =>navigation.navigate("BottomHome")} style={styles.refreshButton} >
+      <Button mode="contained" onPress={() =>navigation.navigate("SalesBottomStack")} style={styles.refreshButton} >
         Refresh Now
       </Button>
     </View>
+    </ScrollView>
   );
 };
 

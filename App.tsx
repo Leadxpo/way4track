@@ -260,6 +260,7 @@ const StackNavigator = () => {
       <Stack.Screen name="ProductTech" component={ProductTech} options={{ headerShown: true }} />
       <Stack.Screen name="InstallationProcessing" component={InstallationProcessing} options={{ headerShown: true }} />
       <Stack.Screen name="InstallSuccessfully" component={InstallSuccessfully} options={{ headerShown: true }} />
+      <Stack.Screen name="VisitSuccessfully" component={VisitSuccessfully} options={{ headerShown: true }} />
       <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
       <Stack.Screen name="ProfileSubStaff" component={ProfileSubStaff} options={{ headerShown: false }} />
       <Stack.Screen name="UpcommingWorks" component={UpcommingWorks} options={{ headerShown: true }} />
@@ -305,6 +306,7 @@ const SalesStackNavigator = () => {
       <Stack.Screen name="WorkPayment" component={WorkPayment} options={{ headerShown: false }} />
       <Stack.Screen name="Visit_ClientInfo" component={Visit_ClientInfo} options={{ headerShown: false }} />
       <Stack.Screen name="Visit_ProductInfo" component={Visit_ProductInfo} options={{ headerShown: true }} />
+      <Stack.Screen name="VisitSuccessfully" component={VisitSuccessfully} options={{ headerShown: true }} />
       <Stack.Screen name="SalesVisitOverview" component={SalesVisitOverview} options={{ headerShown: true }} />
       <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
       <Stack.Screen name="About" component={About} options={{ headerShown: true }} />

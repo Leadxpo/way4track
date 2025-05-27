@@ -106,7 +106,7 @@ const HomeSalesMan = ({ navigation }) => {
     };
 
     fetchData();
-  }, [dispatch]);
+  }, [dispatch,isRefresh]);
 
   useEffect(() => {
     if (SalesMen_homeInfo) {

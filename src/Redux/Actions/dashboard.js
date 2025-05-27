@@ -299,6 +299,7 @@ export const intiateSalesVisit_dashboard = (create_SalesVisit_dashboardPayload) 
             completedLeads: completedLeads.length,
             totalPendingAndSuccessTickets: totalPendingAndSuccessTickets.data.data,
         }
+        console.log("rrr :",dashboardSalesVisitData)
         dispatch({ type: CREATE_SALES_MEN_DASHBOARD_SUCCESS, payload: dashboardSalesVisitData });
     } catch (error) {
         console.log("error : ", error.message)

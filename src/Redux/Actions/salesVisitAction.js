@@ -11,22 +11,23 @@ import {
 import * as actionType from "../Constants/salesVisitConstant";
 import api from "../../Api/api";
 
-export const uploadSalesVisit = (create_salesPayload) => async (dispatch) => {
-
+export const uploadSalesVisit = (create_salesPayload,staffId) => async (dispatch) => {
+  console.log("fff",staffId)
   const createSalesVisitData = new FormData();
-  if (create_salesPayload.visitingCard_pick) {
-    createSalesVisitData.append("photo1", vehiclePhoto_one)
+  if (create_salesPayload.clientUpload_pick) {
+    createSalesVisitData.append("clientPhoto", create_salesPayload.clientUpload_pick)
   }
-  if (create_salesPayload.client_pick) {
-    createSalesVisitData.append("photo2", vehiclePhoto_two)
+  if (create_salesPayload.visitingCardUpload_pick) {
+    createSalesVisitData.append("visitingCard", create_salesPayload.visitingCardUpload_pick)
   }
+  createSalesVisitData.append("staffId", staffId);
   createSalesVisitData.append("date", create_salesPayload.date);
-  createSalesVisitData.append("EstimateDate", create_salesPayload.EstimateDate);
-  createSalesVisitData.append("products", create_salesPayload.products);
-  createSalesVisitData.append("services", create_salesPayload.services);
+  createSalesVisitData.append("estimateDate", create_salesPayload.estimatedDate);
+  createSalesVisitData.append("requirementDetails", create_salesPayload.products);
+  createSalesVisitData.append("service", create_salesPayload.services);
   createSalesVisitData.append("companyCode", "WAY4TRACK");
   createSalesVisitData.append("unitCode", "WAY4");
-  createSalesVisitData.append("clientName", create_salesPayload.clientName);
+  createSalesVisitData.append("name", create_salesPayload.name);
   createSalesVisitData.append("phoneNumber", create_salesPayload.phoneNumber);
   createSalesVisitData.append("address", create_salesPayload.address);
 
@@ -36,11 +37,12 @@ export const uploadSalesVisit = (create_salesPayload) => async (dispatch) => {
 
   try {
     // Attempt to fetch branches
-    const { data } = await api.post(`/visits/handleVisitDetails`, createSalesVisitData, {
+    const { data } = await api.post(`/sales-works/handleSales`, createSalesVisitData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
+    console.log("response data :",data)
     dispatch({ type: UPLOAD_SALES_VISIT_SUCCESS, payload: data.data });
   } catch (error) {
     console.log("error : ", error)

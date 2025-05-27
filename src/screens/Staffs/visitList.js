@@ -3,13 +3,12 @@ import { View, FlatList, Text, TextInput, StyleSheet, TouchableOpacity, Modal } 
 import { Card, Provider, Button } from "react-native-paper";
 import Header from '../../components/userHeader';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTechnicianWorks } from "../../Redux/Actions/TechnicianWork";
 import { loadData } from "../../Utils/appData";
 import { useFocusEffect } from '@react-navigation/native';
 
 const VisitList = ({ navigation }) => {
   const dispatch = useDispatch();
-  const { technicianWorks, loading } = useSelector(state => state.techWorksReducer);
+  const { SalesMen_homeInfo } = useSelector(state => state.SalesMen_homeInfoReducer);
 
   const [permissions, setPermissions] = useState([]);
   const [staffId, setStaffId] = useState("");
@@ -17,6 +16,7 @@ const VisitList = ({ navigation }) => {
   const [modalInstallDetailsVisible, setModalInstallDetailsVisible] = useState(false);
   const [modalSalesDetailsVisible, setModalSalesDetailsVisible] = useState(false);
   const [selectedWork, setSelectedWork] = useState(null);
+  const [leadsData,setLeadsData]=useState([]);
 
 
   /** Fetch Technician Works Whenever Staff ID is Available */
@@ -31,24 +31,20 @@ const VisitList = ({ navigation }) => {
       };
 
       loadStaffData();
-
-      if (staffId) {
-        const payload = { companyCode: "WAY4TRACK", unitCode: "WAY4", staffId };
-        dispatch(fetchTechnicianWorks(payload));
-      }
-
+      setLeadsData(SalesMen_homeInfo?.totalLeadsData);
+console.log("rrr : ",SalesMen_homeInfo.totalLeadsData)
     }, [staffId, dispatch])
   );
 
   /** Filtered Data for Search */
-  const filteredData = technicianWorks.filter(item => {
+  const filteredData = leadsData?.filter(item => {
     if (!searchQuery) return true;
 
-    const clientName = item.clientName ? item.clientName.toLowerCase() : "";
-    const workAllocationNumber = item.workAllocationNumber ? item.workAllocationNumber.toLowerCase() : "";
-    const workStatus = item.workStatus ? item.workStatus.toLowerCase() : "";
+    const clientName = item.name ? item.name.toLowerCase() : "";
+    const clientPhoneNumber = item.phoneNumber ? item.phoneNumber.toLowerCase() : "";
+    const leadStatus = item.leadStatus ? item.leadStatus.toLowerCase() : "";
 
-    return clientName.includes(searchQuery.toLowerCase()) || workAllocationNumber.includes(searchQuery.toLowerCase()) || workStatus.includes(searchQuery.toLowerCase());
+    return clientName.includes(searchQuery.toLowerCase()) || clientPhoneNumber.includes(searchQuery.toLowerCase()) || leadStatus.includes(searchQuery.toLowerCase());
   });
 
   /** Work Status Color Mapping */
@@ -69,7 +65,7 @@ const VisitList = ({ navigation }) => {
   /** Render Technician Work Item */
   const renderItem = ({ item, index }) => {
     return(
-    <Card style={[styles.card, { backgroundColor: getStatusColor(item.workStatus) }]} key={index}>
+    <Card style={[styles.card, { backgroundColor: getStatusColor(item.leadStatus) }]} key={index}>
       <TouchableOpacity activeOpacity={0.8} onPress={() => {
         setSelectedWork(item);
           setModalInstallDetailsVisible(true)
@@ -77,12 +73,12 @@ const VisitList = ({ navigation }) => {
       }}>
         <View style={styles.cardContent}>
           <Text style={styles.sectionTitle}>Client Details</Text>
-          <Text style={styles.clientInfo}>Client Name: {item.clientName || "N/A"}</Text>
+          <Text style={styles.clientInfo}>Client Name: {item.name || "N/A"}</Text>
           <Text style={styles.clientInfo}>Phone: {item.phoneNumber || "N/A"}</Text>
-          <Text style={styles.clientInfo}>DOA: {(item.date ? String(item.date).split("T")[0] : "N/A")
+          <Text style={styles.clientInfo}>Vist Date: {(item.date ? String(item.date).split("T")[0] : "N/A")
           }</Text>
           <Text style={{ color: "#ffffff", fontWeight: "700", backgroundColor: "#ffa9a8", borderRadius: 8, padding: 5, width: "40%", marginVertical: 10, justifyContent: 'center' }}>
-            Status: {item.workStatus || "N/A"}
+            Status: {item.leadStatus || "N/A"}
           </Text>
         </View>
       </TouchableOpacity>
@@ -123,22 +119,24 @@ const VisitList = ({ navigation }) => {
               <TouchableOpacity style={styles.closeButton} onPress={() => setModalInstallDetailsVisible(false)}>
                 <Text style={styles.closeButtonText}>X</Text>
               </TouchableOpacity>
-              <Text style={styles.modalTitle}>Work Allocation Details</Text>
+              <Text style={styles.modalTitle}>Lead Details</Text>
 
               {selectedWork && (
                 <Card style={styles.modalCard}>
                   <Text style={styles.sectionTitle}>Client Details</Text>
-                  <Text style={styles.clientInfo}>Client Name: {selectedWork.clientName || "N/A"}</Text>
+                  <Text style={styles.clientInfo}>Client Name: {selectedWork.name || "N/A"}</Text>
                   <Text style={styles.clientInfo}>Phone: {selectedWork.phoneNumber || "N/A"}</Text>
 
                   <Text style={styles.sectionTitle}>Staff Details</Text>
                   <Text style={styles.clientInfo}>Staff Name : {selectedWork.staffName || "N/A"}</Text>
+                  <Text style={styles.clientInfo}>Staff Phone No. : {selectedWork.staffPhoneNumber || "N/A"}</Text>
+                  <Text style={styles.clientInfo}>Staff Branch Name : {selectedWork.branchName || "N/A"}</Text>
 
-                  <Text style={styles.sectionTitle}>Work Allocation Details</Text>
-                  <Text style={styles.clientInfo}>Work ID : {selectedWork.workAllocationNumber || "N/A"}</Text>
-                  <Text style={styles.clientInfo}>Work Status : {selectedWork.workStatus || "N/A"}</Text>
-                  <Text style={styles.clientInfo}>productName : {selectedWork.productName || "N/A"}</Text>
-                  <Text style={styles.clientInfo}>Slot Date : {(selectedWork.date ? String(selectedWork.date).split("T")[0] : "N/A")}</Text>
+                  <Text style={styles.sectionTitle}>Visit Details</Text>
+                  <Text style={styles.clientInfo}>Lead ID : {selectedWork.id || "N/A"}</Text>
+                  <Text style={styles.clientInfo}>Work Status : {selectedWork.leadStatus || "N/A"}</Text>
+                  <Text style={styles.clientInfo}>Requirements : {selectedWork.requirementDetails || "N/A"}</Text>
+                  <Text style={styles.clientInfo}>Estimate Date : {(selectedWork.estimateDate ? String(selectedWork.estimateDate).split("T")[0] : "N/A")}</Text>
                 </Card>
               )}
             </View>

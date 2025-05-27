@@ -19,7 +19,7 @@ const InstallSuccessfully = () => {
   return (
     <View style={styles.container}>
       {/* Header Section */}
-      <Text style={styles.title}>Installed Successfully</Text>
+      <Text style={styles.title}>Installed Successfully</Text> 
 
       <Image
         source={{ uri: "https://storage.googleapis.com/way4track-application/Sharlon_App_usage/Sharon%20Telematics%20Logo%20(1).png" }} // Replace with actual URL
