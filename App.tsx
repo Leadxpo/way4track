@@ -120,6 +120,8 @@ import VisitList from './src/screens/Staffs/visitList';
 import VisitSuccessfully from './src/screens/Staffs/visitSuccessfully';
 import SalesVisitOverview from './src/screens/Staffs/salesVisitOverview';
 import PaymentScanner from './src/screens/Staffs/paymentScanner';
+import leadsPayment from './src/screens/Staffs/leadsPayment';
+import leadsWork from './src/screens/Staffs/leadsWork';
 import TechnicianWorks from './src/screens/Staffs/technicianWorks';
 import TrackingStaff from './src/screens/Staffs/trackingDetails';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -281,6 +283,8 @@ const StackNavigator = () => {
       <Stack.Screen name="RequestRaise" component={RequestRaise} options={{ headerShown: false }} />
       <Stack.Screen name="AddRequestRaise" component={AddRequestRaise} options={{ headerShown: true }} />
       <Stack.Screen name="EditRequestRaise" component={EditRequestRaise} options={{ headerShown: true }} />
+      <Stack.Screen name="leadsPayment" component={leadsPayment} options={{ headerShown: true }} />
+      <Stack.Screen name="leadsWork" component={leadsWork} options={{ headerShown: true }} />
       <Stack.Screen name="TechnicianWork" component={TechnicianWorks} options={{ headerShown: true }} />
       <Stack.Screen name="TrackingStaff" component={TrackingStaff} options={{ headerShown: true }} />
       <Stack.Screen name="PaymentScanner" component={PaymentScanner} options={{ headerShown: true }} />
@@ -312,17 +316,17 @@ const SalesStackNavigator = () => {
       <Stack.Screen name="About" component={About} options={{ headerShown: true }} />
       <Stack.Screen name="Notification" component={Notification} options={{ headerShown: false }} />
       <Stack.Screen name="WorkAllocation" component={WorkAllocation} options={{ headerShown: false }} />
-      <Stack.Screen name="TechWorks" component={TechWorks} options={{ headerShown: false }} />
+      <Stack.Screen name="VisitList" component={VisitList} options={{ headerShown: false }} />
       <Stack.Screen name="Tickets" component={Tickets} options={{ headerShown: false }} />
       <Stack.Screen name="AddTickets" component={AddTickets} options={{ headerShown: false }} />
       <Stack.Screen name="Payments" component={Payments} options={{ headerShown: false }} />
-      <Stack.Screen name="Work" component={TechnicianWorks} options={{ headerShown: false }} />
       <Stack.Screen name="Report" component={Report} options={{ headerShown: false }} />
       <Stack.Screen name="RequestRaiseDetails" component={RequestRaiseDetails} options={{ headerShown: true }} />
       <Stack.Screen name="RequestRaise" component={RequestRaise} options={{ headerShown: false }} />
       <Stack.Screen name="AddRequestRaise" component={AddRequestRaise} options={{ headerShown: true }} />
       <Stack.Screen name="EditRequestRaise" component={EditRequestRaise} options={{ headerShown: true }} />
-      <Stack.Screen name="TechnicianWork" component={TechnicianWorks} options={{ headerShown: true }} />
+      <Stack.Screen name="leadsPayment" component={leadsPayment} options={{ headerShown: false }} />
+      <Stack.Screen name="leadsWork" component={leadsWork} options={{ headerShown: false }} />
       <Stack.Screen name="TrackingStaff" component={TrackingStaff} options={{ headerShown: true }} />
     </Stack.Navigator>
   );
@@ -348,7 +352,6 @@ const TechnicianBottomNavigator = () => {
     >
       <BottomTab.Screen
         name='StackHome'
-
         component={TechnicianStackNavigator}
         options={{
           headerShown: false, title: "Home", tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",

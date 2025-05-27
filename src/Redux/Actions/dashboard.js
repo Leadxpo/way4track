@@ -270,15 +270,18 @@ export const intiateTechnician_dashboard = (create_Technician_dashboardPayload) 
     }
 };
 export const intiateSalesVisit_dashboard = (create_SalesVisit_dashboardPayload) => async (dispatch) => {
-    console.log("rrr : ",create_SalesVisit_dashboardPayload)
+
     dispatch({ type: CREATE_SALES_MEN_DASHBOARD_REQUEST });
     try {
         const { data } = await api.post(
-            `/sales-works/getAll`,
+            `/sales-works/getSalesSearchDetails`,
             create_SalesVisit_dashboardPayload,
             { headers: { 'Content-Type': 'application/json' } }
         );
-        const totalLeads = data?.data || [];
+        const rrr=data?.data.filter((item)=>{
+           return (String(item.staffId)===String(create_SalesVisit_dashboardPayload.StaffId))
+        })
+        const totalLeads = rrr || [];
         const pendingLeads = totalLeads?.filter(item => item.leadStatus === "pending");
         const allocatedLeads = totalLeads?.filter(item => item.leadStatus === "allocated");
         const pendingPaymentLeads = totalLeads?.filter(item => item.leadStatus === "paymentPending");
@@ -299,7 +302,6 @@ export const intiateSalesVisit_dashboard = (create_SalesVisit_dashboardPayload) 
             completedLeads: completedLeads.length,
             totalPendingAndSuccessTickets: totalPendingAndSuccessTickets.data.data,
         }
-        console.log("rrr :",dashboardSalesVisitData)
         dispatch({ type: CREATE_SALES_MEN_DASHBOARD_SUCCESS, payload: dashboardSalesVisitData });
     } catch (error) {
         console.log("error : ", error.message)

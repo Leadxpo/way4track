@@ -166,7 +166,7 @@ const HomeSalesMan = ({ navigation }) => {
         </View>
 
 
-        <TouchableOpacity style={[styles.cardBeige, { height: 120, flexDirection: 'row', justifyContent: 'space-between', flex: 1, marginVertical: 10 }]} onPress={() => navigation.navigate("TechnicianWorks")}>
+        <TouchableOpacity style={[styles.cardBeige, { height: 120, flexDirection: 'row', justifyContent: 'space-between', flex: 1, marginVertical: 10 }]} onPress={() => navigation.navigate("leadsWork")}>
           <View style={{ flex: 1 }}>
             <Text style={styles.cardTitle}>Visits</Text>
             <Text style={styles.dataText}>{totalLeads?.pendingLeads ?? 0}/{totalLeads?.totalLeadsData?.length ?? 0}</Text>
@@ -177,7 +177,7 @@ const HomeSalesMan = ({ navigation }) => {
           </View>
         </TouchableOpacity>
 
-        <View style={[styles.cardGreen, { height: 120, flexDirection: 'row', justifyContent: 'space-between', flex: 1, marginVertical: 10 }]}>
+        <TouchableOpacity style={[styles.cardGreen, { height: 120, flexDirection: 'row', justifyContent: 'space-between', flex: 1, marginVertical: 10 }]} onPress={() => navigation.navigate("leadsPayment")}>
           <View style={{ flex: 1 }}>
 
             <Text style={styles.cardTitle}>Payments</Text>
@@ -188,7 +188,7 @@ const HomeSalesMan = ({ navigation }) => {
             <Text style={{ marginBottom: 20 }}>⚪ {totalLeads?.pendingPaymentLeads ?? 0} Leads Payment Pending</Text>
             <Text style={{ marginBottom: 10 }}>🔵 {totalLeads?.completedLeads ?? 0} Leads Payment Done</Text>
           </View>
-        </View>
+        </TouchableOpacity>
         <View style={[styles.cardBeige, { flexDirection: 'row', justifyContent: 'space-between', flex: 1, marginVertical: 10 }]}>
           <View style={{ flex: 1 }}>
 
