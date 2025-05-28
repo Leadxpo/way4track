@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { View, TextInput, FlatList, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TextInput, FlatList, TouchableOpacity, StyleSheet, Modal } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { useFocusEffect } from "@react-navigation/native";
 import { Card, Portal, Provider, SegmentedButtons, Text } from "react-native-paper";
@@ -14,7 +14,8 @@ const LeadWorks = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [leadWork, setLeadWork] = useState([]);
   const [activeSegment, setActiveSegment] = useState("pending");
-
+  const [modalInstallDetailsVisible, setModalInstallDetailsVisible] = useState(false);
+  const [selectedWork, setSelectedWork] = useState(null);
   const { SalesMen_homeInfo } = useSelector(state => state.SalesMen_homeInfoReducer);
 
   useFocusEffect(
@@ -23,7 +24,7 @@ const LeadWorks = ({ navigation }) => {
         const technicianId = await loadData("staffID");
         setStaffId(technicianId || "");
         setLeadWork(SalesMen_homeInfo?.totalLeadsData)
-        console.log("rrr :",SalesMen_homeInfo.totalLeadsData)
+        console.log("rrr :", SalesMen_homeInfo.totalLeadsData)
 
       };
       loadStaffData();
@@ -69,9 +70,11 @@ const LeadWorks = ({ navigation }) => {
           <Text variant="labelLarge" style={styles.entryText}>Estimate Date: <Text variant="bodyMedium" style={styles.values}>{item.estimateDate?.split("T")[0] || "N/A"}</Text></Text>
 
         </View>
-        <TouchableOpacity onPress={() =>
-          navigation.navigate("LeadDetails", { leadDetails: item })
-        }>
+        <TouchableOpacity onPress={() => {
+          setSelectedWork(item);
+          setModalInstallDetailsVisible(true);
+        }}
+        >
           <MaterialCommunityIcons name="eye" size={24} color="black" />
         </TouchableOpacity>
       </View>
@@ -94,9 +97,9 @@ const LeadWorks = ({ navigation }) => {
           value={activeSegment}
           onValueChange={setActiveSegment}
           buttons={[
-            { value: 'leadPending', label: 'Pending', style: activeSegment === 'leadPending' ? styles.activeButton : styles.inactiveButton,checkedColor:"#ffffff",uncheckedColor:"#333333" },
-            { value: 'allocatedLead', label: 'Allocated', style: activeSegment === 'allocatedLead' ? styles.activeButton : styles.inactiveButton,checkedColor:"#ffffff",uncheckedColor:"#333333" },
-            { value: 'completedLead', label: 'Completed', style: activeSegment === 'completedLead' ? styles.activeButton : styles.inactiveButton,checkedColor:"#ffffff",uncheckedColor:"#333333" },
+            { value: 'leadPending', label: 'Pending', style: activeSegment === 'leadPending' ? styles.activeButton : styles.inactiveButton, checkedColor: "#ffffff", uncheckedColor: "#333333" },
+            { value: 'allocatedLead', label: 'Allocated', style: activeSegment === 'allocatedLead' ? styles.activeButton : styles.inactiveButton, checkedColor: "#ffffff", uncheckedColor: "#333333" },
+            { value: 'completedLead', label: 'Completed', style: activeSegment === 'completedLead' ? styles.activeButton : styles.inactiveButton, checkedColor: "#ffffff", uncheckedColor: "#333333" },
           ]}
           density="medium"
           style={styles.segmentContainer}
@@ -122,6 +125,37 @@ const LeadWorks = ({ navigation }) => {
             </View>
           )}
         />
+        <Modal visible={modalInstallDetailsVisible} transparent animationType="slide">
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <TouchableOpacity style={styles.closeButton} onPress={() => setModalInstallDetailsVisible(false)}>
+                <Text style={styles.closeButtonText}>X</Text>
+              </TouchableOpacity>
+              <Text style={styles.modalTitle}>Lead Details</Text>
+
+              {selectedWork && (
+                <Card style={styles.modalCard}>
+                  <Text style={styles.sectionTitle}>Client Details</Text>
+                  <Text style={styles.clientInfo}>Client Name: {selectedWork.name || "N/A"}</Text>
+                  <Text style={styles.clientInfo}>Phone: {selectedWork.phoneNumber || "N/A"}</Text>
+
+                  <Text style={styles.sectionTitle}>Staff Details</Text>
+                  <Text style={styles.clientInfo}>Staff Name : {selectedWork.staffName || "N/A"}</Text>
+                  <Text style={styles.clientInfo}>Staff Phone No. : {selectedWork.staffPhoneNumber || "N/A"}</Text>
+                  <Text style={styles.clientInfo}>Staff Branch Name : {selectedWork.branchName || "N/A"}</Text>
+
+                  <Text style={styles.sectionTitle}>Visit Details</Text>
+                  <Text style={styles.clientInfo}>Lead ID : {selectedWork.id || "N/A"}</Text>
+                  <Text style={styles.clientInfo}>Work Status : {selectedWork.leadStatus || "N/A"}</Text>
+                  <Text style={styles.clientInfo}>Requirements : {selectedWork.requirementDetails || "N/A"}</Text>
+                  <Text style={styles.clientInfo}>Services : {selectedWork.services || "N/A"}</Text>
+                  <Text style={styles.clientInfo}>Estimate Date : {(selectedWork.estimateDate ? String(selectedWork.estimateDate).split("T")[0] : "N/A")}</Text>
+                </Card>
+              )}
+            </View>
+          </View>
+        </Modal>
+
       </View>
     </Provider>
   );
@@ -155,7 +189,7 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   segmentContainer: {
-    backgroundColor: '#F0F0F0',color:'#333333',
+    backgroundColor: '#F0F0F0', color: '#333333',
     borderRadius: 10, marginVertical: 10,
     overflow: 'hidden',
   },
@@ -205,6 +239,13 @@ const styles = StyleSheet.create({
   listContainer: {
     paddingBottom: 16,
   },
+  modalOverlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.5)", justifyContent: "center" },
+  modalContent: { padding: 20, backgroundColor: "#fff", borderRadius: 10, marginHorizontal: 20 },
+  closeButton: { alignSelf: "flex-end" },
+  closeButtonText: { fontSize: 18, color: "red" },
+  modalTitle: { fontSize: 20, fontWeight: "bold", marginBottom: 20 },
+  modalCard: { padding: 15, backgroundColor: "#ffffff", borderRadius: 10 }
+
 });
 
 export default LeadWorks;

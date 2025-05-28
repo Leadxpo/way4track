@@ -189,7 +189,7 @@ const HomeSalesMan = ({ navigation }) => {
             <Text style={{ marginBottom: 10 }}>🔵 {totalLeads?.completedLeads ?? 0} Leads Payment Done</Text>
           </View>
         </TouchableOpacity>
-        <View style={[styles.cardBeige, { flexDirection: 'row', justifyContent: 'space-between', flex: 1, marginVertical: 10 }]}>
+        <TouchableOpacity style={[styles.cardBeige, { flexDirection: 'row', justifyContent: 'space-between', flex: 1, marginVertical: 10 }]} onPress={() => navigation.navigate("Tickets")}>
           <View style={{ flex: 1 }}>
 
             <Text style={styles.cardTitle}>Total Tickets</Text>
@@ -200,7 +200,7 @@ const HomeSalesMan = ({ navigation }) => {
             <Text style={[styles.legendText, { marginBottom: 30, backgroundColor: '#5ce854', borderRadius: 15, padding: 5, color: '#f3f3f3', fontWeight: 600 }]}>🟢   {totalSuccessTickets ?? 0} Done</Text>
             <Text style={[styles.legendText, { backgroundColor: '#d8e8db', borderRadius: 15, padding: 5, color: '#333333', fontWeight: 600 }]}>⚪ {totalPendingTickets ?? 0} Pending</Text>
           </View>
-        </View>
+        </TouchableOpacity>
         {/* Modal to show details */}
         <Modal visible={!!selectedDate} transparent animationType="slide" style={{ flex: 1 }}>
           <View style={styles.modalContainer}>

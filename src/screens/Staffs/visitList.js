@@ -54,10 +54,8 @@ console.log("rrr : ",SalesMen_homeInfo.totalLeadsData)
       case "allocated": return "blue";
       case "completed": return "#ffa9a8";
       case "incomplete": return "#d3d3d3";
-      case "install": return "#c1e1c1"; // light green
-      case "accept": return "#add8e6";  // light blue
-      case "activate": return "#90ee90"; // light green
-      case "processing": return "#fdfd96"; // light yellow
+      case "paymentPending": return "#c1e1c1"; // light green
+      case "partiallyPaid": return "#fdfd96"; // light yellow
       default: return "#f3f3f3";
     }
   };
@@ -110,7 +108,7 @@ console.log("rrr : ",SalesMen_homeInfo.totalLeadsData)
               </Card>
             </View>
           )}
-        />
+        /> 
 
         {/* Work Details Modal */}
         <Modal visible={modalInstallDetailsVisible} transparent animationType="slide">
@@ -136,6 +134,7 @@ console.log("rrr : ",SalesMen_homeInfo.totalLeadsData)
                   <Text style={styles.clientInfo}>Lead ID : {selectedWork.id || "N/A"}</Text>
                   <Text style={styles.clientInfo}>Work Status : {selectedWork.leadStatus || "N/A"}</Text>
                   <Text style={styles.clientInfo}>Requirements : {selectedWork.requirementDetails || "N/A"}</Text>
+                  <Text style={styles.clientInfo}>Services : {selectedWork.services || "N/A"}</Text>
                   <Text style={styles.clientInfo}>Estimate Date : {(selectedWork.estimateDate ? String(selectedWork.estimateDate).split("T")[0] : "N/A")}</Text>
                 </Card>
               )}

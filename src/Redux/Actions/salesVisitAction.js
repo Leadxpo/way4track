@@ -12,7 +12,6 @@ import * as actionType from "../Constants/salesVisitConstant";
 import api from "../../Api/api";
 
 export const uploadSalesVisit = (create_salesPayload,staffId) => async (dispatch) => {
-  console.log("fff",staffId)
   const createSalesVisitData = new FormData();
   if (create_salesPayload.clientUpload_pick) {
     createSalesVisitData.append("clientPhoto", create_salesPayload.clientUpload_pick)

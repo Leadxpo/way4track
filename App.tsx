@@ -449,7 +449,7 @@ const SubdealerStaffBottomNavigator = () => {
         component={SubStaffWorks}
         options={{
           headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
-          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",title:'Works',
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff", title: 'Works',
 
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="lead-pencil" color={color} size={size} />
@@ -484,7 +484,7 @@ const SubdealerStaffBottomNavigator = () => {
         component={ProfileSubStaff}
         options={{
           headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
-          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",title:"Profile",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff", title: "Profile",
 
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account" color={color} size={size} />
@@ -705,25 +705,32 @@ const DrawerNavigator = () => {
       {role === "sub dealer staff" &&
         <Drawer.Screen name="SubdealerStaffWorks" component={SubdealerStaffWorks} options={{ headerShown: false, title: "StaffWork" }} />
       }
-      <Drawer.Screen name="NewWork" component={DeviceInstall_ClientInfo} options={{ headerShown: false }} />
+      {(role === "Sales Executive" || role === "SalesMan") &&
+        <Drawer.Screen name="VisitList" component={VisitList} options={{ headerShown: false, title: "Leads" }} />
+      }
+      {(role === "sub dealer staff" || role === "Technician" || role === "Field Technician" || role === "Sr. Technician") &&
+
+        <Drawer.Screen name="NewWork" component={DeviceInstall_ClientInfo} options={{ headerShown: false }} />
+      }
       {role === "sub dealer staff" &&
         <Drawer.Screen name="PaymentSubStaffWorks" component={PaymentSubStaffWorks} options={{ headerShown: false, title: "Payments" }} />
       }
       {role === "sub dealer staff" &&
         <Drawer.Screen name="SubStaffWorks" component={SubStaffWorks} options={{ headerShown: false, title: "Works" }} />
       }
-      {role === "Technician" &&
+      {(role === "Technician" || role === "Field Technician" || role === "Sr. Technician") &&
         <Drawer.Screen name="TechWorks" component={TechWorks} options={{ headerShown: false, title: "Payments" }} />
       }
       <Drawer.Screen name="Tickets" component={Tickets} options={{ headerShown: false }} />
-      {role === "Technician" &&
+      {(role === "Technician" || role === "Field Technician" || role === "Sr. Technician") &&
         <Drawer.Screen name="RequestRaise" component={RequestRaise} options={{ headerShown: false }} />
       }
-            {role === "Technician" &&
-      <Drawer.Screen name="TechnicianWork" component={TechnicianWorks} options={{ headerShown: false,title:'Works'}} />
-            }
-
-      <Drawer.Screen name="ProductTech" component={ProductTech} options={{ headerShown: false }} />
+      {(role === "Technician" || role === "Field Technician" || role === "Sr. Technician") &&
+        <Drawer.Screen name="TechnicianWork" component={TechnicianWorks} options={{ headerShown: false, title: 'Works' }} />
+      }
+      {(role === "sub dealer staff" || role === "Technician" || role === "Field Technician" || role === "Sr. Technician") &&
+        <Drawer.Screen name="ProductTech" component={ProductTech} options={{ headerShown: false }} />
+      }
     </Drawer.Navigator>
   );
 };
