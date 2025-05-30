@@ -22,8 +22,8 @@ export const uploadSalesVisit = (create_salesPayload,staffId) => async (dispatch
   createSalesVisitData.append("staffId", staffId);
   createSalesVisitData.append("date", create_salesPayload.date);
   createSalesVisitData.append("estimateDate", create_salesPayload.estimatedDate);
-  createSalesVisitData.append("requirementDetails", create_salesPayload.products);
-  createSalesVisitData.append("service", create_salesPayload.services);
+  createSalesVisitData.append("requirementDetails", JSON.stringify(create_salesPayload.products));
+  createSalesVisitData.append("service", JSON.stringify(create_salesPayload.services));
   createSalesVisitData.append("companyCode", "WAY4TRACK");
   createSalesVisitData.append("unitCode", "WAY4");
   createSalesVisitData.append("name", create_salesPayload.name);

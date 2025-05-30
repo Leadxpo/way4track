@@ -51,11 +51,10 @@ const SalesVisitOverview = ({ navigation, route }) => {
             </View>
             {salesVisitData?.products.length > 0 ? (
                 salesVisitData?.products.map((product, index) => {
-                    console.log("product : ", product);
                     return (
                         <View key={index} style={[styles.item, { flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 5, }]}>
-                            <Text style={[styles.value, { flex: 1 }]}>
-                                {product.name ? product.name : product.productId}
+                            <Text style={[styles.value, { flex: 1,fontWeight:'bold' }]}>
+                                {product.productName ? product.productName : "no product name"}
                             </Text>
                             <Text style={[styles.value, { flex: 1 }]}>
                                 {product.quantity}
@@ -75,14 +74,14 @@ const SalesVisitOverview = ({ navigation, route }) => {
                     <View key={index} style={styles.item}>
 
                         <Text style={[styles.value, { fontWeight: 700, fontSize: 16, color: '#333333' }]}>
-                            {service.serviceName}
+                            {service.services}
                         </Text>
                         <Text style={{ fontSize: 13, paddingVertical: '5', color: '#333333' }}>
                             Description
                         </Text>
                         <Card style={{ backgroundColor: '#f3f3ff', padding: 8, marginBottom: 5 }}>
                             <Text style={styles.value}>
-                                {service.serviceDescription}
+                                {service.description}
                             </Text>
                         </Card>
                     </View>
@@ -116,7 +115,7 @@ const styles = StyleSheet.create({
     sectionTitle: { fontSize: 18, fontWeight: "bold", marginTop: 15, marginBottom: 5 },
     label: { fontWeight: "bold", },
     value: { fontSize: 16, color: "#555", marginBottom: 5 },
-    item: { paddingVertical: 5, borderBottomWidth: 1, borderBottomColor: "#eee", marginBottom: 5 },
+    item: { paddingVertical: 5, borderBottomWidth: 1, borderBottomColor: "#eee",color:"#333333", marginBottom: 5 },
     emptyText: { fontSize: 14, color: "gray", fontStyle: "italic", textAlign: "center", marginTop: 5 },
     nextButton: { backgroundColor: "green", padding: 15, alignItems: "center", borderRadius: 5, marginTop: 20 },
     nextButtonText: { color: "white", fontSize: 18, fontWeight: "bold" },

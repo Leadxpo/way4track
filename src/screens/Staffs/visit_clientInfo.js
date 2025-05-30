@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, Button, Alert } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, Button, Alert,PermissionsAndroid } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Provider, Modal } from "react-native-paper";
 import { fetchProducts } from "../../Redux/Actions/productAction";
@@ -28,6 +28,33 @@ const Visit_ClientInfo = ({ navigation }) => {
   useEffect(() => {
     dispatch(fetchProducts({ companyCode: "WAY4TRACK", unitCode: "WAY4" }));
   }, [dispatch]);
+
+  async function requestCameraPermission() {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.CAMERA,
+        {
+          title: 'Camera Permission',
+          message: 'This app needs access to your camera',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log('Camera permission granted');
+      } else {
+        console.log('Camera permission denied');
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  }
+
+  useEffect(() => {
+    requestCameraPermission();
+  })
 
 
   const handleVisitingCardPick = async () => {
