@@ -8,6 +8,7 @@ import Header from '../../components/userHeader';
 import { staffDataHook } from '../../Utils/permissions';
 import { intiateSalesVisit_dashboard } from '../../Redux/Actions/dashboard';
 import api from '../../Api/api';
+import { loadData } from '../../Utils/appData';
 
 
 const HomeSalesMan = ({ navigation }) => {
@@ -88,14 +89,12 @@ const HomeSalesMan = ({ navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const technicianDetails = await staffDataHook();
-
-        setTechnicianData(technicianDetails);
+        const StaffID = await loadData("ID");
 
         const SalesVisit_dashboardPayload = {
           companyCode: 'WAY4TRACK',
           unitCode: 'WAY4',
-          StaffId: technicianDetails?.staffID,
+          StaffId: StaffID,
           date: getTodayDate()
         };
 

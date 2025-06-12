@@ -4,6 +4,7 @@ import {
   FlatList, Button, Alert,
   Dimensions
 } from "react-native";
+import DatePicker from 'react-native-date-picker';
 import { useDispatch } from 'react-redux';
 import { useIsFocused } from '@react-navigation/native';
 import { Card, Provider, Modal, Text, Avatar } from "react-native-paper";
@@ -29,8 +30,10 @@ const DeviceInstall_ClientInfo = ({ navigation }) => {
   const [userID, setUserID] = useState("");
   const [subdealerStaffId, setSubdealerStaffId] = useState("");
   const [address, setAddress] = useState("");
-  const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
-
+  const [date, setDate] = useState(new Date());
+  const [open, setOpen] = useState(false);
+  const formattedDate = date.toISOString().split('T')[0]; // "YYYY-MM-DD"
+ 
   const [productTypes, setProductTypes] = useState([]);
   const [serviceTypes, setServiceTypes] = useState([]);
 
@@ -188,8 +191,18 @@ const DeviceInstall_ClientInfo = ({ navigation }) => {
         <FormField label="Name" value={name} onChangeText={setName} placeholder="Enter Name" />
         <FormField label="Email" value={email} onChangeText={setEmail} placeholder="Enter Email" />
         <FormField label="Mobile Number" value={phoneNumber} onChangeText={setPhoneNumber} placeholder="Enter Phone Number" keyboardType="phone-pad" />
-        <FormField label="Date" value={date} onChangeText={setDate} placeholder="Enter Date (YYYY-MM-DD)" />
-
+        <FormField label="Date" value={formattedDate} onPress={() => setOpen(true)} placeholder="Enter Date (YYYY-MM-DD)" />
+        <DatePicker
+        modal
+        mode="date"
+        open={open}
+        date={date}
+        onConfirm={(selectedDate) => {
+          setOpen(false);
+          setDate(selectedDate);
+        }}
+        onCancel={() => setOpen(false)}
+      />
         {/* Product Picker */}
         <Text style={styles.label}>Product</Text>
         <TouchableOpacity style={styles.dropdownBtn} onPress={() => setShowProductModal(true)}>

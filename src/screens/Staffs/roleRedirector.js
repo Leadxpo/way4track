@@ -30,7 +30,12 @@ const RoleRedirector = () => {
       const fetchedRole = await loadData("role");
       console.log("rolesss:", fetchedRole)
       setTimeout(() => {
-        if (fetchedRole === "Technician" || fetchedRole === "Technician" || fetchedRole === "Field Technician" || fetchedRole === "Sr. Technician") {
+        if (fetchedRole === "CEO") {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "CEOBottomStack" }],
+          });
+         }else if (fetchedRole === "Technician" || fetchedRole === "Technician" || fetchedRole === "Field Technician" || fetchedRole === "Sr. Technician") {
           navigation.reset({
             index: 0,
             routes: [{ name: "TechBottomStack" }],

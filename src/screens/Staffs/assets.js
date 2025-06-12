@@ -67,7 +67,6 @@ const Asset = ({ navigation }) => {
     setAssetType(prev => prev.map(cat => ({
       ...cat,
       count: cat.key === 'All' ? totalCount : cat.key === 'office asset' ? officeCount : transportCount,
-      label: cat.key === 'All' && branch !== 0 ? branchId : cat.label,
     })));
 
     setFilteredAssets(filtered);
@@ -82,7 +81,8 @@ const Asset = ({ navigation }) => {
       
       {/* Asset Categories */}
       <View style={styles.categoryContainer}>
-        {assetType.map(category => (
+        {assetType.map(category => {
+          return(
           <TouchableOpacity
             key={category.key}
             onPress={() => setSelectedCategory(category.key)}
@@ -91,7 +91,7 @@ const Asset = ({ navigation }) => {
 
             <Text style={styles.categoryLabel}>{category.label}</Text>
           </TouchableOpacity>
-        ))}
+        )})}
       </View>
       
       {/* Asset List */}
@@ -127,10 +127,10 @@ const Asset = ({ navigation }) => {
       )}
       
       {/* Add Assets Button */}
-      <FAB icon="plus" label="Add Assets" visible={hasAddAssertPermission} style={styles.fab} onPress={() => {
+      {/* <FAB icon="plus" label="Add Assets" visible={hasAddAssertPermission} style={styles.fab} onPress={() => {
         dispatch(drawLabel("Asserts"));
         navigation.navigate('AddAsset');
-      }} />
+      }} /> */}
     </View>
   );
 };

@@ -7,6 +7,7 @@ import { branchById, createBranch, fetchBranches } from "../../Redux/Actions/bra
 
 const BranchDetails = ({ navigation, route }) => {
   const { branchDetails } = route.params;  // Sample address data
+
   const dispatch = useDispatch();
   const [selectedTab, setSelectedTab] = useState("Assets"); // For SegmentedButtons Tabs
   const [assetsFilter, setAssetsFilter] = useState("All");
@@ -37,7 +38,6 @@ const BranchDetails = ({ navigation, route }) => {
   useEffect(() => {
     const branchDetailPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4",id:branchDetails.id}
     dispatch(branchById( branchDetailPayload))
-    dispatch(branchById( branchDetailPayload))
   }, [dispatch])
 
   // Dummy Data
@@ -67,20 +67,23 @@ const BranchDetails = ({ navigation, route }) => {
     if (branchDetails) {
       setBranchPayload((prevState) => ({
         ...prevState, // Preserve current state
-        branchName: branchDetails.branchName,
-        branchNumber: branchDetails.branchNumber,
-        branchAddress: branchDetails.branchAddress,
-        addressLine1: branchDetails.addressLine1,
-        addressLine2: branchDetails.addressLine2,
-        city: branchDetails.city,
-        state: branchDetails.state,
-        pincode: branchDetails.pincode,
-        branchOpening: branchDetails.branchOpening,
-        email: branchDetails.email,
-        branchPhotos: branchDetails.branchPhotoss
+        branchName: branch?.branchName,
+        branchNumber: branch?.branchNumber,
+        branchAddress: branch?.branchAddress,
+        addressLine1: branch?.addressLine1,
+        addressLine2: branch?.addressLine2,
+        city: branch?.city,
+        state: branch?.state,
+        pincode: branch?.pincode,
+        branchOpening: branch?.branchOpening,
+        email: branch?.email,
+        branchPhotos: branch?.branchPhotos
       }));
+      setAssets(branch?.asserts)
+      setStaff(branch?.staff)
+      setProducts(branch?.product)
     }
-  }, [branchDetails]);
+  }, [branchDetails,dispatch]);
 
 
   // Animation Handler
@@ -163,11 +166,12 @@ const BranchDetails = ({ navigation, route }) => {
               renderItem={({ item }) => (
                 <Card style={styles.card}>
                   <View style={styles.row}>
-                    <Image source={{ uri: item.image }} style={styles.image} />
+                   
+                    <Image source={ item.staffPhoto ?{uri: item.staffPhoto } : require('../../utilities/images/way4tracklogo.png')} style={styles.image} />
                     <View>
                       <Text>{item.name}</Text>
-                      <Text>{item.role}</Text>
-                      <Text>{item.location}</Text>
+                      <Text>{item.designation}</Text>
+                      <Text>{item.department}</Text>
                     </View>
                   </View>
                 </Card>
@@ -202,7 +206,6 @@ const BranchDetails = ({ navigation, route }) => {
               renderItem={({ item }) => (
                 <Card style={styles.card}>
                   <View style={styles.row}>
-                    <Image source={{ uri: item.image }} style={styles.image} />
                     <View>
                       <Text>{item.name}</Text>
                       <Text>Total Count: {item.tot_count}</Text>
@@ -226,7 +229,7 @@ const BranchDetails = ({ navigation, route }) => {
         <Avatar.Image
           size={80}
           source={
-            branchPayload.branchOpening ? { uri: branchPayload.branchOpening } : require('../../utilities/images/way4tracklogo.png')
+            branchPayload.branchOpening ? { uri: branchPayload.branchPhotos } : require('../../utilities/images/way4tracklogo.png')
           }
           style={styles.avatar}
         />
@@ -235,7 +238,7 @@ const BranchDetails = ({ navigation, route }) => {
           <Text> Branch Name : {branchPayload.branchName} </Text>
           <Text> Branch PhoneNumber : {branchPayload.branchNumber} </Text>
           <Text> Branch Email : {branchPayload.email} </Text>
-          <Text> Branch Manager Name : {branchPayload.managerName} </Text>
+          <Text> Branch Address : {branchPayload.branchAddress} </Text>
         </View>
 
       </Surface>

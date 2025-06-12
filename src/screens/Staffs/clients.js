@@ -1,12 +1,5 @@
-import React, { useState,useEffect} from "react";
-import {
-  View,
-  FlatList,
-  Text,
-  TextInput, Alert,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, FlatList, Text, Modal, ScrollView, TextInput, Alert, StyleSheet, TouchableOpacity } from "react-native";
 import { Avatar, Card, Button, Menu, Provider, FAB } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,59 +7,80 @@ import { drawLabel } from "../../Redux/Actions/drawAction";
 import { fetchClients } from "../../Redux/Actions/clientAction";
 import Header from '../../components/userHeader';
 import { permissions } from "../../Utils/permissions";
+import { loadData } from "../../Utils/appData";
 
 const Clients = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [menuVisible, setMenuVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [branchName, setBranchName] = useState(null);
   const dispatch = useDispatch();
   const { loading, selectedLabel, error } = useSelector(state => state.selectedDrawLabel);
-  const { loading:clientsLoading, clients, error:clienteError } = useSelector(state => state.clients);
-  
+  const { loading: clientsLoading, clients, error: clienteError } = useSelector(state => state.clients);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedClient, setSelectedClient] = useState(null);
   const [permissions, setPermissions] = useState([]);
+
   useEffect(() => {
     const loadStaffloginData = async () => {
-        const rrr = await loadData("staffPermissions")
-        setPermissions(prev => prev = rrr ||permissions);
-        console.log(permissions)
+      const rrr = await loadData("staffPermissions")
+      setPermissions(prev => prev = rrr || permissions);
+      console.log(permissions)
     };
     loadStaffloginData();
-}, []);
+  }, []);
 
   const hasAddClientPermission = permissions.some(p => p.name === "client" && p.add);
   const hasEditClientPermission = permissions.some(p => p.name === "client" && p.edit);
   const hasDeleteClientPermission = permissions.some(p => p.name === "client" && p.delete);
 
 
-  const filteredData = clients.filter((item) =>
-    item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.phoneNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.branchId.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredData = clients?.filter((item) =>
+    item.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.phoneNumber?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.branchId?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   useEffect(() => {
-    const clientPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
-    dispatch(fetchClients(clientPayload));
-  }, [dispatch])
+    const rrr = async () => {
+
+      const aaa = await loadData("branchName")
+      setBranchName(prev => prev = aaa)
+      const clientPayload = {
+        companyCode: "WAY4TRACK",
+        unitCode: "WAY4",
+        branchName: aaa,
+      };
+      dispatch(fetchClients(clientPayload));
+    }
+    rrr();
+  }, [dispatch]);
 
   const renderItem = ({ item }) => {
-    console.log("client item : ",item)
-    return(
-    <Card style={styles.card}>
-      <View style={{backgroundColor:"#27AE60",borderTopEndRadius:6,borderTopStartRadius:6,padding:5,justifyContent:'center'}}>
-        <Text style={[styles.clientName,{textAlign:'center',color:'#f3f3f3'}]}>{item.clientId}</Text>
-      </View>
-      <View style={styles.cardContent}>
-        <Avatar.Image size={50} source={{ uri: item.clientPhoto }} />
-        <View style={styles.details}>
-          <Text style={[styles.clientName,{textTransform:"capitalize"}]}>{item.name}</Text>
-          <Text style={styles.clientInfo}>
-            Phone No.: {item.phoneNumber}
-          </Text>
-          <Text style={styles.clientInfo}>DOJ: {item.joiningDate}</Text>
-          
+    return (
+      <Card style={styles.card}>
+        <View style={{ backgroundColor: "#27AE60", borderTopEndRadius: 6, borderTopStartRadius: 6, padding: 5, justifyContent: 'center' }}>
+          <Text style={[styles.clientName, { textAlign: 'center', color: '#f3f3f3' }]}>{item.clientId}</Text>
         </View>
-        <Menu
+        <View style={styles.cardContent}>
+          <Avatar.Image size={50} source={{ uri: item.clientPhoto }} />
+          <View style={styles.details}>
+            <Text style={[styles.clientName, { textTransform: "capitalize" }]}>{item.name}</Text>
+            <Text style={styles.clientInfo}>
+              Phone No.: {item.phoneNumber}
+            </Text>
+            <Text style={styles.clientInfo}>address: {item.address}</Text>
+
+          </View>
+          <TouchableOpacity onPress={() => {
+            setSelectedClient(item);
+            setModalVisible(true);
+          }}>
+            <Avatar.Icon size={30} icon={'eye'} />
+          </TouchableOpacity>
+
+
+          {/* <Menu
           visible={menuVisible && selectedItem === item.clientId}
           onDismiss={() => setMenuVisible(false)}
           anchor={
@@ -96,15 +110,16 @@ const Clients = ({ navigation }) => {
               }
             ]);
           }} />}
-        </Menu>
-      </View>
-    </Card>
-  )};
+        </Menu> */}
+        </View>
+      </Card>
+    )
+  };
 
   return (
     <Provider>
-            {/* Header */}
-            <Header />
+      {/* Header */}
+      <Header />
       {/* Dropdown for Branches */}
 
       <View style={styles.container}>
@@ -130,6 +145,42 @@ const Clients = ({ navigation }) => {
         }} />
 
       </View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <ScrollView>
+              <Text style={styles.modalTitle}>Client Details</Text>
+              {selectedClient && (
+                <>
+                  <Text style={styles.modalText}>Client ID: {selectedClient.clientId}</Text>
+                  <Text style={styles.modalText}>Name: {selectedClient.name}</Text>
+                  <Text style={styles.modalText}>Phone: {selectedClient.phoneNumber}</Text>
+                  <Text style={styles.modalText}>Email: {selectedClient.email}</Text>
+                  <Text style={styles.modalText}>Address: {selectedClient.address}</Text>
+                  <Text style={styles.modalText}>Branch: {selectedClient.branch}</Text>
+                  <Text style={styles.modalText}>Branch ID: {selectedClient.branchId}</Text>
+                  <Text style={styles.modalText}>GST Number: {selectedClient.gstNumber || "N/A"}</Text>
+                  <Text style={styles.modalText}>State: {selectedClient.state || "N/A"}</Text>
+                  <Text style={styles.modalText}>Status: {selectedClient.status}</Text>
+                </>
+              )}
+              <Button
+                mode="contained"
+                onPress={() => setModalVisible(false)}
+                style={{ marginTop: 16 }}
+              >
+                Close
+              </Button>
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
+
     </Provider>
   );
 };
@@ -154,6 +205,30 @@ const styles = StyleSheet.create({
   },
   listContent: {
     padding: 10,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    width: '90%',
+    padding: 20,
+    borderRadius: 10,
+    maxHeight: '80%',
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  modalText: {
+    fontSize: 16,
+    marginBottom: 6,
+    color: '#333',
   },
   card: {
     marginBottom: 10,

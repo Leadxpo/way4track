@@ -16,7 +16,7 @@ const Banks = ({ navigation, route }) => {
   const { loading, selectedLabel, error } = useSelector(state => state.selectedDrawLabel);
   const { loading: bankAccountsLoading, bankAccount, error: bankAccountsError } = useSelector(state => state.bankAccountDetailReducer);
 
-  const filteredData = bankDetails.invoiceData.filter((item) =>
+  const filteredData = bankDetails?.invoiceData?.filter((item) =>
     item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.id.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -60,10 +60,10 @@ const Banks = ({ navigation, route }) => {
           renderItem={renderItem}
           contentContainerStyle={styles.listContent}
         />
-        <FAB icon="plus" label="AddBank" style={styles.fab} onPress={() => {
+        {/* <FAB icon="plus" label="AddBank" style={styles.fab} onPress={() => {
           dispatch(drawLabel("Banks"));
           navigation.navigate('AddBank');
-        }} />
+        }} /> */}
 
       </View>
     </Provider>

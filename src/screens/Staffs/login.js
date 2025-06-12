@@ -82,6 +82,7 @@ const Login = ({ navigation }) => {
     await saveData('phoneNumber', staffInfo?.phoneNumber);
     await saveData('email', staffInfo?.email);
     await saveData('branch_id', subdealerdetails?.branchId);
+    await saveData('branchName', subdealerdetails?.branchName);
     await saveData('role', "sub dealer staff");
     await saveData('staffPermissions', staffInfo?.permissions[0].permissions);
   }
@@ -110,6 +111,7 @@ const Login = ({ navigation }) => {
       await AsyncStorage.removeItem('isLogin');
       await AsyncStorage.removeItem('ID');
       await AsyncStorage.removeItem('branch_id');
+      await AsyncStorage.removeItem('branchName');
       await AsyncStorage.removeItem('staffPermissions');
       await AsyncStorage.clear()
     }
@@ -150,6 +152,7 @@ const Login = ({ navigation }) => {
             await saveData('phoneNumber', staffInfo?.phoneNumber);
             await saveData('email', staffInfo?.email);
             await saveData('branch_id', staffInfo?.branch?.id);
+            await saveData('branchName', staffInfo?.branch?.branchName);
             await saveData('role', staffInfo?.designation);
             await saveData('latitude', staffInfo?.latitude);
             await saveData('longitude', staffInfo?.longitude);

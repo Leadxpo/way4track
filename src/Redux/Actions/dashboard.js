@@ -278,8 +278,9 @@ export const intiateSalesVisit_dashboard = (create_SalesVisit_dashboardPayload) 
             create_SalesVisit_dashboardPayload,
             { headers: { 'Content-Type': 'application/json' } }
         );
+        console.log("eee:",create_SalesVisit_dashboardPayload.StaffId)
         const rrr=data?.data.filter((item)=>{
-           return (String(item.staffId)===String(create_SalesVisit_dashboardPayload.StaffId))
+           return (Number(item.staffId)===Number(create_SalesVisit_dashboardPayload.StaffId))
         })
         const totalLeads = rrr || [];
         const pendingLeads = totalLeads?.filter(item => item.leadStatus === "pending");
@@ -302,6 +303,8 @@ export const intiateSalesVisit_dashboard = (create_SalesVisit_dashboardPayload) 
             completedLeads: completedLeads.length,
             totalPendingAndSuccessTickets: totalPendingAndSuccessTickets.data.data,
         }
+
+        console.log("rrr :",rrr)
         dispatch({ type: CREATE_SALES_MEN_DASHBOARD_SUCCESS, payload: dashboardSalesVisitData });
     } catch (error) {
         console.log("error : ", error.message)
