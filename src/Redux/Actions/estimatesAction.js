@@ -34,24 +34,24 @@ import {
 import * as actionTyes from "../Constants/estimateConstant";
 import api from "../../Api/api";
 
-export const createEstimate = (create_estimatePayload,estimatePDF) => async (dispatch) => {
+export const createEstimate = (create_estimatePayload, estimatePDF) => async (dispatch) => {
     const { clientId, buildingAddress, estimateDate, expireDate, productOrService, description, totalAmount, companyCode, unitCode, productDetails,
-         estimateId } = create_estimatePayload;
+        estimateId } = create_estimatePayload;
     const creatEstimateformData = new FormData();
-    creatEstimateformData.append('clientId',clientId);
-    creatEstimateformData.append('buildingAddress',buildingAddress);
-    creatEstimateformData.append('estimateDate',estimateDate);
-    creatEstimateformData.append('expireDate',expireDate);
-    creatEstimateformData.append('productOrService',productOrService);
-    creatEstimateformData.append('description',description);
-    creatEstimateformData.append('totalAmount',totalAmount);
-    creatEstimateformData.append('description',description);
-    creatEstimateformData.append('companyCode',companyCode);
-    creatEstimateformData.append('unitCode',unitCode);
-    creatEstimateformData.append('productDetails',productDetails);
-    creatEstimateformData.append('estimatePdfUrl',estimatePDF);
+    creatEstimateformData.append('clientId', clientId);
+    creatEstimateformData.append('buildingAddress', buildingAddress);
+    creatEstimateformData.append('estimateDate', estimateDate);
+    creatEstimateformData.append('expireDate', expireDate);
+    creatEstimateformData.append('productOrService', productOrService);
+    creatEstimateformData.append('description', description);
+    creatEstimateformData.append('totalAmount', totalAmount);
+    creatEstimateformData.append('description', description);
+    creatEstimateformData.append('companyCode', companyCode);
+    creatEstimateformData.append('unitCode', unitCode);
+    creatEstimateformData.append('productDetails', productDetails);
+    creatEstimateformData.append('estimatePdfUrl', estimatePDF);
 
-    dispatch({ type: CREATE_ESTIMATE_REQUEST });    
+    dispatch({ type: CREATE_ESTIMATE_REQUEST });
     try {
         // Attempt to fetch ESTIMATES
         const { data } = await api.post(`/estimate/handleEstimateDetails`, create_estimatePayload, {
@@ -59,7 +59,7 @@ export const createEstimate = (create_estimatePayload,estimatePDF) => async (dis
                 'Content-Type': 'application/json',
             },
         });
-        console.log("create estimaresponse : ",data)
+        console.log("create estimaresponse : ", data)
         dispatch({ type: CREATE_ESTIMATE_SUCCESS, payload: data.data });
     } catch (error) {
         console.log("error : ", error)
@@ -90,7 +90,7 @@ export const createReciept = (create_recieptPayload) => async (dispatch) => {
 
 export const createInvoice = (create_invoicePayload) => async (dispatch) => {
     const { clientId, buildingAddress, estimateDate, expireDate, productOrService, description, totalAmount, companyCode, unitCode, products, estimateId } = create_invoicePayload;
-    console.log("createInvoice_payload : ",create_invoicePayload)
+    console.log("createInvoice_payload : ", create_invoicePayload)
 
     dispatch({ type: CREATE_INVOICE_REQUEST });
     try {
@@ -138,8 +138,11 @@ export const fetchEstimates = (getAll_estimatePayload) => async (dispatch) => {
                 'Content-Type': 'application/json',
             },
         });
-        console.log("estimate data : ",data)
-        dispatch({ type: FETCH_ESTIMATES_SUCCESS, payload: data.data });
+        const rrr = data.data.filter(item => {
+            return item.invoiceId === null || item.invoiceId === '' || item.invoiceId === undefined;
+        });
+        console.log("estimate data : ", rrr)
+        dispatch({ type: FETCH_ESTIMATES_SUCCESS, payload: rrr });
     } catch (error) {
         console.log("error : ", error)
         // If the error status is 500, try refreshing the token
@@ -153,14 +156,17 @@ export const fetchInvioces = (getAll_invoicePayload) => async (dispatch) => {
     dispatch({ type: FETCH_INVOICES_REQUEST });
     try {
         // Attempt to fetch INVOICES
-        const { data } = await api.post(`/dashboards/getDetailInVoiceData`,getAll_invoicePayload,  {
+        const { data } = await api.post(`/estimate/getAllEstimateDetails`, getAll_invoicePayload, {
             headers: {
                 'Content-Type': 'application/json',
             },
         });
-        console.log("invoice data : ",data.data)
+        const rrr = data.data.filter(item => {
+            return item.invoiceId !== null || item.invoiceId !== '' || item.invoiceId !== undefined;
+        });
+        console.log("invoice data : ", rrr)
 
-        dispatch({ type: FETCH_INVOICES_SUCCESS, payload: data.data });
+        dispatch({ type: FETCH_INVOICES_SUCCESS, payload: rrr });
     } catch (error) {
         console.log("error : ", error)
         // If the error status is 500, try refreshing the token
@@ -179,7 +185,7 @@ export const fetchReciepts = (getAll_recieptPayload) => async (dispatch) => {
                 'Content-Type': 'application/json',
             },
         });
-        console.log("reciept data : ",data)
+        console.log("reciept data : ", data)
         dispatch({ type: FETCH_RECIEPTS_SUCCESS, payload: data.data });
     } catch (error) {
         console.log("error : ", error)

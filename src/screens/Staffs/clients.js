@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, FlatList, Text, Modal, ScrollView, TextInput, Alert, StyleSheet, TouchableOpacity } from "react-native";
+import { View, FlatList, Text, Modal, ScrollView, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 import { Avatar, Card, Button, Menu, Provider, FAB } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDispatch, useSelector } from 'react-redux';
@@ -139,10 +139,10 @@ const Clients = ({ navigation }) => {
           renderItem={renderItem}
           contentContainerStyle={styles.listContent}
         />
-        <FAB icon="plus" label="AddClient" visible={hasAddClientPermission} style={styles.fab} onPress={() => {
+        {/* <FAB icon="plus" label="AddClient" visible={hasAddClientPermission} style={styles.fab} onPress={() => {
           dispatch(drawLabel("Clients"));
           navigation.navigate('AddClient');
-        }} />
+        }} /> */}
 
       </View>
       <Modal

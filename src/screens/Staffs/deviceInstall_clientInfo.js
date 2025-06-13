@@ -13,7 +13,7 @@ import { loadData } from "../../Utils/appData";
 import { createDeviceInstall } from "../../Redux/Actions/deviceInstallAction";
 import Header from "../../components/userHeader";
 
-const DeviceInstall_ClientInfo = ({ navigation }) => {
+const DeviceInstall_ClientInfo = ({ navigation, route  }) => {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
 
@@ -39,6 +39,26 @@ const DeviceInstall_ClientInfo = ({ navigation }) => {
 
   const [showProductModal, setShowProductModal] = useState(false);
   const [showServiceModal, setShowServiceModal] = useState(false);
+
+  useEffect(() => {
+    if (route?.params?.techWorkDetails) {
+      const details = route.params.techWorkDetails;
+  console.log("rrr :",details)
+      setProductName(details.productName || "Select Product Name");
+      setService(details.serviceName || "Select Services");
+      setServiceId(details.serviceId || "");
+      setRole(details.role || "");
+      setProductID(details.productID || "");
+      setStaffId(details.staffId || "");
+      setName(details.clientName || "");
+      setEmail(details.email || "");
+      setPhoneNumber(details.phoneNumber || "");
+      setUserID(details.userName || "");
+      setAddress(details.address || "");
+      if (details.startDate) setDate(new Date(details.startDate));
+    }
+  }, [route]);
+  
 
   useEffect(() => {
     const fetchDropdownData = async () => {

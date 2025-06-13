@@ -139,18 +139,21 @@ const TechnicianWorks = ({ navigation }) => {
                   <Text style={styles.clientInfo}>Work Status : {selectedWork.workStatus || "N/A"}</Text>
                   <Text style={styles.clientInfo}>productName : {selectedWork.productName || "N/A"}</Text>
                   <Text style={styles.clientInfo}>Slot Date : {(selectedWork.date ? String(selectedWork.date).split("T")[0] : "N/A")}</Text>
-                  {/* {selectedWork.workStatus === "pending" && (
+                  {selectedWork.workStatus === "pending" && (
                     <Button
                       mode="contained" style={{ margin: 10 }}
                       onPress={() => {
                         setModalInstallDetailsVisible(false); // Close modal
-                        navigation.navigate("DeviceInstall_ClientInfo", { techWorkDetails: selectedWork });
+                        navigation.navigate("Home", {
+                          screen: "DeviceInstall_ClientInfo",
+                          params: { techWorkDetails: selectedWork }
+                        });
                       }}
                     >
                       Start Installation
                     </Button>
 
-                  )} */}
+                  )}
                 </Card>
               )}
             </View>

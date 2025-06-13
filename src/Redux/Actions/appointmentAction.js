@@ -59,10 +59,11 @@ export const updateAppointment = (update_appointmentPayload) => async (dispatch)
 
 export const fetchAppointments = (getAll_appointmentPayload) => async (dispatch) => {
     const { unitCode, companyCode } = getAll_appointmentPayload;
+console.log("rrr :",getAll_appointmentPayload)
     dispatch({ type: FETCH_APPOINTMENTS_REQUEST });
     try {
         // Attempt to fetch APPOINTMENTS
-        const { data } = await api.post(`/appointment/get-all-appointment`, getAll_appointmentPayload, {
+        const { data } = await api.post(`/appointment/getAllAppointmentDetails`, getAll_appointmentPayload, {
             headers: {
                 'Content-Type': 'application/json',
             },

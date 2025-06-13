@@ -33,7 +33,7 @@ const Estimates = ({ navigation }) => {
     dispatch(fetchEstimates(estimatePayload));
   }, [dispatch])
 
-  const filteredData = estimates.filter((item) =>
+  const filteredData = estimates?.filter((item) =>
     item.clientName.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.estimateId.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -43,7 +43,7 @@ const Estimates = ({ navigation }) => {
     <Card style={styles.card}>
       <View style={styles.cardContent}>
         <View style={styles.details}>
-          <Text style={[styles.clientName,{color:'#aaaaaa'}]}>{item.estimateId}</Text>
+          <Text style={[styles.clientName,{color:"#28a745"}]}>{item.estimateId}</Text>
           <Text style={[styles.clientName,{color:'#333333'}]}>{item.clientName}</Text>
           <Text style={styles.clientInfo}>Generated Date : {item.estimateDate.split("T")[0]}</Text>
           <Text style={styles.clientInfo}>Expire Date : {item.expireDate}</Text>

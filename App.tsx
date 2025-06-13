@@ -946,9 +946,10 @@ const DrawerNavigator = () => {
       {/* {permissions?.some((p) => p?.name === 'invoice' && p?.view) && (
         <Drawer.Screen name="InvoiceDetails" component={InvoiceDetails} options={{ headerShown: false }} />
       )} */}
-      {permissions?.some((p) => p?.name === 'product' && p?.view) && (
-        <Drawer.Screen name="Products" component={Products} options={{ headerShown: false }} />
-      )}
+      {permissions?.some(p => p?.name === 'product' && p?.view) &&
+        !['Sales Executive', 'sub dealer staff', 'Technician', 'Field Technician', 'Sr. Technician'].includes(role) && (
+          <Drawer.Screen name="Products" component={Products} options={{ headerShown: false }} />
+        )}
       {permissions?.some((p) => p?.name === 'report' && p?.view) && (
         <Drawer.Screen name="Report" component={Report} options={{ headerShown: false }} />
       )}

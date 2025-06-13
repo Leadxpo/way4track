@@ -17,30 +17,31 @@ const Invoice = ({ navigation }) => {
     dispatch(fetchInvioces(fetchPayload));
   }, [dispatch]);
 
-  const filteredData = invoices.filter(item => {
+  const filteredData = invoices?.filter(item => {
     const matchesSearch =
-      item.client.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.invoiceId.toLowerCase().includes(searchQuery.toLowerCase());
+      item.clientName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.invoiceId?.toLowerCase().includes(searchQuery.toLowerCase());
 
     return matchesSearch ;
   });
 
   const renderItem = ({ item }) => (
     <Card style={styles.card} onPress={()=>navigation.navigate('InvoiceDetails')}>
+     <Text style={{fontWeight:'bold',fontSize:18,color:"#28a745"}}>{item.invoiceId}</Text>
       <Card.Title
-        title={`Client: ${item.client}`}
-        subtitle={`Estimate Date: ${item.estimateDate}\nExpiry Date: ${item.expiryDate}`}
+        title={`Client: ${item.clientName}`}
+        subtitle={`Estimate Date: ${item.estimateDate?.split("T")[0]}\nExpiry Date: ${item.expiryDate}`}
         left={props => (
           <Avatar.Text
             {...props}
-            label={item.client.charAt(0)}
+            label={item.clientName?.charAt(0)}
             style={{ backgroundColor: '#28a745' }}
           />
         )}
       />
       <Card.Content>
-        <Text>Amount: {item.amount}</Text>
-        <Text>Status: {item.status}</Text>
+        <Text>Amount: {item.totalAmount}</Text>
+        <Text>Branch Name: {item.branchName}</Text>
       </Card.Content>
     </Card>
   );
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
     elevation: 2,borderWidth:1,
   },
   card: {
-    margin: 10,
+    margin: 10,padding:10,
     backgroundColor: '#fff',
     elevation: 4,
   },

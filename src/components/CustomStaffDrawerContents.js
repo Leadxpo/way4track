@@ -14,12 +14,14 @@ const CustomStaffDrawerContents = (props) => {
   const [staffDesignation, setStaffDesignation] = useState("");
   const [staffPhoto, setStaffPhoto] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [branchName, setBranchName] = useState("");
   const [email, setEmail] = useState("");
   useEffect(() => {
     const fetchStaffData = async () => {
       const staffId = await loadData("staffID");
       const staffName = await loadData("staffName");
       const staffDesignation = await loadData("role");
+      const branchName = await loadData("branchName");
       const staffPhoto = await loadData("staffPhoto");
       const phoneNumber = await loadData("phoneNumber");
       const email = await loadData("email");
@@ -29,6 +31,7 @@ const CustomStaffDrawerContents = (props) => {
       setStaffDesignation(staffDesignation);
       setStaffPhoto(staffPhoto);
       setPhoneNumber(phoneNumber);
+      setBranchName(branchName);
       setEmail(email);
     }
     fetchStaffData()
@@ -40,6 +43,9 @@ const CustomStaffDrawerContents = (props) => {
         <Avatar.Image source={staffPhoto ? { uri: staffPhoto } : require("../utilities/images/way4tracklogo.png")} size={50} style={{ backgroundColor: '#ffffff', margin: 5, alignSelf: 'center' }} />
         <Text style={styles.headerText}>{staffName}</Text>
         <Card.Title title={staffId} titleStyle={{ color: '#222222', textAlign: 'center', textTransform: "capitalize" }} subtitleStyle={{ color: "#222222", textAlign: 'center', textTransform: "capitalize" }} subtitle={staffDesignation + "\n" + email + "\n" + phoneNumber} subtitleNumberOfLines={5} titleVariant='bodyLarge' subtitleVariant='bodySmall' />
+        <Card.Content>
+        <Text style={{color: '#222222', textAlign: 'center', textTransform: "capitalize"}}>{branchName}</Text>
+        </Card.Content>
       </View>
 
       {/* 🧭 Drawer Items */}

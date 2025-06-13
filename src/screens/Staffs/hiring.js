@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from "react";
-import { View, FlatList, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from "react-native";
-import { Avatar, Card, FAB, Menu, Provider } from "react-native-paper";
+import { View, FlatList, Text, TextInput, StyleSheet, TouchableOpacity, Modal, ScrollView, } from "react-native";
+import { Avatar, Card, FAB, Button, Provider } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchHirings } from "../../Redux/Actions/hiringAction";
@@ -12,7 +12,8 @@ const Hiring = ({ navigation }) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const dispatch = useDispatch();
-
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [permissions, setPermissions] = useState([]);
   useEffect(() => {
     const loadStaffloginData = async () => {
@@ -63,15 +64,16 @@ const Hiring = ({ navigation }) => {
       default:
         break;
     }
+
     return(
     <Card style={styles.card}>
       <View style={styles.cardContent}>
         <View style={styles.details}>
-          <Text style={styles.clientName}>{item.candidateName}</Text>
-          <Text style={styles.clientInfo}>
+          <Text style={styles.candidateName}>{item.candidateName}</Text>
+          <Text style={styles.candidateInfo}>
             Phone: {item.phoneNumber}
           </Text>
-          <Text style={styles.clientInfo}>Address: {itemaddress}</Text>
+          <Text style={styles.candidateInfo}>Address: {item.address}</Text>
           <Text
             style={[
               styles.status,
@@ -81,7 +83,14 @@ const Hiring = ({ navigation }) => {
             Status: {item.status}
           </Text>
         </View>
-        <Menu
+        <TouchableOpacity onPress={() => {
+            setSelectedCandidate(item);
+            setModalVisible(true);
+          }}>
+            <Avatar.Icon size={30} icon={'eye'} />
+          </TouchableOpacity>
+
+        {/* <Menu
           visible={menuVisible && selectedItem === item.id}
           onDismiss={() => setMenuVisible(false)}
           anchor={
@@ -111,7 +120,7 @@ const Hiring = ({ navigation }) => {
               }
             ]);
           }} title="Delete" />}
-        </Menu>
+        </Menu> */}
       </View>
     </Card>
   )};
@@ -123,7 +132,7 @@ const Hiring = ({ navigation }) => {
         {/* Search Bar */}
         <TextInput
           style={styles.searchInput}
-          placeholder="Search Client Name"
+          placeholder="Search Candidate Name"
           value={searchQuery}
           onChangeText={setSearchQuery}
         />
@@ -136,10 +145,77 @@ const Hiring = ({ navigation }) => {
           contentContainerStyle={styles.listContent}
         />
       </View>
-      <FAB icon="plus" label="AddHiring Candidate" visible={hasAddHiringPermission} style={styles.fab} onPress={() => {
+      {/* <FAB icon="plus" label="AddHiring Candidate" visible={hasAddHiringPermission} style={styles.fab} onPress={() => {
         dispatch(drawLabel("Hiring"));
         navigation.navigate('AddHiring');
-      }} />
+      }} /> */}
+<Modal
+  animationType="slide"
+  transparent={true}
+  visible={modalVisible}
+  onRequestClose={() => setModalVisible(false)}
+>
+  <View style={styles.modalOverlay}>
+    <View style={styles.modalContent}>
+      <ScrollView>
+        <Text style={styles.modalTitle}>Candidate Details</Text>
+        {selectedCandidate && (
+          <>
+            <Text style={styles.modalText}>Candidate Name: {selectedCandidate.candidateName}</Text>
+            <Text style={styles.modalText}>Phone: {selectedCandidate.phoneNumber}</Text>
+            <Text style={styles.modalText}>Email: {selectedCandidate.email}</Text>
+            <Text style={styles.modalText}>Address: {selectedCandidate.address}</Text>
+            <Text style={styles.modalText}>Hiring Level: {selectedCandidate.hiringLevel}</Text>
+            <Text style={styles.modalText}>Status: {selectedCandidate.status}</Text>
+            <Text style={styles.modalText}>Company Code: {selectedCandidate.companyCode}</Text>
+            <Text style={styles.modalText}>Unit Code: {selectedCandidate.unitCode}</Text>
+            <Text style={styles.modalText}>Driving Licence: {selectedCandidate.drivingLicence}</Text>
+            <Text style={styles.modalText}>Driving Licence No: {selectedCandidate.drivingLicenceNumber || "N/A"}</Text>
+
+            {/* Joining Date, Notice Period, Date of Upload */}
+            <Text style={styles.modalText}>
+              Joining Date: {selectedCandidate.joiningDate ? new Date(selectedCandidate.joiningDate).toLocaleDateString() : "N/A"}
+            </Text>
+            <Text style={styles.modalText}>
+              Notice Period End: {selectedCandidate.noticePeriod ? new Date(selectedCandidate.noticePeriod).toLocaleDateString() : "N/A"}
+            </Text>
+            <Text style={styles.modalText}>
+              Date of Upload: {selectedCandidate.dateOfUpload ? new Date(selectedCandidate.dateOfUpload).toLocaleDateString() : "N/A"}
+            </Text>
+
+            {/* Qualification Details */}
+            <Text style={[styles.modalTitle, { marginTop: 16 }]}>Qualifications</Text>
+            {selectedCandidate.qualifications && selectedCandidate.qualifications.map((q, index) => (
+              <View key={index} style={{ marginBottom: 8 }}>
+                <Text style={styles.modalText}>Qualification: {q.qualificationName}</Text>
+                <Text style={styles.modalText}>Marks: {q.marks}</Text>
+                <Text style={styles.modalText}>Year of Pass: {q.yearOfPass}</Text>
+              </View>
+            ))}
+
+            {/* Resume Link */}
+            {selectedCandidate.resumePath && (
+              <TouchableOpacity onPress={() => Linking.openURL(selectedCandidate.resumePath)}>
+                <Text style={[styles.modalText, { color: 'blue', textDecorationLine: 'underline' }]}>
+                  View Resume
+                </Text>
+              </TouchableOpacity>
+            )}
+          </>
+        )}
+
+        <Button
+          mode="contained"
+          onPress={() => setModalVisible(false)}
+          style={{ marginTop: 16 }}
+        >
+          Close
+        </Button>
+      </ScrollView>
+    </View>
+  </View>
+</Modal>
+
     </Provider>
   );
 };
@@ -148,6 +224,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f8f9fa",
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    width: '90%',
+    padding: 20,
+    borderRadius: 10,
+    maxHeight: '80%',
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  modalText: {
+    fontSize: 16,
+    marginBottom: 6,
+    color: '#333',
   },
   searchInput: {
     height: 50,
@@ -175,12 +275,12 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 10,
   },
-  clientName: {
+  candidateName: {
     fontSize: 16,
     fontWeight: "bold",
     color: "#333",
   },
-  clientInfo: {
+  candidateInfo: {
     fontSize: 14,
     color: "#555",
     marginTop: 2,

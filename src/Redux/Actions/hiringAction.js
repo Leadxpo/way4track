@@ -62,7 +62,7 @@ export const fetchHirings = (getAll_hiringPayload) => async (dispatch) => {
     dispatch({ type: FETCH_HIRINGS_REQUEST });
     try {
         // Attempt to fetch HIRINGS
-        const { data } = await api.post(`/hiring/get-all-hiring`, getAll_hiringPayload, {
+        const { data } = await api.post(`/hiring/getHiringDetails`, getAll_hiringPayload, {
             headers: {
                 'Content-Type': 'application/json',
             },

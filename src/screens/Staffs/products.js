@@ -47,8 +47,8 @@ const Product = ({ navigation }) => {
 
   const updateFilteredProducts = (category, branch) => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-
-    const filtered = products.filter(product =>
+const rrr=products?.branchList
+    const filtered = rrr?.filter(product =>
       (category === 'warehouse' || product.location === category) &&
       (branch === 'All' || product.branch === branch)
     );
@@ -59,7 +59,7 @@ const Product = ({ navigation }) => {
       Installed: 0,
     };
 
-    products.forEach(product => {
+    rrr?.forEach(product => {
       if (branch === 'All' || product.branch === branch) {
         if (countByCategory.hasOwnProperty(product.location)) {
           countByCategory[product.location] += 1;
@@ -68,7 +68,7 @@ const Product = ({ navigation }) => {
     });
 
     setProductCategories(prevCategories =>
-      prevCategories.map(cat => ({ ...cat, count: countByCategory[cat.key] || 0 }))
+      prevCategories?.map(cat => ({ ...cat, count: countByCategory[cat.key] || 0 }))
     );
     setFilteredProducts(filtered);
   };
@@ -119,7 +119,7 @@ const Product = ({ navigation }) => {
         )}
       />
 
-      <FAB
+      {/* <FAB
         icon="plus" visible={hasAddProductPermission}
         label="Add Products"
         style={styles.fab}
@@ -127,7 +127,7 @@ const Product = ({ navigation }) => {
           dispatch(drawLabel("Products"));
           navigation.navigate('AddProduct');
         }}
-      />
+      /> */}
     </View>
   );
 };
