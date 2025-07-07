@@ -41,6 +41,7 @@ export const fetchStaffs = (getAll_staffpayload) => async (dispatch) => {
                 'Content-Type': 'application/json',
             },
         });
+        console.log("rrr :",data.data)
         dispatch({ type: FETCH_STAFFS_SUCCESS, payload: data.data });
     } catch (error) {
         console.log("error : ", error)

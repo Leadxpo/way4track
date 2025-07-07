@@ -4,9 +4,8 @@ import { Card } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const BranchSummary = ({branchSales}) => {
-
   const renderbranchSaleItem=({item, index})=>{
-    return(
+   return(
       <Card key={index} style={styles.card}>
       <View style={styles.cardContent}>
         <View style={styles.header}>
@@ -15,19 +14,39 @@ const BranchSummary = ({branchSales}) => {
         </View>
         <View style={styles.stats}>
           <View style={{ width: "100%", flex: 1, flexDirection: 'row',marginVertical:3 }}>
-            <Text style={[styles.statText, {color:'black',fontFamily:"Roboto-Regular", flex: 2, textAlign: 'left', }]}>Service Sales</Text>
+            <Text style={[styles.statText, {color:'black',fontFamily:"Roboto-Regular", flex: 2, textAlign: 'left', }]}>Other Sales Amount</Text>
             <Text style={[styles.statText, { flex: 2, textAlign: 'center', }]}>:</Text>
-            <Text style={[styles.statText, { flex: 2, textAlign: 'right',fontFamily:"Roboto-Black" }]}>{item.serviceSales}</Text>
+            <Text style={[styles.statText, { flex: 2, textAlign: 'right',fontFamily:"Roboto-Black" }]}>{item.otherSalesAmount}</Text>
           </View>
           <View style={{ width: "100%", flex: 1, flexDirection: 'row',marginVertical:3 }}>
-            <Text style={[styles.statText, {color:'black',fontFamily:"Roboto-Regular", flex: 2, textAlign: 'left', }]}>Product Sales</Text>
+            <Text style={[styles.statText, {color:'black',fontFamily:"Roboto-Regular", flex: 2, textAlign: 'left', }]}>Product SalesAmount</Text>
             <Text style={[styles.statText, { flex: 2, textAlign: 'center', }]}>:</Text>
-            <Text style={[styles.statText, { flex: 2, textAlign: 'right',fontFamily:"Roboto-Black"}]}>{item.productSales}</Text>
+            <Text style={[styles.statText, { flex: 2, textAlign: 'right',fontFamily:"Roboto-Black"}]}>{item.productSalesAmount}</Text>
           </View>
           <View style={{ width: "100%", flex: 1, flexDirection: 'row',marginVertical:3 }}>
-            <Text style={[styles.statText, {color:'black',fontFamily:"Roboto-Regular", flex: 2, textAlign: 'left', }]}>Total Sales</Text>
+            <Text style={[styles.statText, {color:'black',fontFamily:"Roboto-Regular", flex: 2, textAlign: 'left', }]}>Rectifications Amount</Text>
             <Text style={[styles.statText, { flex: 2, textAlign: 'center', }]}>:</Text>
-            <Text style={[styles.statText, { flex: 2, textAlign: 'right',fontFamily:"Roboto-Black"}]}>{item.totalSales}</Text>
+            <Text style={[styles.statText, { flex: 2, textAlign: 'right',fontFamily:"Roboto-Black"}]}>{item.rectificationsAmount}</Text>
+          </View>
+          <View style={{ width: "100%", flex: 1, flexDirection: 'row',marginVertical:3 }}>
+            <Text style={[styles.statText, {color:'black',fontFamily:"Roboto-Regular", flex: 2, textAlign: 'left', }]}>Renewables Amount</Text>
+            <Text style={[styles.statText, { flex: 2, textAlign: 'center', }]}>:</Text>
+            <Text style={[styles.statText, { flex: 2, textAlign: 'right',fontFamily:"Roboto-Black"}]}>{item.renewablesAmount}</Text>
+          </View>
+          <View style={{ width: "100%", flex: 1, flexDirection: 'row',marginVertical:3 }}>
+            <Text style={[styles.statText, {color:'black',fontFamily:"Roboto-Regular", flex: 2, textAlign: 'left', }]}>Replacements Amount</Text>
+            <Text style={[styles.statText, { flex: 2, textAlign: 'center', }]}>:</Text>
+            <Text style={[styles.statText, { flex: 2, textAlign: 'right',fontFamily:"Roboto-Black"}]}>{item.replacementsAmount}</Text>
+          </View>
+          <View style={{ width: "100%", flex: 1, flexDirection: 'row',marginVertical:3 }}>
+            <Text style={[styles.statText, {color:'black',fontFamily:"Roboto-Regular", flex: 2, textAlign: 'left', }]}>Service Sales Amount</Text>
+            <Text style={[styles.statText, { flex: 2, textAlign: 'center', }]}>:</Text>
+            <Text style={[styles.statText, { flex: 2, textAlign: 'right',fontFamily:"Roboto-Black"}]}>{item.serviceSalesAmount}</Text>
+          </View>
+          <View style={{ width: "100%", flex: 1, flexDirection: 'row',marginVertical:3 }}>
+            <Text style={[styles.statText, {color:'black',fontFamily:"Roboto-Regular", flex: 2, textAlign: 'left', }]}>Total Sales Amount</Text>
+            <Text style={[styles.statText, { flex: 2, textAlign: 'center', }]}>:</Text>
+            <Text style={[styles.statText, { flex: 2, textAlign: 'right',fontFamily:"Roboto-Black"}]}>{item.totalSalesAmount}</Text>
           </View>
         </View>
       </View>

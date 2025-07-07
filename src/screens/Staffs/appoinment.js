@@ -1,49 +1,49 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, FlatList, StyleSheet, Text, TouchableOpacity, Modal, ScrollView, } from 'react-native';
-import { Card, Menu,Button, Badge, FAB, Provider,Avatar, Surface, } from 'react-native-paper';
+import { Card, Menu, Button, Badge, FAB, Provider, Avatar, Surface, } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Header from '../../components/userHeader';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAppointments} from "../../Redux/Actions/appointmentAction";
+import { fetchAppointments } from "../../Redux/Actions/appointmentAction";
 import { drawLabel } from "../../Redux/Actions/drawAction";
 import { loadData } from '../../Utils/appData';
 
 const Appointment = ({ navigation }) => {
     const dispatch = useDispatch();
     const { loading, selectedLabel, error } = useSelector(state => state.selectedDrawLabel);
-    const { loading:appointmentLoading, appointments, error:appointmentError } = useSelector(state => state.appointmentsReducer);
+    const { loading: appointmentLoading, appointments, error: appointmentError } = useSelector(state => state.appointmentsReducer);
     const [permissions, setPermissions] = useState([]);
     const [branchName, setBranchName] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedClient, setSelectedClient] = useState(null);
-      useEffect(() => {
+    useEffect(() => {
         const rrr = async () => {
             const aaa = await loadData("branchName")
-            if (aaa!==null || aaa!=="") {
+            if (aaa !== null || aaa !== "") {
                 setBranch(aaa)
                 setTabVisible(false)
             }
-          setBranchName(prev => prev = aaa)
-          const appointmentPayload = {
-            companyCode: "WAY4TRACK",
-            unitCode: "WAY4",
-            branchName: aaa,
-          };
-          console.log("aaa:",appointmentPayload)
-          dispatch(fetchAppointments(appointmentPayload));
+            setBranchName(prev => prev = aaa)
+            const appointmentPayload = {
+                companyCode: "WAY4TRACK",
+                unitCode: "WAY4",
+                branchName: aaa,
+            };
+            console.log("aaa:", appointmentPayload)
+            dispatch(fetchAppointments(appointmentPayload));
         }
         rrr();
-      }, [dispatch]);
-    
+    }, [dispatch]);
+
     useEffect(() => {
-      const loadStaffloginData = async () => {
-          const rrr = await loadData("staffPermissions")
-          setPermissions(prev => prev = rrr ||permissions);
-          console.log(permissions)
-      };
-      loadStaffloginData();
-  }, []);
-  
+        const loadStaffloginData = async () => {
+            const rrr = await loadData("staffPermissions")
+            setPermissions(prev => prev = rrr || permissions);
+            console.log(permissions)
+        };
+        loadStaffloginData();
+    }, []);
+
 
     const [menuVisible, setMenuVisible] = useState(false);
     const [visibleMenus, setVisibleMenus] = useState({});
@@ -54,7 +54,7 @@ const Appointment = ({ navigation }) => {
     const hasAddAppointmentsPermission = permissions.some(p => p.name === "appointments" && p.add);
     const hasEditAppointmentsPermission = permissions.some(p => p.name === "appointments" && p.edit);
     const hasDeleteAppointmentsPermission = permissions.some(p => p.name === "appointments" && p.delete);
-  
+
     const tabs = [
         { id: 1, name: 'All', count: 15 },
         { id: 2, name: 'Visakhapatnam', count: 5 },
@@ -92,17 +92,17 @@ const Appointment = ({ navigation }) => {
                     <Text style={styles.titleText}>ID.{item.appointmentId}-{item.appointmentType}</Text>
                     <Text style={styles.infoText}>Name: {item.name}</Text>
                     <Text style={styles.infoText}>Branch: {item.branchName}</Text>
--                    <Text style={styles.infoText}>Assign Person: {item.assignedTo}</Text>
+                                       <Text style={styles.infoText}>Assign Person: {item.assignedTo}</Text>
                     <Text style={styles.infoText}>Client Name: {item.clientName}</Text>
                     <Text style={styles.infoText}>Appointment Time: {item.date}-{item.slot}{item.period}</Text>
                     <Text style={styles.infoText}>Status: {item.status}</Text>
                 </View>
                 <TouchableOpacity onPress={() => {
-            setSelectedClient(item);
-            setModalVisible(true);
-          }}>
-            <Avatar.Icon size={30} icon={'eye'} />
-          </TouchableOpacity>
+                    setSelectedClient(item);
+                    setModalVisible(true);
+                }}>
+                    <Avatar.Icon size={30} icon={'eye'} />
+                </TouchableOpacity>
 
                 {/* <Menu
                     visible={menuVisible && selectedItem === item.id}
@@ -162,32 +162,30 @@ const Appointment = ({ navigation }) => {
 
                 {/* Tabs */}
                 {
-                    tabVisible && 
+                    tabVisible &&
 
-                <Surface style={styles.tabsContainer}>
+                    <Surface style={styles.tabsContainer}>
 
-                    <FlatList
-                        data={tabs}
-                        style={{ paddingVertical: 8 }}
-                        keyExtractor={(item) => item.id}
-                        renderItem={({ item, index }) => (
-                            <TouchableOpacity key={item.id} style={styles.tabItem} onPress={() => setBranch(item.name)}>
-                                <Text style={[styles.tabText, index === 0 && styles.activeTab]}>
-                                    {item.name}
-                                </Text>
-                                {item.count > 0 && (
-                                    <Badge style={styles.badge} size={24}>{item.count}</Badge>
-                                )}
-                            </TouchableOpacity>
-                        )}
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={false}
-                        contentContainerStyle={styles.listContainer}
-                    />
+                        <FlatList
+                            data={tabs}
+                            style={{ paddingVertical: 8 }}
+                            keyExtractor={(item) => item.id}
+                            renderItem={({ item, index }) => (
+                                <TouchableOpacity key={item.id} style={styles.tabItem} onPress={() => setBranch(item.name)}>
+                                    <Text style={[styles.tabText, index === 0 && styles.activeTab]}>
+                                        {item.name}
+                                    </Text>
+                                    {item.count > 0 && (
+                                        <Badge style={styles.badge} size={24}>{item.count}</Badge>
+                                    )}
+                                </TouchableOpacity>
+                            )}
+                            horizontal={true}
+                            showsHorizontalScrollIndicator={false}
+                            contentContainerStyle={styles.listContainer}
+                        />
+                    </Surface>
 
-
-                </Surface>
-                    
                 }
 
                 {/* Appointment List */}
@@ -200,41 +198,41 @@ const Appointment = ({ navigation }) => {
                 />
             </View>
             <Modal
-  animationType="slide"
-  transparent={true}
-  visible={modalVisible}
-  onRequestClose={() => setModalVisible(false)}
->
-  <View style={styles.modalOverlay}>
-    <View style={styles.modalContent}>
-      <ScrollView>
-        <Text style={styles.modalTitle}>Client Details</Text>
-        {selectedClient && (
-          <>
-            <Text style={styles.modalText}>Appointment ID: {selectedClient.appointmentId}</Text>
-            <Text style={styles.modalText}>Client ID: {selectedClient.clientId}</Text>
-            <Text style={styles.modalText}>Name: {selectedClient.clientName}</Text>
-            <Text style={styles.modalText}>Phone: {selectedClient.clientPhoneNumber}</Text>
-            <Text style={styles.modalText}>Address: {selectedClient.clientAddress}</Text>
-            <Text style={styles.modalText}>Branch: {selectedClient.branchName}  -  {selectedClient.branchId}</Text>
-            <Text style={styles.modalText}>Appointment Type: {selectedClient.appointmentType}</Text>
-            <Text style={styles.modalText}>Assigned To: {selectedClient.assignedTo}</Text>
-            <Text style={styles.modalText}>Slot: {selectedClient.date}-{selectedClient.slot} {selectedClient.period}</Text>
-            <Text style={styles.modalText}>Description: {selectedClient.description}</Text>
-            <Text style={styles.modalText}>Status: {selectedClient.status}</Text>
-          </>
-        )}
-        <Button
-          mode="contained"
-          onPress={() => setModalVisible(false)}
-          style={{ marginTop: 16 }}
-        >
-          Close
-        </Button>
-      </ScrollView>
-    </View>
-  </View>
-</Modal>
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => setModalVisible(false)}
+            >
+                <View style={styles.modalOverlay}>
+                    <View style={styles.modalContent}>
+                        <ScrollView>
+                            <Text style={styles.modalTitle}>Client Details</Text>
+                            {selectedClient && (
+                                <>
+                                    <Text style={styles.modalText}>Appointment ID: {selectedClient.appointmentId}</Text>
+                                    <Text style={styles.modalText}>Client ID: {selectedClient.clientId}</Text>
+                                    <Text style={styles.modalText}>Name: {selectedClient.clientName}</Text>
+                                    <Text style={styles.modalText}>Phone: {selectedClient.clientPhoneNumber}</Text>
+                                    <Text style={styles.modalText}>Address: {selectedClient.clientAddress}</Text>
+                                    <Text style={styles.modalText}>Branch: {selectedClient.branchName}  -  {selectedClient.branchId}</Text>
+                                    <Text style={styles.modalText}>Appointment Type: {selectedClient.appointmentType}</Text>
+                                    <Text style={styles.modalText}>Assigned To: {selectedClient.assignedTo}</Text>
+                                    <Text style={styles.modalText}>Slot: {selectedClient.date}-{selectedClient.slot} {selectedClient.period}</Text>
+                                    <Text style={styles.modalText}>Description: {selectedClient.description}</Text>
+                                    <Text style={styles.modalText}>Status: {selectedClient.status}</Text>
+                                </>
+                            )}
+                            <Button
+                                mode="contained"
+                                onPress={() => setModalVisible(false)}
+                                style={{ marginTop: 16 }}
+                            >
+                                Close
+                            </Button>
+                        </ScrollView>
+                    </View>
+                </View>
+            </Modal>
 
         </Provider>
     );
@@ -307,26 +305,26 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
         justifyContent: 'center',
         alignItems: 'center',
-      },
-      modalContent: {
+    },
+    modalContent: {
         backgroundColor: 'white',
         width: '90%',
         padding: 20,
         borderRadius: 10,
         maxHeight: '80%',
-      },
-      modalTitle: {
+    },
+    modalTitle: {
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 10,
         textAlign: 'center',
-      },
-      modalText: {
+    },
+    modalText: {
         fontSize: 16,
         marginBottom: 6,
         color: '#333',
-      },
-    
+    },
+
     tabItem: {
         flexDirection: 'row', height: 40,
         alignItems: 'center', marginHorizontal: 3,

@@ -42,8 +42,9 @@
         android:theme="@style/AppTheme"
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true">
-<!--        android:usesCleartextTraffic="true"-->
-<!--        android:networkSecurityConfig="@xml/network_security_config"-->
+                <meta-data
+  android:name="com.google.android.geo.API_KEY"
+  android:value="AIzaSyCmiyc8iXq1KDOmW_-yWsjALkQVY1z8krw" />
         <service
             android:foregroundServiceType="location"
             android:name="com.way4track.LocationService" />

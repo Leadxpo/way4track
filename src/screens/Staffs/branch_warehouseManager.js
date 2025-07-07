@@ -28,7 +28,7 @@ const branchData = [
   },
 ];
 
-const Branch_WarhouseManager = () => {
+const Branch_WarehouseManager = () => {
   const [expandedBranch, setExpandedBranch] = useState(null);
   const animation = useRef(new Animated.Value(0)).current;
 
@@ -186,4 +186,4 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
 });
-export default Branch_WarhouseManager;
+export default Branch_WarehouseManager;

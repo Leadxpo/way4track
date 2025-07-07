@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View,ActivityIndicator } from "react-native";
 import { loadData } from "../../Utils/appData";
-import Branch_WarhouseManager from './branch_warhouseManager';
+import Branch_WarhouseManager from './branch_warehouseManager';
 import Branch_HR from './branch_HR';
 import Branch from './branch';
 

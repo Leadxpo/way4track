@@ -34,7 +34,6 @@ const Clients = ({ navigation }) => {
   const hasEditClientPermission = permissions.some(p => p.name === "client" && p.edit);
   const hasDeleteClientPermission = permissions.some(p => p.name === "client" && p.delete);
 
-
   const filteredData = clients?.filter((item) =>
     item.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.phoneNumber?.toLowerCase().includes(searchQuery.toLowerCase()) ||

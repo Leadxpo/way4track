@@ -11,7 +11,7 @@ import {
 import { LineChart } from 'react-native-chart-kit';
 import { Button, Divider, Surface } from 'react-native-paper';
 
-const AnalysisSection = ({ monthWiseAmount, CreditAndDebitPercentages }) => {
+const AnalysisSection = ({yearWiseAmount}) => {
   let data = [];
   let accountData = {};
   const [modalCraditVisible, setModalCraditVisible] = useState(false);

@@ -65,12 +65,12 @@ export const updateProduct = (update_productPayload) => async (dispatch) => {
 };
 
 export const fetchProducts = (getAll_productPayload) => async (dispatch) => {
-    const { unitCode, companyCode,staffId } = getAll_productPayload;
+    const { unitCode, companyCode } = getAll_productPayload;
     console.log("rrr : ",getAll_productPayload)
     dispatch({ type: FETCH_PRODUCTS_REQUEST });
     try {
         // Attempt to fetch PRODUCTS
-        const { data } = await api.post(`/products/productAssignDetails`, getAll_productPayload, { 
+        const { data } = await api.post(`/products/getAllproductDetails`, getAll_productPayload, { 
             headers: {
                 'Content-Type': 'application/json',
             },

@@ -29,8 +29,9 @@ import EditBank from './src/screens/Staffs/editBank';
 import TechWorks from './src/screens/Staffs/techWorks';
 import BankDetails from './src/screens/Staffs/banksDetails';
 import Clients from './src/screens/Staffs/clients';
-import AddClient from './src/screens/Staffs/addClient';
-import EditClient from './src/screens/Staffs/editClient';
+import ProductType from './src/screens/Staffs/productType';
+import Designation from './src/screens/Staffs/designation';
+import Services from './src/screens/Staffs/services';
 import ClientDetails from './src/screens/Staffs/clientDetails';
 import Estimate from './src/screens/Staffs/estimats';
 import AddEstimate from './src/screens/Staffs/createEstimation';
@@ -44,7 +45,7 @@ import Home_WarehouseManager from './src/screens/Staffs/home_warhouseManager';
 import Home_Technician from './src/screens/Staffs/home_technician';
 import Home_SalesMen from './src/screens/Staffs/home_salesMan';
 import Home_SubDealerStaff from './src/screens/Staffs/home_subdealerStaff';
-import Branch_WarhouseManager from './src/screens/Staffs/branch_warhouseManager';
+import Branch_WarehouseManager from './src/screens/Staffs/branch_warehouseManager';
 import Branch_HR from './src/screens/Staffs/branch_HR';
 import Login from './src/screens/Staffs/login';
 import Notification from './src/screens/Staffs/notification';
@@ -202,6 +203,7 @@ const linking = {
     };
   },
 }
+
 const StackNavigator = () => {
   const [role, setRole] = useState("CEO"); // Initial role  useEffect(() => {
   // const navigation=useNavigation()
@@ -246,11 +248,16 @@ const StackNavigator = () => {
       <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
       <Stack.Screen name="RoleRedirector" component={RoleRedirector} options={{ headerShown: false }} />
       <Stack.Screen name="CEOBottomStack" component={CEOBottomNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="HRBottomStack" component={HRBottomNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="WarehouseBottomStack" component={WarehouseBottomNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="BranchManagerBottomStack" component={BranchManagerBottomNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="TechBottomStack" component={TechnicianBottomNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="SalesBottomStack" component={SaleBottomNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="SubdealerStaffBottomStack" component={SubdealerStaffBottomNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="SalesBottomStack" component={SaleBottomNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="Branches" component={Branch} options={{ headerShown: false }} />
-      <Stack.Screen name="BranchDetails" component={BranchDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="BranchesHR" component={Branch_HR} options={{ headerShown: false }} />
+      <Stack.Screen name="BranchesWarehouse" component={Branch_WarehouseManager} options={{ headerShown: false }} />
+      <Stack.Screen name="BranchDetails" component={BranchDetails} options={{ headerShown: true }} />
       <Stack.Screen name="Bank" component={Bank} options={{ headerShown: false }} />
       <Stack.Screen name="BankDetails" component={BankDetails} options={{ headerShown: false }} />
       <Stack.Screen name="Client" component={Clients} options={{ headerShown: false }} />
@@ -325,11 +332,12 @@ const StackNavigator = () => {
     </Stack.Navigator>
   );
 };
+
 const CEOStackNavigator = () => {
   const [role, setRole] = useState("CEO"); // Initial role  useEffect(() => {
 
   return (
-    <Stack.Navigator initialRouteName="Splash"
+    <Stack.Navigator initialRouteName="Home_CEO"
       screenListeners={{
         state: async (e) => {
           // Log navigation changes if needed
@@ -339,11 +347,10 @@ const CEOStackNavigator = () => {
         },
       }}
     >
-      <Stack.Screen name="RoleRedirector" component={RoleRedirector} options={{ headerShown: false }} />
-      <Stack.Screen name="CEOBottomStack" component={CEOBottomNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="Home_CEO" component={Home_CEO} options={{ headerShown: false }} />
+      <Stack.Screen name="CEOBottomStack" component={CEOBottomNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="Branches" component={Branch} options={{ headerShown: false }} />
-      <Stack.Screen name="BranchDetails" component={BranchDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="BranchDetails" component={BranchDetails} options={{ headerShown: true }} />
       <Stack.Screen name="Bank" component={Bank} options={{ headerShown: false }} />
       <Stack.Screen name="BankDetails" component={BankDetails} options={{ headerShown: false }} />
       <Stack.Screen name="Client" component={Clients} options={{ headerShown: false }} />
@@ -367,11 +374,11 @@ const CEOStackNavigator = () => {
       {/* <Stack.Screen name="Payment" component={Payments} options={{ headerShown: false }} /> */}
       <Stack.Screen name="Hiring" component={Hiring} options={{ headerShown: false }} />
       <Stack.Screen name="HiringDetails" component={HiringDetails} options={{ headerShown: false }} />
-      {/* <Stack.Screen name="ProductType" component={ProductType} options={{ headerShown: false }} />
+      <Stack.Screen name="ProductType" component={ProductType} options={{ headerShown: false }} />
       <Stack.Screen name="Designation" component={Designation} options={{ headerShown: false }} />
-      <Stack.Screen name="Orders" component={Orders} options={{ headerShown: false }} />
-      <Stack.Screen name="Review" component={Review} options={{ headerShown: false }} />
-      <Stack.Screen name="Services" component={Services} options={{ headerShown: false }} /> */}
+      {/*<Stack.Screen name="Orders" component={Orders} options={{ headerShown: false }} />
+      <Stack.Screen name="Review" component={Review} options={{ headerShown: false }} /> */}
+      <Stack.Screen name="Services" component={Services} options={{ headerShown: false }} />
       <Stack.Screen name="Staff" component={Staff} options={{ headerShown: false }} />
       <Stack.Screen name="StaffDetails" component={StaffDetails} options={{ headerShown: false }} />
       <Stack.Screen name="Voucher" component={Voucher} options={{ headerShown: false }} />
@@ -388,7 +395,6 @@ const CEOStackNavigator = () => {
       <Stack.Screen name="Payments" component={Payments} options={{ headerShown: false }} />
       <Stack.Screen name="Purchase" component={Purchase} options={{ headerShown: false }} />
       <Stack.Screen name="Work" component={TechnicianWorks} options={{ headerShown: false }} />
-      <Stack.Screen name="Report" component={Report} options={{ headerShown: false }} />
       <Stack.Screen name="RequestRaiseDetails" component={RequestRaiseDetails} options={{ headerShown: true }} />
       <Stack.Screen name="RequestRaise" component={RequestRaise} options={{ headerShown: false }} />
       <Stack.Screen name="AddRequestRaise" component={AddRequestRaise} options={{ headerShown: true }} />
@@ -398,277 +404,208 @@ const CEOStackNavigator = () => {
   );
 };
 
-const SalesStackNavigator = () => {
-  const [role, setRole] = useState("")
-  const [permissions, set] = useState([])
+const HRStackNavigator = () => {
+  const [role, setRole] = useState("HR"); // Initial role  useEffect(() => {
+
   return (
-    <Stack.Navigator initialRouteName="SaleHome"
+    <Stack.Navigator initialRouteName="Home_HR"
       screenListeners={{
         state: async (e) => {
           // Log navigation changes if needed
           const fetchedRole = await loadData("role"); // Replace with your role-fetching logic
           setRole(fetchedRole);
+
         },
       }}
     >
-      <Stack.Screen name="SaleHome" component={Home_SalesMen} options={{ headerShown: false }} />
+      <Stack.Screen name="Home_HR" component={Home_HR} options={{ headerShown: false }} />
+      <Stack.Screen name="HRBottomStack" component={CEOBottomNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="BranchesHR" component={Branch_HR} options={{ headerShown: false }} />
+      <Stack.Screen name="BranchDetails" component={BranchDetails} options={{ headerShown: true }} />
+      <Stack.Screen name="Bank" component={Bank} options={{ headerShown: false }} />
+      <Stack.Screen name="BankDetails" component={BankDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Client" component={Clients} options={{ headerShown: false }} />
+      <Stack.Screen name="ClientDetails" component={ClientDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Vendor" component={Vendors} options={{ headerShown: false }} />
+      <Stack.Screen name="VendorDetails" component={VendorDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Subdealers" component={SubDealers} options={{ headerShown: false }} />
+      <Stack.Screen name="SubdealerDetails" component={SubDealerDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Assets" component={Assets} options={{ headerShown: false }} />
+      <Stack.Screen name="AssetDetails" component={AssetDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Appointments" component={Appointment} options={{ headerShown: false }} />
+      <Stack.Screen name="AppointmentDetails" component={AppointmentDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="workAllocation" component={WorkAllocation} options={{ headerShown: false }} />
+      <Stack.Screen name="Estimate" component={Estimate} options={{ headerShown: false }} />
+      <Stack.Screen name="EstimateDetails" component={EstimateDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Invoice" component={Invoices} options={{ headerShown: false }} />
+      <Stack.Screen name="InvoiceDetails" component={InvoiceDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Products" component={Products} options={{ headerShown: false }} />
+      <Stack.Screen name="Report" component={Report} options={{ headerShown: false }} />
+      <Stack.Screen name="Reciept" component={Reciept} options={{ headerShown: false }} />
+      {/* <Stack.Screen name="Payment" component={Payments} options={{ headerShown: false }} /> */}
+      <Stack.Screen name="Hiring" component={Hiring} options={{ headerShown: false }} />
+      <Stack.Screen name="HiringDetails" component={HiringDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="ProductType" component={ProductType} options={{ headerShown: false }} />
+      <Stack.Screen name="Designation" component={Designation} options={{ headerShown: false }} />
+      {/*<Stack.Screen name="Orders" component={Orders} options={{ headerShown: false }} />
+      <Stack.Screen name="Review" component={Review} options={{ headerShown: false }} /> */}
+      <Stack.Screen name="Services" component={Services} options={{ headerShown: false }} />
+      <Stack.Screen name="Staff" component={Staff} options={{ headerShown: false }} />
+      <Stack.Screen name="StaffDetails" component={StaffDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Voucher" component={Voucher} options={{ headerShown: false }} />
+      <Stack.Screen name="VoucherDetails" component={VoucherDetails} options={{ headerShown: false }} />
       <Stack.Screen name="Attendence" component={Attendence} options={{ headerShown: false }} />
-      <Stack.Screen name="WorkPayment" component={WorkPayment} options={{ headerShown: false }} />
-      <Stack.Screen name="Visit_ClientInfo" component={Visit_ClientInfo} options={{ headerShown: false }} />
-      <Stack.Screen name="Visit_ProductInfo" component={Visit_ProductInfo} options={{ headerShown: true }} />
-      <Stack.Screen name="VisitSuccessfully" component={VisitSuccessfully} options={{ headerShown: true }} />
-      <Stack.Screen name="SalesVisitOverview" component={SalesVisitOverview} options={{ headerShown: true }} />
       <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
+      <Stack.Screen name="ProfileSubStaff" component={ProfileSubStaff} options={{ headerShown: false }} />
       <Stack.Screen name="About" component={About} options={{ headerShown: true }} />
       <Stack.Screen name="Notification" component={Notification} options={{ headerShown: false }} />
       <Stack.Screen name="WorkAllocation" component={WorkAllocation} options={{ headerShown: false }} />
-      <Stack.Screen name="VisitList" component={VisitList} options={{ headerShown: false }} />
+      <Stack.Screen name="TechWorks" component={TechWorks} options={{ headerShown: false }} />
       <Stack.Screen name="Tickets" component={Tickets} options={{ headerShown: false }} />
       <Stack.Screen name="AddTickets" component={AddTickets} options={{ headerShown: false }} />
       <Stack.Screen name="Payments" component={Payments} options={{ headerShown: false }} />
-      <Stack.Screen name="Report" component={Report} options={{ headerShown: false }} />
+      <Stack.Screen name="Purchase" component={Purchase} options={{ headerShown: false }} />
+      <Stack.Screen name="Work" component={TechnicianWorks} options={{ headerShown: false }} />
       <Stack.Screen name="RequestRaiseDetails" component={RequestRaiseDetails} options={{ headerShown: true }} />
       <Stack.Screen name="RequestRaise" component={RequestRaise} options={{ headerShown: false }} />
       <Stack.Screen name="AddRequestRaise" component={AddRequestRaise} options={{ headerShown: true }} />
       <Stack.Screen name="EditRequestRaise" component={EditRequestRaise} options={{ headerShown: true }} />
-      <Stack.Screen name="leadsPayment" component={leadsPayment} options={{ headerShown: false }} />
-      <Stack.Screen name="leadsWork" component={leadsWork} options={{ headerShown: false }} />
       <Stack.Screen name="TrackingStaff" component={TrackingStaff} options={{ headerShown: true }} />
     </Stack.Navigator>
   );
 };
 
-const TechnicianBottomNavigator = () => {
+const WarehouseStackNavigator = () => {
+  const [role, setRole] = useState("Warehouse Manager"); // Initial role  useEffect(() => {
 
   return (
-    <BottomTab.Navigator
-      initialRouteName='StackHome'
-      // screenListeners={{
-      //   state: async (e) => {
-      //     // Log navigation changes if needed
-      //     const fetchedRole = await loadData("role"); // Replace with your role-fetching logic
-      //     setRole(fetchedRole);
+    <Stack.Navigator initialRouteName="Home_Warehouse"
+      screenListeners={{
+        state: async (e) => {
+          // Log navigation changes if needed
+          const fetchedRole = await loadData("role"); // Replace with your role-fetching logic
+          setRole(fetchedRole);
 
-      //   },
-      // }}
-      screenOptions={{
-        tabBarShowLabel: true, headerTitleStyle: { fontSize: 18, },
-        tabBarStyle: { backgroundColor: '#FFFFFF' },
+        },
       }}
     >
-      <BottomTab.Screen
-        name='StackHome'
-        component={TechnicianStackNavigator}
-        options={{
-          headerShown: false, title: "Home", tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
-          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home-outline" color={color} size={size} />
-          ),
-        }}
-      />
-
-      <BottomTab.Screen
-        name="Work"
-        component={TechnicianWorks}
-        options={{
-          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
-          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
-
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="lead-pencil" color={color} size={size} />
-          ),
-        }}
-      />
-
-      <BottomTab.Screen
-        name=" "
-        component={DeviceInstall_ClientInfo}
-        options={{
-          headerShown: false,
-          tabBarStyle: { elevation: 3 },
-          tabBarIcon: ({ color, size }) => (
-            <Avatar.Icon icon={"plus"} size={40} color='#f3f3f3' style={{ backgroundColor: "green", top: 10 }} />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="RequestRaise"
-        component={RequestRaise}
-        options={{
-          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
-          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff", title: 'Requests',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="file" color={color} size={size} />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
-          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
-
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
-          ),
-        }}
-      />
-    </BottomTab.Navigator>
+      <Stack.Screen name="Home_Warehouse" component={Home_WarehouseManager} options={{ headerShown: false }} />
+      <Stack.Screen name="WarehouseBottomStack" component={WarehouseBottomNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="Branches" component={Branch_WarehouseManager} options={{ headerShown: false }} />
+      <Stack.Screen name="BranchDetails" component={BranchDetails} options={{ headerShown: true }} />
+      <Stack.Screen name="Bank" component={Bank} options={{ headerShown: false }} />
+      <Stack.Screen name="BankDetails" component={BankDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Client" component={Clients} options={{ headerShown: false }} />
+      <Stack.Screen name="ClientDetails" component={ClientDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Vendor" component={Vendors} options={{ headerShown: false }} />
+      <Stack.Screen name="VendorDetails" component={VendorDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Subdealers" component={SubDealers} options={{ headerShown: false }} />
+      <Stack.Screen name="SubdealerDetails" component={SubDealerDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Assets" component={Assets} options={{ headerShown: false }} />
+      <Stack.Screen name="AssetDetails" component={AssetDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Appointments" component={Appointment} options={{ headerShown: false }} />
+      <Stack.Screen name="AppointmentDetails" component={AppointmentDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="workAllocation" component={WorkAllocation} options={{ headerShown: false }} />
+      <Stack.Screen name="Estimate" component={Estimate} options={{ headerShown: false }} />
+      <Stack.Screen name="EstimateDetails" component={EstimateDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Invoice" component={Invoices} options={{ headerShown: false }} />
+      <Stack.Screen name="InvoiceDetails" component={InvoiceDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Products" component={Products} options={{ headerShown: false }} />
+      <Stack.Screen name="Report" component={Report} options={{ headerShown: false }} />
+      <Stack.Screen name="Reciept" component={Reciept} options={{ headerShown: false }} />
+      {/* <Stack.Screen name="Payment" component={Payments} options={{ headerShown: false }} /> */}
+      <Stack.Screen name="Hiring" component={Hiring} options={{ headerShown: false }} />
+      <Stack.Screen name="HiringDetails" component={HiringDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="ProductType" component={ProductType} options={{ headerShown: false }} />
+      <Stack.Screen name="Designation" component={Designation} options={{ headerShown: false }} />
+      {/*<Stack.Screen name="Orders" component={Orders} options={{ headerShown: false }} />
+      <Stack.Screen name="Review" component={Review} options={{ headerShown: false }} /> */}
+      <Stack.Screen name="Services" component={Services} options={{ headerShown: false }} />
+      <Stack.Screen name="Staff" component={Staff} options={{ headerShown: false }} />
+      <Stack.Screen name="StaffDetails" component={StaffDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Voucher" component={Voucher} options={{ headerShown: false }} />
+      <Stack.Screen name="VoucherDetails" component={VoucherDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Attendence" component={Attendence} options={{ headerShown: false }} />
+      <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
+      <Stack.Screen name="ProfileSubStaff" component={ProfileSubStaff} options={{ headerShown: false }} />
+      <Stack.Screen name="About" component={About} options={{ headerShown: true }} />
+      <Stack.Screen name="Notification" component={Notification} options={{ headerShown: false }} />
+      <Stack.Screen name="WorkAllocation" component={WorkAllocation} options={{ headerShown: false }} />
+      <Stack.Screen name="TechWorks" component={TechWorks} options={{ headerShown: false }} />
+      <Stack.Screen name="Tickets" component={Tickets} options={{ headerShown: false }} />
+      <Stack.Screen name="AddTickets" component={AddTickets} options={{ headerShown: false }} />
+      <Stack.Screen name="Payments" component={Payments} options={{ headerShown: false }} />
+      <Stack.Screen name="Purchase" component={Purchase} options={{ headerShown: false }} />
+      <Stack.Screen name="Work" component={TechnicianWorks} options={{ headerShown: false }} />
+      <Stack.Screen name="RequestRaiseDetails" component={RequestRaiseDetails} options={{ headerShown: true }} />
+      <Stack.Screen name="RequestRaise" component={RequestRaise} options={{ headerShown: false }} />
+      <Stack.Screen name="AddRequestRaise" component={AddRequestRaise} options={{ headerShown: true }} />
+      <Stack.Screen name="EditRequestRaise" component={EditRequestRaise} options={{ headerShown: true }} />
+      <Stack.Screen name="TrackingStaff" component={TrackingStaff} options={{ headerShown: true }} />
+    </Stack.Navigator>
   );
 };
 
-const CEOBottomNavigator = () => {
+const BranchManagerStackNavigator = () => {
+  const [role, setRole] = useState("Warehouse Manager"); // Initial role  useEffect(() => {
 
   return (
-    <BottomTab.Navigator
-      initialRouteName='StackHome'
-      screenOptions={{
-        tabBarShowLabel: true, headerTitleStyle: { fontSize: 18, },
-        tabBarStyle: { backgroundColor: '#FFFFFF' },
+    <Stack.Navigator initialRouteName="Home_BranchManager"
+      screenListeners={{
+        state: async (e) => {
+          // Log navigation changes if needed
+          const fetchedRole = await loadData("role"); // Replace with your role-fetching logic
+          setRole(fetchedRole);
+
+        },
       }}
     >
-      <BottomTab.Screen
-        name='StackHome'
-        component={CEOStackNavigator}
-        options={{
-          headerShown: false, title: "Home", tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
-          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home-outline" color={color} size={size} />
-          ),
-        }}
-      />
-
-      <BottomTab.Screen
-        name="Work"
-        component={TechnicianWorks}
-        options={{
-          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
-          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="lead-pencil" color={color} size={size} />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="Staff"
-        component={Staff}
-        options={{
-          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
-          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
-          ),
-        }}
-      />
-
-      <BottomTab.Screen
-        name="RequestRaise"
-        component={RequestRaise}
-        options={{
-          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
-          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff", title: 'Requests',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="file" color={color} size={size} />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
-          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
-          ),
-        }}
-      />
-    </BottomTab.Navigator>
-  );
-};
-
-const SubdealerStaffBottomNavigator = () => {
-
-  return (
-    <BottomTab.Navigator
-      initialRouteName='StackHome'
-      // screenListeners={{
-      //   state: async (e) => {
-      //     // Log navigation changes if needed
-      //     const fetchedRole = await loadData("role"); // Replace with your role-fetching logic
-      //     setRole(fetchedRole);
-
-      //   },
-      // }}
-      screenOptions={{
-        tabBarShowLabel: true, headerTitleStyle: { fontSize: 18, },
-        tabBarStyle: { backgroundColor: '#FFFFFF' },
-      }}
-    >
-      <BottomTab.Screen
-        name='StackHome'
-
-        component={SubdealerStaffStackNavigator}
-        options={{
-          headerShown: false, title: "Home", tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
-          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home-outline" color={color} size={size} />
-          ),
-        }}
-      />
-
-      <BottomTab.Screen
-        name="Work"
-        component={SubStaffWorks}
-        options={{
-          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
-          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff", title: 'Works',
-
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="lead-pencil" color={color} size={size} />
-          ),
-        }}
-      />
-
-      <BottomTab.Screen
-        name=" "
-        component={DeviceInstall_ClientInfo}
-        options={{
-          headerShown: false,
-          tabBarStyle: { elevation: 3 },
-          tabBarIcon: ({ color, size }) => (
-            <Avatar.Icon icon={"plus"} size={40} color='#f3f3f3' style={{ backgroundColor: "green", top: 10 }} />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="ProductTech"
-        component={ProductTech}
-        options={{
-          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
-          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff", title: 'Products',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="file" color={color} size={size} />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="ProfileProfileSubStaff"
-        component={ProfileSubStaff}
-        options={{
-          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
-          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff", title: "Profile",
-
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
-          ),
-        }}
-      />
-    </BottomTab.Navigator>
+      <Stack.Screen name="Home_BranchManager" component={Home_BranchManager} options={{ headerShown: false }} />
+      <Stack.Screen name="BranchManagerBottomStack" component={BranchManagerBottomNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="Bank" component={Bank} options={{ headerShown: false }} />
+      <Stack.Screen name="BankDetails" component={BankDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Client" component={Clients} options={{ headerShown: false }} />
+      <Stack.Screen name="ClientDetails" component={ClientDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Vendor" component={Vendors} options={{ headerShown: false }} />
+      <Stack.Screen name="VendorDetails" component={VendorDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Subdealers" component={SubDealers} options={{ headerShown: false }} />
+      <Stack.Screen name="SubdealerDetails" component={SubDealerDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Assets" component={Assets} options={{ headerShown: false }} />
+      <Stack.Screen name="AssetDetails" component={AssetDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Appointments" component={Appointment} options={{ headerShown: false }} />
+      <Stack.Screen name="AppointmentDetails" component={AppointmentDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="workAllocation" component={WorkAllocation} options={{ headerShown: false }} />
+      <Stack.Screen name="Estimate" component={Estimate} options={{ headerShown: false }} />
+      <Stack.Screen name="EstimateDetails" component={EstimateDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Invoice" component={Invoices} options={{ headerShown: false }} />
+      <Stack.Screen name="InvoiceDetails" component={InvoiceDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Products" component={Products} options={{ headerShown: false }} />
+      <Stack.Screen name="Report" component={Report} options={{ headerShown: false }} />
+      <Stack.Screen name="Reciept" component={Reciept} options={{ headerShown: false }} />
+      {/* <Stack.Screen name="Payment" component={Payments} options={{ headerShown: false }} /> */}
+      <Stack.Screen name="Hiring" component={Hiring} options={{ headerShown: false }} />
+      <Stack.Screen name="HiringDetails" component={HiringDetails} options={{ headerShown: false }} />
+      {/*<Stack.Screen name="Orders" component={Orders} options={{ headerShown: false }} />
+      <Stack.Screen name="Review" component={Review} options={{ headerShown: false }} /> */}
+      <Stack.Screen name="Staff" component={Staff} options={{ headerShown: false }} />
+      <Stack.Screen name="StaffDetails" component={StaffDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="Attendence" component={Attendence} options={{ headerShown: false }} />
+      <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
+      <Stack.Screen name="ProfileSubStaff" component={ProfileSubStaff} options={{ headerShown: false }} />
+      <Stack.Screen name="About" component={About} options={{ headerShown: true }} />
+      <Stack.Screen name="Notification" component={Notification} options={{ headerShown: false }} />
+      <Stack.Screen name="TechWorks" component={TechWorks} options={{ headerShown: false }} />
+      <Stack.Screen name="Tickets" component={Tickets} options={{ headerShown: false }} />
+      <Stack.Screen name="AddTickets" component={AddTickets} options={{ headerShown: false }} />
+      <Stack.Screen name="Payments" component={Payments} options={{ headerShown: false }} />
+      <Stack.Screen name="Purchase" component={Purchase} options={{ headerShown: false }} />
+      <Stack.Screen name="Work" component={TechnicianWorks} options={{ headerShown: false }} />
+      <Stack.Screen name="RequestRaiseDetails" component={RequestRaiseDetails} options={{ headerShown: true }} />
+      <Stack.Screen name="RequestRaise" component={RequestRaise} options={{ headerShown: false }} />
+      <Stack.Screen name="AddRequestRaise" component={AddRequestRaise} options={{ headerShown: true }} />
+      <Stack.Screen name="EditRequestRaise" component={EditRequestRaise} options={{ headerShown: true }} />
+      <Stack.Screen name="TrackingStaff" component={TrackingStaff} options={{ headerShown: true }} />
+    </Stack.Navigator>
   );
 };
 
@@ -773,6 +710,483 @@ const SubdealerStaffStackNavigator = () => {
       <Stack.Screen name="SubdealerStaffWorks" component={SubdealerStaffWorks} options={{ headerShown: false }} />
       <Stack.Screen name="PaymentScanner" component={PaymentScanner} options={{ headerShown: true }} />
     </Stack.Navigator>
+  );
+};
+
+const SalesStackNavigator = () => {
+  const [role, setRole] = useState("")
+  const [permissions, set] = useState([])
+  return (
+    <Stack.Navigator initialRouteName="SaleHome"
+      screenListeners={{
+        state: async (e) => {
+          // Log navigation changes if needed
+          const fetchedRole = await loadData("role"); // Replace with your role-fetching logic
+          setRole(fetchedRole);
+        },
+      }}
+    >
+      <Stack.Screen name="SaleHome" component={Home_SalesMen} options={{ headerShown: false }} />
+      <Stack.Screen name="Attendence" component={Attendence} options={{ headerShown: false }} />
+      <Stack.Screen name="WorkPayment" component={WorkPayment} options={{ headerShown: false }} />
+      <Stack.Screen name="Visit_ClientInfo" component={Visit_ClientInfo} options={{ headerShown: false }} />
+      <Stack.Screen name="Visit_ProductInfo" component={Visit_ProductInfo} options={{ headerShown: true }} />
+      <Stack.Screen name="VisitSuccessfully" component={VisitSuccessfully} options={{ headerShown: true }} />
+      <Stack.Screen name="SalesVisitOverview" component={SalesVisitOverview} options={{ headerShown: true }} />
+      <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
+      <Stack.Screen name="About" component={About} options={{ headerShown: true }} />
+      <Stack.Screen name="Notification" component={Notification} options={{ headerShown: false }} />
+      <Stack.Screen name="WorkAllocation" component={WorkAllocation} options={{ headerShown: false }} />
+      <Stack.Screen name="VisitList" component={VisitList} options={{ headerShown: false }} />
+      <Stack.Screen name="Tickets" component={Tickets} options={{ headerShown: false }} />
+      <Stack.Screen name="AddTickets" component={AddTickets} options={{ headerShown: false }} />
+      <Stack.Screen name="Payments" component={Payments} options={{ headerShown: false }} />
+      <Stack.Screen name="Report" component={Report} options={{ headerShown: false }} />
+      <Stack.Screen name="RequestRaiseDetails" component={RequestRaiseDetails} options={{ headerShown: true }} />
+      <Stack.Screen name="RequestRaise" component={RequestRaise} options={{ headerShown: false }} />
+      <Stack.Screen name="AddRequestRaise" component={AddRequestRaise} options={{ headerShown: true }} />
+      <Stack.Screen name="EditRequestRaise" component={EditRequestRaise} options={{ headerShown: true }} />
+      <Stack.Screen name="leadsPayment" component={leadsPayment} options={{ headerShown: false }} />
+      <Stack.Screen name="leadsWork" component={leadsWork} options={{ headerShown: false }} />
+      <Stack.Screen name="TrackingStaff" component={TrackingStaff} options={{ headerShown: true }} />
+    </Stack.Navigator>
+  );
+};
+
+
+const CEOBottomNavigator = () => {
+
+  return (
+    <BottomTab.Navigator
+      initialRouteName='StackHome'
+      screenOptions={{
+        tabBarShowLabel: true, headerTitleStyle: { fontSize: 18, },
+        tabBarStyle: { backgroundColor: '#FFFFFF' },
+      }}
+    >
+      <BottomTab.Screen
+        name='StackHome'
+        component={CEOStackNavigator}
+        options={{
+          headerShown: false, title: "Home", tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home-outline" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <BottomTab.Screen
+        name="Work"
+        component={TechnicianWorks}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="lead-pencil" color={color} size={size} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Staff"
+        component={Staff}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <BottomTab.Screen
+        name="RequestRaise"
+        component={RequestRaise}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff", title: 'Requests',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="file" color={color} size={size} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      />
+    </BottomTab.Navigator>
+  );
+};
+
+const HRBottomNavigator = () => {
+
+  return (
+    <BottomTab.Navigator
+      initialRouteName='StackHome'
+      screenOptions={{
+        tabBarShowLabel: true, headerTitleStyle: { fontSize: 18, },
+        tabBarStyle: { backgroundColor: '#FFFFFF' },
+      }}
+    >
+      <BottomTab.Screen
+        name='StackHome'
+        component={HRStackNavigator}
+        options={{
+          headerShown: false, title: "Home", tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home-outline" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <BottomTab.Screen
+        name="Branch"
+        component={Branch_HR}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="lead-pencil" color={color} size={size} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Staff"
+        component={Staff}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <BottomTab.Screen
+        name="RequestRaise"
+        component={RequestRaise}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff", title: 'Requests',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="file" color={color} size={size} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      />
+    </BottomTab.Navigator>
+  );
+};
+
+const WarehouseBottomNavigator = () => {
+
+  return (
+    <BottomTab.Navigator
+      initialRouteName='StackHome'
+      screenOptions={{
+        tabBarShowLabel: true, headerTitleStyle: { fontSize: 18, },
+        tabBarStyle: { backgroundColor: '#FFFFFF' },
+      }}
+    >
+      <BottomTab.Screen
+        name='StackHome'
+        component={WarehouseStackNavigator}
+        options={{
+          headerShown: false, title: "Home", tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home-outline" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <BottomTab.Screen
+        name="Branch"
+        component={Branch_WarehouseManager}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="lead-pencil" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <BottomTab.Screen
+        name="RequestRaise"
+        component={RequestRaise}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff", title: 'Requests',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="file" color={color} size={size} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      />
+    </BottomTab.Navigator>
+  );
+};
+
+const BranchManagerBottomNavigator = () => {
+
+  return (
+    <BottomTab.Navigator
+      initialRouteName='StackHome'
+      screenOptions={{
+        tabBarShowLabel: true, headerTitleStyle: { fontSize: 18, },
+        tabBarStyle: { backgroundColor: '#FFFFFF' },
+      }}
+    >
+      <BottomTab.Screen
+        name='StackHome'
+        component={BranchManagerStackNavigator}
+        options={{
+          headerShown: false, title: "Home", tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home-outline" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <BottomTab.Screen
+        name="work"
+        component={TechWorks}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="lead-pencil" color={color} size={size} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Staff"
+        component={Staff}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <BottomTab.Screen
+        name="RequestRaise"
+        component={RequestRaise}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff", title: 'Requests',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="file" color={color} size={size} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      />
+    </BottomTab.Navigator>
+  );
+};
+
+const TechnicianBottomNavigator = () => {
+
+  return (
+    <BottomTab.Navigator
+      initialRouteName='StackHome'
+      // screenListeners={{
+      //   state: async (e) => {
+      //     // Log navigation changes if needed
+      //     const fetchedRole = await loadData("role"); // Replace with your role-fetching logic
+      //     setRole(fetchedRole);
+
+      //   },
+      // }}
+      screenOptions={{
+        tabBarShowLabel: true, headerTitleStyle: { fontSize: 18, },
+        tabBarStyle: { backgroundColor: '#FFFFFF' },
+      }}
+    >
+      <BottomTab.Screen
+        name='StackHome'
+        component={TechnicianStackNavigator}
+        options={{
+          headerShown: false, title: "Home", tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home-outline" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <BottomTab.Screen
+        name="Work"
+        component={TechnicianWorks}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
+
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="lead-pencil" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <BottomTab.Screen
+        name=" "
+        component={DeviceInstall_ClientInfo}
+        options={{
+          headerShown: false,
+          tabBarStyle: { elevation: 3 },
+          tabBarIcon: ({ color, size }) => (
+            <Avatar.Icon icon={"plus"} size={40} color='#f3f3f3' style={{ backgroundColor: "green", top: 10 }} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="RequestRaise"
+        component={RequestRaise}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff", title: 'Requests',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="file" color={color} size={size} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
+
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      />
+    </BottomTab.Navigator>
+  );
+};
+
+const SubdealerStaffBottomNavigator = () => {
+
+  return (
+    <BottomTab.Navigator
+      initialRouteName='StackHome'
+      // screenListeners={{
+      //   state: async (e) => {
+      //     // Log navigation changes if needed
+      //     const fetchedRole = await loadData("role"); // Replace with your role-fetching logic
+      //     setRole(fetchedRole);
+
+      //   },
+      // }}
+      screenOptions={{
+        tabBarShowLabel: true, headerTitleStyle: { fontSize: 18, },
+        tabBarStyle: { backgroundColor: '#FFFFFF' },
+      }}
+    >
+      <BottomTab.Screen
+        name='StackHome'
+
+        component={SubdealerStaffStackNavigator}
+        options={{
+          headerShown: false, title: "Home", tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home-outline" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <BottomTab.Screen
+        name="Work"
+        component={SubStaffWorks}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff", title: 'Works',
+
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="lead-pencil" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <BottomTab.Screen
+        name=" "
+        component={DeviceInstall_ClientInfo}
+        options={{
+          headerShown: false,
+          tabBarStyle: { elevation: 3 },
+          tabBarIcon: ({ color, size }) => (
+            <Avatar.Icon icon={"plus"} size={40} color='#f3f3f3' style={{ backgroundColor: "green", top: 10 }} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="ProductTech"
+        component={ProductTech}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff", title: 'Products',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="file" color={color} size={size} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="ProfileProfileSubStaff"
+        component={ProfileSubStaff}
+        options={{
+          headerShown: false, tabBarActiveTintColor: '#f3f3f3', tabBarActiveBackgroundColor: "green",
+          tabBarInactiveTintColor: '#808080', tabBarInactiveBackgroundColor: "#ffffff", title: "Profile",
+
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      />
+    </BottomTab.Navigator>
   );
 };
 
@@ -892,60 +1306,42 @@ const DrawerNavigator = () => {
       {role === "sub dealer staff" &&
         <Drawer.Screen name="SubdealerStaffWorks" component={SubdealerStaffWorks} options={{ headerShown: false, title: "StaffWork" }} />
       }
-      {permissions?.some((p) => p?.name === 'branch' && p?.view) && (
-        <Drawer.Screen name="Branches" component={Branch} options={{ headerShown: false }} />
-      )}
-      {/* {permissions?.some((p) => p?.name === 'branch' && p?.view) && (
-        <Drawer.Screen name="BranchDetails" component={BranchDetails} options={{ headerShown: false }} />
-      )} */}
-      {permissions?.some((p) => p?.name === 'bank' && p?.view) && (
-        <Drawer.Screen name="Bank" component={Bank} options={{ headerShown: false }} />
-      )}
+      {permissions?.some(p => p?.name === 'branch' && p?.view) &&
+        !['Sales Executive', 'sub dealer staff', 'Technician', 'Field Technician', 'Sr. Technician', 'Branch Manager', 'HR', 'Warehouse Manager', 'Operations Manager'].includes(role) && (
+          <Drawer.Screen name="Branches" component={Branch} options={{ headerShown: false }} />
+        )}
+      {permissions?.some(p => p?.name === 'branch' && p?.view) &&
+        ['HR'].includes(role) && (
+          <Drawer.Screen name="BranchesHR" component={Branch_HR} options={{ headerShown: false, title: 'Branches' }} />
+        )}
+      {permissions?.some(p => p?.name === 'branch' && p?.view) &&
+        ['Warehouse Manager', 'Operations Manager'].includes(role) && (
+          <Drawer.Screen name="BranchesHR" component={Branch_WarehouseManager} options={{ headerShown: false, title: 'Branches' }} />
+        )}
       {permissions?.some((p) => p?.name === 'client' && p?.view) && (
         <Drawer.Screen name="Client" component={Clients} options={{ headerShown: false }} />
       )}
-      {/* {permissions?.some((p) => p?.name === 'client' && p?.view) && (
-        <Drawer.Screen name="ClientDetails" component={ClientDetails} options={{ headerShown: false }} />
-      )} */}
       {permissions?.some((p) => p?.name === 'vendor' && p?.view) && (
         <Drawer.Screen name="Vendor" component={Vendors} options={{ headerShown: false }} />
       )}
-      {/* {permissions?.some((p) => p?.name === 'vendor' && p?.view) && (
-        <Drawer.Screen name="VendorDetails" component={VendorDetails} options={{ headerShown: false }} />
-      )} */}
       {permissions?.some((p) => p?.name === 'sub dealer' && p?.view) && (
         <Drawer.Screen name="Subdealers" component={SubDealers} options={{ headerShown: false }} />
       )}
-      {/* {permissions?.some((p) => p?.name === 'sub dealer' && p?.view) && (
-        <Drawer.Screen name="SubdealerDetails" component={SubDealerDetails} options={{ headerShown: false }} />
-      )} */}
       {permissions?.some((p) => p?.name === 'assets' && p?.view) && (
         <Drawer.Screen name="Assets" component={Assets} options={{ headerShown: false }} />
       )}
-      {/* {permissions?.some((p) => p?.name === 'asset' && p?.view) && (
-        <Drawer.Screen name="AssetDetails" component={AssetDetails} options={{ headerShown: false }} />
-      )} */}
       {permissions?.some((p) => p?.name === 'appointments' && p?.view) && (
         <Drawer.Screen name="Appointments" component={Appointment} options={{ headerShown: false }} />
       )}
-      {/* {permissions?.some((p) => p?.name === 'appointment' && p?.view) && (
-        <Drawer.Screen name="AppointmentDetails" component={AppointmentDetails} options={{ headerShown: false }} />
-      )} */}
       {permissions?.some((p) => p?.name === 'workAllocation' && p?.view) && (
         <Drawer.Screen name="workAllocation" component={WorkAllocation} options={{ headerShown: false }} />
       )}
       {permissions?.some((p) => p?.name === 'estimate' && p?.view) && (
         <Drawer.Screen name="Estimate" component={Estimate} options={{ headerShown: false }} />
       )}
-      {/* {permissions?.some((p) => p?.name === 'estimate' && p?.view) && (
-        <Drawer.Screen name="EstimateDetails" component={EstimateDetails} options={{ headerShown: false }} />
-      )} */}
       {permissions?.some((p) => p?.name === 'invoice' && p?.view) && (
         <Drawer.Screen name="Invoice" component={Invoices} options={{ headerShown: false }} />
       )}
-      {/* {permissions?.some((p) => p?.name === 'invoice' && p?.view) && (
-        <Drawer.Screen name="InvoiceDetails" component={InvoiceDetails} options={{ headerShown: false }} />
-      )} */}
       {permissions?.some(p => p?.name === 'product' && p?.view) &&
         !['Sales Executive', 'sub dealer staff', 'Technician', 'Field Technician', 'Sr. Technician'].includes(role) && (
           <Drawer.Screen name="Products" component={Products} options={{ headerShown: false }} />
@@ -962,36 +1358,21 @@ const DrawerNavigator = () => {
       {permissions?.some((p) => p?.name === 'hiring' && p?.view) && (
         <Drawer.Screen name="Hiring" component={Hiring} options={{ headerShown: false }} />
       )}
-      {/* {permissions?.some((p) => p?.name === 'hiring' && p?.view) && (
-        <Drawer.Screen name="HiringDetails" component={HiringDetails} options={{ headerShown: false }} />
-      )} */}
-      {/*       {permissions?.some((p) => p?.name === 'productType' && p?.view) && (
-<Drawer.Screen name="ProductType" component={ProductType} options={{ headerShown: false }} />
-)}
-            {permissions?.some((p) => p?.name === 'designation' && p?.view) && (
-<Drawer.Screen name="Designation" component={Designation} options={{ headerShown: false }} />
-)}
-            {permissions?.some((p) => p?.name === 'orders' && p?.view) && (
-<Drawer.Screen name="Orders" component={Orders} options={{ headerShown: false }} />
-)}
-            {permissions?.some((p) => p?.name === 'review' && p?.view) && (
-<Drawer.Screen name="Review" component={Review} options={{ headerShown: false }} />
-)}
-            {permissions?.some((p) => p?.name === 'services' && p?.view) && (
-<Drawer.Screen name="Services" component={Services} options={{ headerShown: false }} /> 
-)}  */}
+      {permissions?.some((p) => p?.name === 'productType' && p?.view) && (
+        <Drawer.Screen name="ProductType" component={ProductType} options={{ headerShown: false }} />
+      )}
+      {permissions?.some((p) => p?.name === 'designation' && p?.view) && (
+        <Drawer.Screen name="Designation" component={Designation} options={{ headerShown: false }} />
+      )}
+      {permissions?.some((p) => p?.name === 'services' && p?.view) && (
+        <Drawer.Screen name="Services" component={Services} options={{ headerShown: false }} />
+      )}
       {permissions?.some((p) => p?.name === 'staff' && p?.view) && (
         <Drawer.Screen name="Staff" component={Staff} options={{ headerShown: false }} />
       )}
-      {/* {permissions?.some((p) => p?.name === 'staff' && p?.view) && (
-        <Drawer.Screen name="StaffDetails" component={StaffDetails} options={{ headerShown: false }} />
-      )} */}
       {permissions?.some((p) => p?.name === 'voucher' && p?.view) && (
         <Drawer.Screen name="Voucher" component={Voucher} options={{ headerShown: false }} />
       )}
-      {/* {permissions?.some((p) => p?.name === 'voucher' && p?.view) && (
-        <Drawer.Screen name="VoucherDetails" component={VoucherDetails} options={{ headerShown: false }} />
-      )} */}
       {(role === "Sales Executive" || role === "SalesMan") &&
         <Drawer.Screen name="VisitList" component={VisitList} options={{ headerShown: false, title: "Leads" }} />
       }
@@ -1006,12 +1387,12 @@ const DrawerNavigator = () => {
         <Drawer.Screen name="SubStaffWorks" component={SubStaffWorks} options={{ headerShown: false, title: "Works" }} />
       }
       {(role === "Technician" || role === "Field Technician" || role === "Sr. Technician") &&
-        <Drawer.Screen name="TechWorks" component={TechWorks} options={{ headerShown: false, title: "Payments" }} />
+        <Drawer.Screen name="TechWorks" component={TechWorks} options={{ headerShown: false, title: "All Works" }} />
       }
       <Drawer.Screen name="Tickets" component={Tickets} options={{ headerShown: false }} />
       <Drawer.Screen name="RequestRaise" component={RequestRaise} options={{ headerShown: false }} />
       {(role === "Technician" || role === "Field Technician" || role === "Sr. Technician") &&
-        <Drawer.Screen name="TechnicianWork" component={TechnicianWorks} options={{ headerShown: false, title: 'Works' }} />
+        <Drawer.Screen name="TechnicianWork" component={TechnicianWorks} options={{ headerShown: false, title: 'Pending Works' }} />
       }
       {(role === "sub dealer staff" || role === "Technician" || role === "Field Technician" || role === "Sr. Technician") &&
         <Drawer.Screen name="ProductTech" component={ProductTech} options={{ headerShown: false }} />

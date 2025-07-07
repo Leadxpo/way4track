@@ -38,47 +38,36 @@ const ProductTech = ({ navigation }) => {
         fetchProducts({
           companyCode: "WAY4TRACK",
           unitCode: "WAY4",
-          staffId: staffId,
         })
       );
     }
   }, [dispatch, staffId]);
 
   const filteredData = useMemo(() => {
-    return products?.staffDetails?.filter((item) => {
+    return products?.filter((item) => {
       if (!searchQuery) return true;
       const query = searchQuery.toLowerCase();
       return item.productName?.toLowerCase().includes(query);
     }) || [];
   }, [products, searchQuery]);
 
-  const techProduct = useMemo(
-    () =>
-      filteredData.filter(
-        (item) =>
-          item.productStatus === "installed" ||
-          item.productStatus === "available"
-      ),
-    [filteredData]
-  );
 
-  const techProductInstalled = useMemo(
-    () =>
-      filteredData.filter((item) => item.productStatus === "installed"),
-    [filteredData]
-  );
 
-  const techProductRemaining = useMemo(
-    () =>
-      filteredData.filter((item) => item.productStatus !== "available"),
-    [filteredData]
-  );
-
+  // Products that have been installed or used (i.e., out of stock)
+  const techProductInstalled = useMemo(() => {
+    return filteredData.filter(item => item.productStatus === "outOfStock" && item.staffId === staffId);
+  }, [filteredData]);
+  
+  // Products that are still available (i.e., not yet installed)
+  const techProductRemaining = useMemo(() => {
+    return filteredData.filter(item => item.productStatus === "available" && item.staffId === staffId);
+  }, [filteredData]);
+  
   const getStatusColor = (status) => {
     switch (status) {
       case "available":
         return "#ffc4a8";
-      case "installed":
+      case "outOfStock":
         return "blue";
       default:
         return "#f3f3f3";
@@ -89,30 +78,59 @@ const ProductTech = ({ navigation }) => {
     <Card
       style={[
         styles.card,
-        { backgroundColor: getStatusColor(item.productStatus) },
+        { backgroundColor: getStatusColor(item.productStatus),padding:10 },
       ]}
     >
       <View style={styles.entryRow}>
         <View>
           <Text style={styles.entryText}>
-            Product Name:{" "}
+            Product Name :{" "}
             <Text style={styles.values}>{item.productName || "N/A"}</Text>
           </Text>
         </View>
         <TouchableOpacity onPress={() => console.log("Clicked quantity")}>
           <Text style={styles.entryText}>
-            Qty:{" "}
-            <Text style={styles.values}>{item.handStock || 0}</Text>
+            IMEI Number :{" "}
+            <Text style={styles.values}>{item.imeiNumber || 0}</Text>
           </Text>
         </TouchableOpacity>
       </View>
+      <View style={styles.entryRow}>
+        <View>
+          <Text style={styles.entryText}>
+            Basket Name :{" "}
+            <Text style={styles.values}>{item.basketName || "N/A"}</Text>
+          </Text>
+        </View>
+        <TouchableOpacity onPress={() => console.log("Clicked quantity")}>
+          <Text style={styles.entryText}>
+          SIM Number :{" "}
+            <Text style={styles.values}>{item.simNumber || 'N/A'}</Text>
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.entryRow}>
+        <View>
+          <Text style={styles.entryText}>
+          Product Type :{" "}
+            <Text style={styles.values}>{item.productType || "N/A"}</Text>
+          </Text>
+        </View>
+        <TouchableOpacity onPress={() => console.log("Clicked quantity")}>
+          <Text style={styles.entryText}>
+          Location :{" "}
+            <Text style={styles.values}>{item.location || 'N/A'}</Text>
+          </Text>
+        </TouchableOpacity>
+      </View>
+
     </Card>
   );
 
   const getSegmentData = () => {
     switch (activeSegment) {
-      case "products":
-        return techProduct;
+      // case "products":
+      //   return techProduct;
       case "productInstalled":
         return techProductInstalled;
       case "productsRemaining":
@@ -138,14 +156,7 @@ const ProductTech = ({ navigation }) => {
           value={activeSegment}
           onValueChange={setActiveSegment}
           buttons={[
-            {
-              value: "products",
-              label: "Products",checkedColor:"#ffffff",uncheckedColor:"#333333",
-              style:
-                activeSegment === "products"
-                  ? styles.activeButton
-                  : styles.inactiveButton,
-            },
+           
             {
               value: "productInstalled",
               label: "Installed",checkedColor:"#ffffff",uncheckedColor:"#333333",
@@ -156,7 +167,7 @@ const ProductTech = ({ navigation }) => {
             },
             {
               value: "productsRemaining",
-              label: "Remaining",checkedColor:"#ffffff",uncheckedColor:"#333333",
+              label: "Available",checkedColor:"#ffffff",uncheckedColor:"#333333",
               style:
                 activeSegment === "productsRemaining"
                   ? styles.activeButton
@@ -238,7 +249,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 16,
   },
   entryText: {
     color: '#333',
@@ -267,7 +277,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   listContainer: {
-    paddingBottom: 16,
+    paddingVertical: 16,
   },
 });
 

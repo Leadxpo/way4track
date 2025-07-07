@@ -35,6 +35,21 @@ const RoleRedirector = () => {
             index: 0,
             routes: [{ name: "CEOBottomStack" }],
           });
+        }else if (fetchedRole === "HR") {
+         navigation.reset({
+           index: 0,
+           routes: [{ name: "HRBottomStack" }],
+         });
+        }else if (fetchedRole === 'Warehouse Manager'||fetchedRole === 'Operations Manager') {
+         navigation.reset({
+           index: 0,
+           routes: [{ name: "WarehouseBottomStack" }],
+         });
+        }else if (fetchedRole === 'Branch Manager') {
+         navigation.reset({
+           index: 0,
+           routes: [{ name: "BranchManagerBottomStack" }],
+         });
          }else if (fetchedRole === "Technician" || fetchedRole === "Technician" || fetchedRole === "Field Technician" || fetchedRole === "Sr. Technician") {
           navigation.reset({
             index: 0,
@@ -65,7 +80,7 @@ const RoleRedirector = () => {
   return (
     <View style={styles.container}>
       <MaterialCommunityIcons name="progress-clock" size={50} color={theme.colors.primary} />
-      <Text style={styles.title}>SHARONTELEMATRIC</Text>
+      <Text style={styles.title}>SHARON TELEMATICS</Text>
       <Text style={styles.subtitle}>Please wait home screen was loading ..</Text>
       <ProgressBar progress={progress} color={theme.colors.primary} style={styles.progressBar} />
     </View>

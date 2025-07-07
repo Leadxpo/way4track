@@ -20,16 +20,24 @@ const Home_CEO = ({ navigation }) => {
     const CEO_dashboardPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
     dispatch(intiateCEO_dashboard(CEO_dashboardPayload)); 
   }, [dispatch])
-
-  return (
+  return ( 
     <SafeAreaView>
         <Header />
       <ScrollView>
         <BranchSummary branchSales={CEO_homeInfo?.ProductAndServiceSales} />
         <CashSummary solidLiquid={CEO_homeInfo?.solidLiquid} branchwise={CEO_homeInfo?.branchWiseSolidLiquidCash}/>
         <GraphSection monthWiseBalance={CEO_homeInfo?.monthWiseBalance}/>
-        <StatsSummary TicketCount={CEO_homeInfo?.totalTickets} expancesCount={CEO_homeInfo?.ExpenseCount} expencesData={CEO_homeInfo?.ExpenseData} productCount={CEO_homeInfo?.totalProducts} productData={CEO_homeInfo?.productData} purchaseCount={CEO_homeInfo?.PurchaseCount} purchaseData={CEO_homeInfo?.purchaseData} ticketData={CEO_homeInfo?.ticketsData}/>
-        <AnalysisSection monthWiseAmount={CEO_homeInfo?.monthWiseBalance} CreditAndDebitPercentages={CEO_homeInfo?.ProductTypeCreditAndDebitPercentages}/>
+        <StatsSummary
+        PayableAmount={CEO_homeInfo?.amountDetails.PayableAmount} 
+        ReceivableAmount={CEO_homeInfo?.amountDetails.ReceivableAmount} 
+        SalesAmount={CEO_homeInfo?.amountDetails.SalesAmount} 
+        PurchaseCount={CEO_homeInfo?.PurchaseCount.last30DaysPurchases}
+        receivableTable={CEO_homeInfo?.receivableTable}  
+        saleTable={CEO_homeInfo?.saleTable} 
+        payableTable={CEO_homeInfo?.payableTable} 
+        purchaseTable={CEO_homeInfo?.purchaseData} 
+        />
+        {/* <AnalysisSection yearWiseAmount={CEO_homeInfo?.branchWiseYearlySales} CreditAndDebitPercentages={CEO_homeInfo?.ProductTypeCreditAndDebitPercentages}/> */}
       </ScrollView>
     </SafeAreaView>
   );

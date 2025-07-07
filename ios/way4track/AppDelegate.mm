@@ -6,7 +6,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  //  [GMSServices provideAPIKey:@"AIzaSyBiBti8gGaR3eZ8ghJA_NExqpbeJUvMfBo"];  // Add your Google Maps API Key here
+   [GMSServices provideAPIKey:@"AIzaSyCmiyc8iXq1KDOmW_-yWsjALkQVY1z8krw"];  // Add your Google Maps API Key here
   self.moduleName = @"way4track";
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.

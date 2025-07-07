@@ -30,16 +30,41 @@ import api from "../../Api/api";
 
 export const intiateCEO_dashboard = (create_CEO_dashboardPayload) => async (dispatch) => {
     const { unitCode, companyCode } = create_CEO_dashboardPayload;
+    const currentYear = new Date().getFullYear().toString();
     dispatch({ type: CREATE_CEO_DASHBOARD_REQUEST });
     try {
         // Attempt to fetch CEO_DASHBOARDS
-        const productAndServiceSales = await api.post(`/dashboards/getTotalProductAndServiceSales`, create_CEO_dashboardPayload, {
+        const productAndServiceSales = await api.post(`/dashboards/getSalesBreakdown`, {companyCode,unitCode,date:currentYear}, {
             headers: {
                 'Content-Type': 'application/json',
             },
         });
 
-        const attendenceData = await api.post(`/dashboards/staffAttendanceDetails`, create_CEO_dashboardPayload, {
+        const amountData = await api.post(`/dashboards/getAmountDetails`, create_CEO_dashboardPayload, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const saleTable = await api.post(`/dashboards/getSalesForTable`, create_CEO_dashboardPayload, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const payableTable = await api.post(`/dashboards/getPayableAmountForTable`, create_CEO_dashboardPayload, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const receivableTable = await api.post(`/dashboards/getReceivableAmountForTable`, create_CEO_dashboardPayload, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const purchaseData = await api.post(`/dashboards/getPurchaseData`, create_CEO_dashboardPayload, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -57,25 +82,19 @@ export const intiateCEO_dashboard = (create_CEO_dashboardPayload) => async (disp
             },
         });
 
-        const monthWiseBalanceData = await api.post(`/dashboards/getMonthWiseBalance`, create_CEO_dashboardPayload, {
+        const TotalProductAndServiceSales = await api.post(`/dashboards/getTotalProductAndServiceSales`, create_CEO_dashboardPayload, {
             headers: {
                 'Content-Type': 'application/json',
             },
         });
 
-        const totalTickets = await api.post(`/dashboards/totalTickets`, create_CEO_dashboardPayload, {
+        const monthWiseBalanceData = await api.post(`/dashboards/getBranchWiseMonthlySales`, {companyCode,unitCode,date:currentYear}, {
             headers: {
                 'Content-Type': 'application/json',
             },
         });
 
-        const ticketsData = await api.post(`/dashboards/getTicketDetailsAgainstSearch`, create_CEO_dashboardPayload, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        const totalProducts = await api.post(`/dashboards/totalProducts`, create_CEO_dashboardPayload, {
+        const branchWiseYearlySales = await api.post(`/dashboards/getBranchWiseYearlySales`, {companyCode,unitCode,date:currentYear}, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -87,53 +106,22 @@ export const intiateCEO_dashboard = (create_CEO_dashboardPayload) => async (disp
             },
         });
 
-        const expenseData = await api.post(`/dashboards/getExpenseData`, create_CEO_dashboardPayload, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        const expenseCount = await api.post(`/dashboards/getExpansesTableData`, create_CEO_dashboardPayload, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        const productData = await api.post(`/dashboards/getProductDetailsByBranch`, create_CEO_dashboardPayload, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        const purchaseData = await api.post(`/dashboards/getPurchaseData`, create_CEO_dashboardPayload, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        const ProductTypeCreditAndDebitPercentages = await api.post(`/dashboards/getProductTypeCreditAndDebitPercentages`, create_CEO_dashboardPayload, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
         const dashboardData = {
             ProductAndServiceSales: productAndServiceSales.data.data,
             monthWiseBalance: monthWiseBalanceData.data.data,
             solidLiquid: solidLiquidData.data.data,
             branchWiseSolidLiquidCash: branchWiseSolidLiquidCash.data.data,
-            attendence: attendenceData.data.data,
+            amountDetails: amountData.data.data,
             PurchaseCount: purchaseCount.data.data,
-            totalTickets: totalTickets.data.data,
-            totalProducts: totalProducts.data.data,
-            ExpenseData: expenseData.data.data,
-            ExpenseCount: expenseCount.data.data,
-            productData: productData.data.data,
-            ticketsData: ticketsData.data.data,
+            saleTable: saleTable.data.data,
+            payableTable: payableTable.data.data,
+            receivableTable: receivableTable.data.data,
+            TotalProductAndServiceSales: TotalProductAndServiceSales.data.data,
+            branchWiseYearlySales: branchWiseYearlySales.data.data,
             purchaseData: purchaseData.data.data,
-            ProductTypeCreditAndDebitPercentages: ProductTypeCreditAndDebitPercentages.data.data,
+            // ProductTypeCreditAndDebitPercentages: ProductTypeCreditAndDebitPercentages.data.data,
         }
-
+console.log("rrr :",dashboardData);
         dispatch({ type: CREATE_CEO_DASHBOARD_SUCCESS, payload: dashboardData });
     } catch (error) {
         console.log("error : ", error)
@@ -176,7 +164,7 @@ export const intiateHR_dashboard = (create_HR_dashboardPayload) => async (dispat
     dispatch({ type: CREATE_HR_DASHBOARD_REQUEST });
     try {
         // Attempt to fetch CEO_DASHBOARDS
-        const staffCountByBranchData = await api.post(`/dashboards/getBranchStaffDetails`, create_HR_dashboardPayload, {
+        const staffCountByBranchData = await api.post(`/dashboards/getTotalStaffDetails`, create_HR_dashboardPayload, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -278,7 +266,7 @@ export const intiateSalesVisit_dashboard = (create_SalesVisit_dashboardPayload) 
             create_SalesVisit_dashboardPayload,
             { headers: { 'Content-Type': 'application/json' } }
         );
-        console.log("eee:",create_SalesVisit_dashboardPayload.StaffId)
+
         const rrr=data?.data.filter((item)=>{
            return (Number(item.staffId)===Number(create_SalesVisit_dashboardPayload.StaffId))
         })
@@ -304,7 +292,6 @@ export const intiateSalesVisit_dashboard = (create_SalesVisit_dashboardPayload) 
             totalPendingAndSuccessTickets: totalPendingAndSuccessTickets.data.data,
         }
 
-        console.log("rrr :",rrr)
         dispatch({ type: CREATE_SALES_MEN_DASHBOARD_SUCCESS, payload: dashboardSalesVisitData });
     } catch (error) {
         console.log("error : ", error.message)

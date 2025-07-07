@@ -4,41 +4,58 @@ import { LineChart } from 'react-native-chart-kit';
 
 const GraphSection = ({ monthWiseBalance }) => {
   let data = [];
-
+  
   const transformBranchApiResponse = (apiResponse) => {
-
+  
     // Define all months in order
     const allMonths = [
-      "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Juy", "Aug", "Sep", "Oct", "Nov", "Dec"
     ];
-
-    return apiResponse.map(branch => {
-      // Create a map of existing month data for quick lookup
-      const dataMap = new Map(branch.data.map(item => [item.month, item.balanceAmount]));
-
-      // Generate a complete dataset including missing months
-      const completeData = allMonths.map((monthName, index) => ({
-        month: index + 1, // Month number (1-based index)
-        monthName,
-        balanceAmount: dataMap.get(index + 1) || 0, // Get balance or default to 0
-      }));
-
-      return {
-        branchName: branch.branchName, // Keep branch name
+  
+    // Step 1: Group data by branchName
+    const branchMap = new Map();
+  
+    apiResponse.forEach(item => {
+      const { branchName, month, TotalSalesAmount } = item;
+  
+      if (!branchMap.has(branchName)) {
+        branchMap.set(branchName, new Map());
+      }
+  
+      branchMap.get(branchName).set(month, TotalSalesAmount);
+    });
+  
+    // Step 2: Build transformed result
+    const result = [];
+  
+    branchMap.forEach((monthDataMap, branchName) => {
+      const completeData = allMonths.map((monthName, index) => {
+        const monthNumber = index + 1;
+        return {
+          month: monthNumber,
+          monthName,
+          balanceAmount: monthDataMap.get(monthNumber) || 0
+        };
+      });
+  
+      result.push({
+        branchName,
         data: {
-          labels: completeData.map(item => item.month), // Extract month names
+          labels: completeData.map(item => item.monthName),
           datasets: [
             {
-              data: completeData.map(item => item.balanceAmount), // Extract balance values
-              color: () => '#E74C3C' // Red graph
+              data: completeData.map(item => item.balanceAmount),
+              color: () => '#E74C3C'
             }
           ]
         }
-      };
+      });
     });
+  
+    return result;
   };
-
+  
 
   // Transform and log the output
 
@@ -106,56 +123,17 @@ const GraphSection = ({ monthWiseBalance }) => {
           <View style={[styles.chartWrapper, { backgroundColor: '#E74C3C' }]}>
             <LineChart
               data={data.data}
-              width={250}
+              width={450}
               height={200}
               chartConfig={redChartConfig}
               bezier
               style={styles.chart}
             />
             <Text style={{ color: "#fff", fontSize: 14, fontFamily: "Parkinsans-SemiBold", marginTop: 8 }}>{data.branchName}</Text>
-            <Text style={{ color: "#fff", fontSize: 12, fontFamily: "Parkinsans-Regular", marginBottom: 5 }}>profit - 15 %</Text>
+            {/* <Text style={{ color: "#fff", fontSize: 12, fontFamily: "Parkinsans-Regular", marginBottom: 5 }}>profit - 15 %</Text> */}
           </View>
         )
       })}
-      {/* <View style={[styles.chartWrapper, { backgroundColor: '#27AE60' }]}>
-        <LineChart
-          data={data}
-          width={250}
-          height={200}
-          chartConfig={greenChartConfig}
-          bezier
-          style={styles.chart}
-        />
-        <Text style={{ color: "#fff", fontSize: 14, fontFamily: "Parkinsans-SemiBold", marginTop: 8 }}>Visakhaptnam</Text>
-        <Text style={{ color: "#fff", fontSize: 12, fontFamily: "Parkinsans-Regular", marginBottom: 5 }}>profit - 15 %</Text>
-
-      </View>
-      <View style={[styles.chartWrapper, { backgroundColor: '#333333' }]}>
-        <LineChart
-          data={data}
-          width={250}
-          height={200}
-          chartConfig={blackChartConfig}
-          bezier
-          style={styles.chart}
-        />
-        <Text style={{ color: "#fff", fontSize: 14, fontFamily: "Parkinsans-SemiBold", marginTop: 8 }}>Banglore</Text>
-        <Text style={{ color: "#fff", fontSize: 12, fontFamily: "Parkinsans-Regular", marginBottom: 5 }}>Loss - 15 %</Text>
-
-      </View>
-      <View style={[styles.chartWrapper, { backgroundColor: '#3498DB' }]}>
-        <LineChart
-          data={data}
-          width={250}
-          height={200}
-          chartConfig={blueChartConfig}
-          bezier
-          style={styles.chart}
-        />
-        <Text style={{ color: "#fff", fontSize: 14, fontFamily: "Parkinsans-SemiBold", marginTop: 8 }}>Buvaneshwar</Text>
-        <Text style={{ color: "#fff", fontSize: 12, fontFamily: "Parkinsans-Regular", marginBottom: 5 }}>profit - 15 %</Text>
-
-      </View> */}
     </ScrollView>
   );
 };

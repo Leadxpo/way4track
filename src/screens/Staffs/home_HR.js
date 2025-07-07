@@ -5,7 +5,7 @@ import Header from '../../components/userHeader';
 import { useDispatch, useSelector } from 'react-redux';
 import { drawLabel } from "../../Redux/Actions/drawAction";
 import { intiateHR_dashboard } from '../../Redux/Actions/dashboard';
-
+import api from "../../Api/api";
 const branches = [
     {
         name: 'Hyderabad',
@@ -57,7 +57,7 @@ const Home_HR = () => {
         totalSales: 0,
         totalNonTechnicians: 0,
     });
-
+    const [candidateStats, setCandidateStats] = useState({});
     const dispatch = useDispatch();
 
     const { loading, selectedLabel, error } = useSelector(state => state.selectedDrawLabel);
@@ -67,26 +67,44 @@ const Home_HR = () => {
     useEffect(() => {
         const HR_dashboardPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
         dispatch(intiateHR_dashboard(HR_dashboardPayload));
+        getCandidateStats()
     }, [dispatch])
 
+    const getCandidateStats = async () => {
+        try {
+            const response = await api.post(
+                '/hiring/getCandidatesStatsLast30Days',
+                {
+                    companyCode: "WAY4TRACK",
+                    unitCode: "WAY4",
+                }
+            );
+
+            setCandidateStats(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     useEffect(() => {
         // Extract branch data
-        const branches = HR_homeInfo?.data;
-        console.log("branchesss : ", branches);
-        setBranches(branches);
+        const branches = HR_homeInfo; 
+        const filteredBranches = branches?.result?.filter(
+            (branch) => branch.branchName !== null
+        );
+                setBranches(filteredBranches);
 
         // Calculate totals
-        const totalTechnicians = branches?.reduce(
-            (sum, branch) => sum + branch.totalTechnicians,
+        const totalTechnicians = branches?.result?.reduce(
+            (sum, branch) => sum + parseInt(branch.totalTechnicians),
             0
         );
-        const totalSales = branches?.reduce(
-            (sum, branch) => sum + branch.totalSales,
+        const totalSales = branches?.result.reduce(
+            (sum, branch) => sum + parseInt(branch.totalSales),
             0
         );
-        const totalNonTechnicians = branches?.reduce(
-            (sum, branch) => sum + branch.totalNonTechnicians,
+        const totalNonTechnicians = branches?.result.reduce(
+            (sum, branch) => sum + parseInt(branch.totalNonTechnicians),
             0
         );
 
@@ -144,6 +162,23 @@ const Home_HR = () => {
                     <Text style={[styles.roleCard, { backgroundColor: '#029D4830', fontSize: 16, fontWeight: "bold", color: "#029D48", marginBottom: 8 }]}>Marketing: {selectedBranch?.totalSales}</Text>
                     <Text style={[styles.roleCard, { backgroundColor: '#029D4830', fontSize: 16, fontWeight: "bold", color: "#029D48", marginBottom: 8 }]}>Total Staff: {selectedBranch?.totalStaff}</Text>
                 </Card>
+
+                <View style={styles.container}>
+                        <Text style={styles.statText}>
+                        Hiring Program :
+                        </Text>
+                    <View style={styles.statBox}>
+                        <Text style={styles.statText}>
+                            Total Attended : {candidateStats.totalAttended}
+                        </Text>
+                    </View>
+                    <View style={styles.statBox}>
+                        <Text style={styles.statText}>
+                            Total Qualified : {candidateStats.totalQualified}
+                        </Text>
+                    </View>
+                </View>
+
             </ScrollView>
         </Provider>
     );
@@ -172,12 +207,28 @@ const styles = StyleSheet.create({
         overflow: "hidden",
         backgroundColor: "#FFF",
     },
+    statBox: {
+        backgroundColor: '#D1D5DB', // gray-300
+        padding: 12,
+        borderRadius: 10,
+        marginBottom: 12,
+      },
+      statText: {
+        fontSize: 18,
+        fontWeight: '600', // equivalent to font-semibold
+        color: '#111827', // gray-900
+      },
     row: {
         flexDirection: "row",
         alignItems: "center",
         padding: 16,
     },
-
+    detailBox: {
+        backgroundColor: '#D1D5DB', // gray-300
+        padding: 12,
+        margin: 8,
+        borderRadius: 10,
+    },
     branchHeader: {
         backgroundColor: "#029D48",
         padding: 15,

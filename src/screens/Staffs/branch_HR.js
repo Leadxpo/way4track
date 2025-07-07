@@ -1,9 +1,9 @@
-import React, { useState,useEffect } from "react";
-import { View, Text, TouchableOpacity, FlatList, StyleSheet,Image, ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity, FlatList, StyleSheet, Image, ScrollView } from "react-native";
 import { Card, Menu, MD3Colors, Provider as PaperProvider, Icon, Button } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Header from "../../components/userHeader";
-import { permissions } from "../../Utils/permissions";
+import { useDispatch, useSelector } from 'react-redux';
 
 const branchesData = [
     {
@@ -34,6 +34,7 @@ const branchesData = [
 ];
 
 const Branch_HR = () => {
+    const { loading: HR_homeInfoLoading, HR_homeInfo, error: HR_homeInfoError } = useSelector(state => state.HR_homeInfoReducer);
     const [selectedBranch, setSelectedBranch] = useState(null);
     const [selectedRole, setSelectedRole] = useState(null);
     const [activeTab, setActiveTab] = useState("Receipt"); // Manage active tab
@@ -41,13 +42,18 @@ const Branch_HR = () => {
     const [paymentModeVisible, setPaymentModeVisible] = useState(false); // Manage payment dropdown visibility
     const [selectedPaymentMode, setSelectedPaymentMode] = useState(""); // Manage selected payment mode
     const [visibleMenu, setVisibleMenu] = useState(null); // Track which product's menu is open
+    const [branches, setBranches] = useState([]); // Track which product's menu is open
+    const [totals, setTotals] = useState({
+        totalBranches: 0,
+        totalTechnicians: 0,
+        totalNonTechnicians: 0,
+        totalSales: 0,
+    });
+    // const hasAddStaffPermission = getPermissions.some(p => p.name === "staff" && p.add);
+    // const hasEditStaffPermission = getPermissions.some(p => p.name === "staff" && p.edit);
+    // const hasDeleteStaffPermission = getPermissions.some(p => p.name === "staff" && p.delete);
 
-    const hasAddStaffPermission = permissions.some(p => p.name === "staff" && p.add);
-    const hasEditStaffPermission = permissions.some(p => p.name === "staff" && p.edit);
-    const hasDeleteStaffPermission = permissions.some(p => p.name === "staff" && p.delete);
-  
     const renderStaff = ({ item }) => {
-        console.log("staff item : ", item)
         return (
             <Card style={styles.card}>
                 <View style={styles.row}>
@@ -57,7 +63,7 @@ const Branch_HR = () => {
                         <Text style={styles.role}>{item.phone}</Text>
                         <Text style={styles.location}>{item.email}</Text>
                     </View>
-                    <Menu
+                    {/* <Menu
                         visible={visibleMenu === item.id}
                         onDismiss={() => setVisibleMenu(null)}
                         anchor={<TouchableOpacity onPress={() => setVisibleMenu(item.id)}>
@@ -81,7 +87,7 @@ const Branch_HR = () => {
                                 }
                             ]);
                         }} />}
-                    </Menu>
+                    </Menu> */}
                 </View>
             </Card>
         )
@@ -99,90 +105,129 @@ const Branch_HR = () => {
         setSelectedRole(selectedRole === roleId ? null : roleId);
     };
 
+    useEffect(() => {
+        if (HR_homeInfo) {
+            const branchData = HR_homeInfo.result;
+            const staffData = HR_homeInfo.staff;
+            // Process totals
+            const totalBranches = branchData.reduce(
+                (total, branch) => total + parseInt(branch.totalStaff || 0, 10),
+                0
+            );
+
+            const totalTechnicians = branchData.reduce(
+                (sum, b) => sum + parseInt(b.totalTechnicians || 0),
+                0
+            );
+            const totalNonTechnicians = branchData.reduce(
+                (sum, b) => sum + parseInt(b.totalNonTechnicians || 0),
+                0
+            );
+            const totalSales = branchData.reduce(
+                (sum, b) => sum + parseInt(b.totalSales || 0),
+                0
+            );
+
+            // Process branches
+            const processedBranches = branchData.map((branch) => {
+                const branchStaff = staffData.filter(
+                    (s) => s.branchName === branch.branchName
+                );
+                return {
+                    name: branch.branchName || 'Unknown',
+                    managerName:
+                        branchStaff.length > 0
+                            ? branchStaff[0].branchManagerName || 'N/A'
+                            : 'N/A',
+                    managerPhone:
+                        branchStaff.length > 0
+                            ? branchStaff[0].branchManagerPhoneNumber || 'N/A'
+                            : 'N/A',
+                    staff: {
+                        technicities: parseInt(branch.totalTechnicians || 0),
+                        nonTechnicities: parseInt(branch.totalNonTechnicians || 0),
+                        sales: parseInt(branch.totalSales || 0),
+                        total: parseInt(branch.totalStaff || 0),
+                    },
+                };
+            });
+            const filteredBranches = processedBranches.filter(
+                (branch) => branch.name !== 'Unknown'
+            );
+
+            setBranches(filteredBranches);
+            setSelectedBranch(processedBranches[0] || null);
+            setTotals({
+                totalBranches,
+                totalTechnicians,
+                totalNonTechnicians,
+                totalSales,
+            });
+        }
+    }, [])
+
+
     return (
         <PaperProvider>
             <Header />
             <ScrollView style={styles.container}>
                 <Text style={styles.header}>Branch’s</Text>
-                <Card style={styles.roleDetails}>
-                    <Text style={[styles.roleTitle, styles.roleCard, { backgroundColor: '#FF8A8A' }]}>Accountant</Text>
-                    <Text style={styles.roleText}>Branch:{"ravi"}</Text>
-                    <Text style={styles.roleText}>Phone: {"999999999"}</Text>
-                    <Text style={styles.roleText}>Email: {"ravi@gmail.com"}</Text>
-                    <Text style={styles.roleText}>Salary: {"35000"}</Text>
-                </Card>
-
-                <Card style={styles.roleDetails}>
-                    <Text style={[styles.roleTitle, styles.roleCard, { backgroundColor: '#8AFF8A' }]}>Warehouse Manager</Text>
-                    <Text style={styles.roleText}>Branch:{"ravi"}</Text>
-                    <Text style={styles.roleText}>Phone: {"999999999"}</Text>
-                    <Text style={styles.roleText}>Email: {"ravi@gmail.com"}</Text>
-                    <Text style={styles.roleText}>Salary: {"35000"}</Text>
-                </Card>
-
-                <Card style={styles.roleDetails}>
-                    <Text style={[styles.roleTitle, styles.roleCard, { backgroundColor: '#A48AFF' }]}>HR Manager</Text>
-                    <Text style={styles.roleText}>Branch:{"ravi"}</Text>
-                    <Text style={styles.roleText}>Phone: {"999999999"}</Text>
-                    <Text style={styles.roleText}>Email: {"ravi@gmail.com"}</Text>
-                    <Text style={styles.roleText}>Salary: {"35000"}</Text>
-                </Card>
-
                 <Text style={{ color: '#333333', fontWeight: '700', fontSize: 16, padding: 8 }}>HR Manager</Text>
 
                 {/* Branch List */}
-                {branchesData.map((branch) => (
-                    <View key={branch.name}>
-                        {/* Branch Name */}
-                        <TouchableOpacity onPress={() => toggleBranch(branch.name)} style={styles.branchHeader}>
-                            <Text style={styles.branchTitle}>{branch.name}</Text>
-                            <MaterialCommunityIcons name={selectedBranch === branch.name ? 'arrow-up-drop-circle' : 'arrow-down-drop-circle'} size={20} color="#ffffff" />
+                <FlatList
+                    data={branches}
+                    horizontal
+                    keyExtractor={(item, index) => index.toString()}
+                    contentContainerStyle={styles.buttonList}
+                    renderItem={({ item }) => (
+                        <TouchableOpacity
+                            onPress={() => setSelectedBranch(item)}
+                            style={[
+                                styles.branchButton,
+                                selectedBranch?.name === item.name && styles.selectedButton,
+                            ]}
+                        >
+                            <Text
+                                style={[
+                                    styles.buttonText,
+                                    selectedBranch?.name === item.name && styles.selectedText,
+                                ]}
+                            >
+                                {item.name}
+                            </Text>
                         </TouchableOpacity>
+                    )}
+                />
 
-                        {/* Show roles only if branch is selected */}
-                        {selectedBranch === branch.name && (
-                            <View>
-                                <View>
-                                    <Text style={[styles.roleCard, { backgroundColor: '#029D4830', fontSize: 16, fontWeight: "bold", color: "#029D48", marginBottom: 8 }]}>PhoneNumber : 999999999</Text>
-                                    <Text style={[styles.roleCard, { backgroundColor: '#029D4830', fontSize: 16, fontWeight: "bold", color: "#029D48", arginBottom: 8 }]}>Email:{branch.name}@gmail.com</Text>
-                                    {/* Role Name */}
-                                    <ScrollView
-                                        horizontal
-                                        showsHorizontalScrollIndicator={false}
-                                        contentContainerStyle={styles.tabContainer}
-                                    >
-                                        {["Technician", "NonTechnetian", "SaleMan"].map((tab, index) => (
-                                            <Button
-                                                key={index}
-                                                mode="outlined"
-                                                onPress={() => {
-                                                    setPaymentModeVisible(false);
-                                                    setSelectedPaymentMode(tab);
-                                                    setPaymentActiveTab(tab)
-                                                }}
-                                                style={paymentActiveTab === tab ? styles.activeTab : styles.inactiveTab}
-                                                labelStyle={paymentActiveTab === tab ? styles.activePaymentTabText : styles.inactivePaymentTabText}
-                                            >
-                                                {tab}
-                                            </Button>
-                                        ))}
+                {selectedBranch && (
+                    <View style={styles.branchDetails}>
+                        <View style={styles.header}>
+                            <Text style={styles.headerText}>
+                                Branch Name: {selectedBranch.name}
+                            </Text>
+                        </View>
 
-                                    </ScrollView>
-                                    {/* Smooth Animated Payment Form */}
-                                    <View>
-                                        <FlatList
-                                            data={branch.roles}
-                                            keyExtractor={(item) => item.id}
-                                            renderItem={renderStaff}
-                                            contentContainerStyle={styles.listContent}
-                                        />
-                                    </View>
-
-                                </View>
-                            </View>
-                        )}
+                        <View style={styles.detailBox}>
+                            <Text>Branch Manager Name: {selectedBranch.managerName}</Text>
+                        </View>
+                        <View style={styles.detailBox}>
+                            <Text>Branch Manager Phone: {selectedBranch.managerPhone}</Text>
+                        </View>
+                        <View style={styles.detailBox}>
+                            <Text>Technicians: {selectedBranch.staff.technicities}</Text>
+                        </View>
+                        <View style={styles.detailBox}>
+                            <Text>Non Technicians: {selectedBranch.staff.nonTechnicities}</Text>
+                        </View>
+                        <View style={styles.detailBox}>
+                            <Text>Sales: {selectedBranch.staff.sales}</Text>
+                        </View>
+                        <View style={styles.detailBox}>
+                            <Text>Total Staff: {selectedBranch.staff.total}</Text>
+                        </View>
                     </View>
-                ))}
+                )}
             </ScrollView>
         </PaperProvider>
     );
@@ -201,20 +246,20 @@ const styles = StyleSheet.create({
     },
     listContainer: {
         paddingBottom: 16,
-      }, 
-      card: {
+    },
+    card: {
         marginBottom: 16,
         borderRadius: 8,
         elevation: 3,
         overflow: "hidden",
         backgroundColor: "#FFF",
-      },
-      row: {
+    },
+    row: {
         flexDirection: "row",
         alignItems: "center",
         padding: 16,
-      },
-       
+    },
+
     branchHeader: {
         backgroundColor: "#029D48",
         padding: 15,
@@ -229,24 +274,35 @@ const styles = StyleSheet.create({
         height: 70,
         borderRadius: 35,
         marginRight: 16,
-      },
-      detailsContainer: {
+    },
+    detailsContainer: {
         flex: 1,
-      },
-      name: {
+    },
+    name: {
         fontSize: 16,
         fontWeight: "bold",
         color: "#333",
-      },
-      role: {
+    },
+    role: {
         fontSize: 14,
         color: "#666",
         marginVertical: 4,
-      },
-      location: {
+    },
+    location: {
         fontSize: 14,
         color: "#888",
-      },    
+    },
+    statBox: {
+        backgroundColor: '#D1D5DB', // gray-300
+        padding: 12,
+        borderRadius: 10,
+        marginBottom: 12,
+      },
+      statText: {
+        fontSize: 18,
+        fontWeight: '600', // equivalent to font-semibold
+        color: '#111827', // gray-900
+      },
     branchTitle: {
         fontSize: 18,
         color: "white",
@@ -269,11 +325,49 @@ const styles = StyleSheet.create({
         flex: 1,
         margin: 5,
     },
-    inactiveTab: {
-        backgroundColor: "#FFFFFF",
-        borderColor: "#CCCCCC",
-        flex: 1,
-        margin: 5,
+    buttonList: {
+        flexDirection: 'row',
+        marginBottom: 20,
+    },
+    branchButton: {
+        paddingVertical: 10,
+        paddingHorizontal: 16,
+        borderRadius: 10,
+        backgroundColor: '#D1D5DB', // gray-300
+        marginRight: 10,
+    },
+    selectedButton: {
+        backgroundColor: '#16A34A', // green-600
+    },
+    buttonText: {
+        color: '#374151', // gray-700
+        fontWeight: 'bold',
+    },
+    selectedText: {
+        color: 'white',
+    },
+    branchDetails: {
+        backgroundColor: 'white',
+        borderRadius: 10,
+        elevation: 3,
+        paddingBottom: 16,
+    },
+    header: {
+        backgroundColor: '#16A34A', // green-600
+        padding: 12,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+    },
+    headerText: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 16,
+    },
+    detailBox: {
+        backgroundColor: '#D1D5DB', // gray-300
+        padding: 12,
+        margin: 8,
+        borderRadius: 10,
     },
     activeTabText: {
         color: "#FFFFFF",

@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, Button, Alert,PermissionsAndroid } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Provider, Modal } from "react-native-paper";
-import { fetchProducts } from "../../Redux/Actions/productAction";
 import DatePicker from "react-native-date-picker";
 import Header from "../../components/userHeader";
 import { createSalesVisit } from "../../Redux/Actions/salesVisitAction";
 import * as ImagePicker from "react-native-image-picker";
 
 const Visit_ClientInfo = ({ navigation }) => {
-  const { products } = useSelector(state => state.products);
+
   const dispatch = useDispatch();
 
   // States
@@ -25,9 +24,6 @@ const Visit_ClientInfo = ({ navigation }) => {
   const [visitingCardUpload_pick, setVisitingCardUpload_pick] = useState(null);
   const [clientUpload_pick, setClientUpload_pick] = useState(null);
 
-  useEffect(() => {
-    dispatch(fetchProducts({ companyCode: "WAY4TRACK", unitCode: "WAY4" }));
-  }, [dispatch]);
 
   async function requestCameraPermission() {
     try {
