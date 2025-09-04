@@ -131,9 +131,9 @@ const Staff = ({ navigation }) => {
                   <Text style={styles.modalText}>Staff ID: {selectedStaff.staffId}</Text>
                   <Text style={styles.modalText}>Name: {selectedStaff.name}</Text>
                   <Text style={styles.modalText}>Designation: {selectedStaff.designation}</Text>
-                  <Text style={styles.modalText}>Phone: {selectedStaff.phoneNumber}</Text>
-                  <Text style={styles.modalText}>Alternate Phone: {selectedStaff.alternateNumber || "N/A"}</Text>
-                  <Text style={styles.modalText}>Email: {selectedStaff.email}</Text>
+                  <Text style={styles.modalText}>Phone: {selectedStaff.officePhoneNumber}</Text>
+                  {/* <Text style={styles.modalText}>Alternate Phone: {selectedStaff.alternateNumber || "N/A"}</Text> */}
+                  <Text style={styles.modalText}>Email: {selectedStaff.officeEmail}</Text>
                   <Text style={styles.modalText}>Aadhar Number: {selectedStaff.aadharNumber}</Text>
                   <Text style={styles.modalText}>PAN Number: {selectedStaff.panCardNumber || "N/A"}</Text>
                   <Text style={styles.modalText}>Gender: {selectedStaff.gender}</Text>
@@ -142,7 +142,7 @@ const Staff = ({ navigation }) => {
                   <Text style={styles.modalText}>Department: {selectedStaff.department || "N/A"}</Text>
                   <Text style={styles.modalText}>Blood Group: {selectedStaff.bloodGroup || "N/A"}</Text>
                   <Text style={styles.modalText}>Staff Status: {selectedStaff.staffStatus}</Text>
-                  <Text style={styles.modalTitle}>Experience Details</Text>
+                  {/* <Text style={styles.modalTitle}>Experience Details</Text>
                   {
                     selectedStaff.experienceDetails.map((item) => {
                       return (
@@ -165,9 +165,9 @@ const Staff = ({ navigation }) => {
                         </View>
                       )
                     })
-                  }
+                  } */}
                   <Text style={styles.modalText}>Monthly Salary: {selectedStaff.monthlySalary}</Text>
-                  <Text style={styles.modalText}>Carry Forward Leaves: {selectedStaff.carryForwardLeaves}</Text>
+                  {/* <Text style={styles.modalText}>Carry Forward Leaves: {selectedStaff.carryForwardLeaves}</Text> */}
                   <Text style={styles.modalText}>Joining Date: {selectedStaff.joiningDate || "N/A"}</Text>
                 </>
               )}

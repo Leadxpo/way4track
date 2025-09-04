@@ -26,7 +26,10 @@ const Invoice = ({ navigation }) => {
   });
 
   const renderItem = ({ item }) => (
-    <Card style={styles.card} onPress={()=>navigation.navigate('InvoiceDetails')}>
+    <Card key={item.id} style={styles.card} onPress={()=> navigation.navigate("Home", {
+      screen: "InvoiceDetails",
+      params: { estimateDetails: item }
+    })}>
      <Text style={{fontWeight:'bold',fontSize:18,color:"#28a745"}}>{item.invoiceId}</Text>
       <Card.Title
         title={`Client: ${item.clientName}`}

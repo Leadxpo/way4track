@@ -21,6 +21,9 @@ const InstallDeviceOverview = ({ navigation }) => {
         const currentDateTime = new Date().toISOString();
         const installedAddress = await getCurrentAddress();
         const createWorkFormData = new FormData();
+        if (deviceInstallData.id) {
+            createWorkFormData.append("id", deviceInstallData.id);
+        }
         if (deviceInstallData.productIMEI) {
             createWorkFormData.append("imeiNumber", deviceInstallData.productIMEI);
         }
@@ -61,8 +64,6 @@ const InstallDeviceOverview = ({ navigation }) => {
         createWorkFormData.append("address", deviceInstallData.address);
         createWorkFormData.append("installationAddress", installedAddress);
         createWorkFormData.append("workStatus", "install");
-
-        console.log("createWorkFormData: ", createWorkFormData);
 
         try {
             // Attempt to fetch branches

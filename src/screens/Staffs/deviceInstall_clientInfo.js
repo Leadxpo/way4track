@@ -13,7 +13,7 @@ import { loadData } from "../../Utils/appData";
 import { createDeviceInstall } from "../../Redux/Actions/deviceInstallAction";
 import Header from "../../components/userHeader";
 
-const DeviceInstall_ClientInfo = ({ navigation, route  }) => {
+const DeviceInstall_ClientInfo = ({ navigation, route }) => {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
 
@@ -23,6 +23,7 @@ const DeviceInstall_ClientInfo = ({ navigation, route  }) => {
   const [subDealerId, setSubDealerId] = useState("");
   const [role, setRole] = useState("");
   const [productID, setProductID] = useState("");
+  const [id, setId] = useState("");
   const [staffId, setStaffId] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -30,10 +31,11 @@ const DeviceInstall_ClientInfo = ({ navigation, route  }) => {
   const [userID, setUserID] = useState("");
   const [subdealerStaffId, setSubdealerStaffId] = useState("");
   const [address, setAddress] = useState("");
+  const [description, setDescription] = useState("");
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const formattedDate = date.toISOString().split('T')[0]; // "YYYY-MM-DD"
- 
+
   const [productTypes, setProductTypes] = useState([]);
   const [serviceTypes, setServiceTypes] = useState([]);
 
@@ -43,7 +45,10 @@ const DeviceInstall_ClientInfo = ({ navigation, route  }) => {
   useEffect(() => {
     if (route?.params?.techWorkDetails) {
       const details = route.params.techWorkDetails;
-  console.log("rrr :",details)
+      console.log("rrr :", details)
+      if (details.id) {
+        setId(details.id || "");
+      }
       setProductName(details.productName || "Select Product Name");
       setService(details.serviceName || "Select Services");
       setServiceId(details.serviceId || "");
@@ -55,10 +60,11 @@ const DeviceInstall_ClientInfo = ({ navigation, route  }) => {
       setPhoneNumber(details.phoneNumber || "");
       setUserID(details.userName || "");
       setAddress(details.address || "");
+      setDescription(details.description || "")
       if (details.startDate) setDate(new Date(details.startDate));
     }
   }, [route]);
-  
+
 
   useEffect(() => {
     const fetchDropdownData = async () => {
@@ -88,7 +94,7 @@ const DeviceInstall_ClientInfo = ({ navigation, route  }) => {
         }
 
         // Set service types if valid
-        const serviceList = serviceRes?.data?.data;
+        const serviceList = serviceRes?.data?.data ||[];
         if (Array.isArray(serviceList)) {
           setServiceTypes(serviceList);
         } else {
@@ -133,9 +139,10 @@ const DeviceInstall_ClientInfo = ({ navigation, route  }) => {
       Alert.alert("Validation", "Please enter all required fields");
       return;
     }
-  
+
     // Construct the payload based on role
     const commonPayload = {
+      ...(id ? { id } : ''),
       userID,
       productName,
       name,
@@ -144,23 +151,23 @@ const DeviceInstall_ClientInfo = ({ navigation, route  }) => {
       service,
       serviceId,
       address,
-      date,
-    };
-  
+      date: date instanceof Date ? date.toISOString() : date,
+        };
+
     const payload = role === "sub dealer staff"
-      ? { ...commonPayload, subDealerId,subdealerStaffId }
+      ? { ...commonPayload, subDealerId, subdealerStaffId }
       : { ...commonPayload, staffId };
-  
+
     // Log and dispatch
     console.log("payload:", payload);
     dispatch(createDeviceInstall(payload));
-  
+
     // Navigate to the next screen
     navigation.navigate("Home", {
       screen: "DeviceInstall_ProductInfo",
     });
   };
-  
+
   const renderItem = (item, setter, IdSetter, closeModal) => {
     console.log("item :", item.name)
     return (
@@ -213,16 +220,16 @@ const DeviceInstall_ClientInfo = ({ navigation, route  }) => {
         <FormField label="Mobile Number" value={phoneNumber} onChangeText={setPhoneNumber} placeholder="Enter Phone Number" keyboardType="phone-pad" />
         <FormField label="Date" value={formattedDate} onPress={() => setOpen(true)} placeholder="Enter Date (YYYY-MM-DD)" />
         <DatePicker
-        modal
-        mode="date"
-        open={open}
-        date={date}
-        onConfirm={(selectedDate) => {
-          setOpen(false);
-          setDate(selectedDate);
-        }}
-        onCancel={() => setOpen(false)}
-      />
+          modal
+          mode="date"
+          open={open}
+          date={date}
+          onConfirm={(selectedDate) => {
+            setOpen(false);
+            setDate(selectedDate);
+          }}
+          onCancel={() => setOpen(false)}
+        />
         {/* Product Picker */}
         <Text style={styles.label}>Product</Text>
         <TouchableOpacity style={styles.dropdownBtn} onPress={() => setShowProductModal(true)}>
@@ -246,6 +253,15 @@ const DeviceInstall_ClientInfo = ({ navigation, route  }) => {
           multiline
           value={address}
           onChangeText={setAddress}
+        />
+        <Text style={styles.label}>Description</Text>
+        <TextInput
+          style={[styles.input, { height: 100 }]}
+          placeholder="Enter Description"
+          placeholderTextColor="#aaa"
+          multiline
+          value={description}
+          onChangeText={setDescription}
         />
 
         <View style={styles.buttonGroup}>

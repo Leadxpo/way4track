@@ -26,7 +26,7 @@ export { salesVisitReducer,uploadSalesVisitReducer, } from "./salesVisitReducer"
 
 export { staffLoginReducer } from "./loginReducer";
 
-export { notificationReducer, singleNotificationReducer,createNotificationReducer } from "./notificationReducer";
+export { notificationReducer, singleNotificationReducer } from "./notificationReducer";
 
 export { productsReducer, productDetailReducer, updateProductReducer,createProductsReducer,deleteProductReducer,productsDropdownReducer } from "./productReducer";
 

@@ -66,7 +66,7 @@ export const fetchWorkAllocations = (getAll_workAllocationPayload) => async (dis
     dispatch({ type: FETCH_WORK_ALLOCATIONS_REQUEST });
     try {
         // Attempt to fetch WORK_ALLOCATIONS
-        const { data } = await api.post(`/work-allocations/getWorkAllocationDetails`, getAll_workAllocationPayload, {
+        const { data } = await api.post(`/technician/getBackendSupportWorkAllocation`, getAll_workAllocationPayload, {
             headers: {
                 'Content-Type': 'application/json',
             },

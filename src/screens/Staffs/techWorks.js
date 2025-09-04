@@ -151,6 +151,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#E0E0E0', // Inactive button background
     color: '#000', // Inactive text color
   },
+  segmentContainer: {
+    backgroundColor: '#F0F0F0',color:'#333333',
+    borderRadius: 10, margin: 10,
+    overflow: 'hidden',
+  },
+  listContainer: {
+    paddingBottom: 16,
+  },
+
   searchInput: {
     width: "90%",
     alignSelf: "center",
@@ -162,11 +171,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 10,
     elevation: 3,
-  },
-  segmentContainer: {
-    backgroundColor: '#F0F0F0',color:'#333333',
-    borderRadius: 10, marginVertical: 10,
-    overflow: 'hidden',
   },
   entryCard: {
     marginBottom: 8,
@@ -210,9 +214,6 @@ const styles = StyleSheet.create({
   emptyText: {
     color: "#721c24",
     fontSize: 16,
-  },
-  listContainer: {
-    paddingBottom: 16,
   },
 });
 

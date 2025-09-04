@@ -19,6 +19,7 @@ const Home = ({ navigation }) => {
     fetchRole();
   }, []);
 
+  
   const renderComponent = () => {
     switch (role) { 
       case "CEO":
@@ -30,6 +31,8 @@ const Home = ({ navigation }) => {
       case "Branch Manager":
         return <Home_BranchManager navigation={navigation} />;
       case "Warehouse Manager":
+        return <Home_WarehouseManager navigation={navigation} />;
+      case "Inventory Operational Analyst":
         return <Home_WarehouseManager navigation={navigation} />;
       case "Technician":
         return <Home_Technician navigation={navigation} />;

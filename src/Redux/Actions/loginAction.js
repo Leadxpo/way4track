@@ -18,7 +18,7 @@ export const login = (login_payload) => async (dispatch) => {
     const {data}  = await api.post('/login/LoginDetails', login_payload, {
       headers: { "Content-Type": "application/json" }
     });
-
+console.log("rrr :",data)
     if (data.status) {
       dispatch({
         type: STAFF_LOGIN_SUCCESS,

@@ -1330,7 +1330,7 @@ PODS:
     - ReactCommon/turbomodule/core
   - react-native-background-actions (4.0.1):
     - React-Core
-  - react-native-date-picker (5.0.12):
+  - react-native-date-picker (5.0.13):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2585,7 +2585,7 @@ SPEC CHECKSUMS:
   React-Mapbuffer: 0502faf46cab8fb89cfc7bf3e6c6109b6ef9b5de
   React-microtasksnativemodule: 663bc64e3a96c5fc91081923ae7481adc1359a78
   react-native-background-actions: ea5bab231a28710eea614acb9ca595594415a5ec
-  react-native-date-picker: d23f0a313972fe5336540d55380366367f8a2a51
+  react-native-date-picker: b7d4183bed3f5ddb67e295cf24b468af1dfb5ffb
   react-native-geolocation: 70b8819c3a45a4613e58c2b13ba694ec1f7de3d2
   react-native-geolocation-service: 608e1da71a1ac31b4de64d9ef2815f697978c55b
   react-native-html-to-pdf: 4c5c6e26819fe202971061594058877aa9b25265

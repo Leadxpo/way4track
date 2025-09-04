@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { View, FlatList, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
-import { Avatar, Card, Button, Menu, Provider, FAB } from "react-native-paper";
+import { View, FlatList, Text, TextInput, StyleSheet,ScrollView, TouchableOpacity } from "react-native";
+import { Avatar, Card, Button, Menu, Provider, FAB ,Modal} from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDispatch, useSelector } from 'react-redux';
 import { drawLabel } from "../../Redux/Actions/drawAction";
@@ -11,19 +11,20 @@ import { permissions } from "../../Utils/permissions";
 const Vendors = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [menuVisible, setMenuVisible] = useState(false);
+  const [modelVisible, setModelVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const dispatch = useDispatch();
   const { loading, selectedLabel, error } = useSelector(state => state.selectedDrawLabel);
-  const { loading:subdealersLoading, vendors, error:subdealereError } = useSelector(state => state.vendors);
+  const { loading: subdealersLoading, vendors, error: subdealereError } = useSelector(state => state.vendors);
   const [permissions, setPermissions] = useState([]);
   useEffect(() => {
     const loadStaffloginData = async () => {
-        const rrr = await loadData("staffPermissions")
-        setPermissions(prev => prev = rrr ||permissions);
-        console.log(permissions)
+      const rrr = await loadData("staffPermissions")
+      setPermissions(prev => prev = rrr || permissions);
+      console.log(permissions)
     };
     loadStaffloginData();
-}, []);
+  }, []);
   const hasAddVendorPermission = permissions.some(p => p.name === "vendor" && p.add);
   const hasEditVendorPermission = permissions.some(p => p.name === "vendor" && p.edit);
   const hasDeleteVendorPermission = permissions.some(p => p.name === "vendor" && p.delete);
@@ -40,56 +41,61 @@ const Vendors = ({ navigation }) => {
   );
 
   const renderItem = ({ item }) => {
-    return(
-    <Card style={styles.card}>
-      <View style={styles.cardContent}>
-        <Avatar.Image size={50} source={{ uri: item.image }} />
-        <View style={styles.details}>
-          <Text style={styles.vendorName}>{item.name}</Text>
-          <Text style={styles.vendorInfo}>
-            Phone Number: {item.phoneNumber}
-          </Text>
-          <Text style={styles.vendorInfo}>Start Date: {item.joiningDate?.split("T")[0]}</Text>
-        </View>
-        <Menu
-          visible={menuVisible && selectedItem === item.vendorId}
-          onDismiss={() => setMenuVisible(false)}
-          anchor={
-            <TouchableOpacity
-              onPress={() => {
-                setMenuVisible(true);
-                setSelectedItem(item.vendorId);
-              }}
-            >
-              <MaterialCommunityIcons
-                name="dots-vertical"
-                size={24}
-                color="black"
-              />
-            </TouchableOpacity>
-          }
-        >
-          <Menu.Item titleStyle={{ color: "green" }} title='View' onPress={() => { navigation.navigate("VendorDetails", { vendorDetails: item }) }} />
-          {hasEditVendorPermission &&<Menu.Item titleStyle={{ color: "green" }} title='Edit' onPress={() => { navigation.navigate("EditVendor", { vendorDetails: item }) }} />}
-          {hasDeleteVendorPermission &&<Menu.Item titleStyle={{ color: "green" }} title='Delete' onPress={() => {
-            Alert.alert(`Delete ${item.name} Staff`, " Are you sure you want to delete this Vendor from the database? Once deleted, you will no longer be able to access any records or perform operations related to this Vendor.", [
-              { text: "Cancel", style: "cancel" },
-              {
-                text: "Delete", onPress: () => {
-                  Alert.alert("Yes", `${item.name} with clienID ${item.vendorId} deleted`);
+    const shortName = item.name ? item.name.charAt(0).toUpperCase() : 'S';
+    return (
+      <Card style={styles.card}>
+        <View style={styles.cardContent}>
+          <Avatar.Text label={shortName} size={50} style={{ marginRight: 10 }} />
+          <View style={styles.details}>
+            <Text style={styles.vendorName}>{item.name}</Text>
+            <Text style={styles.vendorInfo}>
+              Phone Number: {item.phoneNumber}
+            </Text>
+            <Text style={styles.vendorInfo}>Start Date: {item.joiningDate?.split("T")[0]}</Text>
+          </View>
+          <Menu
+            visible={menuVisible && selectedItem === item}
+            onDismiss={() => setMenuVisible(false)}
+            anchor={
+              <TouchableOpacity
+                onPress={() => {
+                  setMenuVisible(true);
+                  setSelectedItem(item);
+                }}
+              >
+                <MaterialCommunityIcons
+                  name="dots-vertical"
+                  size={24}
+                  color="black"
+                />
+              </TouchableOpacity>
+            }
+          >
+            <Menu.Item titleStyle={{ color: "green" }} title='View' onPress={() => {
+              setMenuVisible(false);
+              setModelVisible(true)
+            }} />
+            {hasEditVendorPermission && <Menu.Item titleStyle={{ color: "green" }} title='Edit' onPress={() => { navigation.navigate("EditVendor", { vendorDetails: item }) }} />}
+            {hasDeleteVendorPermission && <Menu.Item titleStyle={{ color: "green" }} title='Delete' onPress={() => {
+              Alert.alert(`Delete ${item.name} Staff`, " Are you sure you want to delete this Vendor from the database? Once deleted, you will no longer be able to access any records or perform operations related to this Vendor.", [
+                { text: "Cancel", style: "cancel" },
+                {
+                  text: "Delete", onPress: () => {
+                    Alert.alert("Yes", `${item.name} with clienID ${item.vendorId} deleted`);
+                  }
                 }
-              }
-            ]);
-          }} />}
-        </Menu>
-      </View>
-    </Card>
-  )};
+              ]);
+            }} />}
+          </Menu>
+        </View>
+      </Card>
+    )
+  };
 
   return (
     <Provider>
-            {/* Header */}
-            <Header />
+      {/* Header */}
+      <Header />
       {/* Dropdown for Branches */}
 
       <View style={styles.container}>
@@ -115,6 +121,37 @@ const Vendors = ({ navigation }) => {
         }} />
 
       </View>
+
+      <Modal
+        animationType="slide"
+        transparent
+        visible={modelVisible} style={{flex:1,backgroundColor:"#33333390"}}
+        onRequestClose={() => setMenuVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <ScrollView>
+              <Text style={styles.modalTitle}>Vendor Details</Text>
+
+              {selectedItem && (
+                <>
+                  <Text style={styles.modalText}>Vendor ID: {selectedItem.vendorId || 'N/A'}</Text>
+                  <Text style={styles.modalText}>Name: {selectedItem.name || 'N/A'}</Text>
+                  <Text style={styles.modalText}>Phone Number: {selectedItem.phoneNumber || 'N/A'}</Text>
+                  <Text style={styles.modalText}>GST Number: {selectedItem.GSTNumber || 'N/A'}</Text>
+                  <Text style={styles.modalText}>State: {selectedItem.state || 'N/A'}</Text>
+                  <Text style={styles.modalText}>Bank Details: {selectedItem.bankDetails || 'N/A'}</Text>
+                </>
+              )}
+
+              <Button mode="contained" onPress={() => setModelVisible(false)} style={{ marginTop: 16 }}>
+                Close
+              </Button>
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
+
     </Provider>
   );
 };
@@ -139,6 +176,28 @@ const styles = StyleSheet.create({
   },
   listContent: {
     padding: 10,
+  },
+  modalOverlay: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    width: '90%',
+    padding: 20,
+    borderRadius: 10,
+    maxHeight: '95%',
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  modalText: {
+    fontSize: 16,
+    marginBottom: 6,
+    color: '#333',
   },
   card: {
     marginBottom: 10,

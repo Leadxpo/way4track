@@ -66,7 +66,6 @@ export const updateProduct = (update_productPayload) => async (dispatch) => {
 
 export const fetchProducts = (getAll_productPayload) => async (dispatch) => {
     const { unitCode, companyCode } = getAll_productPayload;
-    console.log("rrr : ",getAll_productPayload)
     dispatch({ type: FETCH_PRODUCTS_REQUEST });
     try {
         // Attempt to fetch PRODUCTS
@@ -75,7 +74,6 @@ export const fetchProducts = (getAll_productPayload) => async (dispatch) => {
                 'Content-Type': 'application/json',
             },
         });
-        console.log("rrr : ",data.data)
         dispatch({ type: FETCH_PRODUCTS_SUCCESS, payload: data.data });
     } catch (error) {
         console.log("error : ", error)

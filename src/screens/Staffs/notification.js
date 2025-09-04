@@ -1,36 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, ScrollView,} from 'react-native';
 import api from '../../Api/api';
 import { Provider } from 'react-native-paper';
 import Header from '../../components/userHeader';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { fetchNotifications } from '../../Redux/Actions/notificationAction';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
   const [selectedBranch, setSelectedBranch] = useState('All');
   const [expandedNotification, setExpandedNotification] = useState(null);
-
-  const getAllNotification = async (branchName = 'All') => {
+  const dispatch = useDispatch();
+  
+  const getAllNotification = async () => {
+    const userID = await AsyncStorage.getItem('ID');
     try {
       const payload = {
+        notifyStaffId: userID,
         companyCode: "WAY4TRACK",
         unitCode: "WAY4",
       };
 
-      if (branchName !== 'All') {
-        payload.branchName = branchName;
-      }
+      const { data } = await api.post('/notifications/getAllNotifications', payload);
 
-      const res = await api.post('/notifications/getAllNotifications', payload);
-
-      if (res.status) {
-        setNotifications(res.data.notifications || []);
+      if (data.status) {
+        setNotifications(data.data.notifications || []);
       } else {
         setNotifications([]);
       }
@@ -40,9 +35,9 @@ const Notifications = () => {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getAllNotification()
-  },[])
+  }, [])
 
   const markAsRead = async (id) => {
     try {
@@ -55,6 +50,8 @@ const Notifications = () => {
       setNotifications((prev) =>
         prev.map((n) => (n.id === id ? { ...n, isRead: 1 } : n))
       );
+      dispatch(fetchNotifications())
+
     } catch (err) {
       console.error('Error marking as read:', err);
     }
@@ -77,6 +74,8 @@ const Notifications = () => {
         unitCode: "WAY4",
       });
       setNotifications((prev) => prev.map((n) => ({ ...n, isRead: 1 })));
+      dispatch(fetchNotifications())
+
     } catch (err) {
       console.error('Error marking all as read:', err);
     }
@@ -89,7 +88,7 @@ const Notifications = () => {
 
   return (
     <Provider style={styles.container}>
-      <Header/>
+      <Header />
       <TouchableOpacity onPress={markAllAsRead}>
         <Text style={styles.markAllRead}>Mark All as Read</Text>
       </TouchableOpacity>
@@ -102,7 +101,9 @@ const Notifications = () => {
             style={styles.notificationItem}
             onPress={() => {
               markAsRead(item.id)
-              toggleExpand(item.id)}}
+              toggleExpand(item.id)
+            }}
+            key={item.id}
           >
             <View style={styles.notificationContent}>
               <Text style={styles.notificationUser}>{item.user}</Text>
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
   },
   markAllRead: {
     color: '#007aff',
-    fontWeight: '600',padding:10,
+    fontWeight: '600', padding: 10,
     marginBottom: 16,
     textAlign: 'right',
   },

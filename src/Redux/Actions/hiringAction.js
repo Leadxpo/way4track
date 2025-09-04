@@ -59,15 +59,16 @@ export const updateHiring = (update_hiringPayload) => async (dispatch) => {
 
 export const fetchHirings = (getAll_hiringPayload) => async (dispatch) => {
     const { unitCode, companyCode } = getAll_hiringPayload;
+    console.log("rrr :",getAll_hiringPayload)
     dispatch({ type: FETCH_HIRINGS_REQUEST });
     try {
         // Attempt to fetch HIRINGS
-        const { data } = await api.post(`/hiring/getHiringDetails`, getAll_hiringPayload, {
+        const { data } = await api.post(`/hiring/getHiringSearchDetails`, getAll_hiringPayload, {
             headers: {
                 'Content-Type': 'application/json',
             },
         });
-        console.log("hiring-mainData  success: ", data.data)
+        console.log("hiring-mainData  success: ", data)
         dispatch({ type: FETCH_HIRINGS_SUCCESS, payload: data.data });
     } catch (error) {
         console.log("error : ", error)

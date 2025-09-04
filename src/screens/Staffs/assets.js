@@ -56,8 +56,8 @@ const Asset = ({ navigation }) => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 
     const filtered = asserts.filter(asset =>
-      (category === 'All' || asset.assetType === category) &&
-      (branch === 0 || asset.branchId.id === branch)
+      (category === 'All' || asset?.assetType === category) &&
+      (branch === 0 || asset?.branchId?.id === branch)
     );
 
     const officeCount = filtered.filter(asset => asset.assetType === 'office asset').length;

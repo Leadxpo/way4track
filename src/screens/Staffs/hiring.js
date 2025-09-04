@@ -38,33 +38,20 @@ const Hiring = ({ navigation }) => {
     dispatch(fetchHirings(hiringPayload));
   }, [dispatch])
 
-  const filteredData = hirings.filter((item) =>
+  const filteredData = hirings?.filter((item) =>
     item.candidateName.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.status.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.phoneNumber.toLowerCase().includes(searchQuery.toLowerCase()) 
   );
 
   const renderItem = ({ item }) => {
-    const statusColor='gray'
-    switch (item.status) {
-      case 'Pending':
-        statusColor='blue';
-        break;
-      case 'Rejected':
-        statusColor='red';
-        break;
-     
-      case 'Qualified':
-        statusColor='green';
-        break;
-      case 'APPLIED':
-        statusColor='greenYellow';
-        break;
+    const statusColor = {
+      Pending: 'blue',
+      Rejected: 'red',
+      Qualified: 'green',
+      APPLIED: 'greenyellow',
+    }[item.status] || 'gray';
     
-      default:
-        break;
-    }
-
     return(
     <Card style={styles.card}>
       <View style={styles.cardContent}>

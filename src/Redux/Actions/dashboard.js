@@ -188,13 +188,13 @@ export const intiateBranchManager_dashboard = (create_BranchManager_dashboardPay
                 'Content-Type': 'application/json',
             },
         });
-
-        const productByBranch = await api.post(`/dashboards/getProductDetailsByBranch`, create_BranchManager_dashboardPayload, {
+console.log("CreditAndDebitPercentages :",CreditAndDebitPercentages.data)
+        const productByBranch = await api.post(`/products/getProductDetailsByBranch`, create_BranchManager_dashboardPayload, {
             headers: {
                 'Content-Type': 'application/json',
             },
         });
-
+        console.log("productByBranch :",productByBranch)
         const totalStaff = await api.post(`/dashboards/getTotalStaffDetails`, create_BranchManager_dashboardPayload, {
             headers: {
                 'Content-Type': 'application/json',
@@ -205,12 +205,15 @@ export const intiateBranchManager_dashboard = (create_BranchManager_dashboardPay
                 'Content-Type': 'application/json',
             },
         });
+        console.log("assertCard :",assertCard.data)
+
         const dashboardBranchManagerData = {
             CreditAndDebitPercentages: CreditAndDebitPercentages.data.data,
             productByBranch: productByBranch.data.data,
             totalStaff: totalStaff.data.data,
             assertCard: assertCard.data.data
         }
+        console.log("dashboardBranchManagerData :",dashboardBranchManagerData)
         dispatch({ type: CREATE_BRANCH_MANAGER_DASHBOARD_SUCCESS, payload: dashboardBranchManagerData });
     } catch (error) {
         console.log("error : ", error)

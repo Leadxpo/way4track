@@ -20,29 +20,36 @@ export default function TicketFormScreen() {
     const route = useRoute();
     const editingData = route.params?.ticketData || null;
 
-    const [designationOpen, setDesignationOpen] = useState(false);
     const [designationValue, setDesignationValue] = useState(null);
-    const [designationItems, setDesignationItems] = useState([]);
+
+    const [reportingStaffOpen, setReportingStaffOpen] = useState(false);
+    const [reportingStaffValue, setReportingStaffValue] = useState(null);
+    const [reportingStaffItems, setReportingStaffItems] = useState([]);
 
     const [formData, setFormData] = useState({
         problem: "",
         date: new Date(),
+        reportingStaffId:"",
         designationRelation: null,
     });
 
     const [showDatePicker, setShowDatePicker] = useState(false);
 
-    const getDesignations = useCallback(async () => {
+    const getReportingStaff = useCallback(async () => {
+        const payload={
+            companyCode: "WAY4TRACK",
+            unitCode: "WAY4",
+          }
         try {
-            const response = await api.post("/designations/getAllDesignation");
+            const response = await api.post("/staff/getStaffNamesDropDown",payload);
             if (response.data.status && Array.isArray(response.data.data)) {
-                const items = response.data.data
-                    .filter((d) => d.id && d.designation)
+                const staffItems = response.data.data
+                    .filter((d) => d.id && d.staffId)
                     .map((d) => ({
-                        label: d.designation,
-                        value: d.id,
+                        label: d.staffId+"-"+d.name+"-"+d?.designationRelation?.designation,
+                        value: d.id+"-"+d?.designationRelation?.id,
                     }));
-                setDesignationItems(items);
+                setReportingStaffItems(staffItems);
             }
         } catch (error) {
             console.error("Failed to fetch designations:", error);
@@ -50,18 +57,20 @@ export default function TicketFormScreen() {
     }, []);
 
     useEffect(() => {
-        getDesignations();
-    }, [getDesignations]);
+        getReportingStaff();
+    }, [reportingStaffOpen]);
 
     useEffect(() => {
         if (editingData) {
             const parsedDate = new Date(editingData.date);
+
             setFormData({
                 problem: editingData.problem || "",
                 date: isNaN(parsedDate) ? new Date() : parsedDate,
-                designationRelation: editingData.designationRelation || null,
+                reportingStaffId: editingData.reportingStaffId || null,
             });
             setDesignationValue(editingData.designationRelation || null);
+            setReportingStaffValue(editingData?.reportingStaffId+"-"+ editingData?.de_id|| null);
         }
     }, [editingData]);
 
@@ -92,18 +101,20 @@ export default function TicketFormScreen() {
             branchId: branchId,
             date: formData.date.toISOString().split("T")[0],
             designationRelation: formData.designationRelation,
+            reportingStaffId: Number(formData.reportingStaffId),
             companyCode: "WAY4TRACK",
             unitCode: "WAY4",
         };
+
         let payload = role === "sub dealer staff"
             ? { ...commonPayload, subDealerId, subDealerStaffId }
             : { ...commonPayload, staffId };
 
         if (editingData && editingData.id) {
             id = editingData.id;
-            payload = { ...payload };
+            console.log("eee:",id)
+            payload = { ...payload,id:id };
         }
-        console.log("editingData.id:", payload);
         console.log("payload with id : ", payload)
 
         try {
@@ -127,19 +138,27 @@ export default function TicketFormScreen() {
                 {editingData ? "Edit Ticket" : "Add Ticket"}
             </Text>
 
-            <Text style={styles.label}>Designation</Text>
             <View style={styles.pickerWrapper}>
                 <DropDownPicker
-                    open={designationOpen}
-                    value={designationValue}
-                    items={designationItems}
-                    setOpen={setDesignationOpen}
-                    setValue={setDesignationValue}
-                    setItems={setDesignationItems}
-                    placeholder="Select a Designation"
-                    listMode="MODAL"
+                    open={reportingStaffOpen}
+                    value={reportingStaffValue}
+                    items={reportingStaffItems}
+                    setOpen={setReportingStaffOpen}
+                    setValue={setReportingStaffValue}
+                    setItems={setReportingStaffItems}
+                    placeholder="Select a Reporting Staff"
+                    listMode="MODAL" 
+                    onSelectItem={(data) => {
+                        console.log("eee :", data);
+                        const rrr = data.value.split("-");
+                        setFormData(prev => ({
+                            ...prev,
+                            reportingStaffId: rrr[0],
+                            designationRelation: rrr[1],
+                        }));
+                    }}
                     zIndex={1000}
-                    modalTitle="Select Designation"
+                    modalTitle="Select Reporting Staff"
                     modalAnimationType="slide"
                     style={styles.dropdown}
                     dropDownContainerStyle={styles.dropdownContainer}

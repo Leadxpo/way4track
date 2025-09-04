@@ -16,30 +16,31 @@ const Product = ({ navigation }) => {
   const { products } = useSelector(state => state.products);
   const [permissions, setPermissions] = useState([]);
   useEffect(() => {
+    dispatch(fetchProducts({ companyCode: "WAY4TRACK", unitCode: "WAY4" }));
+  }, [dispatch]);
+
+  useEffect(() => {
     const loadStaffloginData = async () => {
-        const rrr = await loadData("staffPermissions")
-        setPermissions(prev => prev = rrr ||permissions);
-        console.log(permissions)
+      const rrr = await loadData("staffPermissions")
+      setPermissions(prev => prev = rrr || permissions);
+      console.log(permissions)
     };
     loadStaffloginData();
-}, []);
+  }, []);
 
-  const hasAddProductPermission = permissions.some(p => p.name === "product" && p.add);
-  const hasEditProductPermission = permissions.some(p => p.name === "product" && p.edit);
-  const hasDeleteProductPermission = permissions.some(p => p.name === "product" && p.delete);
+  // const hasAddProductPermission = permissions.some(p => p.name === "product" && p.add);
+  // const hasEditProductPermission = permissions.some(p => p.name === "product" && p.edit);
+  // const hasDeleteProductPermission = permissions.some(p => p.name === "product" && p.delete);
 
   const [branch, setBranch] = useState('All');
   const [selectedCategory, setSelectedCategory] = useState('warehouse');
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [productCategories, setProductCategories] = useState([
     { key: 'warehouse', color: '#FF8080', label: 'Warehouse Products', count: 0 },
-    { key: 'inhand', color: '#80FF80', label: 'In-Hand Products', count: 0 },
-    { key: 'Installed', color: '#B580FF', label: 'Installed Products', count: 0 },
+    { key: 'inHand', color: '#80FF80', label: 'In-Hand Products', count: 0 },
+    { key: 'branch', color: '#B580FF', label: 'Installed Products', count: 0 },
   ]);
 
-  useEffect(() => {
-    dispatch(fetchProducts({ companyCode: "WAY4TRACK", unitCode: "WAY4" }));
-  }, [dispatch]);
 
   useEffect(() => {
     updateFilteredProducts(selectedCategory, branch);
@@ -47,20 +48,21 @@ const Product = ({ navigation }) => {
 
   const updateFilteredProducts = (category, branch) => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-const rrr=products?.branchList
-    const filtered = rrr?.filter(product =>
-      (category === 'warehouse' || product.location === category) &&
-      (branch === 'All' || product.branch === branch)
-    );
+    const rrr = products
+    console.log("rrr:", rrr)
+    const filtered = rrr?.filter(product => {
+      return ((category === 'warehouse' || product.location === category) &&
+        (branch === 'All' || Number(product.branchId?.id) === Number(branch)))
+    });
 
-    const countByCategory = {
+    const countByCategory = { 
       warehouse: 0,
-      inhand: 0,
-      Installed: 0,
+      inHand: 0,
+      branch: 0,
     };
 
     rrr?.forEach(product => {
-      if (branch === 'All' || product.branch === branch) {
+      if (branch === 'All' || product.branchId.id === branch) {
         if (countByCategory.hasOwnProperty(product.location)) {
           countByCategory[product.location] += 1;
         }
@@ -77,9 +79,9 @@ const rrr=products?.branchList
     <View style={styles.container}>
       <Header />
 
-      <View style={styles.dropdownContainer}>
+      {/* <View style={styles.dropdownContainer}>
         <BranchesDropdown branchName={setBranch} dropdownStyles={styles} onBranchChange={setBranch} />
-      </View>
+      </View> */}
 
       <View style={styles.categoryContainer}>
         {productCategories.map(category => (
@@ -98,15 +100,16 @@ const rrr=products?.branchList
         data={filteredProducts}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
-          <Card style={styles.productCard}>
+          <Card key={item.id} style={styles.productCard}>
             <View style={{ flex: 1, flexDirection: 'row' }}>
-              <View style={{ width: '30%' }}>
-                <Image source={{ uri: item.productPhoto }} resizeMode='stretch' style={styles.productImage} />
-              </View>
               <View style={styles.productInfo}>
                 <Text style={{ fontWeight: 700, fontSize: 15, padding: 5, color: "#333333" }}>{item.productName}</Text>
                 <Text style={{ fontWeight: 700, fontSize: 15, padding: 5, color: "#aaaaaa" }}>{item.imeiNumber}</Text>
-                <Text style={{ fontWeight: 700, fontSize: 15, padding: 5, color: "#333333" }}>{item.price}</Text>
+                <Text style={{ fontWeight: 700, fontSize: 15, padding: 5, color: "#333333" }}>{item.location}</Text>
+                {item.branchId && <Text style={{ fontWeight: 700, fontSize: 15, padding: 5, color: "#333333" }}>{item.branchId.branchName}</Text>}
+                {item.staffId && <Text style={{ fontWeight: 700, fontSize: 15, padding: 5, color: "#333333" }}>{item.staffId.name}-{item.staffId.staffId}</Text>}
+                {item.staffId && <Text style={{ fontWeight: 700, fontSize: 15, padding: 5, color: "#333333" }}>{item.staffId.designation}</Text>}
+
                 <TouchableOpacity onPress={() => {
                   dispatch(drawLabel("Products"));
                   navigation.navigate('ProductDetails', { productDetails: item });

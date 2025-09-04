@@ -6,6 +6,7 @@ import Svg, { Defs, LinearGradient, Stop, Rect } from "react-native-svg";
 import Header from '../../components/userHeader';
 import { intiateBranchManager_dashboard } from '../../Redux/Actions/dashboard';
 import { staffDataHook } from '../../Utils/permissions';
+import { fetchNotifications } from '../../Redux/Actions/notificationAction';
 
 const Home_BranchManager = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const Home_BranchManager = () => {
           branch: branchManagerDetails?.branchName,
         };
         dispatch(intiateBranchManager_dashboard(BranchManager_dashboardPayload));
+        dispatch(fetchNotifications())
       } catch (error) {
         console.error('Error fetching branch manager data:', error);
       }

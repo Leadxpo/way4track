@@ -15,7 +15,6 @@ const Banks = ({ navigation, route }) => {
   const { bankDetails } = route.params;  // Sample address data
   const { loading, selectedLabel, error } = useSelector(state => state.selectedDrawLabel);
   const { loading: bankAccountsLoading, bankAccount, error: bankAccountsError } = useSelector(state => state.bankAccountDetailReducer);
-
   const filteredData = bankDetails?.invoiceData?.filter((item) =>
     item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.id.toLowerCase().includes(searchQuery.toLowerCase())

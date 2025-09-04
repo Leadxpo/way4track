@@ -14,7 +14,7 @@ import { createEstimatesReducer, createInvoiceReducer, createRecieptReducer, del
 import { createHiringsReducer, deleteHiringReducer, hiringDetailReducer, hiringsReducer, updateHiringReducer } from './Reducers/hiringReducer'; // Import hiring Reducer
 import { staffLoginReducer } from './Reducers/loginReducer'; // Import userLoginReducer
 import { salesVisitReducer,uploadSalesVisitReducer} from './Reducers/salesVisitReducer'; // Import drawmenu Reducer
-import { notificationReducer, singleNotificationReducer, createNotificationReducer } from './Reducers/notificationReducer'; // Import notification Reducer
+import { notificationReducer, singleNotificationReducer } from './Reducers/notificationReducer'; // Import notification Reducer
 import { productsReducer, productDetailReducer, updateProductReducer, createProductsReducer, deleteProductReducer, productsDropdownReducer } from './Reducers/productReducer'; // Import product Reducer
 import { createProductAssignsReducer,deleteProductAssignReducer,productAssignDetailReducer,productAssignsReducer,updateProductAssignReducer} from './Reducers/productAssignReducer'; // Import product Reducer
 import { createRaiseRequestsReducer, deleteRaiseRequestReducer, raiseRequestDetailReducer, raiseRequestsReducer, updateRaiseRequestReducer } from './Reducers/raiseRequestReducer'; // Import raiserequest Reducer

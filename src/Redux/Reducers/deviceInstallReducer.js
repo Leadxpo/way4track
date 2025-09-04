@@ -2,7 +2,7 @@ import { CREATE_DEVICE_INSTALL_REQUEST, CREATE_DEVICE_INSTALL_SUCCESS, CREATE_DE
 import * as actionType from "../Constants/deviceInstallConstant";
 
 const initialState = {
-  deviceInstallData: null,
+  deviceInstallData: [],
   loading: false,
   error: null,
 };

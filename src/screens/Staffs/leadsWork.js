@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
   },
   segmentContainer: {
     backgroundColor: '#F0F0F0', color: '#333333',
-    borderRadius: 10, marginVertical: 10,
+    borderRadius: 10, margin: 10,
     overflow: 'hidden',
   },
   entryCard: {

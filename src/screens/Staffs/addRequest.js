@@ -5,9 +5,11 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { loadData } from "../../Utils/appData";
 import { useDispatch, useSelector } from 'react-redux';
-import { createRaiseRequest } from "../../Redux/Actions/raiseRequestAction";
+import { createRaiseRequest, fetchRaiseRequests } from "../../Redux/Actions/raiseRequestAction";
 import api from "../../Api/api";
 import DatePicker from 'react-native-date-picker'
+import { launchCamera } from 'react-native-image-picker';
+import { PermissionsAndroid, Platform } from 'react-native';
 
 const AddRequest = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -23,6 +25,7 @@ const AddRequest = ({ navigation }) => {
   const [fromOpen, setFromOpen] = useState(false)
   const [role, setRole] = useState("");
   const [toOpen, setToOpen] = useState(false)
+  const [imagePreviews, setImagePreviews] = useState([]);
   const [dropdownRequestType, setDropdownRequestType] = useState([
     { label: 'Assert', value: 'assets' },
     { label: 'Money', value: 'money' },
@@ -30,6 +33,99 @@ const AddRequest = ({ navigation }) => {
     { label: 'Personal', value: 'personal' },
     { label: 'LeaveRequest', value: 'leaveRequest' },
   ]);
+
+  const requestCameraPermission = async () => {
+    if (Platform.OS === 'android') {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.CAMERA,
+        {
+          title: 'Camera Permission',
+          message: 'App needs camera permission to take photos',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+      return granted === PermissionsAndroid.RESULTS.GRANTED;
+    }
+    return true; // iOS auto-requests via Info.plist
+  };
+
+  const handleFileChange = async () => {
+    const hasPermission = await requestCameraPermission();
+    if (!hasPermission) {
+      Alert.alert('Permission denied', 'Camera access is required');
+      return;
+    }
+    launchCamera(
+      {
+        mediaType: 'photo',
+        selectionLimit: 1, // 0 = unlimited selection
+      },
+      (response) => {
+        if (response.didCancel) return;
+        if (response.errorCode) {
+          Alert.alert('Error', response.errorMessage || 'Image pick failed');
+          console.log('Error', response.errorMessage || 'Image pick failed');
+          return;
+        }
+
+        const selectedFiles = response.assets || [];
+
+        const newFiles = selectedFiles.map((item) => ({
+          uri: item.uri,
+          name: item.fileName,
+          type: item.type,
+        }));
+
+        const newPreviews = selectedFiles.map((item) => item.uri);
+
+        setFormData((prev) => ({
+          ...prev,
+          photo: [...prev.photo, ...newFiles],
+        }));
+
+        setImagePreviews((prev) => [...prev, ...newPreviews]);
+      }
+    );
+  };
+
+  const handleReplaceImage = (index) => {
+    launchCamera(
+      {
+        mediaType: 'photo',
+        selectionLimit: 5,
+      },
+      (response) => {
+        if (response.didCancel) return;
+        if (response.errorCode) {
+          Alert.alert('Error', response.errorMessage || 'Image pick failed');
+          return;
+        }
+
+        const item = response.assets?.[0];
+        if (item) {
+          const newFile = {
+            uri: item.uri,
+            name: item.fileName,
+            type: item.type,
+          };
+
+          setFormData((prev) => {
+            const updated = [...prev.photo];
+            updated[index] = newFile;
+            return { ...prev, photo: updated };
+          });
+
+          setImagePreviews((prev) => {
+            const updated = [...prev];
+            updated[index] = item.uri;
+            return updated;
+          });
+        }
+      }
+    );
+  };
   useEffect(() => {
     const getStaff = async () => {
 
@@ -60,9 +156,15 @@ const AddRequest = ({ navigation }) => {
   const [formData, setFormData] = useState({
     requestToName: "",
     requestType: "",
-    requestFrom: "",
-    description: "",
-    fromDate: new Date(), toDate: new Date(),
+    requestFrom: null,
+    branch: '',
+    requestFor: '',
+    requestTo: '',
+    createdDate: '',
+    photo: [],
+    status: '',
+    fromDate: new Date(),
+    toDate: new Date(),
     products: [{ productType: "", quantity: "" }],
     companyCode: 'WAY4TRACK',
     unitCode: 'WAY4',
@@ -88,12 +190,20 @@ const AddRequest = ({ navigation }) => {
       const branch = await loadData('branch_id');
       const requestFrom = await loadData('ID');
       const role = await loadData('role');
-      setBackgroundMessageHandler(role)
-      setFormData(prev => ({ ...prev, requestFrom: requestFrom, branch: branch, }))
-    }
 
-    getStaffData()
-  }, [])
+      setBackgroundMessageHandler(role);
+      setFormData(prev => ({
+        ...prev,
+        requestFrom,
+        branch,
+      }));
+
+      // Store role if used elsewhere
+      setRole(role);
+    };
+
+    getStaffData();
+  }, []);
 
   // Error state for validation
   const [errors, setErrors] = useState({});
@@ -101,17 +211,10 @@ const AddRequest = ({ navigation }) => {
   // Validation function
   const validateForm = () => {
     let isValid = true;
+
     const newErrors = {};
     if (!formData.requestType) {
       newErrors.requestType = "Request type is required.";
-      isValid = false;
-    }
-    if (!formData.requestFrom) {
-      newErrors.requestFrom = "Request by is required.";
-      isValid = false;
-    }
-    if (!formData.branch?.toString().trim()) {
-      newErrors.branch = "Branch is required.";
       isValid = false;
     }
     if (!formData.requestTo) {
@@ -119,23 +222,35 @@ const AddRequest = ({ navigation }) => {
       isValid = false;
     }
     setErrors(newErrors);
+    console.log("error:", errors)
     return isValid;
   };
 
 
   // Save button handler
-  const handleSave = () => {
-    if (validateForm()) {
-      console.log("formData : ", formData);
-      dispatch(createRaiseRequest(formData))
-        const targetRoute =
-        role === "sub dealer staff" ? "SubdealerStaffBottomStack" : "TechBottomStack";
-        console.log("targetRoute : ",targetRoute)
-        navigation.reset({
-        index: 0,
-        routes: [{ name: targetRoute }],
-      });
-      navigation.navigate(targetRoute)
+  const handleSave = async () => {
+    const formattedFromDate = formData.fromDate?.toISOString().split("T")[0];
+    const formattedToDate = formData.toDate?.toISOString().split("T")[0];
+    const updatedFormData = {
+      ...formData,
+      fromDate: formattedFromDate,
+      toDate: formattedToDate,
+      requestFrom: formData.requestFrom, // fallback if needed
+      branch: formData.branch,
+    };
+
+    if (validateForm(updatedFormData)) {
+      dispatch(createRaiseRequest(updatedFormData))
+      const staffId = await loadData("ID");
+      const requestPayload = {
+        companyCode: "WAY4TRACK",
+        unitCode: "WAY4",
+        id: staffId,
+      };
+      dispatch(fetchRaiseRequests(requestPayload));
+
+      navigation.navigate("RequestRaise");
+
     }
   };
 
@@ -341,7 +456,22 @@ const AddRequest = ({ navigation }) => {
           {errors.requestTo && (
             <Text style={styles.errorText}>{errors.requestTo}</Text>
           )}
+          <View>
+            <Button mode="contained" onPress={handleFileChange}>
+              Select Images
+            </Button>
 
+            <ScrollView horizontal style={{ marginVertical: 10 }}>
+              {imagePreviews.map((uri, index) => (
+                <TouchableOpacity key={index} onPress={() => handleReplaceImage(index)}>
+                  <Image
+                    source={{ uri }}
+                    style={{ width: 100, height: 100, marginRight: 10, borderRadius: 8 }}
+                  />
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
           {/* Action Buttons */}
           <View style={styles.actionButtons}>
             <Button

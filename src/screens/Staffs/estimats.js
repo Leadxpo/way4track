@@ -1,33 +1,33 @@
-import React, { useState,useEffect } from "react";
-import { View, FlatList, Text, TextInput, StyleSheet, TouchableOpacity} from "react-native";
-import { Avatar, Card,  Provider, FAB } from "react-native-paper";
+import React, { useState, useEffect } from "react";
+import { View, FlatList, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
+import { Avatar, Card, Provider, FAB } from "react-native-paper";
 import Header from '../../components/userHeader';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEstimates } from "../../Redux/Actions/estimatesAction";
 import { drawLabel } from "../../Redux/Actions/drawAction";
 
 const Estimates = ({ navigation }) => {
-  const [searchQuery, setSearchQuery] = useState(""); 
+  const [searchQuery, setSearchQuery] = useState("");
   const [menuVisible, setMenuVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const dispatch = useDispatch();
 
   const { loading, selectedLabel, error } = useSelector(state => state.selectedDrawLabel);
 
-  const { loading:estimatesLoading,  estimates, error:estimatesError } = useSelector(state => state.estimatesReducer);
+  const { loading: estimatesLoading, estimates, error: estimatesError } = useSelector(state => state.estimatesReducer);
 
   const [permissions, setPermissions] = useState([]);
   useEffect(() => {
     const loadStaffloginData = async () => {
-        const rrr = await loadData("staffPermissions")
-        setPermissions(prev => prev = rrr ||permissions);
-        console.log(permissions)
+      const rrr = await loadData("staffPermissions")
+      setPermissions(prev => prev = rrr || permissions);
+      console.log(permissions)
     };
     loadStaffloginData();
-}, []);
+  }, []);
 
   const hasAddEstimatePermission = permissions.some(p => p.name === "estimate" && p.add);
-  
+
   useEffect(() => {
     const estimatePayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
     dispatch(fetchEstimates(estimatePayload));
@@ -43,14 +43,17 @@ const Estimates = ({ navigation }) => {
     <Card style={styles.card}>
       <View style={styles.cardContent}>
         <View style={styles.details}>
-          <Text style={[styles.clientName,{color:"#28a745"}]}>{item.estimateId}</Text>
-          <Text style={[styles.clientName,{color:'#333333'}]}>{item.clientName}</Text>
+          <Text style={[styles.clientName, { color: "#28a745" }]}>{item.estimateId}</Text>
+          <Text style={[styles.clientName, { color: '#333333' }]}>{item.clientName}</Text>
           <Text style={styles.clientInfo}>Generated Date : {item.estimateDate.split("T")[0]}</Text>
           <Text style={styles.clientInfo}>Expire Date : {item.expireDate}</Text>
           <Text style={styles.clientInfo}>Total Amount: {item.totalAmount}</Text>
         </View>
-        <TouchableOpacity onPress={()=>navigation.navigate('EstimateDetails',{estimateDetails:item})}>
-        <Avatar.Icon size={24} icon={'eye'}/>
+        <TouchableOpacity onPress={() => navigation.navigate("Home", {
+          screen: "EstimateDetails",
+          params: { estimateDetails: item }
+        })}>
+          <Avatar.Icon size={24} icon={'eye'} />
         </TouchableOpacity>
       </View>
     </Card>
@@ -78,7 +81,7 @@ const Estimates = ({ navigation }) => {
           renderItem={renderItem}
           contentContainerStyle={styles.listContent}
         />
-                <FAB icon="plus" visible={hasAddEstimatePermission} label="Add Estimate" style={styles.fab} onPress={() => {
+        <FAB icon="plus" visible={hasAddEstimatePermission} label="Add Estimate" style={styles.fab} onPress={() => {
           dispatch(drawLabel("Estimate"));
           navigation.navigate('AddEstimate');
         }} />

@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect,useMemo, useCallback } from "react";
 import { View, FlatList, Text, TextInput, StyleSheet, TouchableOpacity, Modal } from "react-native";
-import { Card, Provider, Button } from "react-native-paper";
+import { Card, Provider, SegmentedButtons, Button } from "react-native-paper";
 import Header from '../../components/userHeader';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTechnicianWorks } from "../../Redux/Actions/TechnicianWork";
@@ -9,8 +9,9 @@ import { useFocusEffect } from '@react-navigation/native';
 
 const SubStaffWorks = ({ navigation }) => {
   const dispatch = useDispatch();
-  const {SubdealerStaff_homeInfo } = useSelector(state => state.SubdealerStaff_homeInfoReducer);
+  const { SubdealerStaff_homeInfo } = useSelector(state => state.SubdealerStaff_homeInfoReducer);
   const [permissions, setPermissions] = useState([]);
+  const [activeSegment, setActiveSegment] = useState("pending");
   const [subdealerWorkData, setSubdealerWorkData] = useState([]);
   const [staffId, setStaffId] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
@@ -22,7 +23,7 @@ const SubStaffWorks = ({ navigation }) => {
   /** Fetch Technician Works Whenever Staff ID is Available */
   useFocusEffect(
     useCallback(() => {
-setSubdealerWorkData(SubdealerStaff_homeInfo.totalSubdealerStaffWork)
+      setSubdealerWorkData(SubdealerStaff_homeInfo.totalSubdealerStaffWork)
       const loadStaffData = async () => {
         const technicianId = await loadData("staffID");
         const staffPermissions = await loadData("staffPermissions");
@@ -66,29 +67,39 @@ setSubdealerWorkData(SubdealerStaff_homeInfo.totalSubdealerStaffWork)
       default: return "#f3f3f3";
     }
   };
-  
+
   /** Render Technician Work Item */
   const renderItem = ({ item, index }) => {
-    return(
-    <Card style={[styles.card, { backgroundColor: getStatusColor(item.workStatus) }]} key={index}>
-      <TouchableOpacity activeOpacity={0.8} onPress={() => {
-        setSelectedWork(item);
+    return (
+      <Card style={[styles.card, { backgroundColor: getStatusColor(item.workStatus) }]} key={index}>
+        <TouchableOpacity activeOpacity={0.8} onPress={() => {
+          setSelectedWork(item);
           setModalInstallDetailsVisible(true)
           console.log(modalInstallDetailsVisible)
-      }}>
-        <View style={styles.cardContent}>
-          <Text style={styles.sectionTitle}>Client Details</Text>
-          <Text style={styles.clientInfo}>Client Name: {item.clientName || "N/A"}</Text>
-          <Text style={styles.clientInfo}>Phone: {item.phoneNumber || "N/A"}</Text>
-          <Text style={styles.clientInfo}>DOA: {(item.date ? String(item.date).split("T")[0] : "N/A")
-          }</Text>
-          <Text style={{ color: "#ffffff", fontWeight: "700", backgroundColor: "#ffa9a8", borderRadius: 8, padding: 5, width: "40%", marginVertical: 10, justifyContent: 'center' }}>
-            Status: {item.workStatus || "N/A"}
-          </Text>
-        </View>
-      </TouchableOpacity>
-    </Card>
-  )};
+        }}>
+          <View style={styles.cardContent}>
+            <Text style={styles.sectionTitle}>Client Details</Text>
+            <Text style={styles.clientInfo}>Client Name: {item.clientName || "N/A"}</Text>
+            <Text style={styles.clientInfo}>Phone: {item.phoneNumber || "N/A"}</Text>
+            <Text style={styles.clientInfo}>DOA: {(item.date ? String(item.date).split("T")[0] : "N/A")
+            }</Text>
+            <Text style={{ color: "#ffffff", fontWeight: "700", backgroundColor: "#ffa9a8", borderRadius: 8, padding: 5, width: "40%", marginVertical: 10, justifyContent: 'center' }}>
+              Status: {item.workStatus || "N/A"}
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </Card>
+    )
+  };
+
+  const workStatusMap = useMemo(() => ({
+    pending: filteredData.filter(item => item.workStatus === "pending"),
+    workInstalled: filteredData.filter(item => item.workStatus === "install"),
+    acceptWorks: filteredData.filter(item => item.workStatus === "accept"),
+    activatedWorks: filteredData.filter(item => item.workStatus === "activate")
+  }), [filteredData]);
+
+  const data = workStatusMap[activeSegment] || [];
 
   return (
     <Provider>
@@ -103,15 +114,36 @@ setSubdealerWorkData(SubdealerStaff_homeInfo.totalSubdealerStaffWork)
           onChangeText={setSearchQuery}
         />
 
+        <SegmentedButtons
+          value={activeSegment}
+          onValueChange={setActiveSegment}
+          buttons={[
+            { value: 'pending', label: 'Pending', style: activeSegment === 'pending' ? styles.activeButton : styles.inactiveButton, checkedColor: "#ffffff", uncheckedColor: "#333333" },
+            { value: 'workInstalled', label: 'Installed', style: activeSegment === 'workInstalled' ? styles.activeButton : styles.inactiveButton, checkedColor: "#ffffff", uncheckedColor: "#333333" },
+            { value: 'acceptWorks', label: 'Accepted', style: activeSegment === 'acceptWorks' ? styles.activeButton : styles.inactiveButton, checkedColor: "#ffffff", uncheckedColor: "#333333" },
+            { value: 'activatedWorks', label: 'Activated', style: activeSegment === 'activatedWorks' ? styles.activeButton : styles.inactiveButton, checkedColor: "#ffffff", uncheckedColor: "#333333" },
+          ]}
+          density="medium"
+          style={styles.segmentContainer}
+          theme={{
+            colors: {
+              primary: '#007AFF', // Active Tab Color
+              onSurfaceVariant: '#fff', // Text color
+            },
+          }}
+        />
+
         {/* Work List */}
         <FlatList
-          data={filteredData}
+          data={data}
           keyExtractor={(item) => item.id}
           renderItem={renderItem}
+          contentContainerStyle={styles.listContainer}
+          showsVerticalScrollIndicator={false}
           ListEmptyComponent={() => (
             <View style={styles.emptyContainer}>
               <Card style={styles.emptyCard}>
-                <Text style={styles.emptyText}>No Works Assigned Yetttt</Text>
+                <Text style={styles.emptyText}>No Works Assigned Yet</Text>
               </Card>
             </View>
           )}
@@ -208,7 +240,22 @@ const styles = StyleSheet.create({
   cardContent: { padding: 10 },
   sectionTitle: { fontSize: 18, fontWeight: "bold", color: "#333333", marginVertical: 10 },
   clientInfo: { fontSize: 14, color: "#555", marginVertical: 5 },
-
+  activeButton: {
+    backgroundColor: '#28a745', // Active button background
+    color: '#fff', // Active text color
+  },
+  inactiveButton: {
+    backgroundColor: '#E0E0E0', // Inactive button background
+    color: '#000', // Inactive text color
+  },
+  segmentContainer: {
+    backgroundColor: '#F0F0F0', color: '#333333',
+    borderRadius: 10, margin: 10,
+    overflow: 'hidden',
+  },
+  listContainer: {
+    paddingBottom: 16,
+  },
   emptyContainer: { alignItems: "center", marginTop: 20 },
   emptyCard: { padding: 20, backgroundColor: "#f8d7da", borderRadius: 10 },
   emptyText: { color: "#721c24", fontSize: 16 },

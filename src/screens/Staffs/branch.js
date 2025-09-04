@@ -52,7 +52,6 @@ const Branch = ({ navigation }) => {
             unitCode: "WAY4",
           }
         );
-
         if (percentageResponse.data.status) {
           setPercentages(percentageResponse.data.data);
         } else {
@@ -68,7 +67,7 @@ const Branch = ({ navigation }) => {
 
   // Combine branches and percentages
   const combinedBranches = branches.map((branch) => {
-    const percentageData = percentages.find((p) => p.id === branch.id) || {};
+    const percentageData = percentages.find((p) => p.branchName === branch.branchName) || {};
     return {
       ...branch,
       creditPercentage: percentageData.creditPercentage || 0,
@@ -93,7 +92,6 @@ const Branch = ({ navigation }) => {
 
       {/* Branch Cards */}
       {combinedBranches.map((branch, index) => {
-        console.log("rrr :", branch)
         return (
           <Card key={index} style={styles.branchCard}>
             <View style={styles.cardContent}>

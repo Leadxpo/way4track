@@ -3,21 +3,12 @@ import { View, Text, StyleSheet, Modal, TouchableOpacity, FlatList, Dimensions }
 import { Card, Surface } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const StatsSummary = ({ PayableAmount, ReceivableAmount, SalesAmount, PurchaseCount, receivableTable, saleTable,payableTable,purchaseTable  }) => {
+const StatsSummary = ({ PayableAmount, ReceivableAmount, SalesAmount, PurchaseCount, receivableTable, saleTable, payableTable, purchaseTable }) => {
   const [modalPayableVisible, setModalPayableVisible] = useState(false);
   const [modalSaleVisible, setModalSaleVisible] = useState(false);
   const [modalReceivableVisible, setModalReceivableVisible] = useState(false);
   const [modalPurchaseVisible, setModalPurchaseVisible] = useState(false);
   const [selectedStat, setSelectedStat] = useState(null);
-
-  console.log("PayableAmount :",PayableAmount);
-  console.log("SalesAmount :",SalesAmount);
-  console.log("PurchaseCount :",PurchaseCount);
-  console.log("ReceivableAmount :",ReceivableAmount);
-  console.log("payableTable :",payableTable);
-  console.log("saleTable :",saleTable);
-  console.log("purchaseTable :",purchaseTable);
-  console.log("receivableTable :",receivableTable);
 
   const stats = [
     { title: 'Total Payable', value: PayableAmount, icon: 'cube', color: "#000000" },
@@ -41,7 +32,7 @@ const StatsSummary = ({ PayableAmount, ReceivableAmount, SalesAmount, PurchaseCo
         setModalReceivableVisible(true);
         break;
 
-      case 'Total Purchases':
+      case 'Total Purchase':
         setModalPurchaseVisible(true);
         break;
 
@@ -67,97 +58,75 @@ const StatsSummary = ({ PayableAmount, ReceivableAmount, SalesAmount, PurchaseCo
   };
 
   const renderPayableListItem = ({ item }) => {
-    // const totalProductsSum = item.products.reduce((sum, product) => sum + (product.totalProducts || 0), 0);
-    console.log("PayableListItem :",item)
     return (
-
-      <Card style={[styles.card, { borderColor: "#27AE60", borderWidth: 1, }]}>
-        <Card.Content>
-          <View style={{ flexDirection: 'row', marginVertical: 10 }}>
-            <Text style={{ fontSize: 16, color: '#27AE60', fontWeight: 600, marginRight: 10 }}>{item.branchName}</Text>
-            <Text style={{ fontSize: 16, color: '#27AE60', fontWeight: 600, marginLeft: 10 }}>:</Text>
-            <Text style={{ fontSize: 16, color: '#27AE60', fontWeight: 600, marginLeft: 10 }}>{totalProductsSum}</Text>
-          </View>
-
-          <View style={styles.gridContainer}>
-            {
-              item.products.map((product) => {
-                <View style={[styles.gridItem, { width: "48%" ,backgroundColor:"red"}]}>
-                  <Card.Title title={product.name}>
-                    <Text style={{ fontSize: 16, color: '#27AE60', fontWeight: 600, marginLeft: 10 }}>totalInHandsQty: {product.totalInHandsQty}</Text>
-                  </Card.Title>
-                </View>
-              })
-            }
+      <Card key={item.id} style={styles.card}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', borderTopEndRadius: 5, borderTopStartRadius: 5, backgroundColor: '#27AE60', width: Dimensions.get('screen').width / 1.3, padding: 10 }}>
+          <Text style={{ fontSize: 16, color: '#f3f3f3', textTransform: "capitalize", fontWeight: 600, marginRight: 10, width: "60%" }}>{item.voucherId}</Text>
+          <Text style={{ fontSize: 14, color: '#f3f3f3', textTransform: "capitalize", fontWeight: 600, marginLeft: 10 }}>{item.date?.split("T")[0]}</Text>
+        </View>
+        <View style={styles.gridContainer}>
+          {/* Vizag */}
+          <View style={styles.gridItem}>
+            <Card.Title title={item.branchName} titleNumberOfLines={2} titleStyle={{ width: "100%" }} subtitle={item.amount} subtitleNumberOfLines={2}></Card.Title>
+            <Text numberOfLines={3} style={{ fontSize: 16, color: '#aaaaaa', fontWeight: 600, marginLeft: 10 }}>{item.paymentStatus}</Text>
 
           </View>
-        </Card.Content>
+        </View>
       </Card>
     )
   };
 
   const renderSaleListItem = ({ item }) => {
-    return(
-    <Card style={styles.card}>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', borderTopEndRadius: 5, borderTopStartRadius: 5, backgroundColor: '#27AE60', width: Dimensions.get('screen').width/1.3, padding: 10 }}>
-      <Text style={{ fontSize: 16, color: '#f3f3f3', textTransform: "capitalize", fontWeight: 600, marginRight: 10, width: "60%" }}>{item.vocher_id}</Text>
-      <Text style={{ fontSize: 14, color: '#f3f3f3', textTransform: "capitalize", fontWeight: 600, marginLeft: 10 }}>{item.date.split("T")[0]}</Text>
-      </View>
-      <View style={styles.gridContainer}>
-        {/* Vizag */}
-        <View style={styles.gridItem}>
-          <Card.Title title={item.voucherId} titleNumberOfLines={2} titleStyle={{ width: "100%" }} subtitle={item.branchName} subtitleNumberOfLines={2}></Card.Title>
-          <Text numberOfLines={3} style={{ fontSize: 16, color: '#aaaaaa', fontWeight: 600, marginLeft: 10 }}>{item.amount}</Text>
-
+    return (
+      <Card key={item.id} style={styles.card}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', borderTopEndRadius: 5, borderTopStartRadius: 5, backgroundColor: '#27AE60', width: Dimensions.get('screen').width / 1.3, padding: 10 }}>
+          <Text style={{ fontSize: 16, color: '#f3f3f3', textTransform: "capitalize", fontWeight: 600, marginRight: 10, width: "60%" }}>{item.vocher_id}</Text>
+          <Text style={{ fontSize: 14, color: '#f3f3f3', textTransform: "capitalize", fontWeight: 600, marginLeft: 10 }}>{item.date.split("T")[0]}</Text>
         </View>
-      </View>
-    </Card>
-  )};
+        <View style={styles.gridContainer}>
+          {/* Vizag */}
+          <View style={styles.gridItem}>
+            <Card.Title title={item.voucherId} titleNumberOfLines={2} titleStyle={{ width: "100%" }} subtitle={item.branchName} subtitleNumberOfLines={2}></Card.Title>
+            <Text numberOfLines={3} style={{ fontSize: 16, color: '#aaaaaa', fontWeight: 600, marginLeft: 10 }}>{item.amount}</Text>
+
+          </View>
+        </View>
+      </Card>
+    )
+  };
 
   const renderReceivableListItem = ({ item }) => {
-  //   {
-  //     "date": "2025-05-16T00:00:00.000Z",
-  //     "voucherId": "SA-20250516-003",
-  //     "purpose": "test",
-  //     "branchName": "Visakhapatnam",
-  //     "amount": 1298,
-  //     "ledgerName": "Suneel"
-  // }    
-  return(
-    <Card style={styles.card}>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', borderTopEndRadius: 5, borderTopStartRadius: 5, backgroundColor: '#27AE60', width: Dimensions.get('screen').width/1.3, padding: 10 }}>
-      <Text style={{ fontSize: 16, color: '#f3f3f3', textTransform: "capitalize", fontWeight: 600, marginRight: 10, width: "60%" }}>{item.vocher_id}</Text>
-      <Text style={{ fontSize: 14, color: '#f3f3f3', textTransform: "capitalize", fontWeight: 600, marginLeft: 10 }}>{item.date.split("T")[0]}</Text>
-      </View>
-      <View style={styles.gridContainer}>
-        {/* Vizag */}
-        <View style={styles.gridItem}>
-          <Card.Title title={item.voucherId} titleNumberOfLines={2} titleStyle={{ width: "100%" }} subtitle={item.branchName} subtitleNumberOfLines={2}></Card.Title>
-          <Text numberOfLines={3} style={{ fontSize: 16, color: '#aaaaaa', fontWeight: 600, marginLeft: 10 }}>{item.amount}</Text>
-
+    return (
+      <Card key={item.id} style={styles.card}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', borderTopEndRadius: 5, borderTopStartRadius: 5, backgroundColor: '#27AE60', width: Dimensions.get('screen').width / 1.3, padding: 10 }}>
+          <Text style={{ fontSize: 16, color: '#f3f3f3', textTransform: "capitalize", fontWeight: 600, marginRight: 10, width: "60%" }}>{item.vocher_id}</Text>
+          <Text style={{ fontSize: 14, color: '#f3f3f3', textTransform: "capitalize", fontWeight: 600, marginLeft: 10 }}>{item.date.split("T")[0]}</Text>
         </View>
-      </View>
-    </Card>
-  )};
+        <View style={styles.gridContainer}>
+          {/* Vizag */}
+          <View style={styles.gridItem}>
+            <Card.Title title={item.voucherId} titleNumberOfLines={2} titleStyle={{ width: "100%" }} subtitle={item.branchName} subtitleNumberOfLines={2}></Card.Title>
+            <Text numberOfLines={3} style={{ fontSize: 16, color: '#aaaaaa', fontWeight: 600, marginLeft: 10 }}>{item.amount}</Text>
+
+          </View>
+        </View>
+      </Card>
+    )
+  };
 
   const renderPurchaseListItem = ({ item }) => {
-    console.log("PurchaseListItem",item)
-    return(
-    <Card style={styles.card}>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', borderTopEndRadius: 5, borderTopStartRadius: 5, backgroundColor: '#27AE60', width: "100%", padding: 10 }}>
-        <Text style={{ fontSize: 18, color: '#f3f3f3', textTransform: "capitalize", fontWeight: 600, marginRight: 10, width: "60%" }}>{item.vocher_id}</Text>
-        <Text style={{ fontSize: 14, color: '#f3f3f3', textTransform: "capitalize", fontWeight: 600, marginLeft: 10 }}>{item.branch}</Text>
-      </View>
-      <View style={styles.gridContainer}>
-        {/* Vizag */}
-        <View style={styles.gridItem}>
-          <Card.Title title={item.title} titleNumberOfLines={2} titleStyle={{ width: "100%", color: "#27AE60", fontSize: 16, fontFamily: "Parkinsans-SemiBold", textTransform: "capitalize", }} subtitle={item.branch + " / " + item.type} subtitleNumberOfLines={2} subtitleStyle={{ width: "100%", textTransform: "capitalize", }}></Card.Title>
-          <Text numberOfLines={3} style={{ fontSize: 16, color: '#aaaaaa', fontWeight: 600, marginLeft: 10 }}>{item.description}</Text>
-
+    return (
+      <Card key={item.id} style={styles.card}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', borderTopEndRadius: 5, borderTopStartRadius: 5, backgroundColor: '#27AE60', width: "100%", padding: 10 }}>
+          <Text style={{ fontSize: 18, color: '#f3f3f3', textTransform: "capitalize", fontWeight: 600, marginRight: 10, width: "60%" }}>{item.purchaseId}</Text>
+          <Text style={{ fontSize: 14, color: '#f3f3f3', textTransform: "capitalize", fontWeight: 600, marginLeft: 10 }}>{item.generationDate.split("T")[0]}</Text>
         </View>
-      </View>
-    </Card>
-  )};
+        <View style={styles.gridItem}>
+          <Card.Title title={item.branchName} titleNumberOfLines={2} titleStyle={{ width: "100%", color: "#27AE60", fontSize: 16, fontFamily: "Parkinsans-SemiBold", textTransform: "capitalize", }} subtitle={item.amount} subtitleNumberOfLines={2} subtitleStyle={{ width: "100%", textTransform: "capitalize", }}></Card.Title>
+        </View>
+      </Card>
+    )
+  };
 
   return (
     <View style={styles.container}>
@@ -194,7 +163,7 @@ const StatsSummary = ({ PayableAmount, ReceivableAmount, SalesAmount, PurchaseCo
               <Text style={styles.closeButtonText}>X</Text>
             </TouchableOpacity>
             <Text style={styles.modalTitle}>
-            Payable Data
+              Payable Data
             </Text>
             <FlatList
               data={receivableTable}
@@ -218,7 +187,7 @@ const StatsSummary = ({ PayableAmount, ReceivableAmount, SalesAmount, PurchaseCo
               <Text style={styles.closeButtonText}>X</Text>
             </TouchableOpacity>
             <Text style={styles.modalTitle}>
-            Sale Data
+              Sale Data
             </Text>
             <FlatList
               data={saleTable}
@@ -242,7 +211,7 @@ const StatsSummary = ({ PayableAmount, ReceivableAmount, SalesAmount, PurchaseCo
               <Text style={styles.closeButtonText}>X</Text>
             </TouchableOpacity>
             <Text style={styles.modalTitle}>
-            Receivable Data
+              Receivable Data
             </Text>
             <FlatList
               data={receivableTable}
@@ -266,7 +235,7 @@ const StatsSummary = ({ PayableAmount, ReceivableAmount, SalesAmount, PurchaseCo
               <Text style={styles.closeButtonText}>X</Text>
             </TouchableOpacity>
             <Text style={styles.modalTitle}>
-            Purchase Data
+              Purchase Data
             </Text>
             <FlatList
               data={purchaseTable}
@@ -362,7 +331,7 @@ const styles = StyleSheet.create({
   },
   gridItem: {
     backgroundColor: "#ffffff",
-    padding: 6,flex:1,
+    padding: 6, flex: 1,
     borderRadius: 5,
     alignItems: "center",
     elevation: 2, // Adds shadow effect

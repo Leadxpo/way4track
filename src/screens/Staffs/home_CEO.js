@@ -9,6 +9,7 @@ import GraphSection from '../../components/graphSection';
 import StatsSummary from '../../components/statsSummary';
 import AnalysisSection from '../../components/analysisSection';
 import { intiateCEO_dashboard } from '../../Redux/Actions/dashboard';
+import { fetchNotifications } from '../../Redux/Actions/notificationAction';
 
 const Home_CEO = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -19,6 +20,8 @@ const Home_CEO = ({ navigation }) => {
   useEffect(() => {
     const CEO_dashboardPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
     dispatch(intiateCEO_dashboard(CEO_dashboardPayload)); 
+    dispatch(fetchNotifications())
+    
   }, [dispatch])
   return ( 
     <SafeAreaView>
@@ -28,10 +31,10 @@ const Home_CEO = ({ navigation }) => {
         <CashSummary solidLiquid={CEO_homeInfo?.solidLiquid} branchwise={CEO_homeInfo?.branchWiseSolidLiquidCash}/>
         <GraphSection monthWiseBalance={CEO_homeInfo?.monthWiseBalance}/>
         <StatsSummary
-        PayableAmount={CEO_homeInfo?.amountDetails.PayableAmount} 
-        ReceivableAmount={CEO_homeInfo?.amountDetails.ReceivableAmount} 
-        SalesAmount={CEO_homeInfo?.amountDetails.SalesAmount} 
-        PurchaseCount={CEO_homeInfo?.PurchaseCount.last30DaysPurchases}
+        PayableAmount={Number(CEO_homeInfo?.amountDetails.PayableAmount).toFixed(2)} 
+        ReceivableAmount={Number(CEO_homeInfo?.amountDetails.ReceivableAmount).toFixed(2)} 
+        SalesAmount={Number(CEO_homeInfo?.amountDetails.SalesAmount).toFixed(2)} 
+        PurchaseCount={Number(CEO_homeInfo?.amountDetails.PurchaseAmount).toFixed(2)}
         receivableTable={CEO_homeInfo?.receivableTable}  
         saleTable={CEO_homeInfo?.saleTable} 
         payableTable={CEO_homeInfo?.payableTable} 

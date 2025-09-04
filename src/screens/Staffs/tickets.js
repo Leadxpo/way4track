@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   View, FlatList, Text, TextInput, StyleSheet, TouchableOpacity, Alert
 } from "react-native";
-import { Card, Menu, Provider, FAB } from "react-native-paper";
+import { Card, Menu, Provider, SegmentedButtons, FAB } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDispatch, useSelector } from 'react-redux';
 import Header from "../../components/userHeader";
@@ -13,12 +13,12 @@ const Tickets = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const { tickets } = useSelector(state => state.ticketsReducer);
-
   const [permissions, setPermissions] = useState([]);
   const [staffID, setStaffID] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [menuVisible, setMenuVisible] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
+  const [activeSegment, setActiveSegment] = useState("myTickets");
 
   useEffect(() => {
     const loadPermissionsAndID = async () => {
@@ -38,17 +38,42 @@ const Tickets = ({ navigation }) => {
     fetchTicketData();
   }, [dispatch]);
 
+
+  const ticketMap = useMemo(() => ({
+    myTickets: tickets?.filter((item) => {
+      const currentUserId = item.staffId ?? item.subDealerId;
+      return (Number(currentUserId) === Number(staffID))
+    }),
+    tickets: tickets?.filter((item) => {
+      const reportingStaff = item.reportingStaffId;
+      return (Number(reportingStaff) ===  Number(staffID))
+    }),
+
+  }), [tickets, staffID]);
+
+  const data =  ticketMap[activeSegment]||[];
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "pending": return "#ffffff";
+      case "accept": return "#ffeeec";
+      case "completed": return "#e9f6ff";
+      case "REJECT": return "#e9f6ff";
+      default: return "#f3f3f3";
+    }
+  };
+  
   // const hasAddTicketsPermission = permissions.some(p => p.name === "tickets" && p.add);
   // const hasEditTicketsPermission = permissions.some(p => p.name === "tickets" && p.edit);
   // const hasDeleteTicketsPermission = permissions.some(p => p.name === "tickets" && p.delete);
 
-  const filteredTickets = tickets.filter((item) =>
+  const filteredTickets = data.filter((item) =>
     (item.staffId && item.staffId?.toString().includes(staffID)) ||
     (item.branchName && item.branchName.toLowerCase().includes(searchQuery.toLowerCase())) ||
     (item.addressingDepartment && item.addressingDepartment.toLowerCase().includes(searchQuery.toLowerCase())) ||
     (item.ticketNumber && item.ticketNumber.toLowerCase().includes(searchQuery.toLowerCase()))
   );
-  
+
   const handleEdit = (item) => {
     navigation.navigate("Home", {
       screen: "AddTickets",
@@ -74,14 +99,15 @@ const Tickets = ({ navigation }) => {
   };
 
   const renderItem = ({ item }) => (
-    <Card style={styles.card}>
+    <Card style={[styles.card, { backgroundColor: getStatusColor(item.ticketStatus) }]}>
       <Text style={styles.clientName}>{item.ticketNumber}</Text>
       <View style={styles.cardContent}>
         <View style={styles.details}>
+          <Text style={styles.clientInfo}>reporting Staff: {item.reportingStaffName}</Text>
+          <Text style={styles.clientInfo}>reporting Staff designation: {item.designationRelation}</Text>
           <Text style={styles.clientInfo}>Branch: {item.branchName}</Text>
-          <Text style={styles.clientInfo}>Department: {item.addressingDepartment}</Text>
-          <Text style={[styles.status, { color: item.status === "Accepted" ? "green" : "red" }]}>
-            Status: {item.workStatus}
+          <Text style={[styles.status, { color: item.ticketStatus === "accept" ? "green" : "red" }]}>
+            Status: {item.ticketStatus}
           </Text>
         </View>
         <Menu
@@ -99,10 +125,10 @@ const Tickets = ({ navigation }) => {
           }
         >
           {/* {hasEditTicketsPermission && ( */}
-            <Menu.Item onPress={() => handleEdit(item)} title="Edit" />
+          <Menu.Item onPress={() => handleEdit(item)} title="Edit" />
           {/* )} */}
           {/* {hasDeleteTicketsPermission && ( */}
-            <Menu.Item title="Delete" titleStyle={{ color: "red" }} onPress={() => handleDelete(item)} />
+          <Menu.Item title="Delete" titleStyle={{ color: "red" }} onPress={() => handleDelete(item)} />
           {/* )} */}
           <Menu.Item onPress={() => console.log("Details:", item)} title="Details" />
         </Menu>
@@ -121,6 +147,23 @@ const Tickets = ({ navigation }) => {
           value={searchQuery}
           onChangeText={setSearchQuery}
         />
+
+        <SegmentedButtons
+          value={activeSegment}
+          onValueChange={setActiveSegment}
+          buttons={[
+            { value: 'myTickets', label: 'My Tickets', style: activeSegment === 'myTickets' ? styles.activeButton : styles.inactiveButton, checkedColor: "#ffffff", uncheckedColor: "#333333" },
+            { value: 'tickets', label: 'Tickets', style: activeSegment === 'tickets' ? styles.activeButton : styles.inactiveButton, checkedColor: "#ffffff", uncheckedColor: "#333333" },
+          ]}
+          density="medium"
+          style={styles.segmentContainer}
+          theme={{
+            colors: {
+              primary: '#007AFF', // Active Tab Color
+              onSurfaceVariant: '#fff', // Text color
+            },
+          }}
+        />
         <FlatList
           data={filteredTickets}
           keyExtractor={(item) => item.id}
@@ -128,12 +171,12 @@ const Tickets = ({ navigation }) => {
           contentContainerStyle={styles.listContent}
         />
         {/* {hasAddTicketsPermission && ( */}
-          <FAB
-            icon="plus"
-            label="Create Ticket"
-            style={styles.fab}
-            onPress={() => navigation.navigate("Home", { screen: "AddTickets" })}
-          />
+        <FAB
+          icon="plus"
+          label="Create Ticket"
+          style={styles.fab}
+          onPress={() => navigation.navigate("Home", { screen: "AddTickets" })}
+        />
         {/* )} */}
       </View>
     </Provider>
@@ -153,9 +196,14 @@ const styles = StyleSheet.create({
     bottom: 20,
     right: 20,
   },
+  segmentContainer: {
+    backgroundColor: '#F0F0F0', color: '#333333',
+    borderRadius: 10, margin: 10,alignSelf:'center',
+    overflow: 'hidden',width:'50%'
+  },
   card: {
-    marginBottom: 10,padding:10,
-    borderRadius: 8,backgroundColor:"#ffffff",
+    marginBottom: 10, padding: 10,
+    borderRadius: 8, backgroundColor: "#ffffff",
     elevation: 3,
   },
   cardContent: {

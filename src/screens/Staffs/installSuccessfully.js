@@ -13,7 +13,7 @@ const InstallSuccessfully = () => {
       const role = await loadData("role");
       setRole(role)
     };
-
+ 
     getStaffDetails();
   },[]);
   return (
@@ -37,15 +37,9 @@ const InstallSuccessfully = () => {
       <Button
         mode="contained"
         onPress={() => {
-          console.log("role : ")
-          console.log("role : ",role)
           const targetRoute =
             role === "sub dealer staff" ? "SubdealerStaffBottomStack" : "TechBottomStack";
-            console.log("targetRoute : ",targetRoute)
-            navigation.reset({
-            index: 0,
-            routes: [{ name: targetRoute }],
-          });
+            navigation.navigate("RoleRedirector")
         }}
         style={styles.refreshButton}
       >

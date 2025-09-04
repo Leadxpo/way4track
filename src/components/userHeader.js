@@ -6,48 +6,38 @@ import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { SafeAreaView } from '../utilities';
 import { loadData } from '../Utils/appData';
-import api from '../Api/api';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchNotifications } from '../Redux/Actions/notificationAction';
 
-const width = Dimensions.get("screen");
 const Header = ({ title = 'way4track', showStaff = true }) => {
+  const width = Dimensions.get("screen");
   const navigation = useNavigation();
   const [role, setRole] = useState(null); // Initial role
+  const [notifyStaffId, setNotifyStaffId] = useState(null); // Initial role
   const [notificationsCount, setNotificationsCount] = useState(null); // Initial role
+  const dispatch = useDispatch();
+  const { requestCount, ticketCount, notifications } = useSelector(
+    (state) => state.notifications
+  );
+
+  useEffect(() => {
+    console.log("rrr :",requestCount, ticketCount)
+    setNotificationsCount(Number(requestCount) + Number(ticketCount))
+  }, [])
 
   useEffect(() => {
     const fetchRole = async () => {
       const fetchedRole = await loadData("role");
+      const fetchedNotifyId = await loadData("ID");
       setRole(prev => prev = fetchedRole); // Default to "Guest" if role is null 
+      setNotifyStaffId(prev => prev = fetchedNotifyId); // Default to "Guest" if role is null 
     };
     fetchRole();
   }, [role]);
 
-  const getAllNotification = async (branchName = 'All') => {
-    try {
-      const payload = {
-        companyCode: "WAY4TRACK",
-        unitCode: "WAY4",
-      };
-
-      if (branchName !== 'All') {
-        payload.branchName = branchName;
-      }
-
-      const res = await api.post('/notifications/getAllNotifications', payload);
-
-      if (res.status) {
-        setNotificationsCount(res.data.length || 0);
-      } else {
-        setNotificationsCount(res.data.length);
-      }
-    } catch (err) {
-      console.error('Failed to fetch notifications:', err);
-    }
-  };
-
-  useEffect(()=>{
-    getAllNotification()
-  },[])
+  useEffect(() => {
+    dispatch(fetchNotifications())
+  }, [dispatch])
 
 
   const openMenu = () => {
@@ -69,7 +59,7 @@ const Header = ({ title = 'way4track', showStaff = true }) => {
               screen: "Notification"
             })
           }>
-                        <MaterialCommunityIcons name="bell" size={28} color="#333" />
+            <MaterialCommunityIcons name="bell" size={28} color="#333" />
             <View style={styles.notificationBadge}>
               <Text style={styles.badgeText}>{notificationsCount}</Text>
             </View>

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { drawLabel } from "../../Redux/Actions/drawAction";
 import { intiateHR_dashboard } from '../../Redux/Actions/dashboard';
 import api from "../../Api/api";
+import { fetchNotifications } from '../../Redux/Actions/notificationAction';
 const branches = [
     {
         name: 'Hyderabad',
@@ -67,6 +68,7 @@ const Home_HR = () => {
     useEffect(() => {
         const HR_dashboardPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
         dispatch(intiateHR_dashboard(HR_dashboardPayload));
+        dispatch(fetchNotifications())
         getCandidateStats()
     }, [dispatch])
 

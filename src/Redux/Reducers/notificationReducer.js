@@ -1,36 +1,13 @@
 import * as actionTypes from "../Constants/notificationConstant";
 
 const initialState = {
+    notifications: [],
+    requestCount: 0,
+    ticketCount: 0,
     loading: false,
-    notifications: [], 
-    error: ""
-}
-
-export const createNotificationReducer = (state = { loading: false, notification: {}, error: "" }, action) => {
-    switch (action.type) {
-        case actionTypes.CREATE_NOTIFICATION_REQUEST:
-            return {
-                ...state,
-                loading: true,
-            }
-        case actionTypes.CREATE_NOTIFICATION_SUCCESS:
-            if (state.notification === action.payload) {
-                return state;  // No state change if the array is the same
-              }
-            return {
-                ...state,
-                loading: false,
-                notifications: action.payload
-            }
-        case actionTypes.CREATE_NOTIFICATION_FAIL:
-            return {
-                ...state,
-                loading: false,
-                error: action.payload
-            }
-        default: return state
-    }
-}
+    error: null,
+  };
+  
 
 export const notificationReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -46,8 +23,10 @@ export const notificationReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                notifications: action.payload
-            }
+                notifications: action.payload.notifications,
+                requestCount: action.payload.requestCount,
+                ticketCount: action.payload.ticketCount,
+                        }
         case actionTypes.GET_NOTIFICATIONS_FAIL:
             return {
                 ...state,

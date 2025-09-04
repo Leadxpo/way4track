@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import MapView, { Marker } from "react-native-maps";
-import ApiService from "../services/ApiService"; // Adjust path
+import api from "../Api/api";
 
 const { width, height } = Dimensions.get("window");
 
@@ -19,7 +19,7 @@ const GoogleMapScreen = () => {
   useEffect(() => {
     const fetchBranches = async () => {
       try {
-        const response = await ApiService.post("/branch/getBranchDetails");
+        const response = await api.post("/branch/getBranchDetails");
 
         if (response.status && Array.isArray(response.data)) {
           const validBranches = response.data.filter((branch) => {

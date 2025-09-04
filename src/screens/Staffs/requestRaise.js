@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useMemo, useCallback } from "react";
 import { View, FlatList, Text, TextInput, StyleSheet, Alert, TouchableOpacity } from "react-native";
-import { Avatar, Card, FAB, Menu, Provider } from "react-native-paper";
+import { Avatar, Card, FAB, Menu, Provider ,SegmentedButtons} from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Header from '../../components/userHeader';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +8,7 @@ import { drawLabel } from "../../Redux/Actions/drawAction";
 import { loadData } from "../../Utils/appData";
 import { fetchRaiseRequests } from "../../Redux/Actions/raiseRequestAction";
 import api from "../../Api/api";
+import { useFocusEffect } from "@react-navigation/native";
 
 const RequestRaise = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -19,6 +20,20 @@ const RequestRaise = ({ navigation }) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [isRefresh, setIsRefresh] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [activeSegment, setActiveSegment] = useState("myRequests");
+  const [permissions, setPermissions] = useState([]);
+  const [staffID, setStaffID] = useState("");
+
+  useEffect(() => {
+    const loadPermissionsAndID = async () => {
+      const loadedPermissions = await loadData("staffPermissions") || [];
+      const loadedStaffID = await loadData("ID") || "";
+      setPermissions(loadedPermissions);
+      setStaffID(loadedStaffID);
+    };
+    loadPermissionsAndID();
+  }, []);
+
 
   const deleteRequest = async (ticketId) => {
     try {
@@ -43,22 +58,37 @@ const RequestRaise = ({ navigation }) => {
 
   }
 
-  useEffect(() => {
-    const getStaffData = async () => {
-      const staffId = await loadData("ID");
-      console.log("rrr : ", staffId)
-      const requestPayload = {
-        companyCode: "WAY4TRACK",
-        unitCode: "WAY4",
-        id: staffId,
+  useFocusEffect(
+    useCallback(() => {
+      const getStaffData = async () => {
+        const staffId = await loadData("ID");
+        const requestPayload = {
+          companyCode: "WAY4TRACK",
+          unitCode: "WAY4",
+          id: staffId,
+        };
+        dispatch(fetchRaiseRequests(requestPayload));
       };
-      dispatch(fetchRaiseRequests(requestPayload));
-    };
+  
+      getStaffData();
+      }, [dispatch, isRefresh])
+  );
 
-    getStaffData();
-  }, [dispatch, isRefresh]);
+const raiseRequestMap = useMemo(() => ({
+  myRequests: raiseRequests?.filter((item) => {
+    const currentUserId = item?.requestFrom?.id;
+    return (Number(currentUserId) === Number(staffID))
+  }),
+  requests: raiseRequests?.filter((item) => {
+    const requestTo = item?.requestTo?.id; 
+    return (Number(requestTo) ===  Number(staffID))
+  }),
 
-  const filteredData = raiseRequests.filter((item) =>
+}), [raiseRequests, staffID]);
+
+const data =  raiseRequestMap[activeSegment]||[];
+
+  const filteredData = data.filter((item) =>
     [item.requestType, item.requestTo, item.status, item.subDealerId, item.requestFrom]
       .join(" ")
       .toLowerCase()
@@ -67,19 +97,17 @@ const RequestRaise = ({ navigation }) => {
 
   const renderItem = ({ item }) => {
     const getStatusColor = (status) => {
-      switch (status.toLowerCase()) {
-        case "accepted": return "#c1e1c1";   // light green
-        case "rejected": return "#ffa9a8";   // light red/pink
-        case "expire": return "#d3d3d3";     // gray
-        case "sent": return "#add8e6";       // light blue
-        case "declined": return "#ffc4a8";   // light orange
-        case "pending": return "#add8e6";    // light yellow
-        default: return "#f3f3f3";           // default light gray
+      switch (status) {
+        case "pending": return "#ffffff";
+        case "accept": return "#ffeeec";
+        case "completed": return "#e9f6ff";
+        case "REJECT": return "#e9f6ff";
+        default: return "#f3f3f3";
       }
     };
-
+   
     return (
-      <Card style={[styles.card, { backgroundColor: getStatusColor(item.status) }]}>
+      <Card key={item.id} style={[styles.card, { backgroundColor: getStatusColor(item.status) }]}>
         <View style={styles.cardContent}>
           <View style={[styles.details]}>
             <Card.Title
@@ -129,15 +157,19 @@ const RequestRaise = ({ navigation }) => {
               }}
               title="View"
             />
-            {/* <Menu.Item
-            onPress={() => {
-              setMenuVisible(false);
-              navigation.navigate("EditRequestRaise", {
-                productAssignDetails: item,
-              });
-            }}
+            { (activeSegment==="myRequests" && item.status === "pending") &&<Menu.Item
+           onPress={() => {
+            setMenuVisible(false);
+            navigation.navigate("Home", {
+              screen: "EditRequestRaise",
+              params: {
+                requestDetails: item,
+              },
+            });
+          }}
+          
             title="Edit"
-          /> */}
+          /> }
             {item.status === "pending" &&
 
               <Menu.Item
@@ -175,6 +207,22 @@ const RequestRaise = ({ navigation }) => {
           placeholderTextColor="#aaaaaa"
           value={searchQuery}
           onChangeText={setSearchQuery}
+        />
+        <SegmentedButtons
+          value={activeSegment}
+          onValueChange={setActiveSegment}
+          buttons={[
+            { value: 'myRequests', label: 'My Request', style: activeSegment === 'myRequests' ? styles.activeButton : styles.inactiveButton, checkedColor: "#ffffff", uncheckedColor: "#333333" },
+            { value: 'requests', label: 'Request', style: activeSegment === 'requests' ? styles.activeButton : styles.inactiveButton, checkedColor: "#ffffff", uncheckedColor: "#333333" },
+          ]}
+          density="medium"
+          style={styles.segmentContainer}
+          theme={{
+            colors: {
+              primary: '#007AFF', // Active Tab Color
+              onSurfaceVariant: '#fff', // Text color
+            },
+          }}
         />
 
         <FlatList
@@ -247,6 +295,12 @@ const styles = StyleSheet.create({
     color: "#555",
     marginTop: 2,
   },
+  segmentContainer: {
+    backgroundColor: '#F0F0F0', color: '#333333',
+    borderRadius: 10, margin: 10,alignSelf:'center',
+    overflow: 'hidden',width:'50%'
+  },
+
   status: {
     marginTop: 5,
     fontWeight: "bold",

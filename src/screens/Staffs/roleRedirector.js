@@ -35,6 +35,16 @@ const RoleRedirector = () => {
             index: 0,
             routes: [{ name: "CEOBottomStack" }],
           });
+        }else if (fetchedRole === "Accountant") {
+         navigation.reset({
+           index: 0,
+           routes: [{ name: "CEOBottomStack" }],
+         });
+        }else if (fetchedRole === "HR") {
+         navigation.reset({
+           index: 0,
+           routes: [{ name: "HRBottomStack" }],
+         });
         }else if (fetchedRole === "HR") {
          navigation.reset({
            index: 0,
@@ -65,10 +75,16 @@ const RoleRedirector = () => {
             index: 0,
             routes: [{ name: "SubdealerStaffBottomStack" }],
           });
+        } else if (fetchedRole === "sub dealer") {
+          console.log("rrr :",fetchedRole)
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "SubdealerBottomStack" }],
+          });
         } else {
           navigation.reset({
             index: 0,
-            routes: [{ name: "Login" }],
+            routes: [{ name: "DefaultBottomStack" }],
           });
         }
       }, 2000); // show loading screen for 2 seconds

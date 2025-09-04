@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, Button, Alert,PermissionsAndroid } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, Button, Alert, PermissionsAndroid } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
-import { Card, Provider, Modal } from "react-native-paper";
+import { Card, Provider, ToggleButton } from "react-native-paper";
 import DatePicker from "react-native-date-picker";
 import Header from "../../components/userHeader";
 import { createSalesVisit } from "../../Redux/Actions/salesVisitAction";
@@ -13,9 +13,11 @@ const Visit_ClientInfo = ({ navigation }) => {
 
   // States
   const [dateOpen, setDateOpen] = useState(false);
+  const [visitDateOpen, setVisitDateOpen] = useState(false);
 
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [leadStatus, setLeadStatus] = useState("");
   const [address, setAddress] = useState("");
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [estimatedDate, setEstimatedDate] = useState("");
@@ -83,10 +85,14 @@ const Visit_ClientInfo = ({ navigation }) => {
 
   const handleNext = () => {
     if (phoneNumber && name && address) {
-      const salesVisit_payload = { name, phoneNumber, address, date, estimatedDate, visitingCardUpload_pick, clientUpload_pick };
+      const salesVisit_payload = { name, phoneNumber, address, date, estimatedDate, visitingCardUpload_pick, clientUpload_pick, leadStatus };
       console.log("Payload:", salesVisit_payload);
       dispatch(createSalesVisit(salesVisit_payload));
-      navigation.navigate("Visit_ProductInfo");
+      if (leadStatus==='pending') {
+        navigation.navigate("Visit_ProductInfo");
+      } else {
+        navigation.navigate("SalesVisitOverview");
+      }
     } else {
       Alert.alert("Please enter all required fields");
     }
@@ -117,11 +123,27 @@ const Visit_ClientInfo = ({ navigation }) => {
         />
 
         {/* Date */}
-        <Text>Date</Text>
-        <TextInput
-          style={styles.input}
-          value={date}
-          editable={false}
+        <Text> Visit Date</Text>
+        <TouchableOpacity onPress={() => setVisitDateOpen(true)}>
+
+          <TextInput
+            style={styles.input}
+            value={date}
+            editable={false}
+          />
+        </TouchableOpacity>
+
+        <DatePicker
+          modal
+          open={visitDateOpen}
+          date={new Date()}
+          mode="date"
+          onConfirm={(selectedVisitDate) => {
+            setDateOpen(false);
+            const formattedVisitDate = selectedVisitDate.toISOString().split('T')[0];
+            setDate(formattedVisitDate);
+          }}
+          onCancel={() => setVisitDateOpen(false)}
         />
 
         {/* Estimated Date Picker */}
@@ -175,9 +197,35 @@ const Visit_ClientInfo = ({ navigation }) => {
             <Text style={styles.imagePlaceholder}>Client Pick</Text>
           )}
         </TouchableOpacity>
+        <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 20 }}>
+
+          <Text style={[styles.label, { marginHorizontal: 20 }]}>Interest Status</Text>
+          <ToggleButton.Row
+            onValueChange={(value) => setLeadStatus(value)}
+            value={leadStatus}
+            style={styles.toggleGroup}
+          >
+            <ToggleButton icon="thumb-up" value="pending"
+              style={[
+                styles.button,
+                leadStatus === 'pending' && styles.selectedButton,
+              ]}
+              iconColor={leadStatus === 'pending' ? 'white' : '#4CAF50'}>
+              Interested
+            </ToggleButton>
+            <ToggleButton icon="thumb-down" value="notinterested"
+              style={[
+                styles.button,
+                leadStatus === 'notinterested' && styles.selectedButton,
+              ]}
+              iconColor={leadStatus === 'notinterested' ? 'white' : '#4CAF50'}>
+              Not Interested
+            </ToggleButton>
+          </ToggleButton.Row>
+        </View>
 
         {/* Next Button */}
-        <View style={[styles.buttonContainer,{marginBottom:70}]}>
+        <View style={[styles.buttonContainer, { marginBottom: 70 }]}>
           <Button title="Next" onPress={handleNext} />
         </View>
       </ScrollView>
@@ -190,7 +238,16 @@ const Visit_ClientInfo = ({ navigation }) => {
 const styles = {
   container: {
     padding: 16,
+    marginVertical: 16,
     backgroundColor: "#fff",
+  },
+  button: {
+    borderColor: '#4CAF50',
+    borderWidth: 1,
+    backgroundColor: 'white',
+  },
+  selectedButton: {
+    backgroundColor: '#4CAF50',
   },
   input: {
     height: 45,
@@ -218,6 +275,14 @@ const styles = {
     height: 40,
     backgroundColor: "#d3d3d3",
     marginRight: 10,
+  },
+  label: {
+    marginBottom: 8,
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  toggleGroup: {
+    justifyContent: 'center'
   },
   productText: {
     fontSize: 15,

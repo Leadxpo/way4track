@@ -11,7 +11,7 @@ const SalesVisitOverview = ({ navigation, route }) => {
     const { loading: salesVisitDataLoading, salesVisitData, error: salesVisitDataError } = useSelector(state => state.salesVistReducer);
     useEffect(() => {
         const fetchStaffData = async () => {
-            const staffId = await loadData("ID");
+            const staffId = await loadData("ID"); 
             setStaffId(staffId);
         }
         fetchStaffData()
@@ -49,8 +49,8 @@ const SalesVisitOverview = ({ navigation, route }) => {
                 <Text style={[styles.label, { fontSize: 16, flex: 2, color: '#fefefe' }]}>Product</Text>
                 <Text style={[styles.label, { fontSize: 16, flex: 1, color: '#fefefe' }]}>QTY</Text>
             </View>
-            {salesVisitData?.products.length > 0 ? (
-                salesVisitData?.products.map((product, index) => {
+            {salesVisitData?.products?.length > 0 ? (
+                salesVisitData?.products?.map((product, index) => {
                     return (
                         <View key={index} style={[styles.item, { flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 5, }]}>
                             <Text style={[styles.value, { flex: 1,fontWeight:'bold' }]}>
@@ -69,8 +69,8 @@ const SalesVisitOverview = ({ navigation, route }) => {
             {/* Service List */}
             <Text style={styles.sectionTitle}>Services</Text>
 
-            {salesVisitData?.services.length > 0 ? (
-                salesVisitData?.services.map((service, index) => (
+            {salesVisitData?.services?.length > 0 ? (
+                salesVisitData?.services?.map((service, index) => (
                     <View key={index} style={styles.item}>
 
                         <Text style={[styles.value, { fontWeight: 700, fontSize: 16, color: '#333333' }]}>

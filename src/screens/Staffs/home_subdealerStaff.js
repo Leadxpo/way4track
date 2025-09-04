@@ -10,6 +10,7 @@ import { intiateSubDealerStaff_dashboard, intiateTechnician_dashboard } from '..
 import api from '../../Api/api';
 import { UpdateCurrentAddress } from '../../Utils/updateLocation';
 import { loadData } from '../../Utils/appData';
+import { fetchNotifications } from '../../Redux/Actions/notificationAction';
 
 const Home_SubdealerStaff = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const Home_SubdealerStaff = ({ navigation }) => {
           subDealerStaffId: subDealerStaffId,
         };
         dispatch(intiateSubDealerStaff_dashboard(subdealerStaff_dashboardPayload));
+        dispatch(fetchNotifications())
       } catch (error) {
         console.error('Error fetching technician data:', error);
       }

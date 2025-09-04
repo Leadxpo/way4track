@@ -150,11 +150,11 @@ const Appointment = ({ navigation }) => {
             <Header />
             <View style={styles.container}>
                 {/* Header */}
-                <View style={styles.header}>
+                <View  style={styles.header}>
                     <Text style={styles.headerText}>Appointment</Text>
                     <FAB
                         icon="plus" visible={hasAddAppointmentsPermission}
-                        style={styles.fab}
+                        style={[styles.fab,{display:'none'}]} 
                         onPress={() => navigation.navigate("AddAppointment")}
                         label="Add Appointment"
                     />

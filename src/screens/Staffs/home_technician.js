@@ -9,6 +9,7 @@ import { staffDataHook } from '../../Utils/permissions';
 import { intiateTechnician_dashboard } from '../../Redux/Actions/dashboard';
 import api from '../../Api/api';
 import { UpdateCurrentAddress } from '../../Utils/updateLocation';
+import { fetchNotifications } from '../../Redux/Actions/notificationAction';
 
 const Home_Technician = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ const Home_Technician = ({ navigation }) => {
           date: attendenceDate
         };
         dispatch(intiateTechnician_dashboard(Technician_dashboardPayload));
+        dispatch(fetchNotifications())
       } catch (error) {
         console.error('Error fetching technician data:', error);
       }

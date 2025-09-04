@@ -1,48 +1,47 @@
 import * as actionTypes from "../Constants/notificationConstant";
 import api from "../../Api/api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const createNotification = (create_notificationPayload) => async (dispatch) => {
-    const { unitCode, companyCode, branchName, description } = create_notificationPayload;
-    dispatch({ type: actionTypes.CREATE_NOTIFICATION_REQUEST })
+export const fetchNotifications = () => async (dispatch) => {
+    dispatch({ type: actionTypes.GET_NOTIFICATIONS_REQUEST })
     try {
-        const { data } = await api.post(`/notification/get-Notification-by-userID`,create_notificationPayload, {
+        const userID = await AsyncStorage.getItem('ID');
+        const payload = {
+            notifyStaffId: userID,
+            companyCode: "WAY4TRACK",
+            unitCode: "WAY4"
+        };
+        const { data } = await api.post('/notifications/getAllNotifications', payload, {
             headers: {
                 'Content-Type': 'application/json',
             },
         });
-        const notificationStaffData=rrr.filter((item)=>{
-            if (item.subtype=="all") {
-                return(!item.viewers.include(userID))
-            } else {
-                return(!item.isview)
-            }
-        })
-        console.log("notification-mainData  success : ", notificationStaffData)
-        dispatch({ type: actionTypes.CREATE_NOTIFICATION_SUCCESS, payload: notificationStaffData})
-    } catch (error) {
-        console.log("error : ", error)
-        dispatch({ type: actionTypes.CREATE_NOTIFICATION_FAIL, payload: error.message })
-    }
-}
+        console.log("rrr:",data.data.notifications)
+        if (data.status) {
+            const notifications = data?.data?.notifications || [];
 
-export const fetchNotifications = (getAll_notificationPayload) => async (dispatch) => {
-    const { unitCode, companyCode } = getAll_notificationPayload;
-        dispatch({ type: actionTypes.GET_NOTIFICATIONS_REQUEST })
-    try {
-        const { data } = await api.post(`/notification/get-Notification-by-userID`,getAll_notificationPayload, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        const notificationStaffData=rrr.filter((item)=>{
-            if (item.subtype=="all") {
-                return(!item.viewers.include(userID))
-            } else {
-                return(!item.isview)
-            }
-        })
-        console.log("notification-mainData  success : ", notificationStaffData)
-        dispatch({ type: actionTypes.GET_NOTIFICATIONS_SUCCESS, payload: notificationStaffData})
+            // Filter unread request and ticket notifications
+            const requestUnread = notifications.filter(
+                (n) => !n.isRead && n.notificationType === 'Request'
+            );
+            const ticketUnread = notifications.filter(
+                (n) => !n.isRead && n.notificationType === 'Ticket'
+            );
+
+            dispatch({
+                type: actionTypes.GET_NOTIFICATIONS_SUCCESS,
+                payload: {
+                    notifications,
+                    requestCount: requestUnread.length,
+                    ticketCount: ticketUnread.length,
+                },
+            });
+        } else {
+            dispatch({
+                type: actionTypes.GET_NOTIFICATIONS_FAIL,
+                payload: 'No notifications found',
+            });
+        }
     } catch (error) {
         console.log("error : ", error)
         dispatch({ type: actionTypes.GET_NOTIFICATIONS_FAIL, payload: error.message })
@@ -50,7 +49,7 @@ export const fetchNotifications = (getAll_notificationPayload) => async (dispatc
 }
 
 export const notificationDetail = (get_notificationPayload) => async (dispatch) => {
-    const { unitCode, companyCode,id } = get_notificationPayload;
+    const { unitCode, companyCode, id } = get_notificationPayload;
 
     dispatch({ type: actionTypes.NOTIFICATION_DETAIL_REQUEST })
     try {

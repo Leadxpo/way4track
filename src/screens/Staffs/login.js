@@ -140,7 +140,7 @@ const Login = ({ navigation }) => {
       await dispatch(login(loginPayload));
       const state = store.getState(); // Get updated Redux state
       const { staffInfo } = state.staffLogin;
-      if (staffInfo?.staffId === staffID) {
+      if (staffInfo?.staffId??staffInfo?.subDealerId === staffID) {
         await saveData('isLogin', true);
         if (staffInfo) {
           if (staffRole !== "sub dealer" && staffRole !== "sub dealer staff") {

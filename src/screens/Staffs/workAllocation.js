@@ -23,7 +23,7 @@ const WorkAllocation = ({ navigation }) => {
         const rrr = await loadData("staffPermissions")
         setPermissions(prev => prev = rrr ||permissions);
         console.log(permissions)
-    };
+    }; 
     loadStaffloginData();
 }, []);
 
@@ -97,23 +97,26 @@ const WorkAllocation = ({ navigation }) => {
     dispatch(updateWorkAllocation(formData))
   };
 
-
   const renderItem = ({ item }) => (
     <Card style={styles.card}>
       <View style={styles.cardContent}>
         <View style={styles.cardContent}>
           <View style={styles.details}>
-              <Text style={{ fontSize: 18, fontWeight: 700, color: '#333333' }}>CLient Details</Text>
+              <Text style={{ fontSize: 18, fontWeight: 700, color: '#333333' }}>WorkAllocation Details</Text>
               <Text style={styles.clientName}>client Name : {item.clientName}</Text>
-              <Text style={styles.clientInfo}> Phone: {item.clientPhoneNumber} </Text>
-            <Text style={styles.clientInfo}>DOA: {item.date}</Text>
+              <Text style={styles.clientInfo}> Phone: {item.phoneNumber} </Text>
+              <Text style={styles.clientInfo}> Staff Name: {item.staffName} </Text>
+              <Text style={styles.clientInfo}> IMEI Number: {item.imeiNumber} </Text>
+              <Text style={styles.clientInfo}> Amount: {item.amount} </Text>
+            <Text style={styles.clientInfo}>startDate: {(item.startDate)?.split("T")[0]}</Text>
+            <Text style={styles.clientInfo}>Payment Status: {item.paymentStatus}</Text>
             <Text
               style={[
                 styles.status,
-                { color: item.status === "Accepted" ? "green" : "red" },
+                { color: item.workStatus === "install" ? "green" : "red" },
               ]}
             >
-              Status: {item.status}
+              Status: {item.workStatus}
             </Text>
           </View>
         </View>
@@ -478,7 +481,7 @@ const styles = StyleSheet.create({
   createButton: { margin: 10, backgroundColor: "#007bff" },
   searchInput: { width: "90%", alignSelf: 'center', borderRadius: 10, borderColor: "#f3f3f3", borderWidth: 1, margin: 10, height: 50, backgroundColor: "#fff", padding: 10, elevation: 3 },
   card: {
-    marginBottom: 10,
+    marginVertical: 10,
     borderRadius: 8, backgroundColor: "#ffffff",
     elevation: 3, width: "90%", alignSelf: "center"
   },

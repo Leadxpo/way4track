@@ -9,6 +9,7 @@ import { staffDataHook } from '../../Utils/permissions';
 import { intiateSalesVisit_dashboard } from '../../Redux/Actions/dashboard';
 import api from '../../Api/api';
 import { loadData } from '../../Utils/appData';
+import { fetchNotifications } from '../../Redux/Actions/notificationAction';
 
 
 const HomeSalesMan = ({ navigation }) => {
@@ -99,6 +100,7 @@ const HomeSalesMan = ({ navigation }) => {
         };
 
         dispatch(intiateSalesVisit_dashboard(SalesVisit_dashboardPayload));
+        dispatch(fetchNotifications())
       } catch (error) {
         console.error('Error fetching technician data:', error);
       }

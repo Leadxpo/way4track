@@ -58,7 +58,7 @@ const BranchSummary = ({branchSales}) => {
 
 <FlatList
           data={branchSales}
-          keyExtractor={(item) => item.bankId}
+          keyExtractor={(item) => item.id}
           renderItem={renderbranchSaleItem}
           horizontal={true}
         />

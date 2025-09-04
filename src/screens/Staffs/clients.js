@@ -56,13 +56,21 @@ const Clients = ({ navigation }) => {
   }, [dispatch]);
 
   const renderItem = ({ item }) => {
+    const shortName = item.name ? item?.name?.charAt(0).toUpperCase() : 'S';
+
     return (
       <Card style={styles.card}>
         <View style={{ backgroundColor: "#27AE60", borderTopEndRadius: 6, borderTopStartRadius: 6, padding: 5, justifyContent: 'center' }}>
           <Text style={[styles.clientName, { textAlign: 'center', color: '#f3f3f3' }]}>{item.clientId}</Text>
         </View>
         <View style={styles.cardContent}>
-          <Avatar.Image size={50} source={{ uri: item.clientPhoto }} />
+          {
+             item.clientPhoto ?(          
+             <Avatar.Image size={50} source={{ uri: item.clientPhoto }} />
+             ):(
+              <Avatar.Text label={shortName} size={50} style={{ marginRight: 10 }} />
+             )
+          }
           <View style={styles.details}>
             <Text style={[styles.clientName, { textTransform: "capitalize" }]}>{item.name}</Text>
             <Text style={styles.clientInfo}>

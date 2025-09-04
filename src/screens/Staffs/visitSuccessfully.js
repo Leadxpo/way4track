@@ -8,7 +8,7 @@ const VisitSuccessfully = () => {
   const navigation = useNavigation();
 
   return (
-    <ScrollView style={{paddingBottom:500}}>
+    <ScrollView>
     <View style={styles.container}>
       {/* Header Section */}
 
@@ -25,7 +25,7 @@ const VisitSuccessfully = () => {
       />
 
       {/* Refresh Button */}
-      <Button mode="contained" onPress={() =>navigation.navigate("SalesBottomStack")} style={styles.refreshButton} >
+      <Button mode="contained" onPress={() =>navigation.navigate("RoleRedirector")} style={styles.refreshButton} >
         Refresh Now
       </Button>
     </View>
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   title: { fontSize: 22, fontWeight: "bold", color: "#d89225", marginVertical: 20 },
   mainImage: { width: "90%", height: 250 },
 
-  refreshButton: { backgroundColor: "green", marginTop: 20, paddingHorizontal: 40, paddingVertical: 10 },
+  refreshButton: { backgroundColor: "green", marginVertical: 30, paddingHorizontal: 40, paddingVertical: 10 },
 
   bottomNav: { flexDirection: "row", justifyContent: "space-around", width: "100%", position: "absolute", bottom: 0, backgroundColor: "#fff", paddingVertical: 10, borderTopWidth: 1, borderColor: "#ddd" },
   navItem: { alignItems: "center" },

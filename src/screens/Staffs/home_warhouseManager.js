@@ -9,6 +9,7 @@ import { staffDataHook } from '../../Utils/permissions';
 import { intiateWarhouse_dashboard } from '../../Redux/Actions/dashboard';
 import { useDispatch, useSelector } from 'react-redux';
 import { drawLabel } from "../../Redux/Actions/drawAction";
+import { fetchNotifications } from '../../Redux/Actions/notificationAction';
 
 const branches = [
     {
@@ -72,6 +73,7 @@ const Home_WarehouseManager = () => {
     useEffect(() => {
         const Warehouse_dashboardPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
         dispatch(intiateWarhouse_dashboard(Warehouse_dashboardPayload));
+        dispatch(fetchNotifications())
     }, [dispatch])
 
     useEffect(() => {
