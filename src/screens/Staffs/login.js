@@ -16,8 +16,7 @@ import api from '../../Api/api';
 
 const Login = ({ navigation }) => {
   const dispatch = useDispatch();
-
-  // State Variables
+  const { staffInfo } = useSelector(state => state.staffLogin); // ✅ OK  // State Variables
   const [staffID, setStaffID] = useState('');
   const [password, setPassword] = useState('');
   const [staffRole, setStaffRole] = useState(null);
@@ -25,12 +24,7 @@ const Login = ({ navigation }) => {
   const [open, setOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [loginLoading, setLoginLoading] = useState(false);
-  const [deviceID, setDeviceID] = useState(false);
-
-
-
-  // Redux State
-  const { loading, staffInfo, error: loginError } = useSelector(state => state.staffLogin);
+  const [deviceID, setDeviceID] = useState(null);
 
   // Role List
   const [designations, setDesignations] = useState([]);
@@ -62,42 +56,60 @@ const Login = ({ navigation }) => {
   };
 
   const getSubdealerStaffDetails = async (staffInfo) => {
-    const subdealerStaffpayload={
-      subDealerId:  staffInfo?.subDealerId.subDealerId,
-      companyCode: "WAY4TRACK",
-      unitCode: "WAY4"
-    };
-    const subdealerStaffResponse = await api.post("/subdealer/getSubDealerDetailById",subdealerStaffpayload);
-    const subdealerdetails=subdealerStaffResponse.data.data
-    console.log("eee : ",subdealerdetails?.subDealerId)
-    await saveData('ID', staffInfo?.id);
-    await saveData('password', staffInfo?.password);
-    await saveData('staffID', staffInfo?.staffId);
-    await saveData('subDealerId', subdealerdetails?.subDealerId);
-    await saveData('subDealerPrmId', subdealerdetails?.id);
-    await saveData('subDealerstaffId', staffInfo?.staffId);
-    await saveData('subDealerstaffPrmId', staffInfo?.id);
-    await saveData('staffName', staffInfo?.name);
-    // await saveData('staffPhoto', staffInfo?.subDealerPhoto);
-    await saveData('phoneNumber', staffInfo?.phoneNumber);
-    await saveData('email', staffInfo?.email);
-    await saveData('branch_id', subdealerdetails?.branchId);
-    await saveData('branchName', subdealerdetails?.branchName);
-    await saveData('role', "sub dealer staff");
-    await saveData('staffPermissions', staffInfo?.permissions[0].permissions);
+    try {
+
+      const subdealerStaffpayload = {
+        subDealerId: staffInfo?.subDealerId.subDealerId,
+        companyCode: "WAY4TRACK",
+        unitCode: "WAY4"
+      };
+      const subdealerStaffResponse = await api.post("/subdealer/getSubDealerDetailById", subdealerStaffpayload);
+      const subdealerdetails = subdealerStaffResponse.data.data
+      await saveData('ID', staffInfo?.id);
+      await saveData('staffID', staffInfo?.staffId);
+      await saveData('subDealerId', subdealerdetails?.subDealerId);
+      await saveData('subDealerPrmId', subdealerdetails?.id);
+      await saveData('subDealerstaffId', staffInfo?.staffId);
+      await saveData('subDealerstaffPrmId', staffInfo?.id);
+      await saveData('staffName', staffInfo?.name);
+      // await saveData('staffPhoto', staffInfo?.subDealerPhoto);
+      await saveData('phoneNumber', staffInfo?.phoneNumber);
+      await saveData('email', staffInfo?.email);
+      await saveData('branch_id', subdealerdetails?.branchId);
+      await saveData('branchName', subdealerdetails?.branchName);
+      await saveData('role', "sub dealer staff");
+      const permissions = staffInfo?.permissions?.[0]?.permissions || [];
+
+      if (Array.isArray(permissions)) {
+        await saveData('staffPermissions', permissions);
+      } else {
+        console.warn('Permissions data is not an array');
+      }
+    } catch (error) {
+      console.error("Error fetching subdealer details:", error);
+      Alert.alert("Error", "Failed to fetch subdealer details.");
+    }
+
   }
 
   useEffect(() => {
     fetchDesignations();
   }, []);
 
+  // useEffect(() => {
+  //   if (staffInfo) {
+  //     console.log("staffInfo ::", staffInfo)
+  //     // perform your saving and navigation here
+  //   }
+  // }, [staffInfo]);
+
   useEffect(() => {
-    const rrr = async () => {
+    const fetchDeviceID = async () => {
       const deviceIDs = await getDeviceId();
       setDeviceID(deviceIDs);
     }
-    rrr();
-  }, [deviceID])
+    fetchDeviceID();
+  }, [])
 
   useEffect(() => {
     const removePrevData = async () => {
@@ -113,7 +125,6 @@ const Login = ({ navigation }) => {
       await AsyncStorage.removeItem('branch_id');
       await AsyncStorage.removeItem('branchName');
       await AsyncStorage.removeItem('staffPermissions');
-      await AsyncStorage.clear()
     }
     removePrevData();
   }, [])
@@ -138,25 +149,34 @@ const Login = ({ navigation }) => {
       };
 
       await dispatch(login(loginPayload));
-      const state = store.getState(); // Get updated Redux state
+      const state = store.getState(); // Assuming you have access to the Redux store
       const { staffInfo } = state.staffLogin;
-      if (staffInfo?.staffId??staffInfo?.subDealerId === staffID) {
+
+      if (staffInfo?.staffId === staffID || staffInfo?.subDealerId === staffID) {
         await saveData('isLogin', true);
         if (staffInfo) {
           if (staffRole !== "sub dealer" && staffRole !== "sub dealer staff") {
             await saveData('ID', staffInfo?.id);
-            await saveData('password', staffInfo?.password);
             await saveData('staffID', staffInfo?.staffId);
             await saveData('staffName', staffInfo?.name);
             await saveData('staffPhoto', staffInfo?.staffPhoto);
             await saveData('phoneNumber', staffInfo?.phoneNumber);
             await saveData('email', staffInfo?.email);
-            await saveData('branch_id', staffInfo?.branch?.id);
+            await saveData('branch_id', staffInfo?.branch?.id || 0);
             await saveData('branchName', staffInfo?.branch?.branchName);
             await saveData('role', staffInfo?.designation);
             await saveData('latitude', staffInfo?.latitude);
             await saveData('longitude', staffInfo?.longitude);
-            await saveData('staffPermissions', staffInfo?.permissions[0].permissions);
+            const activePermissionsObj = Array.isArray(staffInfo?.permissions)
+            ? staffInfo.permissions.findLast(p => p.staffStatus === 'ACTIVE')
+            : null;
+          
+          const permissionsToStore = activePermissionsObj?.permissions || [];
+            if (Array.isArray(permissionsToStore)) {
+              await saveData('staffPermissions', permissionsToStore);
+            } else {
+              console.warn('Permissions data is not an array');
+            }
             await UpdateCurrentAddress();
           }
 
@@ -165,14 +185,14 @@ const Login = ({ navigation }) => {
           }
 
           if (staffRole === "sub dealer staff") {
-            getSubdealerStaffDetails(staffInfo);
+            await getSubdealerStaffDetails(staffInfo);
             await saveData('role', "sub dealer staff");
           }
 
           navigation.navigate('RoleRedirector');
 
-        }else{
-          console.log("staffdata :",staffInfo)
+        } else {
+          console.log("staffdata :", staffInfo)
         }
       }
     } catch (error) {
@@ -184,7 +204,10 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <ScrollView>
+    <ScrollView keyboardDismissMode="on-drag"
+      keyboardShouldPersistTaps="handled"
+      nestedScrollEnabled={true} // ✅ This is critical
+      contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.container}>
         {/* Logo Section */}
         <Surface style={styles.header}>
@@ -201,28 +224,72 @@ const Login = ({ navigation }) => {
         {error !== '' && <Text style={styles.errorText}>{error}</Text>}
 
         {/* Staff Role Dropdown */}
-        <DropDownPicker
-          open={open}
-          value={staffRole}
-          items={staffRoleOptions}
-          setOpen={setOpen}
-          setValue={setStaffRole}
-          setItems={setStaffRoleOptions}
-          placeholder="Select Staff Role"
-          containerStyle={{ width: '98%' }}
-          style={[styles.input, { alignSelf: "center" }]}
-          dropDownContainerStyle={{
-            width: "90%",
-            alignSelf: "center",
-            borderColor: '#cccccc',
-            borderWidth: 1,
-            borderRadius: 8
-          }}
-        />
-
+        <View style={{ zIndex: 1000 }}>
+  <DropDownPicker
+    open={open}
+    value={staffRole}
+    items={staffRoleOptions}
+    setOpen={setOpen}
+    setValue={setStaffRole}
+    setItems={setStaffRoleOptions}
+    placeholder="Select Staff Role"
+    listMode="MODAL"
+    modalTitle="Choose Staff Role"
+    modalProps={{
+      animationType: 'slide',
+      presentationStyle: 'pageSheet',
+    }}
+    modalContentContainerStyle={{
+      backgroundColor: '#fff',
+      paddingHorizontal: 20,
+      paddingVertical: 24,
+      borderTopLeftRadius: 16,
+      borderTopRightRadius: 16,
+      flex: 1,
+    }}
+    style={{
+      borderColor: '#cccccc',
+      borderRadius: 8,
+      borderWidth: 1,
+      paddingHorizontal: 12,
+      backgroundColor: '#fafafa',
+    }}
+    containerStyle={{
+      width: '90%',
+      alignSelf: 'center',
+      marginBottom: 16,
+    }}
+    textStyle={{
+      fontSize: 16,
+      color: '#333',
+    }}
+    dropDownContainerStyle={{
+      borderRadius: 8,
+      borderColor: '#cccccc',
+    }}
+    listItemLabelStyle={{
+      fontSize: 16,
+      color: '#333',elevation:0,alignSelf:'center',
+      paddingVertical: 10,borderBottomWidth:1,borderColor:"#E6F4EA",
+      paddingLeft: 8,
+    }}
+    selectedItemContainerStyle={{
+      backgroundColor: '#F0FFF4',
+    }}
+    selectedItemLabelStyle={{
+      color: '#2ECC71',
+      fontWeight: 'bold',
+    }}
+    closeIconStyle={{
+      tintColor: '#888'
+    }}
+    showTickIcon={true}
+    tickIconStyle={{ tintColor: '#2ECC71' }}
+  />
+</View>
         {/* StaffID Input */}
         <TextInput
-          style={styles.input}
+          style={[styles.input, { zIndex: open ? 0 : 1 }]}
           placeholder="Staff ID"
           mode='outlined'
           outlineColor='#cccccc'

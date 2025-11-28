@@ -16,7 +16,7 @@ export const fetchNotifications = () => async (dispatch) => {
                 'Content-Type': 'application/json',
             },
         });
-        console.log("rrr:",data.data.notifications)
+
         if (data.status) {
             const notifications = data?.data?.notifications || [];
 

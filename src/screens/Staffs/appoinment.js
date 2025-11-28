@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useCallback } from 'react';
 import { View, FlatList, StyleSheet, Text, TouchableOpacity, Modal, ScrollView, } from 'react-native';
 import { Card, Menu, Button, Badge, FAB, Provider, Avatar, Surface, } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAppointments } from "../../Redux/Actions/appointmentAction";
 import { drawLabel } from "../../Redux/Actions/drawAction";
 import { loadData } from '../../Utils/appData';
+import { useFocusEffect } from '@react-navigation/native';
 
 const Appointment = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -16,30 +17,37 @@ const Appointment = ({ navigation }) => {
     const [branchName, setBranchName] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedClient, setSelectedClient] = useState(null);
-    useEffect(() => {
-        const rrr = async () => {
-            const aaa = await loadData("branchName")
-            if (aaa !== null || aaa !== "") {
-                setBranch(aaa)
-                setTabVisible(false)
-            }
-            setBranchName(prev => prev = aaa)
-            const appointmentPayload = {
-                companyCode: "WAY4TRACK",
-                unitCode: "WAY4",
-                branchName: aaa,
-            };
-            console.log("aaa:", appointmentPayload)
-            dispatch(fetchAppointments(appointmentPayload));
-        }
-        rrr();
-    }, [dispatch]);
 
+
+
+    useFocusEffect(
+        useCallback(() => {
+          const rrr = async () => {
+            const aaa = await loadData("branchName");
+      
+            if (aaa !== null && aaa !== "") {
+              setBranch(aaa);
+              setTabVisible(false);
+            }
+      
+            setBranchName(() => aaa);
+      
+            const appointmentPayload = {
+              companyCode: "WAY4TRACK",
+              unitCode: "WAY4",
+              branchName: aaa,
+            };      
+            dispatch(fetchAppointments(appointmentPayload));
+          };
+      
+          rrr();
+        }, [dispatch])
+    )
+      
     useEffect(() => {
         const loadStaffloginData = async () => {
             const rrr = await loadData("staffPermissions")
             setPermissions(prev => prev = rrr || permissions);
-            console.log(permissions)
         };
         loadStaffloginData();
     }, []);

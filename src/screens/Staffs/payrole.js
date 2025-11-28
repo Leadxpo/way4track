@@ -4,6 +4,7 @@ import { Card, Provider, Modal, Button } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchStaffs } from "../../Redux/Actions/staffAction";
 import Header from '../../components/userHeader';
+import { useFocusEffect } from "@react-navigation/native";
 
 const branches = [
     { name: 'Hyderabad', manager: 'Vijayawad', phone: '+91 84653 34445', technicities: 200, nonTechnicities: 50, marketing: 450, totalStaff: 500, requiredManPower: 10 },
@@ -30,11 +31,13 @@ const PayRole = () => {
       };
       loadStaffloginData();
   }, []);
-      useEffect(() => {
+
+  useFocusEffect(
+    useCallback(() => {
         const staffsPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
         dispatch(fetchStaffs(staffsPayload));
-    }, [dispatch]);
-
+    }, [dispatch])
+  )
     const renderStaff = ({ item }) => (
         <TouchableOpacity onPress={() => {
 

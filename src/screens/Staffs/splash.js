@@ -46,7 +46,6 @@ const Splash = () => {
                 } else {
                     // If not logged in, navigate to login
                     setTimeout(() => {
-                        Alert.alert('login unsuccessfull');
                         navigation.navigate('Login');
                     }, 3000);
                 }

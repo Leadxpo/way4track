@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { View, FlatList, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 import { Avatar, Card, Button, Menu, Provider } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { drawLabel } from "../../Redux/Actions/drawAction";
 import { fetchVouchersbyPayments, fetchVouchersbyPurchase } from "../../Redux/Actions/vouchersAction";
 import Header from "../../components/userHeader";
+import { useFocusEffect } from "@react-navigation/native";
 
 const Purchase = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -16,11 +17,14 @@ const Purchase = ({ navigation }) => {
   const { loading, selectedLabel, error } = useSelector(state => state.selectedDrawLabel);
   const { loading: voucherPurchasesDataLoading, voucherPurchasesData, error: voucherPurchasesDataError } = useSelector(state => state.voucher_purchasesReducer);
 
-  useEffect(() => {
-    const dayBookPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
-    dispatch(fetchVouchersbyPurchase(dayBookPayload));
-  }, [dispatch])
 
+  useFocusEffect(
+    useCallback(() => {
+      const dayBookPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
+      dispatch(fetchVouchersbyPurchase(dayBookPayload));
+    }, [dispatch])
+  )
+  
   const filteredData = voucherPurchasesData.filter((item) =>
     item.name?.toLowerCase().includes(searchQuery.toLowerCase())
   );

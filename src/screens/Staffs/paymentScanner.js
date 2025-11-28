@@ -227,7 +227,7 @@ const PaymentScanner = ({ navigation, route }) => {
                   placeholder="Description"
                   mode='outlined'
                   outlineColor="#aaaaaa"
-                  keyboardType='numeric'
+                  keyboardType='default'
                   placeholderTextColor={"#aaaaaa"}
                   value={description}
                   onChangeText={setDescription}

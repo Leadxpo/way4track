@@ -36,6 +36,25 @@ const CustomStaffDrawerContents = (props) => {
     }
     fetchStaffData()
   })
+
+  const handleLogout = () => {
+    Alert.alert(
+      `${staffDesignation} Logout`,
+      `Do you want to logout from the ${staffDesignation} dashboard?`,
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Logout",
+          style: "destructive",
+          onPress: () => {
+            navigation.navigate("Home", {
+              screen: "Login"
+            });
+          }
+        }
+      ]
+    );
+  };
   return (
     <View style={{ flex: 1 }}>
       {/* 🔼 Header */}
@@ -55,19 +74,7 @@ const CustomStaffDrawerContents = (props) => {
 
       {/* 🔽 Footer */}
       <View style={styles.footer}>
-        <TouchableOpacity onPress={() => {
-          Alert.alert("Technician", "Do you want to logout from Technician dashboad.", [
-            { text: "Cancel", style: "cancel" },
-            {
-              text: `${staffDesignation} Logout`, onPress: async () => {
-                navigation.navigate("Home", {
-                  screen: "Login"
-                });
-              }
-            }
-          ]);
-        }
-        }>
+        <TouchableOpacity onPress={handleLogout}>
           <Text style={styles.footerText}>Logout</Text>
         </TouchableOpacity>
       </View>
@@ -93,7 +100,14 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
   },
   footerText: {
-    color: '#ff3b30',
+    color: '#007AFF',
+    fontSize: 16,
+    textAlign: 'center',
+    padding: 10,
     fontWeight: '600',
+
   },
+  // footerText: {
+  //   color: '#ff3b30',
+  // },
 });

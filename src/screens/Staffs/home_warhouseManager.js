@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useCallback } from 'react';
 import { View, Text, TouchableOpacity, FlatList, Image, StyleSheet, ScrollView } from 'react-native';
 import { Avatar, Card, Menu, Divider, Provider } from 'react-native-paper';
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -10,6 +10,8 @@ import { intiateWarhouse_dashboard } from '../../Redux/Actions/dashboard';
 import { useDispatch, useSelector } from 'react-redux';
 import { drawLabel } from "../../Redux/Actions/drawAction";
 import { fetchNotifications } from '../../Redux/Actions/notificationAction';
+import { useFocusEffect } from '@react-navigation/native';
+import { UpdateCurrentAddress } from '../../Utils/updateLocation';
 
 const branches = [
     {
@@ -69,6 +71,17 @@ const Home_WarehouseManager = () => {
         }
         rrr();
     }, [])
+
+    useFocusEffect(
+        useCallback(() => {
+          const timeout = setTimeout(() => {
+            UpdateCurrentAddress();
+          }, 3000);
+      
+          return () => clearTimeout(timeout); // Cleanup when screen loses focus
+        }, [])
+      );
+
 
     useEffect(() => {
         const Warehouse_dashboardPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }

@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { View, FlatList, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 import { Avatar, Card, Provider, FAB } from "react-native-paper";
 import Header from '../../components/userHeader';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEstimates } from "../../Redux/Actions/estimatesAction";
 import { drawLabel } from "../../Redux/Actions/drawAction";
+import { useFocusEffect } from '@react-navigation/native';
 
 const Estimates = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -28,11 +29,12 @@ const Estimates = ({ navigation }) => {
 
   const hasAddEstimatePermission = permissions.some(p => p.name === "estimate" && p.add);
 
-  useEffect(() => {
-    const estimatePayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
-    dispatch(fetchEstimates(estimatePayload));
-  }, [dispatch])
-
+  useFocusEffect(
+    useCallback(() => {
+      const estimatePayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
+      dispatch(fetchEstimates(estimatePayload));
+    }, [dispatch])
+  )
   const filteredData = estimates?.filter((item) =>
     item.clientName.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.estimateId.toLowerCase().includes(searchQuery.toLowerCase())

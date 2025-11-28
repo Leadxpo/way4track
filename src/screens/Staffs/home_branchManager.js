@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { Card, ProgressBar } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,6 +7,8 @@ import Header from '../../components/userHeader';
 import { intiateBranchManager_dashboard } from '../../Redux/Actions/dashboard';
 import { staffDataHook } from '../../Utils/permissions';
 import { fetchNotifications } from '../../Redux/Actions/notificationAction';
+import { useFocusEffect } from '@react-navigation/native';
+import { UpdateCurrentAddress } from '../../Utils/updateLocation';
 
 const Home_BranchManager = () => {
   const dispatch = useDispatch();
@@ -19,27 +21,40 @@ const Home_BranchManager = () => {
 
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const branchManagerDetails = await staffDataHook();
-        setBranchManagerData(branchManagerDetails);
+  useFocusEffect(
+    useCallback(() => {
+      const fetchData = async () => {
+        try {
+          const branchManagerDetails = await staffDataHook();
+          setBranchManagerData(branchManagerDetails);
 
-        const BranchManager_dashboardPayload = {
-          companyCode: 'WAY4TRACK',
-          unitCode: 'WAY4',
-          branchName: branchManagerDetails?.branchName,
-          branch: branchManagerDetails?.branchName,
-        };
-        dispatch(intiateBranchManager_dashboard(BranchManager_dashboardPayload));
-        dispatch(fetchNotifications())
-      } catch (error) {
-        console.error('Error fetching branch manager data:', error);
-      }
-    };
+          const BranchManager_dashboardPayload = {
+            companyCode: 'WAY4TRACK',
+            unitCode: 'WAY4',
+            branchName: branchManagerDetails?.branchName,
+            branch: branchManagerDetails?.branchName,
+          };
+          dispatch(intiateBranchManager_dashboard(BranchManager_dashboardPayload));
+          dispatch(fetchNotifications())
+        } catch (error) {
+          console.error('Error fetching branch manager data:', error);
+        }
+      };
 
-    fetchData();
-  }, [dispatch]);
+      fetchData();
+    }, [dispatch])
+  )
+
+  useFocusEffect(
+    useCallback(() => {
+      const timeout = setTimeout(() => {
+        UpdateCurrentAddress();
+      }, 3000);
+
+      return () => clearTimeout(timeout); // Cleanup when screen loses focus
+    }, [])
+  );
+
 
   useEffect(() => {
     if (BranchManager_homeInfo) {

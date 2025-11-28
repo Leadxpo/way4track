@@ -9,7 +9,7 @@
 
 // export default store;
 
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore,getDefaultMiddleware } from '@reduxjs/toolkit';
 import rootReducer from './rootReducer';
 
 const store = configureStore({
@@ -17,7 +17,7 @@ const store = configureStore({
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             immutableCheck: false,
-            serializableCheck: true,
+            serializableCheck: false,
         }),
     devTools: process.env.NODE_ENV !== 'production', // Enable DevTools in development
 });

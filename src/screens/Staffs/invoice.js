@@ -1,10 +1,11 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect,useCallback } from 'react';
 import { View, FlatList, StyleSheet, Text, SafeAreaView, TextInput} from 'react-native';
 import {  Card, Avatar } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { drawLabel } from "../../Redux/Actions/drawAction";
 import { fetchInvioces } from '../../Redux/Actions/estimatesAction';
 import Header from '../../components/userHeader';
+import { useFocusEffect } from '@react-navigation/native';
 
 const Invoice = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -12,10 +13,12 @@ const Invoice = ({ navigation }) => {
 
   const [searchQuery, setSearchQuery] = useState('');
 
-  useEffect(() => {
+  useFocusEffect(
+    useCallback(() => {
     const fetchPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" };
     dispatch(fetchInvioces(fetchPayload));
-  }, [dispatch]);
+  }, [dispatch])
+)
 
   const filteredData = invoices?.filter(item => {
     const matchesSearch =

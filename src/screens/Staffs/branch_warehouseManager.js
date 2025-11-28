@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, FlatList, Image,Animated, StyleSheet } fr
 import { Card } from 'react-native-paper';
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Header from '../../components/userHeader';
+import { useFocusEffect } from '@react-navigation/native';
 
 const branchData = [
   {

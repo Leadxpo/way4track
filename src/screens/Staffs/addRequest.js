@@ -33,7 +33,9 @@ const AddRequest = ({ navigation }) => {
     { label: 'Personal', value: 'personal' },
     { label: 'LeaveRequest', value: 'leaveRequest' },
   ]);
-
+  const [branch, setBranch] = useState('');
+  const [requestFrom, setRequestFrom] = useState('');
+  
   const requestCameraPermission = async () => {
     if (Platform.OS === 'android') {
       const granted = await PermissionsAndroid.request(
@@ -63,7 +65,7 @@ const AddRequest = ({ navigation }) => {
         selectionLimit: 1, // 0 = unlimited selection
       },
       (response) => {
-        if (response.didCancel) return;
+        if (response.didCancel) return; 
         if (response.errorCode) {
           Alert.alert('Error', response.errorMessage || 'Image pick failed');
           console.log('Error', response.errorMessage || 'Image pick failed');
@@ -127,19 +129,19 @@ const AddRequest = ({ navigation }) => {
     );
   };
   useEffect(() => {
+    let isMounted = true;
     const getStaff = async () => {
-
-      const { data } = await api.post(`/staff/getStaffDetails`, { companyCode: "WAY4TRACK", unitCode: "WAY4" }, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      setStaffData(data.data)
-    }
+      try {
+        const { data } = await api.post(`/staff/getStaffDetails`, { companyCode: "WAY4TRACK", unitCode: "WAY4" });
+        if (isMounted) setStaffData(data.data);
+      } catch (error) {
+        console.error("Error fetching staff:", error);
+      }
+    };
     getStaff();
+    return () => { isMounted = false };
   }, []);
-
+  
   useEffect(() => {
     const getProductTypes = async () => {
       const { data } = await api.post(`/productType/getProductTypeNamesDropDown`, { companyCode: "WAY4TRACK", unitCode: "WAY4" }, {
@@ -156,7 +158,7 @@ const AddRequest = ({ navigation }) => {
   const [formData, setFormData] = useState({
     requestToName: "",
     requestType: "",
-    requestFrom: null,
+    requestFrom: "",
     branch: '',
     requestFor: '',
     requestTo: '',
@@ -187,24 +189,17 @@ const AddRequest = ({ navigation }) => {
 
   useEffect(() => {
     const getStaffData = async () => {
-      const branch = await loadData('branch_id');
-      const requestFrom = await loadData('ID');
+      const branches = await loadData('branch_id');
+      const requestFroms = await loadData('ID');
       const role = await loadData('role');
-
-      setBackgroundMessageHandler(role);
-      setFormData(prev => ({
-        ...prev,
-        requestFrom,
-        branch,
-      }));
-
-      // Store role if used elsewhere
+  
+      setBranch(branches);
+      setRequestFrom(requestFroms);
       setRole(role);
     };
-
+  
     getStaffData();
   }, []);
-
   // Error state for validation
   const [errors, setErrors] = useState({});
 
@@ -235,8 +230,9 @@ const AddRequest = ({ navigation }) => {
       ...formData,
       fromDate: formattedFromDate,
       toDate: formattedToDate,
-      requestFrom: formData.requestFrom, // fallback if needed
-      branch: formData.branch,
+      requestFrom: requestFrom, // fallback if needed
+      branch: branch,
+      requestFor:formData.description
     };
 
     if (validateForm(updatedFormData)) {
@@ -326,7 +322,14 @@ const AddRequest = ({ navigation }) => {
                 activeOutlineColor="#cccccc"
                 onChangeText={(text) => setFormData(prev => ({ ...prev, description: text }))}
                 outlineStyle={[styles.input, { height: 50, borderRadius: 8, borderWidth: 1 }]}
-                style={{ backgroundColor: '#ffffff', marginVertical: 8 }}
+                style={{ backgroundColor: '#ffffff', marginVertical: 8,color:'#333333' }} 
+                textColor="#333333"
+                theme={{
+                  colors: {
+                      primary: '#007AFF',       // Label color (active)
+                      onSurfaceVariant: '#666', // Label color (inactive)
+                  },
+              }}
               />
             ) :
               (
@@ -365,6 +368,14 @@ const AddRequest = ({ navigation }) => {
                             return { ...prev, products: updatedItems };
                           });
                         }}
+                        textColor="#333333"
+                        theme={{
+                          colors: {
+                              primary: '#007AFF',       // Label color (active)
+                              onSurfaceVariant: '#666', // Label color (inactive)
+                          },
+                      }}
+        
                       />
                     </View>
                     <View style={styles.rowContainer}>
@@ -395,6 +406,13 @@ const AddRequest = ({ navigation }) => {
                       placeholder="Select From Date"
                       value={formData.fromDate ? formData.fromDate.toISOString().split('T')[0] : ''}
                       editable={false}
+                      textColor="#333333"
+                      theme={{
+                        colors: {
+                            primary: '#007AFF',       // Label color (active)
+                            onSurfaceVariant: '#666', // Label color (inactive)
+                        },
+                    }}      
                     />
                   </TouchableOpacity>
 
@@ -422,6 +440,13 @@ const AddRequest = ({ navigation }) => {
                       placeholder="Select To Date"
                       value={formData.toDate ? formData.toDate.toISOString().split('T')[0] : ''}
                       editable={false}
+                      textColor="#333333"
+                      theme={{
+                        colors: {
+                            primary: '#007AFF',       // Label color (active)
+                            onSurfaceVariant: '#666', // Label color (inactive)
+                        },
+                    }}      
                     />
                   </TouchableOpacity>
 
@@ -452,12 +477,19 @@ const AddRequest = ({ navigation }) => {
             error={!!errors.requestTo}
             outlineStyle={[styles.input, { height: 50, borderRadius: 8, borderWidth: 1 }]}
             style={{ backgroundColor: '#ffffff', marginVertical: 8, color: "red" }}
+            textColor="#333333"
+            theme={{
+              colors: {
+                  primary: '#007AFF',       // Label color (active)
+                  onSurfaceVariant: '#666', // Label color (inactive)
+              },
+          }}
           />
           {errors.requestTo && (
             <Text style={styles.errorText}>{errors.requestTo}</Text>
           )}
           <View>
-            <Button mode="contained" onPress={handleFileChange}>
+            <Button mode="contained" buttonColor="#28a745" style={{width:'50%',alignSelf:'center',marginTop:10}} labelStyle={{fontWeight:'bold'}} onPress={handleFileChange}>
               Select Images
             </Button>
 
@@ -536,19 +568,22 @@ const AddRequest = ({ navigation }) => {
         </View>
       </Modal>
       <Modal visible={isStaffDDVisible} onDismiss={() => setIsStaffDDVisible(false)} contentContainerStyle={{ backgroundColor: "#ffffff", paddingVertical: 20 }}>
+      <TouchableOpacity onPress={() => setIsStaffDDVisible(false)} style={{ alignSelf: "flex-end" }}>
+            <Avatar.Icon icon="close" style={styles.closeIcon} size={30} />
+          </TouchableOpacity>
         <FlatList
           data={staffData}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <Card style={{ width: Dimensions.get("screen").width / 1.2, justifyContent: 'center', alignSelf: 'center', margin: 5, backgroundColor: '#f3f3f3' }} onPress={() => {
               setFormData(prev => ({ ...prev, requestTo: item.id.toString(), requestToName: item.name.toString() }))
-              console.log("staff ID : ", item.id)
+
               setIsStaffDDVisible(false)
             }}>
               <View style={{ flexDirection: "row", padding: 10 }}>
                 <Image source={{ uri: item.assetPhoto }} style={{ width: 30, height: 30, }} />
                 <View style={{ justifyContent: "center", alignSelf: "center" }}>
-                  <Text variant="bodyMedium">{item.name} - {item.designation}</Text>
+                  <Text style={styles.itemText} variant="bodyMedium">{item.name} - {item.designation}</Text>
                 </View>
               </View>
             </Card>
@@ -591,6 +626,13 @@ const styles = StyleSheet.create({
     marginTop: 10, borderRadius: 8, borderWidth: 1, height: 50,
     padding: 10,
   },
+  dropdownText: {
+    flex: 1,
+    fontSize: 15,color:'#333333',
+    fontWeight: "500",
+    textTransform: "capitalize",
+    marginLeft: 10,
+  },
   scrollContainer: {
     padding: 16,
   },
@@ -602,7 +644,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: '#ddd',color:'#333333',
     borderRadius: 5, padding: 5,
     marginBottom: 16, backgroundColor: '#f9f9f9',
   },
@@ -627,11 +669,11 @@ const styles = StyleSheet.create({
   actionButtons: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 16,
+    marginTop: 16,color:'green'
   },
   saveButton: {
     flex: 1,
-    marginRight: 8,
+    marginRight: 8,color:'color'
   },
   rowContainer: {
     flexDirection: 'row',

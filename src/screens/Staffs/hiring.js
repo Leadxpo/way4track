@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,useCallback } from "react";
 import { View, FlatList, Text, TextInput, StyleSheet, TouchableOpacity, Modal, ScrollView, } from "react-native";
 import { Avatar, Card, FAB, Button, Provider } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchHirings } from "../../Redux/Actions/hiringAction";
 import { drawLabel } from "../../Redux/Actions/drawAction";
 import Header from '../../components/userHeader';
+import { useFocusEffect } from '@react-navigation/native';
 
 const Hiring = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -33,11 +34,12 @@ const Hiring = ({ navigation }) => {
 
 
 
-  useEffect(() => {
+  useFocusEffect(
+    useCallback(() => {
     const hiringPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
     dispatch(fetchHirings(hiringPayload));
   }, [dispatch])
-
+  )
   const filteredData = hirings?.filter((item) =>
     item.candidateName.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.status.toLowerCase().includes(searchQuery.toLowerCase()) ||

@@ -1,12 +1,5 @@
-import React, { useState,useEffect } from "react";
-import {
-  View,
-  FlatList,
-  Text,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import React, { useState,useEffect,useCallback } from "react";
+import {View,FlatList,Text,TextInput,StyleSheet,TouchableOpacity} from "react-native";
 import { Avatar, Card, Button, Menu, Provider, FAB } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +8,7 @@ import { fetchVendors } from "../../Redux/Actions/vendorAction";
 import { fetchSubdealers } from "../../Redux/Actions/subdealerAction";
 import Header from '../../components/userHeader';
 import { permissions } from "../../Utils/permissions";
+import { useFocusEffect } from "@react-navigation/native";
 
 const SubDealer = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -43,11 +37,12 @@ const SubDealer = ({ navigation }) => {
     item.SubDealerId.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  useEffect(() => {
+  useFocusEffect(
+    useCallback(() => {
     const subdealersPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
     dispatch(fetchSubdealers(subdealersPayload));
   }, [dispatch])
-
+  )
 
   const renderItem = ({ item }) => {
     console.log("client item : ",item)

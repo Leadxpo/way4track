@@ -263,7 +263,7 @@ const StackNavigator = () => {
       {/* <Stack.Screen name="ProductType" component={ProductType} options={{ headerShown: false }} />
       <Stack.Screen name="Designation" component={Designation} options={{ headerShown: false }} />
       <Stack.Screen name="Services" component={Services} options={{ headerShown: false }} /> */}
-      <Stack.Screen name="Dispatch" component={Dispatch} options={{ headerShown: true }} />
+      <Stack.Screen name="Dispatch" component={Dispatch} options={{ headerShown: false }} />
       <Stack.Screen name="AddEditDispatch" component={AddEditDispatch} options={{ headerShown: true }} />
       <Stack.Screen name="Staff" component={Staff} options={{ headerShown: false }} />
       <Stack.Screen name="StaffDetails" component={StaffDetails} options={{ headerShown: false }} />
@@ -380,7 +380,7 @@ const CEOStackNavigator = () => {
       <Stack.Screen name="AddRequestRaise" component={AddRequestRaise} options={{ headerShown: true }} />
       <Stack.Screen name="EditRequestRaise" component={EditRequestRaise} options={{ headerShown: true }} />
       <Stack.Screen name="TrackingStaff" component={TrackingStaff} options={{ headerShown: true }} />
-      <Stack.Screen name="Dispatch" component={Dispatch} options={{ headerShown: true }} />
+      <Stack.Screen name="Dispatch" component={Dispatch} options={{ headerShown: false }} />
       <Stack.Screen name="AddEditDispatch" component={AddEditDispatch} options={{ headerShown: true }} />
     </Stack.Navigator>
   );
@@ -453,7 +453,7 @@ const DefaultStackNavigator = () => {
       <Stack.Screen name="AddRequestRaise" component={AddRequestRaise} options={{ headerShown: true }} />
       <Stack.Screen name="EditRequestRaise" component={EditRequestRaise} options={{ headerShown: true }} />
       <Stack.Screen name="TrackingStaff" component={TrackingStaff} options={{ headerShown: true }} />
-      <Stack.Screen name="Dispatch" component={Dispatch} options={{ headerShown: true }} />
+      <Stack.Screen name="Dispatch" component={Dispatch} options={{ headerShown: false }} />
       <Stack.Screen name="AddEditDispatch" component={AddEditDispatch} options={{ headerShown: true }} />
     </Stack.Navigator>
   );
@@ -502,7 +502,7 @@ const HRStackNavigator = () => {
       <Stack.Screen name="HiringDetails" component={HiringDetails} options={{ headerShown: false }} />
       <Stack.Screen name="ProductType" component={ProductType} options={{ headerShown: false }} />
       <Stack.Screen name="Designation" component={Designation} options={{ headerShown: false }} />
-      <Stack.Screen name="Dispatch" component={Dispatch} options={{ headerShown: true }} />
+      <Stack.Screen name="Dispatch" component={Dispatch} options={{ headerShown: false }} />
       <Stack.Screen name="AddEditDispatch" component={AddEditDispatch} options={{ headerShown: true }} />
       <Stack.Screen name="Services" component={Services} options={{ headerShown: false }} />
       <Stack.Screen name="Staff" component={Staff} options={{ headerShown: false }} />
@@ -573,7 +573,7 @@ const WarehouseStackNavigator = () => {
       <Stack.Screen name="HiringDetails" component={HiringDetails} options={{ headerShown: false }} />
       <Stack.Screen name="ProductType" component={ProductType} options={{ headerShown: false }} />
       <Stack.Screen name="Designation" component={Designation} options={{ headerShown: false }} />
-      <Stack.Screen name="Dispatch" component={Dispatch} options={{ headerShown: true }} />
+      <Stack.Screen name="Dispatch" component={Dispatch} options={{ headerShown: false }} />
       <Stack.Screen name="AddEditDispatch" component={AddEditDispatch} options={{ headerShown: true }} />
       <Stack.Screen name="Services" component={Services} options={{ headerShown: false }} />
       <Stack.Screen name="Staff" component={Staff} options={{ headerShown: false }} />
@@ -640,7 +640,7 @@ const BranchManagerStackNavigator = () => {
       {/* <Stack.Screen name="Payment" component={Payments} options={{ headerShown: false }} /> */}
       <Stack.Screen name="Hiring" component={Hiring} options={{ headerShown: false }} />
       <Stack.Screen name="HiringDetails" component={HiringDetails} options={{ headerShown: false }} />
-      <Stack.Screen name="Dispatch" component={Dispatch} options={{ headerShown: true }} />
+      <Stack.Screen name="Dispatch" component={Dispatch} options={{ headerShown: false }} />
       <Stack.Screen name="AddEditDispatch" component={AddEditDispatch} options={{ headerShown: true }} />
       <Stack.Screen name="Staff" component={Staff} options={{ headerShown: false }} />
       <Stack.Screen name="StaffDetails" component={StaffDetails} options={{ headerShown: false }} />
@@ -1520,13 +1520,12 @@ const DrawerNavigator = () => {
     const fetchPermissions = async () => {
       const fetchedRole = await loadData('role');
       const fetchedPermissions = await loadData('staffPermissions');
-      console.log("Permissions:", fetchedPermissions); // <- debug
       setPermissions(fetchedPermissions || []);
       setRole(fetchedRole);
     };
 
     fetchPermissions();
-  }, []);
+  }, [permissions,role]);
 
   return (
     <Drawer.Navigator

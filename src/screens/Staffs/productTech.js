@@ -1,12 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  FlatList,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
+import { View, Text, TextInput, FlatList, TouchableOpacity, StyleSheet} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { useFocusEffect } from "@react-navigation/native";
 import { Card, Provider, SegmentedButtons } from "react-native-paper";
@@ -32,7 +25,8 @@ const ProductTech = ({ navigation }) => {
     }, [])
   );
 
-  useEffect(() => {
+  useFocusEffect(
+    useCallback(()=>{
     if (staffId) {
       dispatch(
         fetchProducts({
@@ -41,7 +35,8 @@ const ProductTech = ({ navigation }) => {
         })
       );
     }
-  }, [dispatch, staffId]);
+  }, [dispatch, staffId])
+)
 
   const filteredData = useMemo(() => {
     return products?.filter((item) => {
@@ -88,7 +83,7 @@ const ProductTech = ({ navigation }) => {
             <Text style={styles.values}>{item.productName || "N/A"}</Text>
           </Text>
         </View>
-        <TouchableOpacity onPress={() => console.log("Clicked quantity")}>
+        <TouchableOpacity>
           <Text style={styles.entryText}>
             IMEI Number :{" "}
             <Text style={styles.values}>{item.imeiNumber || 0}</Text>
@@ -102,7 +97,7 @@ const ProductTech = ({ navigation }) => {
             <Text style={styles.values}>{item.basketName || "N/A"}</Text>
           </Text>
         </View>
-        <TouchableOpacity onPress={() => console.log("Clicked quantity")}>
+        <TouchableOpacity>
           <Text style={styles.entryText}>
           SIM Number :{" "}
             <Text style={styles.values}>{item.simNumber || 'N/A'}</Text>
@@ -116,7 +111,7 @@ const ProductTech = ({ navigation }) => {
             <Text style={styles.values}>{item.productType || "N/A"}</Text>
           </Text>
         </View>
-        <TouchableOpacity onPress={() => console.log("Clicked quantity")}>
+        <TouchableOpacity>
           <Text style={styles.entryText}>
           Location :{" "}
             <Text style={styles.values}>{item.location || 'N/A'}</Text>
@@ -209,7 +204,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F5F5F5',
     padding: 16,
-  },
+  }, 
   activeButton: {
     backgroundColor: '#28a745', // Active button background
     color: '#fff', // Active text color

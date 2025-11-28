@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useCallback } from "react";
 import { View, FlatList, Text, TextInput, StyleSheet, Alert, TouchableOpacity, TouchableWithoutFeedback, Modal, ScrollView } from "react-native";
 import { DataTable, Card, Button, Menu, Provider, FAB } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -11,6 +11,7 @@ import StaffDropdown from '../../components/staffDropdown';
 import DatePicker from 'react-native-date-picker';
 import { createWorkAllocation, fetchWorkAllocations, updateWorkAllocation } from "../../Redux/Actions/workAllocationAction";
 import DynamicWorkInputRows from "../../components/dynamicWorkInputRows";
+import { useFocusEffect } from "@react-navigation/native";
 
 const WorkAllocation = ({ navigation }) => {
 
@@ -78,11 +79,12 @@ const WorkAllocation = ({ navigation }) => {
     productDetails: ""
   });
 
-  useEffect(() => {
+  useFocusEffect(
+    useCallback(() => {
     const workAllocationPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
     dispatch(fetchWorkAllocations(workAllocationPayload));
-  }, [dispatch]);
-
+  }, [dispatch])
+  )
   useEffect(() => {
     setFormData((prev) => ({ ...prev, allocateTo: branchID }))
 

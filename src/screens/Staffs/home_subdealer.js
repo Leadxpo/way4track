@@ -43,6 +43,7 @@ const Home_SubDealer = ({ navigation }) => {
   });
   const [tableData, setTableData] = useState([]);
   const [columns, setColumns] = useState([]);
+  
   const fetchData = async (branchName) => {
     try {
       const payload = {

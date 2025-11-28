@@ -26,7 +26,8 @@ const UpcommingWorks = ({ navigation, route }) => {
     }, [])
   );
 
-  useEffect(() => {
+  useFocusEffect(
+    useCallback(() => {
     const getUpcommingWork = async () => {
 
       if (staffId) {
@@ -51,8 +52,8 @@ const UpcommingWorks = ({ navigation, route }) => {
       }
     }
     getUpcommingWork();
-  }, [staffId, dispatch]);
-
+  }, [staffId, dispatch])
+  )
   const CurrentWeak = technicianWorks.filter(item => item.weekNumber ==="1");
   const Weak_one = technicianWorks.filter(item => item.weekNumber ==="2");
   const Weak_two = technicianWorks.filter(item => item.weekNumber ==="3");

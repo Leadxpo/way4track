@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, Button, Alert, PermissionsAndroid } from "react-native";
+import { View, Text, TextInput,StyleSheet, TouchableOpacity, ScrollView, Image, Button, Alert, PermissionsAndroid } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Provider, ToggleButton } from "react-native-paper";
 import DatePicker from "react-native-date-picker";
@@ -17,7 +17,7 @@ const Visit_ClientInfo = ({ navigation }) => {
 
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [leadStatus, setLeadStatus] = useState("");
+  const [leadStatus, setLeadStatus] = useState("pending");
   const [address, setAddress] = useState("");
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [estimatedDate, setEstimatedDate] = useState("");
@@ -104,30 +104,33 @@ const Visit_ClientInfo = ({ navigation }) => {
       <Header />
       <ScrollView style={styles.container}>
         {/* Name */}
-        <Text>Name</Text>
+        <Text style={styles.label}>Name</Text>
         <TextInput
           style={styles.input}
           placeholder="Enter Name"
+          placeholderTextColor={"#aaaaaa"}
           value={name}
           onChangeText={setName}
         />
 
         {/* Phone Number */}
-        <Text>Mobile Number</Text>
+        <Text style={styles.label}>Mobile Number</Text>
         <TextInput
           style={styles.input}
           placeholder="Enter Phone Number"
+          placeholderTextColor={"#aaaaaa"}
           keyboardType="phone-pad"
           value={phoneNumber}
           onChangeText={setPhoneNumber}
         />
 
         {/* Date */}
-        <Text> Visit Date</Text>
+        <Text style={styles.label}> Visit Date</Text>
         <TouchableOpacity onPress={() => setVisitDateOpen(true)}>
 
           <TextInput
             style={styles.input}
+            placeholderTextColor={"#aaaaaa"}
             value={date}
             editable={false}
           />
@@ -147,11 +150,12 @@ const Visit_ClientInfo = ({ navigation }) => {
         />
 
         {/* Estimated Date Picker */}
-        <Text>Estimated Date</Text>
+        <Text style={styles.label}>Estimated Date</Text>
         <TouchableOpacity onPress={() => setDateOpen(true)}>
           <TextInput
             style={styles.input}
             placeholder="Select Date"
+            placeholderTextColor={"#aaaaaa"}
             value={estimatedDate}
             editable={false}
           />
@@ -168,13 +172,15 @@ const Visit_ClientInfo = ({ navigation }) => {
             setEstimatedDate(formattedDate);
           }}
           onCancel={() => setDateOpen(false)}
+          style={styles.input}
         />
 
         {/* Address */}
-        <Text>Address</Text>
+        <Text style={styles.label}>Address</Text>
         <TextInput
           style={[styles.input, styles.textArea]}
           placeholder="Enter Address"
+          placeholderTextColor={"#aaaaaa"}
           value={address}
           multiline
           onChangeText={setAddress}
@@ -229,13 +235,12 @@ const Visit_ClientInfo = ({ navigation }) => {
           <Button title="Next" onPress={handleNext} />
         </View>
       </ScrollView>
-
     </Provider>
   );
 };
 
 // 🔹 Styles
-const styles = {
+const styles = StyleSheet.create({
   container: {
     padding: 16,
     marginVertical: 16,
@@ -277,15 +282,15 @@ const styles = {
     marginRight: 10,
   },
   label: {
-    marginBottom: 8,
-    fontSize: 16,
+    marginTop: 8,marginBottom:4,
+    fontSize: 14,color:"#333333",
     fontWeight: '500',
   },
   toggleGroup: {
     justifyContent: 'center'
   },
   productText: {
-    fontSize: 15,
+    fontSize: 15,color:"#333333",
     fontWeight: "500",
     textTransform: "capitalize",
   },
@@ -303,7 +308,6 @@ const styles = {
     borderRadius: 10,
     marginHorizontal: 20,
   },
-  label: { fontSize: 16, fontWeight: "bold", marginTop: 10 },
   imagePicker: {
     alignItems: "center",
     justifyContent: "center",
@@ -335,6 +339,6 @@ const styles = {
     fontSize: 16,
     color: "gray",
   },
-};
+});
 
 export default Visit_ClientInfo;

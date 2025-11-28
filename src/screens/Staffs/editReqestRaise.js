@@ -198,7 +198,7 @@ const EditRequestRaise = ({ navigation, route }) => {
         branch,
       }));
 
-      // Store role if used elsewhere
+      // Store role if used elsewhere 
       setRole(role);
     };
 
@@ -233,8 +233,8 @@ const EditRequestRaise = ({ navigation, route }) => {
       ...formData,
       requestFrom: formData.requestFrom, // fallback if needed
       branch: formData.branch,
-      fromDate:moment(formData.fromDate).format('YYYY-MM-DD'),
-      toDate:moment(formData.toDate).format('YYYY-MM-DD'),
+      fromDate: moment(formData.fromDate).format('YYYY-MM-DD'),
+      toDate: moment(formData.toDate).format('YYYY-MM-DD'),
     };
     if (validateForm(updatedFormData)) {
       dispatch(updateRaiseRequest(updatedFormData))
@@ -246,7 +246,10 @@ const EditRequestRaise = ({ navigation, route }) => {
         id: staffId,
       };
       dispatch(fetchRaiseRequests(requestPayload));
-      // navigation.navigate("RequestRaise");
+      setTimeout(() => {
+        navigation.navigate("RequestRaise");
+      }, 3000);
+      
     }
   };
 
@@ -260,7 +263,12 @@ const EditRequestRaise = ({ navigation, route }) => {
             value={formData.requestType} // The selected role value
             items={dropdownRequestType} // Dropdown items
             setOpen={setRequestOpen} // Toggle the dropdown open state
-            setValue={(callback) => setFormData(prev => ({ ...prev, requestType: callback(prev.requestType) }))}
+            setValue={(callback) => {
+              setFormData(prev => ({ ...prev, requestType: callback(prev.requestType)
+                
+              }))
+              console.log("requestType::",formData.requestType)
+              }}
             setItems={setDropdownRequestType} // Update the roles if needed
             dropDownDirection="TOP" // Dropdown direction (optional, for small containers)
             placeholder="Select Request Type"
@@ -313,7 +321,7 @@ const EditRequestRaise = ({ navigation, route }) => {
           {/* Request By */}
 
           <View>
-            {formData.requestType !== "products" ? (
+            {formData.requestType !== "products" && (
               <TextInput
                 label="Request For"
                 value={formData.requestFor}
@@ -323,10 +331,19 @@ const EditRequestRaise = ({ navigation, route }) => {
                 onChangeText={(text) => setFormData(prev => ({ ...prev, requestFor: text }))}
                 outlineStyle={[styles.input, { height: 50, borderRadius: 8, borderWidth: 1 }]}
                 style={{ backgroundColor: '#ffffff', marginVertical: 8 }}
+                textColor="#333333"
+                theme={{
+                  colors: {
+                    primary: '#007AFF',       // Label color (active)
+                    onSurfaceVariant: '#666', // Label color (inactive)
+                  },
+                }}
               />
-            ) :
-              (
-                formData.products?.map((item, index) => (
+            ) }
+            {formData.requestType === "products" && (
+                formData.products?.map((item, index) => {
+                  console.log("rrr::",item)
+                  return(
                   <Surface key={index} style={styles.surfaceContainer}>
                     <View style={[styles.rowContainer, { flex: 1 }]}>
                       <View style={{ flex: 3 }}>
@@ -361,6 +378,13 @@ const EditRequestRaise = ({ navigation, route }) => {
                             return { ...prev, products: updatedItems };
                           });
                         }}
+                        textColor="#333333"
+                        theme={{
+                          colors: {
+                            primary: '#007AFF',       // Label color (active)
+                            onSurfaceVariant: '#666', // Label color (inactive)
+                          },
+                        }}
                       />
                     </View>
                     <View style={styles.rowContainer}>
@@ -375,8 +399,9 @@ const EditRequestRaise = ({ navigation, route }) => {
                       )}
                     </View>
                   </Surface>
-                ))
+                )})
               )}
+            
           </View>
 
           {formData.requestType === "leaveRequest" && (
@@ -389,6 +414,13 @@ const EditRequestRaise = ({ navigation, route }) => {
                     placeholder="Select From Date"
                     value={formData.fromDate ? moment(formData.fromDate).format('YYYY-MM-DD') : ''}
                     editable={false}
+                    textColor="#333333"
+                    theme={{
+                      colors: {
+                        primary: '#007AFF',       // Label color (active)
+                        onSurfaceVariant: '#666', // Label color (inactive)
+                      },
+                    }}
                   />
                 </TouchableOpacity>
                 <DatePicker
@@ -411,6 +443,13 @@ const EditRequestRaise = ({ navigation, route }) => {
                     placeholder="Select From Date"
                     value={formData.toDate ? moment(formData.toDate).format('YYYY-MM-DD') : ''}
                     editable={false}
+                    textColor="#333333"
+                    theme={{
+                      colors: {
+                        primary: '#007AFF',       // Label color (active)
+                        onSurfaceVariant: '#666', // Label color (inactive)
+                      },
+                    }}
                   />
                 </TouchableOpacity>
                 <DatePicker
@@ -439,12 +478,19 @@ const EditRequestRaise = ({ navigation, route }) => {
             error={!!errors.requestTo}
             outlineStyle={[styles.input, { height: 50, borderRadius: 8, borderWidth: 1 }]}
             style={{ backgroundColor: '#ffffff', marginVertical: 8, color: "red" }}
+            textColor="#333333"
+            theme={{
+              colors: {
+                primary: '#007AFF',       // Label color (active)
+                onSurfaceVariant: '#666', // Label color (inactive)
+              },
+            }}
           />
           {errors.requestTo && (
             <Text style={styles.errorText}>{errors.requestTo}</Text>
           )}
           <View>
-            <Button mode="contained" onPress={handleFileChange}>
+            <Button mode="contained" buttonColor="#28a745" style={{ width: '50%', alignSelf: 'center', marginTop: 10 }} onPress={handleFileChange}>
               Select Images
             </Button>
 
@@ -523,6 +569,9 @@ const EditRequestRaise = ({ navigation, route }) => {
         </View>
       </Modal>
       <Modal visible={isStaffDDVisible} onDismiss={() => setIsStaffDDVisible(false)} contentContainerStyle={{ backgroundColor: "#ffffff", paddingVertical: 20 }}>
+        <TouchableOpacity onPress={() => setIsStaffDDVisible(false)} style={{ alignSelf: "flex-end" }}>
+          <Avatar.Icon icon="close" style={styles.closeIcon} size={30} />
+        </TouchableOpacity>
         <FlatList
           data={staffData}
           keyExtractor={(item) => item.id.toString()}
@@ -535,7 +584,7 @@ const EditRequestRaise = ({ navigation, route }) => {
               <View style={{ flexDirection: "row", padding: 10 }}>
                 <Image source={{ uri: item.assetPhoto }} style={{ width: 30, height: 30, }} />
                 <View style={{ justifyContent: "center", alignSelf: "center" }}>
-                  <Text variant="bodyMedium">{item.name} - {item.designation}</Text>
+                  <Text style={styles.itemText} variant="bodyMedium">{item.name} - {item.designation}</Text>
                 </View>
               </View>
             </Card>
@@ -649,6 +698,13 @@ const styles = StyleSheet.create({
   emptyCard: {
     padding: 20,
     alignItems: "center",
+  },
+  dropdownText: {
+    flex: 1,
+    fontSize: 15, color: '#333333',
+    fontWeight: "500",
+    textTransform: "capitalize",
+    marginLeft: 10,
   },
   emptyText: {
     fontSize: 16,

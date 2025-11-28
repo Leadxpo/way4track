@@ -121,61 +121,61 @@ const AddEditDispatch = () => {
 
     const handleSubmit = async () => {
         const payload = new FormData();
-        // for (const [key, value] of Object.entries(formData)) {
-        //     if (key === 'dispatchBoxImage') {
-        //         const photos = formData.dispatchBoxImage;
-        
-        //         for (let i = 0; i < photos.length; i++) {
-        //             const item = photos[i];
-        
-        //             if (typeof item === "string") {
-        //                 // Remote URL
-        //                 try {
-        //                     const response = await fetch(item);
-        //                     const blob = await response.blob();
-        //                     const filename = item.split("/").pop();
-        //                     const mimeType = blob.type || "image/jpeg";
-        
-        //                     payload.append("dispatchBoxImage", {
-        //                         uri: item,
-        //                         name: filename,
-        //                         type: mimeType,
-        //                     });
-        //                 } catch (err) {
-        //                     console.warn("Failed to fetch image:", item, err);
-        //                 }
-        //             } else if (item?.uri && item?.name && item?.type) {
-        //                 // Local image
-        //                 payload.append("dispatchBoxImage", {
-        //                     uri: item.uri,
-        //                     name: item.name,
-        //                     type: item.type,
-        //                 });
-        //             }
-        //         }
-        
-        //     } else {
-        //         if (value !== null && value !== undefined) {
-        //             payload.append(key, value);
-        //         }
-        //     }
-        // }
-
-        Object.entries(formData).forEach(([key, value]) => {
+        for (const [key, value] of Object.entries(formData)) {
             if (key === 'dispatchBoxImage') {
-                value.forEach((file) => {
-                    if (file.uri) payload.append('dispatchBoximage', {
-                        uri: file.uri,
-                        name: file.name || 'image.jpg',
-                        type: file.type || 'image/jpeg'
-                    });
-                });
+                const photos = formData.dispatchBoxImage;
+
+                for (let i = 0; i < photos.length; i++) {
+                    const item = photos[i];
+
+                    if (typeof item === "string") {
+                        // Remote URL
+                        try {
+                            const response = await fetch(item);
+                            const blob = await response.blob();
+                            const filename = item.split("/").pop();
+                            const mimeType = blob.type || "image/jpeg";
+
+                            payload.append("dispatchBoximage", {
+                                uri: item,
+                                name: filename,
+                                type: mimeType,
+                            });
+                        } catch (err) {
+                            console.warn("Failed to fetch image:", item, err);
+                        }
+                    } else if (item?.uri && item?.name && item?.type) {
+                        // Local image
+                        payload.append("dispatchBoximage", {
+                            uri: item.uri,
+                            name: item.name,
+                            type: item.type,
+                        });
+                    }
+                }
+
             } else {
                 if (value !== null && value !== undefined) {
                     payload.append(key, value);
                 }
             }
-        });
+        }
+
+        // Object.entries(formData).forEach(([key, value]) => {
+        //     if (key === 'dispatchBoxImage') {
+        //         value.forEach((file) => {
+        //             if (file.uri) payload.append('dispatchBoximage', {
+        //                 uri: file.uri,
+        //                 name: file.name || 'image.jpg',
+        //                 type: file.type || 'image/jpeg'
+        //             });
+        //         });
+        //     } else {
+        //         if (value !== null && value !== undefined) {
+        //             payload.append(key, value);
+        //         }
+        //     }
+        // });
 
         const ID = await AsyncStorage.getItem("staffID");
         const role = await AsyncStorage.getItem("role");
@@ -186,7 +186,6 @@ const AddEditDispatch = () => {
         } else {
             payload.append("staffId", cleanedID);
         }
-        console.log("rrr", payload)
         try {
             const response = await api.post('/dispatch/handleDispatchDetails', payload, {
                 headers: {
@@ -207,7 +206,12 @@ const AddEditDispatch = () => {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-            <Text variant="titleLarge">{formData.id ? 'Edit Dispatch' : 'Create Dispatch'}</Text>
+            <Text style={styles.headerText}>
+                {formData.id ? 'Edit Dispatch' : 'Create Dispatch'}
+            </Text>
+
+            {/* === Date Section === */}
+            <Text style={styles.sectionTitle}>📅 Dates</Text>
 
             <TouchableOpacity onPress={() => setOpenDispatch(true)}>
                 <TextInput
@@ -215,7 +219,16 @@ const AddEditDispatch = () => {
                     mode="outlined"
                     value={formData.dispatchDate}
                     editable={false}
-                    style={[styles.input, { marginVertical: 10 }]}
+                    style={styles.input}
+                    textColor="#333333"
+                    activeOutlineColor="#007AFF"
+                    left={<TextInput.Icon icon="calendar" color="green" />}
+                    theme={{
+                        colors: {
+                            primary: '#007AFF',       // Label color (active)
+                            onSurfaceVariant: '#666', // Label color (inactive)
+                        },
+                    }}
                 />
             </TouchableOpacity>
 
@@ -226,21 +239,29 @@ const AddEditDispatch = () => {
                 mode="date"
                 onConfirm={(date) => {
                     setOpenDispatch(false);
-                    handleChange('dispatchDate', date.toISOString().split('T')[0]); // Format as YYYY-MM-DD
+                    handleChange('dispatchDate', date.toISOString().split('T')[0]);
                 }}
-                onCancel={() => {
-                    setOpenDispatch(false);
-                }}
+                onCancel={() => setOpenDispatch(false)}
             />
 
-            {/* Arrival Date Picker */}
             <TouchableOpacity onPress={() => setOpenArrival(true)}>
                 <TextInput
                     label="Arrival Date"
                     mode="outlined"
                     value={formData.arrivalDate}
                     editable={false}
-                    style={[styles.input, { marginVertical: 10 }]}
+                    style={styles.input}
+                    textColor="#333333"
+
+                    activeOutlineColor="#007AFF"
+                    left={<TextInput.Icon icon="calendar" color="green" />}
+                    theme={{
+                        colors: {
+                            primary: '#007AFF',       // Label color (active)
+                            onSurfaceVariant: '#666', // Label color (inactive)
+                        },
+                    }}
+
                 />
             </TouchableOpacity>
 
@@ -253,10 +274,11 @@ const AddEditDispatch = () => {
                     setOpenArrival(false);
                     handleChange('arrivalDate', date.toISOString().split('T')[0]);
                 }}
-                onCancel={() => {
-                    setOpenArrival(false);
-                }}
+                onCancel={() => setOpenArrival(false)}
             />
+
+            {/* === Address Section === */}
+            <Text style={styles.sectionTitle}>📍 Address</Text>
 
             <TextInput
                 label="From Address"
@@ -264,16 +286,40 @@ const AddEditDispatch = () => {
                 value={formData.fromAddress}
                 onChangeText={(text) => handleChange('fromAddress', text)}
                 style={styles.input}
+                textColor="#333333"
+                activeOutlineColor="#007AFF"
+                left={<TextInput.Icon icon="map-marker" color="green" />}
+                theme={{
+                    colors: {
+                        primary: '#007AFF',       // Label color (active)
+                        onSurfaceVariant: '#666', // Label color (inactive)
+                    },
+                }}
+
+                multiline
             />
 
             <TextInput
                 label="To Address"
                 mode="outlined"
-                multiline
                 value={formData.toAddress}
                 onChangeText={(text) => handleChange('toAddress', text)}
                 style={styles.input}
+                textColor="#333333"
+                activeOutlineColor="#007AFF"
+                left={<TextInput.Icon icon="map-marker-outline" color="green" />}
+                theme={{
+                    colors: {
+                        primary: '#007AFF',       // Label color (active)
+                        onSurfaceVariant: '#666', // Label color (inactive)
+                    },
+                }}
+
+                multiline
             />
+
+            {/* === Info Section === */}
+            <Text style={styles.sectionTitle}>🚚 Dispatch Details</Text>
 
             <TextInput
                 label="Dispatch Company Name"
@@ -281,6 +327,16 @@ const AddEditDispatch = () => {
                 value={formData.dispatchCompanyName}
                 onChangeText={(text) => handleChange('dispatchCompanyName', text)}
                 style={styles.input}
+                textColor="#333333"
+                activeOutlineColor="#007AFF"
+                left={<TextInput.Icon icon="office-building" color="green" />}
+                theme={{
+                    colors: {
+                        primary: '#007AFF',       // Label color (active)
+                        onSurfaceVariant: '#666', // Label color (inactive)
+                    },
+                }}
+
             />
 
             <TextInput
@@ -289,6 +345,16 @@ const AddEditDispatch = () => {
                 value={formData.receiverName}
                 onChangeText={(text) => handleChange('receiverName', text)}
                 style={styles.input}
+                textColor="#333333"
+                activeOutlineColor="#007AFF"
+                left={<TextInput.Icon icon="account" color="green" />}
+                theme={{
+                    colors: {
+                        primary: '#007AFF',       // Label color (active)
+                        onSurfaceVariant: '#666', // Label color (inactive)
+                    },
+                }}
+
             />
 
             <TextInput
@@ -297,6 +363,16 @@ const AddEditDispatch = () => {
                 value={formData.dispatcherName}
                 onChangeText={(text) => handleChange('dispatcherName', text)}
                 style={styles.input}
+                textColor="#333333"
+                activeOutlineColor="#007AFF"
+                left={<TextInput.Icon icon="account-box" color="green" />}
+                theme={{
+                    colors: {
+                        primary: '#007AFF',       // Label color (active)
+                        onSurfaceVariant: '#666', // Label color (inactive)
+                    },
+                }}
+
             />
 
             <TextInput
@@ -305,6 +381,16 @@ const AddEditDispatch = () => {
                 value={formData.trackingURL}
                 onChangeText={(text) => handleChange('trackingURL', text)}
                 style={styles.input}
+                textColor="#333333"
+                activeOutlineColor="#007AFF"
+                left={<TextInput.Icon icon="identifier" color="green" />}
+                theme={{
+                    colors: {
+                        primary: '#007AFF',       // Label color (active)
+                        onSurfaceVariant: '#666', // Label color (inactive)
+                    },
+                }}
+
             />
 
             <TextInput
@@ -313,6 +399,16 @@ const AddEditDispatch = () => {
                 value={formData.transportId}
                 onChangeText={(text) => handleChange('transportId', text)}
                 style={styles.input}
+                textColor="#333333"
+                activeOutlineColor="#007AFF"
+                left={<TextInput.Icon icon="id-card" color="green" />}
+                theme={{
+                    colors: {
+                        primary: '#007AFF',       // Label color (active)
+                        onSurfaceVariant: '#666', // Label color (inactive)
+                    },
+                }}
+
             />
 
             <TextInput
@@ -321,29 +417,62 @@ const AddEditDispatch = () => {
                 value={formData.packageId}
                 onChangeText={(text) => handleChange('packageId', text)}
                 style={styles.input}
+                textColor="#333333"
+                activeOutlineColor="#007AFF"
+                left={<TextInput.Icon icon="identifier" color="green" />}
+                theme={{
+                    colors: {
+                        primary: '#007AFF',       // Label color (active)
+                        onSurfaceVariant: '#666', // Label color (inactive)
+                    },
+                }}
+
             />
 
             <TextInput
                 label="Description"
                 mode="outlined"
-                multiline
                 value={formData.dispatchDescription}
                 onChangeText={(text) => handleChange('dispatchDescription', text)}
                 style={styles.input}
+                textColor="#333333"
+                activeOutlineColor="#007AFF"
+                theme={{
+                    colors: {
+                        primary: '#007AFF',       // Label color (active)
+                        onSurfaceVariant: '#666', // Label color (inactive)
+                    },
+                }}
+
+                multiline
             />
-            <Button icon="camera" mode="outlined" onPress={openChoiceDialog} style={{ marginTop: 10 }}>
+
+            {/* === Images Section === */}
+            <Text style={styles.sectionTitle}>📷 Images</Text>
+
+            <Button
+                icon="camera"
+                mode="outlined"
+                onPress={openChoiceDialog}
+                style={styles.uploadButton}
+            >
                 Upload Images
             </Button>
 
-            <ScrollView horizontal style={{ marginTop: 10 }}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginTop: 10 }}>
                 {imagePreviews.map((img, index) => (
-                    <TouchableOpacity key={index} onPress={handleImagePick} style={styles.imageContainer}>
+                    <TouchableOpacity key={index} style={styles.imageContainer} onPress={handleImagePick}>
                         <Image source={{ uri: img.uri }} style={styles.image} />
                     </TouchableOpacity>
                 ))}
             </ScrollView>
 
-            <Button mode="contained" onPress={handleSubmit} style={styles.submitBtn}>
+            <Button
+                mode="contained"
+                onPress={handleSubmit}
+                style={styles.submitBtn}
+                contentStyle={{ paddingVertical: 8 }}
+            >
                 {formData.id ? 'Update Dispatch' : 'Create Dispatch'}
             </Button>
         </ScrollView>
@@ -351,11 +480,50 @@ const AddEditDispatch = () => {
 };
 
 const styles = StyleSheet.create({
-    container: { padding: 16 },
-    input: { marginVertical: 8, backgroundColor: '#ffffff' },
-    image: { width: 80, height: 80, marginRight: 10, borderRadius: 8 },
-    imageContainer: { marginRight: 8 },
-    submitBtn: { marginTop: 20 },
+    container: {
+        padding: 16,
+        paddingBottom: 40,
+        backgroundColor: '#F9F9F9',
+    },
+    headerText: {
+        fontSize: 22,
+        fontWeight: '600',
+        marginBottom: 16,
+        color: '#2c3e50',
+    },
+    sectionTitle: {
+        fontSize: 16,
+        fontWeight: '500',
+        marginTop: 20,
+        marginBottom: 8,
+        color: '#444',
+    },
+    input: {
+        marginVertical: 6,
+        backgroundColor: '#fff',
+    },
+    image: {
+        width: 80,
+        height: 80,
+        marginRight: 10,
+        borderRadius: 10,
+    },
+    imageContainer: {
+        marginRight: 8,
+        borderWidth: 1,
+        borderColor: '#ddd',
+        borderRadius: 10,
+        overflow: 'hidden',
+    },
+    uploadButton: {
+        marginTop: 10,
+        borderColor: '#007AFF',
+    },
+    submitBtn: {
+        marginTop: 30,
+        marginBottom: 50,
+        backgroundColor: '#007AFF',
+    },
 });
 
 export default AddEditDispatch;

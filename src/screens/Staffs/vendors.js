@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useCallback } from "react";
 import { View, FlatList, Text, TextInput, StyleSheet,ScrollView, TouchableOpacity } from "react-native";
 import { Avatar, Card, Button, Menu, Provider, FAB ,Modal} from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -7,6 +7,7 @@ import { drawLabel } from "../../Redux/Actions/drawAction";
 import { fetchVendors } from "../../Redux/Actions/vendorAction";
 import Header from '../../components/userHeader';
 import { permissions } from "../../Utils/permissions";
+import { useFocusEffect } from "@react-navigation/native";
 
 const Vendors = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -29,10 +30,12 @@ const Vendors = ({ navigation }) => {
   const hasEditVendorPermission = permissions.some(p => p.name === "vendor" && p.edit);
   const hasDeleteVendorPermission = permissions.some(p => p.name === "vendor" && p.delete);
 
-  useEffect(() => {
+  useFocusEffect(
+    useCallback(() => {
     const vendorPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
     dispatch(fetchVendors(vendorPayload));
-  }, [dispatch]);
+  }, [dispatch])
+)
 
   const filteredData = vendors?.filter((item) =>
     item.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||

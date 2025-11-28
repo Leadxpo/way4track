@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useCallback } from "react";
 import { View, FlatList, Text, TextInput, Modal, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import { Avatar, Card, Button, Menu, Provider, FAB } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { drawLabel } from "../../Redux/Actions/drawAction";
 import { fetchbankAccounts } from "../../Redux/Actions/bankAccountAction";
 import Header from '../../components/userHeader';
+import { useFocusEffect } from '@react-navigation/native';
 
 const Banks = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -37,11 +38,12 @@ const Banks = ({ navigation }) => {
     item.accountType.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  useEffect(() => {
-    const bankPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
+  useFocusEffect(
+    useCallback(() => {
+const bankPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
     dispatch(fetchbankAccounts(bankPayload));
   }, [dispatch])
-
+  )
   const renderItem = ({ item }) => {
     console.log("bank item : ", item)
     return (

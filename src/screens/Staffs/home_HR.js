@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useCallback } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import { Card, Provider } from 'react-native-paper';
 import Header from '../../components/userHeader';
@@ -7,6 +7,9 @@ import { drawLabel } from "../../Redux/Actions/drawAction";
 import { intiateHR_dashboard } from '../../Redux/Actions/dashboard';
 import api from "../../Api/api";
 import { fetchNotifications } from '../../Redux/Actions/notificationAction';
+import { UpdateCurrentAddress } from '../../Utils/updateLocation';
+import { useFocusEffect } from '@react-navigation/native';
+
 const branches = [
     {
         name: 'Hyderabad',
@@ -65,13 +68,14 @@ const Home_HR = () => {
 
     const { loading: HR_homeInfoLoading, HR_homeInfo, error: HR_homeInfoError } = useSelector(state => state.HR_homeInfoReducer);
 
-    useEffect(() => {
-        const HR_dashboardPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
+    useFocusEffect(
+        useCallback(() => {
+            const HR_dashboardPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
         dispatch(intiateHR_dashboard(HR_dashboardPayload));
         dispatch(fetchNotifications())
         getCandidateStats()
     }, [dispatch])
-
+    )
     const getCandidateStats = async () => {
         try {
             const response = await api.post(
@@ -118,6 +122,15 @@ const Home_HR = () => {
         });
     }, [HR_homeInfo,dispatch]);
 
+    useFocusEffect(
+        useCallback(() => {
+          const timeout = setTimeout(() => {
+            UpdateCurrentAddress();
+          }, 3000);
+      
+          return () => clearTimeout(timeout); // Cleanup when screen loses focus
+        }, [])
+      );
 
     return (
         <Provider>

@@ -11,6 +11,7 @@ const AssetDetails = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const { loading, selectedLabel, error } = useSelector(state => state.selectedDrawLabel);
   const [permissions, setPermissions] = useState([]);
+  
   useEffect(() => {
     const loadStaffloginData = async () => {
       const rrr = await loadData("staffPermissions")

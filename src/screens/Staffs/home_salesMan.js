@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useCallback } from 'react';
 import { View, Text, ScrollView, FlatList, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Modal, FAB, Avatar } from 'react-native-paper';
@@ -10,7 +10,8 @@ import { intiateSalesVisit_dashboard } from '../../Redux/Actions/dashboard';
 import api from '../../Api/api';
 import { loadData } from '../../Utils/appData';
 import { fetchNotifications } from '../../Redux/Actions/notificationAction';
-
+import { UpdateCurrentAddress } from '../../Utils/updateLocation';
+import { useFocusEffect } from '@react-navigation/native';
 
 const HomeSalesMan = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -86,6 +87,15 @@ const HomeSalesMan = ({ navigation }) => {
     fetchData();
   }, [attendenceDate, isRefresh]);
 
+  useFocusEffect(
+    useCallback(() => {
+      const timeout = setTimeout(() => {
+        UpdateCurrentAddress();
+      }, 3000);
+  
+      return () => clearTimeout(timeout); // Cleanup when screen loses focus
+    }, [])
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -173,8 +183,8 @@ const HomeSalesMan = ({ navigation }) => {
             <Text style={styles.dataText}>{totalLeads?.pendingLeads ?? 0}/{totalLeads?.totalLeadsData?.length ?? 0}</Text>
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={{ marginBottom: 20 }}>⚪ {totalLeads?.pendingLeads ?? 0} Pending Leads</Text>
-            <Text style={{ marginBottom: 10 }}>🔵 {totalLeads?.allocatedLeads ?? 0} Allocated Leads</Text>
+            <Text style={{ marginBottom: 20,color:'#333333' }}>⚪ {totalLeads?.pendingLeads ?? 0} Pending Leads</Text>
+            <Text style={{ marginBottom: 10,color:'#333333' }}>🔵 {totalLeads?.allocatedLeads ?? 0} Allocated Leads</Text>
           </View>
         </TouchableOpacity>
 
@@ -186,8 +196,8 @@ const HomeSalesMan = ({ navigation }) => {
           </View>
           <View style={{ flex: 1 }}>
 
-            <Text style={{ marginBottom: 20 }}>⚪ {totalLeads?.pendingPaymentLeads ?? 0} Leads Payment Pending</Text>
-            <Text style={{ marginBottom: 10 }}>🔵 {totalLeads?.completedLeads ?? 0} Leads Payment Done</Text>
+            <Text style={{ marginBottom: 20,color:'#333333' }}>⚪ {totalLeads?.pendingPaymentLeads ?? 0} Leads Payment Pending</Text>
+            <Text style={{ marginBottom: 10,color:'#333333' }}>🔵 {totalLeads?.completedLeads ?? 0} Leads Payment Done</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.cardBeige, { flexDirection: 'row', justifyContent: 'space-between', flex: 1, marginVertical: 10 }]} onPress={() => navigation.navigate("Tickets")}>
@@ -248,14 +258,13 @@ const styles = StyleSheet.create({
   cardBeige: { backgroundColor: '#ffeeec', padding: 15, borderRadius: 5, marginBottom: 10 },
   cardGreen: { backgroundColor: '#ecffeb', padding: 15, borderRadius: 5, marginBottom: 10 },
   cardBlue: { backgroundColor: '#e9f6ff', padding: 15, borderRadius: 5, marginBottom: 10 },
-  dataText: { fontSize: 30, fontWeight: 'bold' },
-  legendText: { fontSize: 14, marginBottom: 10 },
+  dataText: { fontSize: 30, fontWeight: 'bold',color:'#333333' },
+  legendText: { fontSize: 14, marginBottom: 10,color:'#333333' },
   ticketContainer: { flexDirection: 'row', justifyContent: 'space-between', marginTop: 5 },
   ticketDone: { fontSize: 14, color: '#4CAF50', fontWeight: 'bold' },
   ticketPending: { fontSize: 14, color: '#D3D3D3', fontWeight: 'bold' },
-  cardTitle: { fontSize: 16, fontWeight: 'bold', marginBottom: 5 },
+  cardTitle: { fontSize: 16, fontWeight: 'bold', marginBottom: 5,color:'#333333' },
   attendanceText: { fontSize: 24, fontWeight: 'bold', color: '#d63384' },
-  dataText: { fontSize: 30, fontWeight: 'bold' },
   card: {
     marginVertical: 15,
     borderRadius: 8, backgroundColor: "#ffffff",
@@ -271,7 +280,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   details: {
-    marginLeft: 10,
+    marginLeft: 10,color:'#333333'
   },
   modalContainer: {
     justifyContent: "center",height:"100%",
@@ -286,7 +295,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalTitle: { fontSize: 18, fontWeight: "bold", color: "#333", marginBottom: 10 },
-  modalText: { fontSize: 16, marginBottom: 10 },
+  modalText: { fontSize: 16, marginBottom: 10,color:'#333333' },
   closeButton: {
     backgroundColor: "blue",
     padding: 10,

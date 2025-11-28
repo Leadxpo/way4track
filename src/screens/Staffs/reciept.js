@@ -1,10 +1,11 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,useCallback } from "react";
 import { View, FlatList, Text, TextInput, StyleSheet, TouchableOpacity} from "react-native";
 import { Avatar, Card, Button, Menu, Provider } from "react-native-paper";
 import { useDispatch, useSelector } from 'react-redux';
 import { drawLabel } from "../../Redux/Actions/drawAction";
 import { fetchReciepts } from '../../Redux/Actions/estimatesAction';
 import Header from '../../components/userHeader';
+import { useFocusEffect } from "@react-navigation/native";
 
 const Receipt = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -14,10 +15,12 @@ const Receipt = ({ navigation }) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
-  useEffect(() => {
+  useFocusEffect(
+    useCallback(() => {
     const fetchPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" };
     dispatch(fetchReciepts(fetchPayload));
-  }, [dispatch]);
+  }, [dispatch])
+)
 
   const filteredData = reciepts.filter((item) =>
     item.clientName?.toLowerCase().includes(searchQuery.toLowerCase())||

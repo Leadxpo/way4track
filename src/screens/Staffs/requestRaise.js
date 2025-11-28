@@ -68,8 +68,8 @@ const RequestRaise = ({ navigation }) => {
           id: staffId,
         };
         dispatch(fetchRaiseRequests(requestPayload));
-      };
-  
+        console.log("rrr:::")
+      }; 
       getStaffData();
       }, [dispatch, isRefresh])
   );
@@ -111,9 +111,10 @@ const data =  raiseRequestMap[activeSegment]||[];
         <View style={styles.cardContent}>
           <View style={[styles.details]}>
             <Card.Title
-              title={item.requestType}
-              subtitle={item.requestId}
+              title={`${item?.requestId} - ${item?.requestType}`}
+              subtitle={`${item?.requestTo?.name} - ${item?.requestTo?.designation}`}
               titleStyle={styles.clientName}
+              subtitleStyle={{color:'#333333'}}
             />
             <Text
               style={[
@@ -148,6 +149,7 @@ const data =  raiseRequestMap[activeSegment]||[];
           >
             <Menu.Item
               onPress={() => {
+                console.log("requestRaiseDetails ::",item)
                 setMenuVisible(false);
                 navigation.navigate("Home", {
                   screen: "RequestRaiseDetails",
@@ -299,6 +301,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#F0F0F0', color: '#333333',
     borderRadius: 10, margin: 10,alignSelf:'center',
     overflow: 'hidden',width:'50%'
+  },
+  activeButton: {
+    backgroundColor: '#28a745', // Active button background
+    color: '#fff', // Active text color
+  },
+  inactiveButton: {
+    backgroundColor: '#E0E0E0', // Inactive button background
+    color: '#000', // Inactive text color
   },
 
   status: {

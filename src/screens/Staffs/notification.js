@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useCallback } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, ScrollView,} from 'react-native';
 import api from '../../Api/api';
 import { Provider } from 'react-native-paper';
@@ -6,6 +6,7 @@ import Header from '../../components/userHeader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { fetchNotifications } from '../../Redux/Actions/notificationAction';
 import { useDispatch, useSelector } from 'react-redux';
+import { useFocusEffect } from '@react-navigation/native';
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
@@ -35,10 +36,11 @@ const Notifications = () => {
     }
   };
 
-  useEffect(() => {
+  useFocusEffect(
+    useCallback(() => {
     getAllNotification()
   }, [])
-
+  )
   const markAsRead = async (id) => {
     try {
       await api.post('/notifications/markAllAsRead', {

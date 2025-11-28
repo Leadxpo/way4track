@@ -1,40 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, ScrollView, StyleSheet, Image } from 'react-native';
 import { Avatar, Text, TextInput, Card, ActivityIndicator, Provider } from 'react-native-paper';
 import { loadData } from '../../Utils/appData';
 import api from '../../Api/api';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Header from '../../components/userHeader';
+import { useFocusEffect } from "@react-navigation/native";
 
 const ProfileSubStaffSettings = () => {
   const [profileData, setProfileData] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetchProfile = async () => {
 
-      try {
-        const payload = {
-          staffId: await loadData('staffID'),
-          id: await loadData('ID'),
-          companyCode: "WAY4TRACK",
-          unitCode: "WAY4",
-        };
-        const response = await api.post('/subDealerStaff/getSubDealerStaffDetailsById', payload);
-        if (response && response.status) {
-          setProfileData(response.data?.data || null);
-        } else {
-          setError(response?.internalMessage || 'Failed to fetch profile details.');
+  useFocusEffect(
+    useCallback(() => {
+      const fetchProfile = async () => {
+
+        try {
+          const payload = {
+            staffId: await loadData('staffID'),
+            id: await loadData('ID'),
+            companyCode: "WAY4TRACK",
+            unitCode: "WAY4",
+          };
+          const response = await api.post('/subDealerStaff/getSubDealerStaffDetailsById', payload);
+          if (response && response.status) {
+            setProfileData(response.data?.data || null);
+          } else {
+            setError(response?.internalMessage || 'Failed to fetch profile details.');
+          }
+        } catch (err) {
+          setError('Error fetching profile details.');
+        } finally {
+          setLoading(false);
         }
-      } catch (err) {
-        setError('Error fetching profile details.');
-      } finally {
-        setLoading(false);
-      }
-    };
+      };
 
-    fetchProfile();
-  }, []);
+      fetchProfile();
+    }, [])
+  )
 
   if (loading) {
     return <ActivityIndicator size="large" style={styles.loader} />;

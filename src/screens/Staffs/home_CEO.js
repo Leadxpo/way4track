@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useCallback} from 'react';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { drawLabel } from "../../Redux/Actions/drawAction";
@@ -7,7 +7,8 @@ import BranchSummary from '../../components/branchSummary';
 import CashSummary from '../../components/cashSummary';
 import GraphSection from '../../components/graphSection';
 import StatsSummary from '../../components/statsSummary';
-import AnalysisSection from '../../components/analysisSection';
+import { UpdateCurrentAddress } from '../../Utils/updateLocation';
+import { useFocusEffect } from '@react-navigation/native';
 import { intiateCEO_dashboard } from '../../Redux/Actions/dashboard';
 import { fetchNotifications } from '../../Redux/Actions/notificationAction';
 
@@ -17,12 +18,25 @@ const Home_CEO = ({ navigation }) => {
 
   const { loading:CEO_homeInfoLoading, CEO_homeInfo, error:CEO_homeInfoError } = useSelector(state => state.CEO_homeInfoReducer);
 
-  useEffect(() => {
+  useFocusEffect(
+    useCallback(() => {
     const CEO_dashboardPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
     dispatch(intiateCEO_dashboard(CEO_dashboardPayload)); 
     dispatch(fetchNotifications())
     
   }, [dispatch])
+  )
+  
+  useFocusEffect(
+    useCallback(() => {
+      const timeout = setTimeout(() => {
+        UpdateCurrentAddress();
+      }, 3000);
+  
+      return () => clearTimeout(timeout); // Cleanup when screen loses focus
+    }, [])
+  );
+
   return ( 
     <SafeAreaView>
         <Header />

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useCallback } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList, Modal, StyleSheet, ScrollView, Linking, Dimensions } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Card, Provider, Button } from 'react-native-paper';
@@ -6,6 +6,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../Api/api';
 import Header from '../../components/userHeader';
 import { loadData } from '../../Utils/appData';
+import { UpdateCurrentAddress } from '../../Utils/updateLocation';
+import { useFocusEffect } from '@react-navigation/native';
 
 const Home_Default = () => {
     const [permissions, setPermissions] = useState([{ name: 'voucher', view: true, add: true, edit: true, delete: true }]);
@@ -38,11 +40,21 @@ const Home_Default = () => {
     const [productList, setProductList] = useState([]);
     const [allProducts, setAllProducts] = useState([]);
 
+    useFocusEffect(
+        useCallback(() => {
+          const timeout = setTimeout(() => {
+            UpdateCurrentAddress();
+          }, 3000);
+      
+          return () => clearTimeout(timeout); // Cleanup when screen loses focus
+        }, [])
+      );    
+
     useEffect(() => {
         const fetchPermissions = async () => {
             const fetchedRole = await loadData('role');
             const fetchedPermissions = await loadData('staffPermissions');
-            console.log("Permissions:", fetchedPermissions); // <- debug
+
             setPermissions(fetchedPermissions || []);
             setRole(fetchedRole);
         };
@@ -57,16 +69,16 @@ const Home_Default = () => {
         setShowStaffModal(true);
     };
 
-    const renderStaffItem = ({ item,index}) => (
-        <Card key={index} style={{ flex:1,flexDirection: 'row',marginVertical: 12, marginHorizontal: 16, padding: 16 }}>
-            <View style={{width:Dimensions.get('screen').width}}>
+    const renderStaffItem = ({ item, index }) => (
+        <Card key={index} style={{ flex: 1, flexDirection: 'row', marginVertical: 12, marginHorizontal: 16, padding: 16 }}>
+            <View style={{ width: Dimensions.get('screen').width }}>
                 <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{item.name}</Text>
                 <Text>Staff ID: {item.staffId}</Text>
                 <Text>Email: {item.email}</Text>
                 <Text>Phone: {item.phoneNumber}</Text>
                 <Text>Description: {item.description}</Text>
             </View>
-            <TouchableOpacity onPress={() => handleViewStaffDetails(item)} style={{flex:1,position:'absolute',top:0,right:5 }}>
+            <TouchableOpacity onPress={() => handleViewStaffDetails(item)} style={{ flex: 1, position: 'absolute', top: 0, right: 5 }}>
                 <MaterialCommunityIcons name="eye" size={24} color="#333" />
             </TouchableOpacity>
         </Card>
@@ -78,20 +90,20 @@ const Home_Default = () => {
         setShowClientModal(true);
     };
 
-    const renderClientCard = ({ item,index}) => (
-        <Card key={index} style={{flex:1,flexDirection: 'row', marginVertical: 8, marginHorizontal: 16, padding: 16 }}>
-            <View style={{width:Dimensions.get('screen').width}}>
+    const renderClientCard = ({ item, index }) => (
+        <Card key={index} style={{ flex: 1, flexDirection: 'row', marginVertical: 8, marginHorizontal: 16, padding: 16 }}>
+            <View style={{ width: Dimensions.get('screen').width }}>
 
-            <Text style={styles.cardTitle}>{item.name}</Text>
-            <Text style={styles.cardText}>Client Id: {item.clientId}</Text>
-            <Text style={styles.cardText}>Email: {item.email}</Text>
-            <Text style={styles.cardText}>Phone: {item.phoneNumber}</Text>
-            <Text style={styles.cardText}>Description: {item.description}</Text>
+                <Text style={styles.cardTitle}>{item.name}</Text>
+                <Text style={styles.cardText}>Client Id: {item.clientId}</Text>
+                <Text style={styles.cardText}>Email: {item.email}</Text>
+                <Text style={styles.cardText}>Phone: {item.phoneNumber}</Text>
+                <Text style={styles.cardText}>Description: {item.description}</Text>
             </View>
 
             <TouchableOpacity
                 onPress={() => handleViewClientDetails(item)}
-                style={{flex:1,position:'absolute',top:0,right:5 }}
+                style={{ flex: 1, position: 'absolute', top: 0, right: 5 }}
             >
                 <MaterialCommunityIcons name="eye" size={24} color="#374151" />
             </TouchableOpacity>
@@ -129,33 +141,33 @@ const Home_Default = () => {
     };
 
 
-    const renderWorkItem = ({ item,index }) => (
-        <Card key={index} style={{ flex:1,flexDirection: 'row',marginVertical: 8, marginHorizontal: 16, padding: 16 }}>
-           <View style={{width:Dimensions.get('screen').width}}>
-             <View style={styles.cardRow}>
-                <Text style={styles.label}>Work ID:</Text>
-                <Text>{item.workId}</Text>
-            </View>
-            <View style={styles.cardRow}>
-                <Text style={styles.label}>Name:</Text>
-                <Text>{item.name}</Text>
-            </View>
-            <View style={styles.cardRow}>
-                <Text style={styles.label}>Email:</Text>
-                <Text>{item.email}</Text>
-            </View>
-            <View style={styles.cardRow}>
-                <Text style={styles.label}>Phone:</Text>
-                <Text>{item.phoneNumber}</Text>
-            </View>
-            <View style={styles.cardRow}>
-                <Text style={styles.label}>Description:</Text>
-                <Text>{item.description}</Text>
-            </View>
+    const renderWorkItem = ({ item, index }) => (
+        <Card key={index} style={{ flex: 1, flexDirection: 'row', marginVertical: 8, marginHorizontal: 16, padding: 16 }}>
+            <View style={{ width: Dimensions.get('screen').width }}>
+                <View style={styles.cardRow}>
+                    <Text style={styles.label}>Work ID:</Text>
+                    <Text>{item.workId}</Text>
+                </View>
+                <View style={styles.cardRow}>
+                    <Text style={styles.label}>Name:</Text>
+                    <Text>{item.name}</Text>
+                </View>
+                <View style={styles.cardRow}>
+                    <Text style={styles.label}>Email:</Text>
+                    <Text>{item.email}</Text>
+                </View>
+                <View style={styles.cardRow}>
+                    <Text style={styles.label}>Phone:</Text>
+                    <Text>{item.phoneNumber}</Text>
+                </View>
+                <View style={styles.cardRow}>
+                    <Text style={styles.label}>Description:</Text>
+                    <Text>{item.description}</Text>
+                </View>
             </View>
 
             <TouchableOpacity
-                style={{flex:1,position:'absolute',top:0,right:5 }}
+                style={{ flex: 1, position: 'absolute', top: 0, right: 5 }}
                 onPress={() => handleViewWorkDetails(item)}
             >
                 <MaterialCommunityIcons name="eye" size={20} color="#333" />
@@ -193,9 +205,9 @@ const Home_Default = () => {
         setProductList(filtered);
     };
 
-    const renderItem = ({ item,index }) => (
-        <Card key={index} style={{flex:1, flexDirection:'row',marginVertical: 8, marginHorizontal: 16, padding: 16 }}>
-            <Card.Content style={{width:Dimensions.get('screen').width}}>
+    const renderItem = ({ item, index }) => (
+        <Card key={index} style={{ flex: 1, flexDirection: 'row', marginVertical: 8, marginHorizontal: 16, padding: 16 }}>
+            <Card.Content style={{ width: Dimensions.get('screen').width }}>
                 <View style={styles.cardRow}>
                     <Text style={styles.label}>Product ID:</Text>
                     <Text>{item.id}</Text>
@@ -208,13 +220,13 @@ const Home_Default = () => {
                     <Text style={styles.label}>Type:</Text>
                     <Text>{item.type}</Text>
                 </View>
-                </Card.Content>
-                <TouchableOpacity
-                     style={{flex:1,position:'absolute',top:0,right:0}}
-                    onPress={() => handleViewProductDetails(item)}
-                >
-                    <MaterialCommunityIcons name="eye" size={24} color="#333" />
-                </TouchableOpacity>
+            </Card.Content>
+            <TouchableOpacity
+                style={{ flex: 1, position: 'absolute', top: 0, right: 0 }}
+                onPress={() => handleViewProductDetails(item)}
+            >
+                <MaterialCommunityIcons name="eye" size={24} color="#333" />
+            </TouchableOpacity>
         </Card>
     );
 
@@ -502,14 +514,14 @@ const Home_Default = () => {
                                 <Text style={{ fontWeight: 'bold' }}>Personnel Details</Text>
                                 <Text>Staff Id: {selectedStaff?.staffId}</Text>
                                 <Text>Name: {selectedStaff?.name}</Text>
-                                <Text>Email: {selectedStaff?.email}</Text>
-                                <Text>Phone: {selectedStaff?.phoneNumber}</Text>
+                                <Text>Email: {selectedStaff?.officeEmail}</Text>
+                                <Text>Phone: {selectedStaff?.officePhoneNumber}</Text>
                                 <Text>Gender: {selectedStaff?.gender}</Text>
                                 <Text>DOB: {selectedStaff?.dob}</Text>
                                 <Text>Designation: {selectedStaff?.designation}</Text>
                                 <Text>Status: {selectedStaff?.staffStatus}</Text>
 
-                                <Text style={{ fontWeight: 'bold', marginTop: 12 }}>Education Details</Text>
+                                {/* <Text style={{ fontWeight: 'bold', marginTop: 12 }}>Education Details</Text>
                                 {selectedStaff?.qualifications?.length ? selectedStaff.qualifications.map((q, index) => (
                                     <View key={index} style={{ marginVertical: 4 }}>
                                         <Text>- {q.qualificationName} - {q.marksOrCgpa}</Text>
@@ -535,14 +547,13 @@ const Home_Default = () => {
                                 <Text>Type: {selectedStaff?.accountType}</Text>
                                 <Text>Branch: {selectedStaff?.accountBranch}</Text>
                                 <Text>IFSC: {selectedStaff?.ifscCode ?? 'N/A'}</Text>
-
+ */}
                                 <Text style={{ fontWeight: 'bold', marginTop: 12 }}>Employer Details</Text>
                                 <Text>Department: {selectedStaff?.department}</Text>
                                 <Text>Branch: {selectedStaff?.branchName}</Text>
                                 <Text>Joining Date: {selectedStaff?.joiningDate}</Text>
                                 <Text>Resignation Date: {selectedStaff?.resignationDate ?? 'N/A'}</Text>
                                 <Text>Final Settlement Date: {selectedStaff?.finalSettlementDate ?? 'N/A'}</Text>
-                                <Text>Salary Date: {selectedStaff?.salaryDate ?? 'N/A'}</Text>
                             </ScrollView>
 
                             <TouchableOpacity onPress={() => setShowStaffModal(false)} style={{ marginTop: 10, backgroundColor: '#007bff', padding: 10, borderRadius: 6 }}>
@@ -600,8 +611,8 @@ const Home_Default = () => {
                     animationType="slide"
                     onRequestClose={() => setShowWorkModal(false)}
                 >
-                    <View style={styles.modalBackground}>
-                        <View style={styles.modalCard}>
+                    <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'center' }}>
+                        <View style={{ backgroundColor: '#fff', borderRadius: 10, margin: 20, padding: 16, maxHeight: '90%' }}>
                             <Text style={styles.modalTitle}>Work Details</Text>
 
                             {selectedWork && (
@@ -634,17 +645,9 @@ const Home_Default = () => {
 
                 {/* product model */}
                 <Modal visible={showProductModal} transparent animationType="slide">
-                    <View style={styles.modalBackground}>
-                        <View style={styles.modalContainer}>
-                            <TouchableOpacity
-                                onPress={() => setShowProductModal(false)}
-                                style={styles.closeButton}
-                            >
-                                <Text style={styles.closeButtonText}>✕</Text>
-                            </TouchableOpacity>
-
+                    <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'center' }}>
+                        <View style={{ backgroundColor: '#fff', borderRadius: 10, margin: 20, padding: 16, maxHeight: '90%' }}>
                             <Text style={styles.modalTitle}>Product Details</Text>
-
                             {selectedProduct && (
                                 <View style={styles.modalContent}>
                                     <Text style={styles.modalContent}><Text style={styles.bold}>Product ID:</Text> {selectedProduct.id}</Text>
@@ -674,7 +677,7 @@ const styles = StyleSheet.create({
     headerText: { fontSize: 24, fontWeight: '600', color: '#1F2937' },
     downloadButton: { flexDirection: 'row', backgroundColor: '#047857', padding: 10, borderRadius: 8, alignItems: 'center' },
     downloadText: { color: '#fff', marginLeft: 6 },
-    searchContainer: { flexDirection: 'row', marginBottom: 12,marginHorizontal:10 },
+    searchContainer: { flexDirection: 'row', marginBottom: 12, marginHorizontal: 10 },
     input: { flex: 1, borderWidth: 1, borderColor: '#D1D5DB', borderRadius: 8, paddingHorizontal: 12, height: 48 },
     searchButton: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#047857', paddingHorizontal: 16, marginLeft: 8, borderRadius: 8 },
     searchText: { color: '#fff', marginLeft: 4 },
@@ -700,14 +703,14 @@ const styles = StyleSheet.create({
     },
     searchRow: {
         flexDirection: 'row',
-        marginBottom: 16,marginHorizontal:10
+        marginBottom: 16, marginHorizontal: 10
     },
     searchBtn: {
         backgroundColor: '#2F855A',
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 12,
-        borderRadius: 8,marginLeft:5,
+        borderRadius: 8, marginLeft: 5,
         height: 48,
     },
     btnText: {
@@ -733,7 +736,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 4,
     },
-    cardRow:{
-        flex:1,flexDirection:'row'
+    cardRow: {
+        flex: 1, flexDirection: 'row'
     }
 });

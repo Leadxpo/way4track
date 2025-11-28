@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   View, TextInput, TouchableOpacity, ScrollView,
   FlatList, Button, Alert,
@@ -12,6 +12,7 @@ import api from "../../Api/api";
 import { loadData } from "../../Utils/appData";
 import { createDeviceInstall } from "../../Redux/Actions/deviceInstallAction";
 import Header from "../../components/userHeader";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const DeviceInstall_ClientInfo = ({ navigation, route }) => {
   const isFocused = useIsFocused();
@@ -42,19 +43,37 @@ const DeviceInstall_ClientInfo = ({ navigation, route }) => {
   const [showProductModal, setShowProductModal] = useState(false);
   const [showServiceModal, setShowServiceModal] = useState(false);
 
+  useEffect(()=>{
+    const userData=async ()=>{
+
+      const ID=await AsyncStorage.getItem("ID");
+      const UserRole=await AsyncStorage.getItem("role");
+
+      setRole(UserRole || "");
+
+      if (role === "sub dealer staff") {
+        setSubdealerStaffId(ID || null)
+      } else if(role === "sub dealer"){
+        setSubDealerId(ID || null);
+      }else {
+        setStaffId(ID || null);
+      }
+    }
+
+    userData();
+  })
+
   useEffect(() => {
     if (route?.params?.techWorkDetails) {
-      const details = route.params.techWorkDetails;
-      console.log("rrr :", details)
+      const details = route?.params?.techWorkDetails;
       if (details.id) {
         setId(details.id || "");
       }
+      
       setProductName(details.productName || "Select Product Name");
       setService(details.serviceName || "Select Services");
       setServiceId(details.serviceId || "");
-      setRole(details.role || "");
       setProductID(details.productID || "");
-      setStaffId(details.staffId || "");
       setName(details.clientName || "");
       setEmail(details.email || "");
       setPhoneNumber(details.phoneNumber || "");
@@ -65,73 +84,76 @@ const DeviceInstall_ClientInfo = ({ navigation, route }) => {
     }
   }, [route]);
 
+  const fetchDropdownData =  useCallback(async () => {
+    const payload = { companycode: "WAY4TRACK", unitCode: "WAY4" };
+
+    try {
+      const [productRes, serviceRes] = await Promise.all([
+        api.post("/productType/getProductTypeNamesDropDown", payload),
+        api.post("/ServiceType/getServiceTypeNamesDropDown", payload),
+      ]);
+
+      // Check and filter product types
+      const productList = productRes?.data?.data;
+      if (Array.isArray(productList)) {
+        const filteredProducts = productList
+          .filter((item) => {
+            const isValid = item && item.type === "PRODUCT" && item.name && item.id;
+            if (!isValid) {
+              console.warn("Skipping invalid item:", item);
+            }
+            return isValid;
+          })
+        setProductTypes(filteredProducts);
+
+      } else {
+        console.warn("Product response is not an array:", productList);
+      }
+
+      // Set service types if valid
+      const serviceList = serviceRes?.data?.data ||[];
+      if (Array.isArray(serviceList)) {
+        setServiceTypes(serviceList);
+      } else {
+        console.warn("Service response is not an array:", serviceList);
+        setServiceTypes([]);
+      }
+
+    } catch (error) {
+      console.error("Error fetching dropdown data:", error);
+    }
+  },[]);
 
   useEffect(() => {
-    const fetchDropdownData = async () => {
-      const payload = { companycode: "WAY4TRACK", unitCode: "WAY4" };
-
-      try {
-        const [productRes, serviceRes] = await Promise.all([
-          api.post("/productType/getProductTypeNamesDropDown", payload),
-          api.post("/ServiceType/getServiceTypeNamesDropDown", payload),
-        ]);
-
-        // Check and filter product types
-        const productList = productRes?.data?.data;
-        if (Array.isArray(productList)) {
-          const filteredProducts = productList
-            .filter((item) => {
-              const isValid = item && item.type === "PRODUCT" && item.name && item.id;
-              if (!isValid) {
-                console.warn("Skipping invalid item:", item);
-              }
-              return isValid;
-            })
-          setProductTypes(filteredProducts);
-
-        } else {
-          console.warn("Product response is not an array:", productList);
-        }
-
-        // Set service types if valid
-        const serviceList = serviceRes?.data?.data ||[];
-        if (Array.isArray(serviceList)) {
-          setServiceTypes(serviceList);
-        } else {
-          console.warn("Service response is not an array:", serviceList);
-          setServiceTypes([]);
-        }
-
-      } catch (error) {
-        console.error("Error fetching dropdown data:", error);
-      }
-    };
-
     fetchDropdownData();
   }, []);
 
+  const getStaffDetails = useCallback(async (mounted = true) => {
+    const id = await loadData("ID");
+    const subDealerPrmId = await loadData("subDealerPrmId");
+    const subDealerstaffPrmId = await loadData("subDealerstaffPrmId");
+    const role = await loadData("role");
+    if (!mounted) return;
+    setRole(role)
+    if (mounted) {
+      if (role === "sub dealer staff") {
+        setSubDealerId(subDealerPrmId);
+        setSubdealerStaffId(subDealerstaffPrmId);
+      } else {
+        setStaffId(id)
+      }
+    }
+  },[]);
+
   useEffect(() => {
     let mounted = true;
-
-    const getStaffDetails = async () => {
-      const id = await loadData("ID");
-      const subDealerPrmId = await loadData("subDealerPrmId");
-      const subDealerstaffPrmId = await loadData("subDealerstaffPrmId");
-      const role = await loadData("role");
-      setRole(role)
-      if (mounted) {
-        if (role === "sub dealer staff") {
-          setSubDealerId(subDealerPrmId);
-          setSubdealerStaffId(subDealerstaffPrmId);
-        } else {
-          setStaffId(id)
-        }
-      }
+    const run = async () => {
+      await getStaffDetails(mounted);
     };
-
-    getStaffDetails();
-    return () => { mounted = false; };
-  }, []);
+    return () => {
+      mounted = false;
+    };
+  }, [getStaffDetails]);
 
   const handleNext = () => {
     // Validate required fields
@@ -142,7 +164,7 @@ const DeviceInstall_ClientInfo = ({ navigation, route }) => {
 
     // Construct the payload based on role
     const commonPayload = {
-      ...(id ? { id } : ''),
+      ...(id ? { id } : {}),
       userID,
       productName,
       name,
@@ -197,7 +219,8 @@ const DeviceInstall_ClientInfo = ({ navigation, route }) => {
         <View style={styles.modalContent}>
           <FlatList
             data={data}
-            keyExtractor={(item) => item.value}
+            keyboardDismissMode="on-drag"
+            keyExtractor={(item) => item.id?.toString()}
             renderItem={({ item }) => renderItem(item, setter, IdSetter, setVisible)}
             ListEmptyComponent={() => (
               <Card style={styles.emptyCard}>
@@ -216,7 +239,7 @@ const DeviceInstall_ClientInfo = ({ navigation, route }) => {
       <ScrollView style={styles.container}>
         <FormField label="UserID" value={userID} onChangeText={setUserID} placeholder="Enter User ID" />
         <FormField label="Name" value={name} onChangeText={setName} placeholder="Enter Name" />
-        <FormField label="Email" value={email} onChangeText={setEmail} placeholder="Enter Email" />
+        <FormField label="Email" value={email ?? ''} onChangeText={setEmail} placeholder="Enter Email" />
         <FormField label="Mobile Number" value={phoneNumber} onChangeText={setPhoneNumber} placeholder="Enter Phone Number" keyboardType="phone-pad" />
         <FormField label="Date" value={formattedDate} onPress={() => setOpen(true)} placeholder="Enter Date (YYYY-MM-DD)" />
         <DatePicker

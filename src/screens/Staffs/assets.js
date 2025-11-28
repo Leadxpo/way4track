@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, LayoutAnimation, UIManager, Platform, } from 'react-native';
 import { Card, FAB, Badge, Avatar } from 'react-native-paper';
 import Header from '../../components/userHeader';
@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { drawLabel } from "../../Redux/Actions/drawAction";
 import BranchesDropdown from '../../components/branchDropdown';
 import { fetchAsserts } from '../../Redux/Actions/assertAction';
+import { useFocusEffect } from '@react-navigation/native';
 
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -14,6 +15,7 @@ const Asset = ({ navigation }) => {
   const dispatch = useDispatch();
   const { asserts, loading: assertsLoading, error: assertsError } = useSelector(state => state.assertsReducer);
   const [permissions, setPermissions] = useState([]);
+
   useEffect(() => {
     const loadStaffloginData = async () => {
       const rrr = await loadData("staffPermissions")
@@ -39,10 +41,12 @@ const Asset = ({ navigation }) => {
   ]);
 
   // Fetch assets on mount
-  useEffect(() => {
-    const fetchPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" };
-    dispatch(fetchAsserts(fetchPayload));
-  }, [dispatch]);
+  useFocusEffect(
+    useCallback(() => {
+      const fetchPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" };
+      dispatch(fetchAsserts(fetchPayload));
+    }, [dispatch])
+  )
 
   // Update filtered assets and counts
   useEffect(() => {
@@ -78,54 +82,56 @@ const Asset = ({ navigation }) => {
       <View style={styles.dropdownContainer}>
         <BranchesDropdown dropdownStyles={styles} branchName={setBranchId} onBranchChange={setBranch} />
       </View>
-      
+
       {/* Asset Categories */}
       <View style={styles.categoryContainer}>
         {assetType.map(category => {
-          return(
-          <TouchableOpacity
-            key={category.key}
-            onPress={() => setSelectedCategory(category.key)}
-            style={[styles.categoryCard, { backgroundColor: category.color }]}>
-            <Text style={styles.categoryCount}>{category.count}</Text>
+          return (
+            <TouchableOpacity
+              key={category.key}
+              onPress={() => setSelectedCategory(category.key)}
+              style={[styles.categoryCard, { backgroundColor: category.color }]}>
+              <Text style={styles.categoryCount}>{category.count}</Text>
 
-            <Text style={styles.categoryLabel}>{category.label}</Text>
-          </TouchableOpacity>
-        )})}
+              <Text style={styles.categoryLabel}>{category.label}</Text>
+            </TouchableOpacity>
+          )
+        })}
       </View>
-      
+
       {/* Asset List */}
       {assertsLoading ? <Text>Loading assets...</Text> : assertsError ? <Text>Error loading assets</Text> : (
         <FlatList
           data={filteredAssets}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => {
-            console.log("asserts item ",item)
-            return(
-            <Card style={styles.assetCard}>
-             {
-              hasDeleteAssertPermission &&
-            <Avatar.Icon icon={'delete'} size={32} color='red' style={{backgroundColor:'#f1f1f1',position:'absolute',right:-50,top:10}}></Avatar.Icon>
-            } 
-              <View style={{ flexDirection: 'row', justifyContent: "space-between", padding: 10 }}>
-                <Image source={{ uri: item.assetPhoto }} style={styles.assetImage} />
-                <View style={styles.assetInfo}>
-                  <Text style={styles.assetTitle}>{item.assertsName}</Text>
-                  <Text style={styles.assetLocation}>{item.branchId.branchName}</Text>
-                  <Text style={styles.assetPrice}>{item.assertsAmount}</Text>
-                  <TouchableOpacity onPress={() => {
-                    dispatch(drawLabel("Asserts"));
-                    navigation.navigate('AssetDetails', { assetDetails: item });
-                  }}>
-                    <Text style={styles.moreDetails}>More Details</Text>
-                  </TouchableOpacity>
+            console.log("asserts item ", item)
+            return (
+              <Card style={styles.assetCard}>
+                {
+                  hasDeleteAssertPermission &&
+                  <Avatar.Icon icon={'delete'} size={32} color='red' style={{ backgroundColor: '#f1f1f1', position: 'absolute', right: -50, top: 10 }}></Avatar.Icon>
+                }
+                <View style={{ flexDirection: 'row', justifyContent: "space-between", padding: 10 }}>
+                  <Image source={{ uri: item.assetPhoto }} style={styles.assetImage} />
+                  <View style={styles.assetInfo}>
+                    <Text style={styles.assetTitle}>{item.assertsName}</Text>
+                    <Text style={styles.assetLocation}>{item.branchId.branchName}</Text>
+                    <Text style={styles.assetPrice}>{item.assertsAmount}</Text>
+                    <TouchableOpacity onPress={() => {
+                      dispatch(drawLabel("Asserts"));
+                      navigation.navigate('AssetDetails', { assetDetails: item });
+                    }}>
+                      <Text style={styles.moreDetails}>More Details</Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
-              </View>
-            </Card>
-          )}}
+              </Card>
+            )
+          }}
         />
       )}
-      
+
       {/* Add Assets Button */}
       {/* <FAB icon="plus" label="Add Assets" visible={hasAddAssertPermission} style={styles.fab} onPress={() => {
         dispatch(drawLabel("Asserts"));

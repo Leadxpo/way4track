@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { View, StyleSheet, Text, TextInput, ScrollView, Dimensions } from 'react-native';
 import { DataTable, Avatar } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,12 +6,13 @@ import { drawLabel } from "../../Redux/Actions/drawAction";
 import { fetchVouchersbyDayBook } from "../../Redux/Actions/vouchersAction";
 import Header from '../../components/userHeader';
 import DatePicker from 'react-native-date-picker';
+import { useFocusEffect } from '@react-navigation/native';
 
 const DayBook = ({ navigation }) => {
   const dispatch = useDispatch();
   const { loading, selectedLabel, error } = useSelector(state => state.selectedDrawLabel);
-  const { loading:voucherDaybookDataLoading,  voucherDaybookData, error:voucherDaybookDataError } = useSelector(state => state.voucher_daybookReducer);
-  
+  const { loading: voucherDaybookDataLoading, voucherDaybookData, error: voucherDaybookDataError } = useSelector(state => state.voucher_daybookReducer);
+
   const [date, setDate] = useState(new Date());
   const [dateOpen, setDateOpen] = useState(false);
   const [selectedData, setSelectedData] = useState('xx-xxx xxxx');
@@ -21,11 +22,13 @@ const DayBook = ({ navigation }) => {
     return new Intl.DateTimeFormat('en-IN', options).format(date).replace(' ', ' - ');
   }
 
-  useEffect(() => {
-    const dayBookPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
-    dispatch(fetchVouchersbyDayBook(dayBookPayload));
-  }, [dispatch])
-
+  useFocusEffect(
+    useCallback(() => {
+      const dayBookPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
+      dispatch(fetchVouchersbyDayBook(dayBookPayload));
+    }, [dispatch])
+  )
+  
   return (
     <View style={styles.container}>
       <Header />
@@ -33,7 +36,7 @@ const DayBook = ({ navigation }) => {
       {/* Day Book Title */}
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Day Book</Text>
-        <Text style={styles.date} onPress={()=>setDateOpen(true)}>{selectedData}</Text>
+        <Text style={styles.date} onPress={() => setDateOpen(true)}>{selectedData}</Text>
       </View>
       <DatePicker
         modal
@@ -56,9 +59,9 @@ const DayBook = ({ navigation }) => {
         <DataTable>
           {/* Table Header */}
           <DataTable.Header style={styles.tableHeader}>
-            <DataTable.Title style={{justifyContent:'center',backgroundColor:'#f3f3f3'}}><Text style={{color:'#333333',fontSize:15}}>Title</Text></DataTable.Title>
-            <DataTable.Title numeric style={{justifyContent:'center',backgroundColor:'#f9f9f9'}}><Text style={{color:'#333333',fontSize:15}}>Debit</Text></DataTable.Title>
-            <DataTable.Title numeric style={{justifyContent:'center',backgroundColor:'#f3f3f3'}}><Text style={{color:'#333333',fontSize:15}}>Credit</Text></DataTable.Title>
+            <DataTable.Title style={{ justifyContent: 'center', backgroundColor: '#f3f3f3' }}><Text style={{ color: '#333333', fontSize: 15 }}>Title</Text></DataTable.Title>
+            <DataTable.Title numeric style={{ justifyContent: 'center', backgroundColor: '#f9f9f9' }}><Text style={{ color: '#333333', fontSize: 15 }}>Debit</Text></DataTable.Title>
+            <DataTable.Title numeric style={{ justifyContent: 'center', backgroundColor: '#f3f3f3' }}><Text style={{ color: '#333333', fontSize: 15 }}>Credit</Text></DataTable.Title>
           </DataTable.Header>
 
           {/* Table Rows */}
@@ -128,7 +131,7 @@ const styles = StyleSheet.create({
   },
   tableHeader: {
     backgroundColor: '#f3f3f3',
-    width:Dimensions.get('screen').width
+    width: Dimensions.get('screen').width
   },
   bottomNav: {
     flexDirection: 'row',

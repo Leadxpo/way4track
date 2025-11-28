@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { View, FlatList, Text, Modal, ScrollView, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 import { Avatar, Card, Button, Menu, Provider, FAB } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -8,6 +8,7 @@ import { fetchClients } from "../../Redux/Actions/clientAction";
 import Header from '../../components/userHeader';
 import { permissions } from "../../Utils/permissions";
 import { loadData } from "../../Utils/appData";
+import { useFocusEffect } from '@react-navigation/native';
 
 const Clients = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -40,21 +41,22 @@ const Clients = ({ navigation }) => {
     item.branchId?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  useEffect(() => {
-    const rrr = async () => {
+  useFocusEffect(
+    useCallback(() => {
+      const rrr = async () => {
 
-      const aaa = await loadData("branchName")
-      setBranchName(prev => prev = aaa)
-      const clientPayload = {
-        companyCode: "WAY4TRACK",
-        unitCode: "WAY4",
-        branchName: aaa,
-      };
-      dispatch(fetchClients(clientPayload));
-    }
-    rrr();
-  }, [dispatch]);
-
+        const aaa = await loadData("branchName")
+        setBranchName(prev => prev = aaa)
+        const clientPayload = {
+          companyCode: "WAY4TRACK",
+          unitCode: "WAY4",
+          branchName: aaa,
+        };
+        dispatch(fetchClients(clientPayload));
+      }
+      rrr();
+    }, [dispatch])
+  )
   const renderItem = ({ item }) => {
     const shortName = item.name ? item?.name?.charAt(0).toUpperCase() : 'S';
 
@@ -65,11 +67,11 @@ const Clients = ({ navigation }) => {
         </View>
         <View style={styles.cardContent}>
           {
-             item.clientPhoto ?(          
-             <Avatar.Image size={50} source={{ uri: item.clientPhoto }} />
-             ):(
+            item.clientPhoto ? (
+              <Avatar.Image size={50} source={{ uri: item.clientPhoto }} />
+            ) : (
               <Avatar.Text label={shortName} size={50} style={{ marginRight: 10 }} />
-             )
+            )
           }
           <View style={styles.details}>
             <Text style={[styles.clientName, { textTransform: "capitalize" }]}>{item.name}</Text>
@@ -83,7 +85,7 @@ const Clients = ({ navigation }) => {
             setSelectedClient(item);
             setModalVisible(true);
           }}>
-            <Avatar.Icon size={30} icon={'eye'} />
+            <Avatar.Icon size={30} icon={'eye'} color="#3EB489" style={{backgroundColor:'#f3f3f3'}} />
           </TouchableOpacity>
 
 
@@ -211,7 +213,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   listContent: {
-    padding: 10,
+    padding: 10,backgroundColor:"#f8f9fa"
   },
   modalOverlay: {
     flex: 1,
@@ -240,12 +242,12 @@ const styles = StyleSheet.create({
   card: {
     marginBottom: 10,
     borderRadius: 8,
-    elevation: 3,
+    elevation: 3,margin:8
   },
   cardContent: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 10,
+    padding: 10,backgroundColor:"#f8f9fa"
   },
   details: {
     flex: 1,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useCallback } from 'react';
 import { View, Text, ScrollView, FlatList, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Modal, FAB, Avatar } from 'react-native-paper';
@@ -8,8 +8,9 @@ import Header from '../../components/userHeader';
 import { staffDataHook } from '../../Utils/permissions';
 import { intiateTechnician_dashboard } from '../../Redux/Actions/dashboard';
 import api from '../../Api/api';
-import { UpdateCurrentAddress } from '../../Utils/updateLocation';
 import { fetchNotifications } from '../../Redux/Actions/notificationAction';
+import { UpdateCurrentAddress } from '../../Utils/updateLocation';
+import { useFocusEffect } from '@react-navigation/native';
 
 const Home_Technician = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -61,12 +62,17 @@ const Home_Technician = ({ navigation }) => {
     fetchData();
   }, [dispatch, isRefresh]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      UpdateCurrentAddress();
-    }, 3000);
-  }, [])
-
+  
+  useFocusEffect(
+    useCallback(() => {
+      const timeout = setTimeout(() => {
+        UpdateCurrentAddress();
+      }, 3000);
+  
+      return () => clearTimeout(timeout); // Cleanup when screen loses focus
+    }, [])
+  );
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -191,9 +197,9 @@ const Home_Technician = ({ navigation }) => {
             <Text style={styles.dataText}>{activateWorksCount ?? 0}/{parseInt(installedWorksCount ?? 0) + parseInt(acceptWorksCount ?? 0)}</Text>
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={{ marginBottom: 20 }}>🔵 {installedWorksCount ?? 0} Installed Works</Text>
-            <Text style={{ marginBottom: 20 }}>🔵 {acceptWorksCount ?? 0} Accepted Works</Text>
-            <Text style={{ marginBottom: 20 }}>🔵 {activateWorksCount ?? 0} Activate Works</Text>
+            <Text style={{ marginBottom: 20,color:"#333333" }}>🔵 {installedWorksCount ?? 0} Installed Works</Text>
+            <Text style={{ marginBottom: 20,color:"#333333" }}>🔵 {acceptWorksCount ?? 0} Accepted Works</Text>
+            <Text style={{ marginBottom: 20 ,color:"#333333"}}>🔵 {activateWorksCount ?? 0} Activate Works</Text>
           </View>
         </TouchableOpacity>
 
@@ -205,8 +211,8 @@ const Home_Technician = ({ navigation }) => {
           </View>
           <View style={{ flex: 1 }}>
 
-            <Text style={{ marginBottom: 20 }}>⚪ {paymentPendingWorksCount ?? 0} Payment Pending</Text>
-            <Text style={{ marginBottom: 10 }}>🔵 {paymentDonedWorksCount ?? 0} Payment Done</Text>
+            <Text style={{ marginBottom: 20,color:"#333333" }}>⚪ {paymentPendingWorksCount ?? 0} Payment Pending</Text>
+            <Text style={{ marginBottom: 10,color:"#333333" }}>🔵 {paymentDonedWorksCount ?? 0} Payment Done</Text>
           </View>
         </TouchableOpacity>
 
@@ -229,9 +235,9 @@ const Home_Technician = ({ navigation }) => {
               <Text style={styles.modalTitle}>Attendance Details</Text>
               {selectedDate ? (
                 <>
-                  <Text style={styles.modalText}>📅 Date: {selectedDate.day}</Text>
-                  <Text style={styles.modalText}>⏰ In Time: {selectedDate.inTime}</Text>
-                  <Text style={styles.modalText}>⏳ Out Time: {selectedDate.outTime}</Text>
+                  <Text style={styles.modalText}>📅 Date: {selectedDate.day ||"N/A"}</Text>
+                  <Text style={styles.modalText}>⏰ In Time: {selectedDate.inTime ||"N/A"}</Text>
+                  <Text style={styles.modalText}>⏳ Out Time: {selectedDate.outTime ||"N/A"}</Text>
                   <Text
                     style={[
                       styles.modalText,
@@ -269,14 +275,13 @@ const styles = StyleSheet.create({
   cardBeige: { backgroundColor: '#ffeeec', padding: 15, borderRadius: 5, marginBottom: 10 },
   cardGreen: { backgroundColor: '#ecffeb', padding: 15, borderRadius: 5, marginBottom: 10 },
   cardBlue: { backgroundColor: '#e9f6ff', padding: 15, borderRadius: 5, marginBottom: 10 },
-  dataText: { fontSize: 30, fontWeight: 'bold' },
-  legendText: { fontSize: 14, marginBottom: 10 },
+  dataText: { fontSize: 30, color: '#333333', fontWeight: 'bold' },
+  legendText: { fontSize: 14, color: '#333333', marginBottom: 10 },
   ticketContainer: { flexDirection: 'row', justifyContent: 'space-between', marginTop: 5 },
   ticketDone: { fontSize: 14, color: '#4CAF50', fontWeight: 'bold' },
   ticketPending: { fontSize: 14, color: '#D3D3D3', fontWeight: 'bold' },
-  cardTitle: { fontSize: 16, fontWeight: 'bold', marginBottom: 5 },
+  cardTitle: { fontSize: 16, fontWeight: 'bold',color: '#333333', marginBottom: 5 },
   attendanceText: { fontSize: 24, fontWeight: 'bold', color: '#d63384' },
-  dataText: { fontSize: 30, fontWeight: 'bold' },
   card: {
     marginVertical: 15,
     borderRadius: 8, backgroundColor: "#ffffff",
@@ -290,6 +295,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center", justifyContent: "space-between",
     padding: 10,
+    color:"#333333"
   },
   details: {
     marginLeft: 10,
@@ -302,12 +308,12 @@ const styles = StyleSheet.create({
   modalContent: {
     width: 300,
     backgroundColor: "white",
-    padding: 20,
+    padding: 20, color:"#333333",
     borderRadius: 10,
     alignItems: "center",
   },
   modalTitle: { fontSize: 18, fontWeight: "bold", color: "#333", marginBottom: 10 },
-  modalText: { fontSize: 16, marginBottom: 10 },
+  modalText: { fontSize: 16,color:'#333333', marginBottom: 10 },
   closeButton: {
     backgroundColor: "blue",
     padding: 10,

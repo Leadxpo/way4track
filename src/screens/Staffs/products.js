@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, LayoutAnimation, UIManager, Platform } from 'react-native';
 import { Card, FAB } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { drawLabel } from "../../Redux/Actions/drawAction";
 import BranchesDropdown from '../../components/branchDropdown';
 import { fetchProducts } from '../../Redux/Actions/productAction';
+import { useFocusEffect } from "@react-navigation/native";
 
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -15,9 +16,12 @@ const Product = ({ navigation }) => {
   const dispatch = useDispatch();
   const { products } = useSelector(state => state.products);
   const [permissions, setPermissions] = useState([]);
-  useEffect(() => {
-    dispatch(fetchProducts({ companyCode: "WAY4TRACK", unitCode: "WAY4" }));
-  }, [dispatch]);
+  
+  useFocusEffect(
+    useCallback(()=>{
+      dispatch(fetchProducts({ companyCode: "WAY4TRACK", unitCode: "WAY4" }));
+    }, [dispatch])
+  )
 
   useEffect(() => {
     const loadStaffloginData = async () => {

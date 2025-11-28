@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import {
-  View,
-  FlatList,
-  Alert,
-  TouchableOpacity,
-  TextInput,
-  StyleSheet
-} from 'react-native';
+import React, { useEffect, useState,useCallback } from 'react';
+import {View,FlatList,Alert,TouchableOpacity,TextInput,StyleSheet} from 'react-native';
 import { Text, Button, ActivityIndicator, Card } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
 import api from "../../Api/api";
+import { useFocusEffect } from "@react-navigation/native";
 
 const ProductType = () => {
   const navigation = useNavigation();
@@ -28,6 +22,13 @@ const ProductType = () => {
       };
       loadStaffloginData();
     }, []);
+
+    useFocusEffect(
+      useCallback(()=>{
+        fetchProductTypes();
+    }, [])
+  )
+  
 
   const fetchProductTypes = async () => {
     try {

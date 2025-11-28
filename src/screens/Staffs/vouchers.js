@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { View, FlatList, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { Avatar, Card, FAB, Menu, Provider, Modal, Button } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { drawLabel } from "../../Redux/Actions/drawAction";
 import { fetchVouchers } from "../../Redux/Actions/vouchersAction";
 import Header from '../../components/userHeader';
+import { useFocusEffect } from "@react-navigation/native";
 
 const Vouchers = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -16,11 +17,13 @@ const Vouchers = ({ navigation }) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  useEffect(() => {
-    const vouchersPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
-    dispatch(fetchVouchers(vouchersPayload));
-  }, [dispatch]);
 
+  useFocusEffect(
+    useCallback(() => {
+      const vouchersPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
+      dispatch(fetchVouchers(vouchersPayload));
+    }, [dispatch])
+  )
   const [permissions, setPermissions] = useState([]);
   useEffect(() => {
     const loadStaffloginData = async () => {
@@ -113,7 +116,7 @@ const Vouchers = ({ navigation }) => {
       </View>
       <Modal
         animationType="slide"
-        transparent style={{flex:1,backgroundColor:'#00000090'}}
+        transparent style={{ flex: 1, backgroundColor: '#00000090' }}
         visible={modalVisible}
         onRequestClose={() => setMenuVisible(false)}
       >
@@ -140,17 +143,17 @@ const Vouchers = ({ navigation }) => {
                   )}
                   {/* Add more fields as needed */}
                   {Array.isArray(selectedItem.productDetails) && selectedItem.productDetails.length > 0 && (
-              <>
-                <Text style={[styles.modalTitle, { marginTop: 16 }]}>Product Details</Text>
-                {selectedItem.productDetails.map((product, index) => (
-                  <View key={index} style={{ marginBottom: 8 }}>
-                    <Text style={styles.modalText}>Product Name: {product.productName || 'N/A'}</Text>
-                    <Text style={styles.modalText}>TotalAmount:  {product.quantity || 0} x {product.rate || 0} ={product.totalCost || 0}</Text>
-                    <Text style={styles.modalText}>Sale Type: {product.type || 'N/A'}</Text>
-                  </View>
-                ))}
-              </>
-            )}
+                    <>
+                      <Text style={[styles.modalTitle, { marginTop: 16 }]}>Product Details</Text>
+                      {selectedItem.productDetails.map((product, index) => (
+                        <View key={index} style={{ marginBottom: 8 }}>
+                          <Text style={styles.modalText}>Product Name: {product.productName || 'N/A'}</Text>
+                          <Text style={styles.modalText}>TotalAmount:  {product.quantity || 0} x {product.rate || 0} ={product.totalCost || 0}</Text>
+                          <Text style={styles.modalText}>Sale Type: {product.type || 'N/A'}</Text>
+                        </View>
+                      ))}
+                    </>
+                  )}
                 </>
               )}
               <Button mode="contained" onPress={() => setModalVisible(false)} style={{ marginTop: 16 }}>
@@ -185,7 +188,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 8,
     elevation: 3,
-  }, 
+  },
   modalOverlay: {
     justifyContent: 'center',
     alignItems: 'center',

@@ -10,7 +10,7 @@ import {
   PermissionsAndroid,
   Alert,
 } from 'react-native';
-import FastImage from 'react-native-fast-image';
+import { TurboImage } from 'react-native-turbo-image';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import Video from 'react-native-video';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -230,12 +230,11 @@ console.log("remark : ",newRemarkObj);
                 <Text style={styles.messageText}>{remark.desc}</Text>
 
                 {isImage && (
-                  <FastImage
-                    source={{ uri: remark.image }}
-                    style={styles.imagePreview}
-                    resizeMode={FastImage.resizeMode.cover}
-                  />
-
+                  <TurboImage
+                  source={{ uri: remark.image }}
+                  style={styles.imagePreview}
+                  resizeMode="cover"
+                />
                 )}
 
                 {isVideo && (
@@ -289,7 +288,7 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: 'bold',color:"#333333",
     marginBottom: 12,
   },
   scrollView: {
@@ -318,7 +317,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f3f4f6',
   },
   messageText: {
-    fontSize: 14,
+    fontSize: 14,color:"#333333"
   },
   metaText: {
     fontSize: 10,
@@ -333,7 +332,7 @@ const styles = StyleSheet.create({
     flex: 1,
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 6,
+    borderRadius: 6,color:"#333333",
     paddingHorizontal: 10,
     paddingVertical: 6,
     fontSize: 14,

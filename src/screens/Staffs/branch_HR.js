@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, TouchableOpacity, FlatList, StyleSheet, Image, ScrollView } from "react-native";
 import { Card, Menu, MD3Colors, Provider as PaperProvider, Icon, Button } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Header from "../../components/userHeader";
 import { useDispatch, useSelector } from 'react-redux';
+import { useFocusEffect } from '@react-navigation/native';
 
 const branchesData = [
     {
@@ -105,66 +106,68 @@ const Branch_HR = () => {
         setSelectedRole(selectedRole === roleId ? null : roleId);
     };
 
-    useEffect(() => {
-        if (HR_homeInfo) {
-            const branchData = HR_homeInfo.result;
-            const staffData = HR_homeInfo.staff;
-            // Process totals
-            const totalBranches = branchData.reduce(
-                (total, branch) => total + parseInt(branch.totalStaff || 0, 10),
-                0
-            );
-
-            const totalTechnicians = branchData.reduce(
-                (sum, b) => sum + parseInt(b.totalTechnicians || 0),
-                0
-            );
-            const totalNonTechnicians = branchData.reduce(
-                (sum, b) => sum + parseInt(b.totalNonTechnicians || 0),
-                0
-            );
-            const totalSales = branchData.reduce(
-                (sum, b) => sum + parseInt(b.totalSales || 0),
-                0
-            );
-
-            // Process branches
-            const processedBranches = branchData.map((branch) => {
-                const branchStaff = staffData.filter(
-                    (s) => s.branchName === branch.branchName
+    useFocusEffect(
+        useCallback(() => {
+            if (HR_homeInfo) {
+                const branchData = HR_homeInfo.result;
+                const staffData = HR_homeInfo.staff;
+                // Process totals
+                const totalBranches = branchData.reduce(
+                    (total, branch) => total + parseInt(branch.totalStaff || 0, 10),
+                    0
                 );
-                return {
-                    name: branch.branchName || 'Unknown',
-                    managerName:
-                        branchStaff.length > 0
-                            ? branchStaff[0].branchManagerName || 'N/A'
-                            : 'N/A',
-                    managerPhone:
-                        branchStaff.length > 0
-                            ? branchStaff[0].branchManagerPhoneNumber || 'N/A'
-                            : 'N/A',
-                    staff: {
-                        technicities: parseInt(branch.totalTechnicians || 0),
-                        nonTechnicities: parseInt(branch.totalNonTechnicians || 0),
-                        sales: parseInt(branch.totalSales || 0),
-                        total: parseInt(branch.totalStaff || 0),
-                    },
-                };
-            });
-            const filteredBranches = processedBranches.filter(
-                (branch) => branch.name !== 'Unknown'
-            );
 
-            setBranches(filteredBranches);
-            setSelectedBranch(processedBranches[0] || null);
-            setTotals({
-                totalBranches,
-                totalTechnicians,
-                totalNonTechnicians,
-                totalSales,
-            });
-        }
-    }, [])
+                const totalTechnicians = branchData.reduce(
+                    (sum, b) => sum + parseInt(b.totalTechnicians || 0),
+                    0
+                );
+                const totalNonTechnicians = branchData.reduce(
+                    (sum, b) => sum + parseInt(b.totalNonTechnicians || 0),
+                    0
+                );
+                const totalSales = branchData.reduce(
+                    (sum, b) => sum + parseInt(b.totalSales || 0),
+                    0
+                );
+
+                // Process branches
+                const processedBranches = branchData.map((branch) => {
+                    const branchStaff = staffData.filter(
+                        (s) => s.branchName === branch.branchName
+                    );
+                    return {
+                        name: branch.branchName || 'Unknown',
+                        managerName:
+                            branchStaff.length > 0
+                                ? branchStaff[0].branchManagerName || 'N/A'
+                                : 'N/A',
+                        managerPhone:
+                            branchStaff.length > 0
+                                ? branchStaff[0].branchManagerPhoneNumber || 'N/A'
+                                : 'N/A',
+                        staff: {
+                            technicities: parseInt(branch.totalTechnicians || 0),
+                            nonTechnicities: parseInt(branch.totalNonTechnicians || 0),
+                            sales: parseInt(branch.totalSales || 0),
+                            total: parseInt(branch.totalStaff || 0),
+                        },
+                    };
+                });
+                const filteredBranches = processedBranches.filter(
+                    (branch) => branch.name !== 'Unknown'
+                );
+
+                setBranches(filteredBranches);
+                setSelectedBranch(processedBranches[0] || null);
+                setTotals({
+                    totalBranches,
+                    totalTechnicians,
+                    totalNonTechnicians,
+                    totalSales,
+                });
+            }
+        }, [])
+    )
 
 
     return (
@@ -297,12 +300,12 @@ const styles = StyleSheet.create({
         padding: 12,
         borderRadius: 10,
         marginBottom: 12,
-      },
-      statText: {
+    },
+    statText: {
         fontSize: 18,
         fontWeight: '600', // equivalent to font-semibold
         color: '#111827', // gray-900
-      },
+    },
     branchTitle: {
         fontSize: 18,
         color: "white",

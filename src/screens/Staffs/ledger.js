@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { View, FlatList, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 import { Avatar, Card, Button, Menu, Provider } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { drawLabel } from "../../Redux/Actions/drawAction";
 import { fetchVouchersbyLedger } from "../../Redux/Actions/vouchersAction";
 import Header from "../../components/userHeader";
+import { useFocusEffect } from '@react-navigation/native';
 
 const Ledger = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -16,11 +17,12 @@ const Ledger = ({ navigation }) => {
   const { loading, selectedLabel, error } = useSelector(state => state.selectedDrawLabel);
   const { loading: voucherledgersDataLoading, voucherledgersData, error: voucherledgersDataError } = useSelector(state => state.voucher_ledgerReducer);
 
-  useEffect(() => {
-    const dayBookPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
-    dispatch(fetchVouchersbyLedger(dayBookPayload));
-  }, [dispatch])
-
+  useFocusEffect(
+    useCallback(() => {
+      const dayBookPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
+      dispatch(fetchVouchersbyLedger(dayBookPayload));
+    }, [dispatch])
+  )
 
 
   const filteredData = voucherledgersData.filter((item) =>

@@ -16,7 +16,6 @@ const AppointmentDetails = ({ navigation, route }) => {
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
 
-  console.log("appointmentDetails : ",appointmentDetails)
   const saveDetails = () => {
     if (!clientName || !clientNumber || !address || !slotTime) {
       alert("Please fill all required fields!");
@@ -46,6 +45,7 @@ const AppointmentDetails = ({ navigation, route }) => {
       setAssignee(appointmentDetails.Assignee)
       setAddress(appointmentDetails.Address)
     }
+    
 fetchData()
   },[appointmentDetails])
   return (

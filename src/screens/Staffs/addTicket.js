@@ -1,19 +1,13 @@
 import React, { useEffect, useState, useCallback } from "react";
-import {
-    View,
-    Text,
-    TextInput,
-    Button,
-    Alert,
-    ScrollView,
-    TouchableOpacity,
-    Modal,
-} from "react-native";
+import {View,Text,TextInput,Button,Alert,ScrollView,TouchableOpacity,Modal} from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import DatePicker from "react-native-date-picker";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import api from "../../Api/api";
 import { loadData } from "../../Utils/appData";
+import Color from "../../utilities/Color";
+import { Provider } from "react-native-paper";
+import Header from "../../components/userHeader";
 
 export default function TicketFormScreen() {
     const navigation = useNavigation();
@@ -133,8 +127,10 @@ export default function TicketFormScreen() {
     };
 
     return (
+        <Provider>
+            <Header title="Ticket"/>
         <ScrollView contentContainerStyle={{ padding: 20 }}>
-            <Text style={styles.heading}>
+            <Text style={[styles.heading,{color:'#333333'}]}>
                 {editingData ? "Edit Ticket" : "Add Ticket"}
             </Text>
 
@@ -167,18 +163,19 @@ export default function TicketFormScreen() {
                 />
             </View>
 
-            <Text style={styles.label}>Problem</Text>
+            <Text style={[styles.label,{color:"#333333"}]} >Problem</Text>
             <TextInput
                 placeholder="Enter problem"
                 value={formData.problem}
                 onChangeText={(text) => handleChange("problem", text)}
-                style={[styles.input, { height: 100 }]}
+                style={[styles.input, { height: 100,color:'#333333' }]}
                 multiline
+                placeholderTextColor={"#aaaaaa"}
             />
 
-            <Text style={styles.label}>Date</Text>
+            <Text style={[styles.label,{color:"#333333"}]}>Date</Text>
             <TouchableOpacity onPress={() => setShowDatePicker(true)} style={styles.input}>
-                <Text>{formData.date.toISOString().split("T")[0]}</Text>
+                <Text style={{color:"#333333"}}>{formData.date.toISOString().split("T")[0]}</Text>
             </TouchableOpacity>
 
             <Modal visible={showDatePicker} transparent animationType="slide">
@@ -186,6 +183,7 @@ export default function TicketFormScreen() {
                     <DatePicker
                         date={formData.date}
                         mode="date"
+                        style={{backgroundColor:'#333333',elevation:3,marginBottom:10}}
                         onDateChange={(date) => handleChange("date", date)}
                     />
                     <Button title="Done" onPress={() => setShowDatePicker(false)} />
@@ -194,6 +192,7 @@ export default function TicketFormScreen() {
 
             <Button title={editingData ? "Update" : "Submit"} onPress={handleSubmit} />
         </ScrollView>
+        </Provider>
     );
 }
 
@@ -205,12 +204,12 @@ const styles = {
     },
     label: {
         fontWeight: "bold",
-        marginBottom: 5,
+        marginBottom: 5,Color:"#333333"
     },
     input: {
         borderWidth: 1,
         borderColor: "#ccc",
-        padding: 10,
+        padding: 10,Color:"#333333",
         marginBottom: 15,
         borderRadius: 6,
     },

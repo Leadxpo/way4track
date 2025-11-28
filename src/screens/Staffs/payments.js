@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useCallback } from "react";
 import { View, FlatList, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 import { Avatar, Card, Button, Menu, Provider } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { drawLabel } from "../../Redux/Actions/drawAction";
 import { fetchVouchersbyPayments } from "../../Redux/Actions/vouchersAction";
 import Header from "../../components/userHeader";
+import { useFocusEffect } from '@react-navigation/native';
 
 const Payments = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -16,11 +17,12 @@ const Payments = ({ navigation }) => {
   const { loading, selectedLabel, error } = useSelector(state => state.selectedDrawLabel);
   const { loading: voucherPaymentsDataLoading, voucherPaymentsData, error: voucherPaymentsDataError } = useSelector(state => state.voucher_paymentsReducer);
 
-  useEffect(() => {
+  useFocusEffect(
+    useCallback(() => {
     const dayBookPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
     dispatch(fetchVouchersbyPayments(dayBookPayload));
   }, [dispatch])
-
+  )
   const filteredData = voucherPaymentsData.filter((item) =>
     item.name?.toLowerCase().includes(searchQuery.toLowerCase())
   );

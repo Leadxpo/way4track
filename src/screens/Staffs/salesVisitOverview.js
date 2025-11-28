@@ -110,11 +110,11 @@ const SalesVisitOverview = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
     container: { flex: 1, padding: 20, backgroundColor: "#fff" },
-    title: { fontSize: 22, fontWeight: "bold", marginBottom: 10, textAlign: "center" },
+    title: { fontSize: 22, fontWeight: "bold", marginBottom: 10,color:'#333333', textAlign: "center" },
     section: { marginBottom: 15, padding: 10, borderWidth: 1, borderColor: "#ddd", borderRadius: 8 },
-    sectionTitle: { fontSize: 18, fontWeight: "bold", marginTop: 15, marginBottom: 5 },
-    label: { fontWeight: "bold", },
-    value: { fontSize: 16, color: "#555", marginBottom: 5 },
+    sectionTitle: { fontSize: 18, fontWeight: "bold", marginTop: 15, marginBottom: 5,color:'#333333', },
+    label: { fontWeight: "bold",color:'#333333', },
+    value: { fontSize: 16, color: "#555", marginBottom: 5,color:'#333333', },
     item: { paddingVertical: 5, borderBottomWidth: 1, borderBottomColor: "#eee",color:"#333333", marginBottom: 5 },
     emptyText: { fontSize: 14, color: "gray", fontStyle: "italic", textAlign: "center", marginTop: 5 },
     nextButton: { backgroundColor: "green", padding: 15, alignItems: "center", borderRadius: 5, marginTop: 20 },

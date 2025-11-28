@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useCallback } from "react";
 import { View, Text, TextInput, FlatList, StyleSheet, Image, TouchableOpacity, Alert, Modal, ScrollView, } from "react-native";
 import { Card, Menu, MD3Colors, Provider as PaperProvider, Icon, FAB, Button, Avatar } from "react-native-paper";
 import { useDispatch, useSelector } from 'react-redux';
 import { drawLabel } from "../../Redux/Actions/drawAction";
 import { fetchStaffs, staffPermissionById } from "../../Redux/Actions/staffAction";
 import Header from '../../components/userHeader';
+import { useFocusEffect } from "@react-navigation/native";
 
 const Staff = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -36,10 +37,12 @@ const Staff = ({ navigation }) => {
     item.branch?.branchName.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  useEffect(() => {
+  useFocusEffect(
+    useCallback(() => {
     const staffsPayload = { companyCode: "WAY4TRACK", unitCode: "WAY4" }
     dispatch(fetchStaffs(staffsPayload));
   }, [dispatch])
+)
   // Render Staff Item
   const renderStaff = ({ item }) => {
     return (
@@ -134,11 +137,12 @@ const Staff = ({ navigation }) => {
                   <Text style={styles.modalText}>Phone: {selectedStaff.officePhoneNumber}</Text>
                   {/* <Text style={styles.modalText}>Alternate Phone: {selectedStaff.alternateNumber || "N/A"}</Text> */}
                   <Text style={styles.modalText}>Email: {selectedStaff.officeEmail}</Text>
-                  <Text style={styles.modalText}>Aadhar Number: {selectedStaff.aadharNumber}</Text>
-                  <Text style={styles.modalText}>PAN Number: {selectedStaff.panCardNumber || "N/A"}</Text>
-                  <Text style={styles.modalText}>Gender: {selectedStaff.gender}</Text>
-                  <Text style={styles.modalText}>DOB: {selectedStaff.dob}</Text>
-                  <Text style={styles.modalText}>Address: {selectedStaff.address}</Text>
+                  {/* <Text style={styles.modalText}>Aadhar Number: {selectedStaff.aadharNumber}</Text>
+                  <Text style={styles.modalText}>PAN Number: {selectedStaff.panCardNumber || "N/A"}</Text> */}
+                  {/* <Text style={styles.modalText}>Gender: {selectedStaff.gender}</Text> */}
+                  {/* <Text style={styles.modalText}>DOB: {selectedStaff.dob}</Text> */}
+                  {/* <Text style={styles.modalText}>Address: {selectedStaff.address}</Text> */}
+                  <Text style={styles.modalText}>Branch: {selectedStaff.branchName || "N/A"}</Text>
                   <Text style={styles.modalText}>Department: {selectedStaff.department || "N/A"}</Text>
                   <Text style={styles.modalText}>Blood Group: {selectedStaff.bloodGroup || "N/A"}</Text>
                   <Text style={styles.modalText}>Staff Status: {selectedStaff.staffStatus}</Text>
@@ -166,9 +170,9 @@ const Staff = ({ navigation }) => {
                       )
                     })
                   } */}
-                  <Text style={styles.modalText}>Monthly Salary: {selectedStaff.monthlySalary}</Text>
+                  {/* <Text style={styles.modalText}>Monthly Salary: {selectedStaff.monthlySalary}</Text> */}
                   {/* <Text style={styles.modalText}>Carry Forward Leaves: {selectedStaff.carryForwardLeaves}</Text> */}
-                  <Text style={styles.modalText}>Joining Date: {selectedStaff.joiningDate || "N/A"}</Text>
+                  {/* <Text style={styles.modalText}>Joining Date: {selectedStaff.joiningDate || "N/A"}</Text> */}
                 </>
               )}
               <Button

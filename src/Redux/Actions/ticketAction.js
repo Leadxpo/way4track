@@ -25,7 +25,7 @@ export const createTickets = (create_ticketPayload) => async (dispatch) => {
 
     try {
         // Attempt to fetch tickets
-        const { data } = await api.post(`/ticket/get-all-ticket`, create_ticketPayload, {
+        const { data } = await api.post(`/tickets/get-all-ticket`, create_ticketPayload, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -64,7 +64,7 @@ export const ticketById = (get_ticketPayload) => async (dispatch) => {
     dispatch({ type: TICKET_DETAIL_REQUEST })
     try {
         // Attempt to fetch tickets
-        const { data } = await api.post(`/ticket/get-tickets-by-id`, get_ticketPayload, {
+        const { data } = await api.post(`/tickets/get-tickets-by-id`, get_ticketPayload, {
             headers: {
 
                 'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ export const updateTicketReplay = (update_ticketPayload) => async (dispatch) => 
     dispatch({ type: UPDATE_TICKET_REQUEST })
     try {
         // Attempt to fetch tickets
-        const { data } = await api.post(`/ticket/update-ticket`, update_ticketPayload, {
+        const { data } = await api.post(`/tickets/update-ticket`, update_ticketPayload, {
             headers: {
 
                 'Content-Type': 'application/json',
@@ -101,22 +101,31 @@ export const updateTicketReplay = (update_ticketPayload) => async (dispatch) => 
 
 export const deleteTicket = (delete_ticketPayload) => async (dispatch) => {
     const { unitCode, companyCode, id } = delete_ticketPayload
-
     dispatch({ type: DELETE_TICKET_REQUEST })
     try {
         // Attempt to fetch tickets
-        const { data } = await api.post(`/ticket/update-ticket`, delete_ticketPayload, {
+        const { data } = await api.post(`/tickets/deleteTicketDetails`, delete_ticketPayload, {
             headers: {
-
+                
                 'Content-Type': 'application/json',
             },
         });
+        console.log("delete_ticketPayload ::",data)
+        
         dispatch({ type: DELETE_TICKET_SUCCESS, payload: data.data });
     } catch (error) {
         console.log("error : ", error)
-        // If the error status is 500, try refreshing the token
-        // Handle other types of errors
-        dispatch({ type: DELETE_TICKET_FAIL, payload: error.message });
+        let errorMessage = error.message;
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message &&
+          error.response.data.message.includes("a foreign key constraint fails")
+        ) {
+          errorMessage = "Cannot delete this ticket as it is linked to notifications.";
+        }
+        dispatch({ type: DELETE_TICKET_FAIL, payload: errorMessage });
+              // Handle other types of errors
     }
 
 }

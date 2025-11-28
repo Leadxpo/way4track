@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, memo } from "react";
 import {
   View,
   TextInput,
@@ -24,157 +24,173 @@ import { updateSalesVisit } from "../../Redux/Actions/salesVisitAction";
 
 const Visit_ProductInfo = ({ navigation }) => {
   const dispatch = useDispatch();
+
   const [productTypes, setProductTypes] = useState([]);
   const [serviceTypes, setServiceTypes] = useState([]);
-  const [showProductModal, setShowProductModal] = useState(false);
-  const [showServiceModal, setShowServiceModal] = useState(false);
-  const [selectedProductIndex, setSelectedProductIndex] = useState(null);
-  const [selectedServiceIndex, setSelectedServiceIndex] = useState(null);
+
+  const [modalType, setModalType] = useState(null); // "product" or "service"
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const [formData, setFormData] = useState({
-    products: [{  productName: "", quantity: "" }],
+    products: [{ productName: "", quantity: "" }],
     services: [{ services: "", description: "" }],
   });
 
-  const handleItemChange = (type, index, field, value) => {
-    const updatedItems = [...formData[type]];
-    updatedItems[index][field] = value;
-    setFormData((prev) => ({ ...prev, [type]: updatedItems }));
-  };
-
-  const addItem = (type) => {
-    const newItem =
-      type === "products"
-        ? {  productName: "", quantity: "" }
-        : { services: "", description: "" };
-    setFormData((prev) => ({ ...prev, [type]: [...prev[type], newItem] }));
-  };
-
-  const removeItem = (type, index) => {
-    setFormData((prev) => ({
-      ...prev,
-      [type]: prev[type].filter((_, i) => i !== index),
-    }));
-  };
-
-  useFocusEffect(
-    React.useCallback(() => {
-      const onBackPress = () => {
-        navigation.navigate("Visit_ClientInfo");
-        return true;
-      };
-      const backHandler = BackHandler.addEventListener("hardwareBackPress", onBackPress);
-      return () => backHandler.remove();
-    }, [navigation])
-  );
-
+  // -----------------------------------------
+  // FETCH DROPDOWN DATA
+  // -----------------------------------------
   useEffect(() => {
-    const fetchDropdownData = async () => {
+    const fetchData = async () => {
       try {
         const payload = { companycode: "WAY4TRACK", unitCode: "WAY4" };
-
-        const [productRes, serviceRes] = await Promise.all([
+        const [pRes, sRes] = await Promise.all([
           api.post("/productType/getProductTypeNamesDropDown", payload),
           api.post("/ServiceType/getServiceTypeNamesDropDown", payload),
         ]);
 
-        const productList = productRes?.data?.data || [];
-        const serviceList = serviceRes?.data?.data || [];
-        setProductTypes(productList.filter((item) => item.type === "PRODUCT"));
-        setServiceTypes(serviceList);
-      } catch (error) {
-        console.error("Error loading dropdown data:", error);
+        setProductTypes(pRes?.data?.data?.filter((i) => i.type === "PRODUCT") || []);
+        setServiceTypes(sRes?.data?.data || []);
+      } catch (err) {
+        console.error("Dropdown Load Error:", err);
       }
     };
-    fetchDropdownData();
+
+    fetchData();
   }, []);
 
-  const handleSelectProduct = (item, index) => {
-    const updated = [...formData.products];
-    updated[selectedProductIndex] = {
-      ...updated[selectedProductIndex],
-      productName: item.name,
-    };
-    setFormData((prev) => ({ ...prev, products: updated }));
-    setShowProductModal(false);
+  // -----------------------------------------
+  // BACK BUTTON HANDLER
+  // -----------------------------------------
+  useFocusEffect(
+    useCallback(() => {
+      const backHandler = BackHandler.addEventListener("hardwareBackPress", () => {
+        navigation.navigate("Visit_ClientInfo");
+        return true;
+      });
+
+      return () => backHandler.remove();
+    }, [navigation])
+  );
+
+  // -----------------------------------------
+  // COMMON ITEM CHANGE HANDLER
+  // -----------------------------------------
+  const handleItemChange = (type, index, field, value) => {
+    setFormData((prev) => {
+      const updated = [...prev[type]];
+      updated[index][field] = value;
+      return { ...prev, [type]: updated };
+    });
   };
 
-  const handleSelectService = (item, index) => {
-    const updated = [...formData.services];
-    updated[selectedServiceIndex] = {
-      ...updated[selectedServiceIndex],
-      services: item.name,
-    };
-    setFormData((prev) => ({ ...prev, services: updated }));
-    setShowServiceModal(false);
+  // -----------------------------------------
+  // ADD ITEM
+  // -----------------------------------------
+  const addItem = (type) => {
+    const emptyItem =
+      type === "products"
+        ? { productName: "", quantity: "" }
+        : { services: "", description: "" };
+
+    setFormData((prev) => ({
+      ...prev,
+      [type]: [...prev[type], emptyItem],
+    }));
   };
 
-  const renderItem = (item, type) => {
-    return(
-    <TouchableOpacity
-      style={styles.modalItem}
-      onPress={() =>
-        type === "product"
-          ? handleSelectProduct(item)
-          : handleSelectService(item)
+  // -----------------------------------------
+  // REMOVE ITEM
+  // -----------------------------------------
+  const removeItem = (type, index) =>
+    setFormData((prev) => ({
+      ...prev,
+      [type]: prev[type].filter((_, i) => i !== index),
+    }));
+
+  // -----------------------------------------
+  // WHEN SELECTING FROM DROPDOWN
+  // -----------------------------------------
+  const handleSelectItem = useCallback(
+    (item) => {
+      if (modalType === "product") {
+        handleItemChange("products", selectedIndex, "productName", item.name);
+      } else {
+        handleItemChange("services", selectedIndex, "services", item.name);
       }
-    >
-      <Text style={styles.modalText}>{item.name}</Text>
-    </TouchableOpacity>
-  )};
+      setModalType(null);
+    },
+    [selectedIndex, modalType]
+  );
 
-  const renderModal = (visible, setVisible, data, type) => (
-    <Modal visible={visible} transparent animationType="slide" style={{flex:1}}>
+  // -----------------------------------------
+  // MODAL COMPONENT
+  // -----------------------------------------
+  const DropdownModal = memo(({ visible, data }) => (
+    <Modal visible={visible} transparent animationType="slide">
       <View style={styles.modalOverlay}>
-        <TouchableOpacity onPress={() => setVisible(false)} style={{ alignSelf: "flex-end" }}>
-          <Avatar.Icon icon="close" style={styles.closeIcon} size={30} />
+        <TouchableOpacity onPress={() => setModalType(null)}>
+          <Avatar.Icon icon="close" style={styles.closeIcon} />
         </TouchableOpacity>
+
         <View style={styles.modalContent}>
           <FlatList
             data={data}
-            keyExtractor={(item, index) => item.id?.toString() || index.toString()}
-            renderItem={({ item }) => renderItem(item, type)}
+            keyExtractor={(item) => item.id?.toString() || item.name}
+            renderItem={({ item }) => (
+              <TouchableOpacity style={styles.modalItem} onPress={() => handleSelectItem(item)}>
+                <Text style={styles.modalText}>{item.name}</Text>
+              </TouchableOpacity>
+            )}
             ListEmptyComponent={
               <Card style={styles.emptyCard}>
-                <Text style={styles.emptyText}>No items available</Text>
+                <Text style={styles.emptyText}>No items found</Text>
               </Card>
             }
           />
         </View>
       </View>
     </Modal>
-  );
+  ));
 
   return (
     <Provider>
       <ScrollView>
         <View style={styles.container}>
+          {/* ---------------------- PRODUCTS ---------------------- */}
           <Text style={styles.sectionTitle}>Products</Text>
           {formData.products.map((item, index) => (
             <Surface key={index} style={styles.surface}>
-              <View style={styles.rowContainer}>
+              <View style={styles.row}>
+                {/* Product dropdown */}
                 <TouchableOpacity
                   style={styles.dropdownBtn}
                   onPress={() => {
-                    setSelectedProductIndex(index);
-                    setShowProductModal(true);
+                    setSelectedIndex(index);
+                    setModalType("product");
                   }}
                 >
                   <Card.Cover
                     source={require("../../utilities/images/way4tracklogo.png")}
                     style={styles.icon}
                   />
-                  <Text style={styles.dropdownText}>{item.productName || "Select Product"}</Text>
+                  <Text style={styles.dropdownText}>
+                    {item.productName || "Select Product"}
+                  </Text>
                 </TouchableOpacity>
+
+                {/* Qty input */}
                 <TextInput
                   style={styles.input}
                   placeholder="Qty"
+                  placeholderTextColor="#aaa"
                   keyboardType="numeric"
                   value={item.quantity}
                   onChangeText={(value) =>
                     handleItemChange("products", index, "quantity", value)
                   }
                 />
+
+                {/* Remove button */}
                 {index > 0 && (
                   <TouchableOpacity
                     style={styles.removeButton}
@@ -186,38 +202,45 @@ const Visit_ProductInfo = ({ navigation }) => {
               </View>
             </Surface>
           ))}
-          <TouchableOpacity
-            style={styles.addButton}
-            onPress={() => addItem("products")}
-          >
+
+          <TouchableOpacity style={styles.addButton} onPress={() => addItem("products")}>
             <Text style={styles.addButtonText}>Add Product</Text>
           </TouchableOpacity>
 
+          {/* ---------------------- SERVICES ---------------------- */}
           <Text style={styles.sectionTitle}>Services</Text>
           {formData.services.map((item, index) => (
             <Surface key={index} style={styles.surface}>
-              <View style={styles.rowContainer}>
+              <View style={styles.row}>
+                {/* Service dropdown */}
                 <TouchableOpacity
                   style={styles.dropdownBtn}
                   onPress={() => {
-                    setSelectedServiceIndex(index);
-                    setShowServiceModal(true);
+                    setSelectedIndex(index);
+                    setModalType("service");
                   }}
                 >
                   <Card.Cover
                     source={require("../../utilities/images/way4tracklogo.png")}
                     style={styles.icon}
                   />
-                  <Text style={styles.dropdownText}>{item.services || "Select Service"}</Text>
+                  <Text style={styles.dropdownText}>
+                    {item.services || "Select Service"}
+                  </Text>
                 </TouchableOpacity>
+
+                {/* Description */}
                 <TextInput
                   style={styles.input}
                   placeholder="Description"
+                  placeholderTextColor="#aaa"
                   value={item.description}
                   onChangeText={(value) =>
                     handleItemChange("services", index, "description", value)
                   }
                 />
+
+                {/* Remove */}
                 {index > 0 && (
                   <TouchableOpacity
                     style={styles.removeButton}
@@ -229,13 +252,12 @@ const Visit_ProductInfo = ({ navigation }) => {
               </View>
             </Surface>
           ))}
-          <TouchableOpacity
-            style={styles.addButton}
-            onPress={() => addItem("services")}
-          >
+
+          <TouchableOpacity style={styles.addButton} onPress={() => addItem("services")}>
             <Text style={styles.addButtonText}>Add Service</Text>
           </TouchableOpacity>
 
+          {/* NEXT */}
           <TouchableOpacity
             style={[styles.nextButton, { marginBottom: 70 }]}
             onPress={() => {
@@ -247,38 +269,74 @@ const Visit_ProductInfo = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </ScrollView>
-      {renderModal(showProductModal, setShowProductModal, productTypes, "product")}
-      {renderModal(showServiceModal, setShowServiceModal, serviceTypes, "service")}
+
+      {/* Reusable Modal */}
+      <DropdownModal
+        visible={!!modalType}
+        data={modalType === "product" ? productTypes : serviceTypes}
+      />
     </Provider>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: "#fff" },
-  sectionTitle: { fontSize: 18, fontWeight: "bold", marginBottom: 10 },
-  surface: { borderColor: "#ddd", borderWidth: 1, padding: 5, backgroundColor: "#fff", borderRadius: 5, marginVertical: 8 },
-  rowContainer: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: 8 },
-  input: { flex: 1, height: 40, borderWidth: 1, borderColor: "#ccc", color: "#333", borderRadius: 5, paddingHorizontal: 10, marginHorizontal: 3 },
-  addButton: { backgroundColor: "#4CAF50", padding: 10, alignItems: "center", borderRadius: 5, marginVertical: 5 },
-  addButtonText: { color: "white", fontSize: 16, fontWeight: "bold" },
-  removeButton: { backgroundColor: "#f44336", borderRadius: 5, padding: 8, marginLeft: 4 },
-  nextButton: { backgroundColor: "green", padding: 15, alignItems: "center", borderRadius: 5, marginTop: 20 },
-  nextButtonText: { color: "white", fontSize: 18, fontWeight: "bold" },
-  dropdownBtn: { flexDirection: "row", alignItems: "center", flex: 2 },
-  dropdownText: { marginLeft: 10, color: "#555", fontSize: 16 },
+  container: { padding: 20, backgroundColor: "#fff", flex: 1 },
+  sectionTitle: { fontSize: 18, fontWeight: "bold", marginVertical: 10, color: "#333" },
+
+  surface: { borderWidth: 1, borderColor: "#ddd", borderRadius: 5, padding: 5, marginVertical: 8,backgroundColor:"#f3f3f3" },
+
+  row: { flexDirection: "row", alignItems: "center" },
+
+  dropdownBtn: { flexDirection: "row", flex: 2, alignItems: "center" },
+  dropdownText: { marginLeft: 10, color: "#444", fontSize: 16 },
+
   icon: { width: 40, height: 40, borderRadius: 20 },
-  modalOverlay: { justifyContent: "center", },
-  modalContent: { backgroundColor: "#fff", margin: 20,    width: "90%",
- padding: 20, borderRadius: 10, maxHeight: "80%" },
-  modalItem: { paddingVertical: 10},
-  modalText: { fontSize: 16,color:'#333333' },
-  emptyCard: { padding: 20, alignItems: "center" },
-  emptyText: { color: "#777" },
-  closeIcon: {
-    backgroundColor: "green",
-    margin: 10,
-    alignSelf: "flex-end",
+
+  input: {
+    flex: 1,
+    height: 40,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: "#ccc",backgroundColor:'#f3f3f3',
+    paddingHorizontal: 10,
+    marginLeft: 8,
+    color: "#333",
   },
+
+  addButton: { backgroundColor: "#4CAF50", padding: 10, borderRadius: 5, marginVertical: 10 },
+  addButtonText: { color: "#fff", fontWeight: "bold", fontSize: 16 },
+
+  removeButton: {
+    backgroundColor: "#f44336",
+    padding: 8,
+    borderRadius: 5,
+    marginLeft: 5,
+  },
+
+  nextButton: {
+    backgroundColor: "green",
+    padding: 15,
+    borderRadius: 5,
+    marginTop: 20,
+    alignItems: "center",
+  },
+  nextButtonText: { color: "#fff", fontSize: 18, fontWeight: "bold" },
+
+  modalOverlay: {  backgroundColor: "rgba(0,0,0,0.3)", justifyContent: "center" },
+  modalContent: {
+    backgroundColor: "#fff",
+    margin: 20,
+    padding: 20,
+    borderRadius: 10,
+    maxHeight: "75%",
+  },
+  modalItem: { paddingVertical: 12 },
+  modalText: { fontSize: 16, color: "#222" },
+
+  emptyCard: { padding: 20, alignItems: "center" },
+  emptyText: { color: "#888" },
+
+  closeIcon: { backgroundColor: "green", alignSelf: "flex-end", marginBottom: 10 },
 });
 
 export default Visit_ProductInfo;

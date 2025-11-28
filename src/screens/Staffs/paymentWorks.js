@@ -26,12 +26,13 @@ const PaymentWorks = ({ navigation, route }) => {
     }, [])
   );
 
-  useEffect(() => {
-    if (staffId) {
-      dispatch(fetchTechnicianWorks({ companyCode: "WAY4TRACK", unitCode: "WAY4", staffId }));
-    }
-  }, [staffId, dispatch]);
-
+  useFocusEffect(
+    useCallback(() => {
+      if (staffId) {
+        dispatch(fetchTechnicianWorks({ companyCode: "WAY4TRACK", unitCode: "WAY4", staffId }));
+      }
+    }, [staffId, dispatch])
+  )
   const filteredData = useMemo(() => {
     return technicianWorks.filter((item) => {
       if (!searchQuery) return true;
@@ -114,10 +115,10 @@ const PaymentWorks = ({ navigation, route }) => {
           value={activeSegment}
           onValueChange={setActiveSegment}
           buttons={[
-            { value: 'paymentPending', label: 'Pending', style: activeSegment === 'paymentPending' ? styles.activeButton : styles.inactiveButton,checkedColor:"#ffffff",uncheckedColor:"#333333" },
-            { value: 'paymentPartially', label: 'Partially', style: activeSegment === 'paymentPartially' ? styles.activeButton : styles.inactiveButton,checkedColor:"#ffffff",uncheckedColor:"#333333" },
-            { value: 'paymentDonedWorks', label: 'Done', style: activeSegment === 'paymentDonedWorks' ? styles.activeButton : styles.inactiveButton,checkedColor:"#ffffff",uncheckedColor:"#333333" },
-            { value: 'paymentUnpaid', label: 'Unpaid', style: activeSegment === 'paymentUnpaid' ? styles.activeButton : styles.inactiveButton,checkedColor:"#ffffff",uncheckedColor:"#333333" },
+            { value: 'paymentPending', label: 'Pending', style: activeSegment === 'paymentPending' ? styles.activeButton : styles.inactiveButton, checkedColor: "#ffffff", uncheckedColor: "#333333" },
+            { value: 'paymentPartially', label: 'Partially', style: activeSegment === 'paymentPartially' ? styles.activeButton : styles.inactiveButton, checkedColor: "#ffffff", uncheckedColor: "#333333" },
+            { value: 'paymentDonedWorks', label: 'Done', style: activeSegment === 'paymentDonedWorks' ? styles.activeButton : styles.inactiveButton, checkedColor: "#ffffff", uncheckedColor: "#333333" },
+            { value: 'paymentUnpaid', label: 'Unpaid', style: activeSegment === 'paymentUnpaid' ? styles.activeButton : styles.inactiveButton, checkedColor: "#ffffff", uncheckedColor: "#333333" },
           ]}
           style={styles.segmentContainer}
           theme={{
